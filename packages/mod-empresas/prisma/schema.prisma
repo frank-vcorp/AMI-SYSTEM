@@ -1,0 +1,132 @@
+// MOD-EMPRESAS: Gestión de empresas clientes + perfiles de puesto
+// Multi-tenant con baterías contratadas y validaciones
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUM DEFINITIONS
+// ============================================================================
+
+enum RiskLevel {
+  BAJO
+  MEDIO
+  ALTO
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+// ============================================================================
+// COMPANY MODEL
+// ============================================================================
+
+model Company {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  
+  // Información básica
+  name              String   @db.VarChar(255)    // Nombre empresa
+  rfc               String   @db.VarChar(13)     // RFC México (opcional pero único)
+  description       String?  @db.Text
+  
+  // Contacto
+  address           String?  @db.VarChar(500)
+  city              String?  @db.VarChar(100)
+  state             String?  @db.VarChar(100)
+  zipCode           String?  @db.VarChar(10)
+  phoneNumber       String?  @db.VarChar(20)
+  email             String?  @db.VarChar(255)
+  contactPerson     String?  @db.VarChar(255)
+  contactPhone      String?  @db.VarChar(20)
+  
+  // Configuración
+  isHeadquarters    Boolean  @default(false)
+  maxEmployees      Int      @default(100)
+  
+  // Estado
+  status            CompanyStatus @default(ACTIVE)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String    @db.Uuid
+  updatedBy         String?   @db.Uuid
+  
+  // Relaciones
+  batteries         CompanyBattery[]
+  jobProfiles       JobProfile[]
+  
+  // Índices
+  @@unique([tenantId, rfc])
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+}
+
+// ============================================================================
+// COMPANY_BATTERY: Relación many-to-many (Baterías contratadas)
+// ============================================================================
+
+model CompanyBattery {
+  id                String   @id @default(cuid())
+  
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  batteryId         String   // UUID de battery en mod-servicios
+  
+  // Contrato
+  contractDate      DateTime  @default(now())
+  validFrom         DateTime  @default(now())
+  validUntil        DateTime? // null = sin expiración
+  isActive          Boolean   @default(true)
+  
+  // Auditoría
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@unique([companyId, batteryId])
+  @@index([companyId])
+  @@index([batteryId])
+}
+
+// ============================================================================
+// JOB_PROFILE MODEL
+// ============================================================================
+
+model JobProfile {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  // Información del perfil
+  name              String   @db.VarChar(255)    // Ej: "Operario", "Gerente", "Chofer"
+  description       String?  @db.Text
+  
+  // Validaciones
+  riskLevel         RiskLevel @default(MEDIO)
+  
+  // Baterías requeridas (JSON array de UUIDs de batteries)
+  requiredBatteryIds String[] @default([])       // Almacena JSON array
+  
+  // Auditoría
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String    @db.Uuid
+  updatedBy         String?   @db.Uuid
+  
+  // Índices
+  @@unique([companyId, name])
+  @@index([companyId])
+  @@index([tenantId])
+}

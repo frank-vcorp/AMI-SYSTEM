@@ -101,7 +101,11 @@ export class ServiceService {
     const skip = (page - 1) * pageSize;
 
     const where: any = { tenantId };
-    if (status) where.status = status;
+    if (status) {
+      where.status = status;
+    } else {
+      where.status = { not: 'ARCHIVED' }; // Default: exclude archived services
+    }
     if (category) where.category = category;
     if (search) {
       where.OR = [
@@ -290,7 +294,11 @@ export class ServiceService {
     const skip = (page - 1) * pageSize;
 
     const where: any = { tenantId };
-    if (status) where.status = status;
+    if (status) {
+      where.status = status;
+    } else {
+      where.status = { not: 'ARCHIVED' }; // Default: exclude archived batteries
+    }
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },

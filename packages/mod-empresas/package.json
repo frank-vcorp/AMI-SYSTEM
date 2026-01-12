@@ -1,0 +1,28 @@
+{
+  "name": "@ami/mod-empresas",
+  "version": "0.1.0",
+  "description": "MOD-EMPRESAS: Gestión de empresas clientes, baterías contratadas y perfiles de puesto",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "test": "echo 'Tests pending'",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@ami/core-auth": "workspace:*",
+    "@ami/core-database": "workspace:*",
+    "@ami/core-types": "workspace:*",
+    "@prisma/client": "^5.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  }
+}

@@ -32,6 +32,15 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  // CRÍTICO PARA MONOREPO: Transpilar paquetes locales en build
+  transpilePackages: [
+    '@ami/core-ui',
+    '@ami/core-types',
+    '@ami/mod-clinicas',
+    '@ami/mod-citas',
+    '@ami/mod-empresas',
+    '@ami/mod-servicios',
+  ],
 };
 
 module.exports = withPWA(nextConfig);

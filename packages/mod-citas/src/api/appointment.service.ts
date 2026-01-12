@@ -142,7 +142,6 @@ export class AppointmentService {
       status,
       dateFrom,
       dateTo,
-      search,
       page = 1,
       pageSize = 10
     } = filters;

@@ -1,0 +1,17 @@
+lockfileVersion: '9.0'
+metadata:
+  corepack: true
+  engines:
+    node: '>=18.0.0'
+    pnpm: '>=8.0.0'
+  packageManager: pnpm@8.0.0
+dependencies:
+  typescript:
+    specifier: ^5.2.2
+    version: 5.2.2
+packages:
+  /typescript@5.2.2:
+    resolution: {integrity: sha512-mI4WrpHsbCIB3v/JloDASZ3HjCHeRP5vTi09Nb3MbYTiLaQ639VtiPQIcXxkgDlALcL1v5QoU5NALL2+B1CjRg==}
+    engines: {node: '>=14.6'}
+    hasBin: true
+    dev: true

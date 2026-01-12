@@ -1,6 +1,7 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización dashboard: 2026-01-12 16:00 UTC_
+> _Última actualización dashboard: 2026-01-12 21:15 UTC_
+> **🔧 VERCEL BUILD FIX APLICADO:** TypeScript version corregida + transpilePackages configurado. Pnpm-lock.yaml regenerado. Listo para redeploy en Vercel.
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.

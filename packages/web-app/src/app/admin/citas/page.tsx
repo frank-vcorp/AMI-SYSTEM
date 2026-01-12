@@ -3,7 +3,7 @@
  * Main appointment management interface
  */
 
-import { AppointmentManager } from '@/components/appointments/AppointmentManager';
+import { AppointmentManager } from '../../../components/appointments';
 
 export const metadata = {
   title: 'Citas | Admin',

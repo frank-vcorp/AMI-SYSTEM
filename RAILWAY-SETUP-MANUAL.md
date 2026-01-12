@@ -1,62 +1,75 @@
-# Railway Setup - Instrucciones Manuales
+# Railway Setup - Instrucciones Actualizadas (2026)
 
 ## 📍 Proyecto Creado en Railway
 
 **Nombre:** `ami-system-prod`
-**URL:** https://railway.com/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa
+**URL:** https://railway.app/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa
 
 ---
 
-## 🛠️ Pasos para Completar (Manual via Dashboard)
+## 🛠️ Pasos Actuales para Railway (Dashboard)
 
-### 1. Crear Servicio PostgreSQL
+### 1. Accede al Dashboard
+- URL: https://railway.app/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa
+- Verifica estar en workspace correcto
 
-1. Ir al dashboard del proyecto: https://railway.app/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa
-2. Hacer clic en **"+ Add"** o **"+ New Service"**
-3. Seleccionar **"PostgreSQL"**
-4. Esperar a que el servicio esté healthy (verde ✓)
+### 2. Crear Servicio PostgreSQL
 
-### 2. Obtener DATABASE_URL
+**Opción A - Desde Dashboard (Recomendado):**
+1. Click en **"+ Create"** (botón grande en el dashboard)
+2. Selecciona **"Database"** → **"PostgreSQL"**
+3. El servicio se crea automáticamente
+4. Espera a que muestre status **"Running"** (verde)
 
-1. En el servicio PostgreSQL, hacer clic en **"Connect"**
-2. Copiar la `Database URL` completa (formato: `postgresql://user:password@host:port/db`)
-3. Guardarla en tu `.env.production`:
-   ```bash
-   DATABASE_URL="postgresql://..."
-   ```
+**Opción B - Desde Templates:**
+1. Click en **"Add Service"** → **"Databases"**
+2. Elige **"PostgreSQL"**
+3. Configura versión (recomendado: 15+)
 
-### 3. Crear Variables de Entorno en Railway
+### 3. Obtener DATABASE_URL
 
-Desde el dashboard del proyecto:
+Una vez el servicio esté **"Running"**:
 
-**Variables de Desarrollo (dev environment):**
-- `DATABASE_URL` → (copiar del paso anterior)
-- `POSTGRES_USER` → user
-- `POSTGRES_PASSWORD` → password
-- `POSTGRES_DB` → ami_system
+1. Click en el servicio PostgreSQL que apareció
+2. Busca la pestaña **"Variables"** o **"Connect"**
+3. Copia el valor de `DATABASE_URL` (formato: `postgresql://user:password@host:port/database`)
 
----
+**Alternativa:** Si no ves `DATABASE_URL` automáticamente:
+- Click en el servicio
+- Tab "Data"
+- Verifica la conexión está activa
+- Railway genera automáticamente `DATABASE_URL` en variables
 
-## ✅ Verificación
-
-Una vez PostgreSQL esté healthy:
+### 4. Guardar DATABASE_URL Localmente
 
 ```bash
-# Local
-pnpm prisma migrate dev --name init
+# En .env.production
+DATABASE_URL="postgresql://user:password@host:port/railway"
+```
 
-# Esto crea todas las tablas en Railway PostgreSQL
+---
+
+## ✅ Verificación en Local
+
+Cuando tengas la URL:
+
+```bash
+# Prueba conexión
+pnpm prisma db push
+
+# O ejecuta migraciones
+pnpm prisma migrate dev --name init
 ```
 
 ---
 
 ## 📞 Próximo Paso
 
-Una vez hayas completado:
-1. Avísame cuando PostgreSQL esté healthy en Railway
-2. Comparte la `DATABASE_URL` de Railway
-3. Yo ejecuto `pnpm prisma migrate dev` y verifico que las tablas de MOD-CITAS existan
+1. ✅ PostgreSQL creado y en estado "Running"
+2. ✅ `DATABASE_URL` copiada
+3. 📨 Comparte la URL conmigo
+4. Yo ejecuto migraciones y verifico tablas de MOD-CITAS
 
 ---
 
-**Enlace directo al proyecto:** https://railway.app/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa
+**Enlace directo:** https://railway.app/project/0fd6b96a-621a-496c-9bfb-b5f996c13baa

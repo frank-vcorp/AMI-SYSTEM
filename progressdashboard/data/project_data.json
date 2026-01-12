@@ -1,62 +1,330 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-12T03:31:20.123Z",
-  "overallProgress": 30,
+  "lastUpdated": "2026-01-12T05:22:53.878Z",
+  "overallProgress": 5,
   "phases": [
     {
-      "name": "FASE 0 – Inicialización",
+      "name": "FASE 0 – Cimientos",
       "order": 0,
-      "progress": 30,
+      "progress": 9.090909090909092,
       "modules": [
         {
-          "id": "test-arquitectura",
-          "name": "Definición de Arquitectura",
-          "owner": "INTEGRA",
-          "status": "progress",
-          "progress": 60,
-          "summary": "Análisis y diseño de arquitectura v2.0",
-          "needs": "Confirmación de decisiones técnicas"
-        },
-        {
-          "id": "test-dashboard",
-          "name": "Prueba Progress Dashboard",
-          "owner": "INTEGRA",
-          "status": "progress",
-          "progress": 30,
-          "summary": "Validar que el dashboard funciona en nuevo repo",
-          "needs": "Parser y datos de prueba"
-        },
-        {
-          "id": "test-cronograma",
-          "name": "Actualizar Cronograma",
-          "owner": "INTEGRA",
+          "id": "core-setup",
+          "name": "Setup Monorepo + Tooling",
+          "owner": "DevOps",
           "status": "pending",
           "progress": 0,
-          "summary": "Ajustar cronograma con nuevo alcance",
-          "needs": "Dashboard funcionando"
+          "summary": "pnpm workspaces + Turborepo + TypeScript",
+          "needs": "ADRs aprobados"
+        },
+        {
+          "id": "core-auth",
+          "name": "Core - Autenticación",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Firebase Auth + roles + Custom Claims",
+          "needs": "core-setup completado"
+        },
+        {
+          "id": "core-database",
+          "name": "Core - Base de Datos",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Prisma + PostgreSQL + multi-tenant middleware",
+          "needs": "core-setup completado"
+        },
+        {
+          "id": "core-storage",
+          "name": "Core - Storage",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "GCP Cloud Storage + URLs firmadas",
+          "needs": "core-setup completado"
+        },
+        {
+          "id": "core-ui",
+          "name": "Core - UI Base",
+          "owner": "Frontend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "shadcn/ui + tema AMI + layout mobile-first",
+          "needs": "core-setup completado"
+        },
+        {
+          "id": "core-pwa",
+          "name": "Core - PWA",
+          "owner": "Frontend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "next-pwa + service worker + offline",
+          "needs": "core-ui completado"
+        },
+        {
+          "id": "core-signatures",
+          "name": "Core - Firmas",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Generador de firma única por médico",
+          "needs": "core-setup completado"
+        },
+        {
+          "id": "mod-clinicas",
+          "name": "MOD-CLINICAS",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "CRUD clínicas, horarios, capacidad, servicios",
+          "needs": "core-database completado"
+        },
+        {
+          "id": "mod-servicios",
+          "name": "MOD-SERVICIOS",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Catálogo estudios + baterías (paquetes)",
+          "needs": "core-database completado"
+        },
+        {
+          "id": "mod-empresas",
+          "name": "MOD-EMPRESAS",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "CRUD empresas + baterías contratadas + perfiles puesto",
+          "needs": "mod-servicios completado"
+        },
+        {
+          "id": "arquitectura",
+          "name": "Arquitectura y Documentación",
+          "owner": "Arquitectura",
+          "status": "done",
+          "progress": 100,
+          "summary": "ADRs, SPECs, Guías - COMPLETADO",
+          "needs": "N/A"
         }
       ],
       "statusCounts": {
-        "progress": 2,
+        "pending": 10,
+        "done": 1
+      }
+    },
+    {
+      "name": "FASE 1 – Flujo Principal",
+      "order": 1,
+      "progress": 0,
+      "modules": [
+        {
+          "id": "mod-citas",
+          "name": "MOD-CITAS",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Agenda, disponibilidad, check-in, recordatorios",
+          "needs": "mod-clinicas + mod-empresas"
+        },
+        {
+          "id": "mod-expedientes",
+          "name": "MOD-EXPEDIENTES",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Recepción + Examen Médico + Carga de Estudios",
+          "needs": "mod-citas completado"
+        },
+        {
+          "id": "mod-validacion",
+          "name": "MOD-VALIDACION",
+          "owner": "Backend · Data",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Extracción IA + semáforos + dictamen + firma",
+          "needs": "mod-expedientes completado"
+        },
+        {
+          "id": "mod-reportes",
+          "name": "MOD-REPORTES",
+          "owner": "Backend · Frontend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Generación PDF + envío email + URLs temporales",
+          "needs": "mod-validacion completado"
+        }
+      ],
+      "statusCounts": {
+        "pending": 4
+      }
+    },
+    {
+      "name": "FASE 2 – Operaciones",
+      "order": 2,
+      "progress": 0,
+      "modules": [
+        {
+          "id": "mod-dashboard",
+          "name": "MOD-DASHBOARD",
+          "owner": "Frontend · Data",
+          "status": "pending",
+          "progress": 0,
+          "summary": "KPIs, gráficas, alertas, pendientes",
+          "needs": "todos FASE 1 completados"
+        },
+        {
+          "id": "mod-bitacora",
+          "name": "MOD-BITACORA",
+          "owner": "Backend · Data",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Audit log, timeline, filtros, export Excel",
+          "needs": "core-database completado"
+        },
+        {
+          "id": "mod-calidad",
+          "name": "MOD-CALIDAD",
+          "owner": "Data",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Precisión IA, alertas activas, auditorías",
+          "needs": "mod-validacion completado"
+        },
+        {
+          "id": "mod-admin",
+          "name": "MOD-ADMIN",
+          "owner": "Frontend · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Usuarios, roles, semáforos, configuración",
+          "needs": "core-auth completado"
+        }
+      ],
+      "statusCounts": {
+        "pending": 4
+      }
+    },
+    {
+      "name": "FASE 3 – Expansión",
+      "order": 3,
+      "progress": 0,
+      "modules": [
+        {
+          "id": "mod-portal-empresa",
+          "name": "MOD-PORTAL-EMPRESA",
+          "owner": "Frontend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Portal RH: expedientes, descargas, agendar",
+          "needs": "todos FASE 2 completados"
+        }
+      ],
+      "statusCounts": {
         "pending": 1
       }
     }
   ],
   "needsAction": [
     {
-      "module": "Definición de Arquitectura",
-      "phase": "FASE 0 – Inicialización",
-      "detail": "Confirmación de decisiones técnicas"
+      "module": "Setup Monorepo + Tooling",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "ADRs aprobados"
     },
     {
-      "module": "Prueba Progress Dashboard",
-      "phase": "FASE 0 – Inicialización",
-      "detail": "Parser y datos de prueba"
+      "module": "Core - Autenticación",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-setup completado"
     },
     {
-      "module": "Actualizar Cronograma",
-      "phase": "FASE 0 – Inicialización",
-      "detail": "Dashboard funcionando"
+      "module": "Core - Base de Datos",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-setup completado"
+    },
+    {
+      "module": "Core - Storage",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-setup completado"
+    },
+    {
+      "module": "Core - UI Base",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-setup completado"
+    },
+    {
+      "module": "Core - PWA",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-ui completado"
+    },
+    {
+      "module": "Core - Firmas",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-setup completado"
+    },
+    {
+      "module": "MOD-CLINICAS",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-database completado"
+    },
+    {
+      "module": "MOD-SERVICIOS",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "core-database completado"
+    },
+    {
+      "module": "MOD-EMPRESAS",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "mod-servicios completado"
+    },
+    {
+      "module": "MOD-CITAS",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "mod-clinicas + mod-empresas"
+    },
+    {
+      "module": "MOD-EXPEDIENTES",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "mod-citas completado"
+    },
+    {
+      "module": "MOD-VALIDACION",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "mod-expedientes completado"
+    },
+    {
+      "module": "MOD-REPORTES",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "mod-validacion completado"
+    },
+    {
+      "module": "MOD-DASHBOARD",
+      "phase": "FASE 2 – Operaciones",
+      "detail": "todos FASE 1 completados"
+    },
+    {
+      "module": "MOD-BITACORA",
+      "phase": "FASE 2 – Operaciones",
+      "detail": "core-database completado"
+    },
+    {
+      "module": "MOD-CALIDAD",
+      "phase": "FASE 2 – Operaciones",
+      "detail": "mod-validacion completado"
+    },
+    {
+      "module": "MOD-ADMIN",
+      "phase": "FASE 2 – Operaciones",
+      "detail": "core-auth completado"
+    },
+    {
+      "module": "MOD-PORTAL-EMPRESA",
+      "phase": "FASE 3 – Expansión",
+      "detail": "todos FASE 2 completados"
+    },
+    {
+      "module": "Arquitectura y Documentación",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "N/A"
     }
   ]
 }

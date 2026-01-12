@@ -1,0 +1,124 @@
+// prisma/schema.prisma - MOD-CLINICAS
+// Defines Clinic, ClinicSchedule, and related entities
+
+model Clinic {
+  id                String     @id @default(cuid())
+  tenantId          String     @db.Uuid
+  name              String     @db.VarChar(255)
+  description       String?    @db.Text
+  address           String     @db.VarChar(500)
+  city              String     @db.VarChar(100)
+  state             String     @db.VarChar(50)
+  zipCode           String     @db.VarChar(20)
+  phoneNumber       String?    @db.VarChar(20)
+  email             String?    @db.VarChar(255)
+  
+  // Capacity and availability
+  totalBeds         Int        @default(1) // Total patient beds
+  availableBeds     Int        @default(1) // Currently available
+  
+  // Status
+  status            ClinicStatus @default(ACTIVE) // ACTIVE, INACTIVE, ARCHIVED
+  isHeadquarters    Boolean    @default(false)
+  
+  // Metadata
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  createdBy         String?    @db.Uuid
+  updatedBy         String?    @db.Uuid
+  
+  // Relations
+  schedules         ClinicSchedule[]
+  services          ClinicService[]
+  appointments      Appointment[]
+  
+  @@index([tenantId])
+  @@index([status])
+  @@unique([tenantId, name])
+}
+
+model ClinicSchedule {
+  id                String     @id @default(cuid())
+  clinicId          String
+  
+  // Day of week: 0 = Sunday, 6 = Saturday
+  dayOfWeek         Int        // 0-6
+  
+  // Times in HH:MM format
+  openingTime       String     @db.VarChar(5) // "08:00"
+  closingTime       String     @db.VarChar(5) // "18:00"
+  
+  // Lunch break (optional)
+  lunchStartTime    String?    @db.VarChar(5)
+  lunchEndTime      String?    @db.VarChar(5)
+  
+  // Availability
+  isOpen            Boolean    @default(true)
+  maxAppointmentsDay Int       @default(10)
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  // Relations
+  clinic            Clinic     @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  @@index([clinicId])
+  @@unique([clinicId, dayOfWeek])
+}
+
+model ClinicService {
+  id                String     @id @default(cuid())
+  clinicId          String
+  serviceId         String     // Foreign key to Service module
+  
+  // Availability at this clinic
+  isAvailable       Boolean    @default(true)
+  estimatedDays     Int        @default(3) // Turnaround time for results
+  price             Float?
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  clinic            Clinic     @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  @@index([clinicId])
+  @@index([serviceId])
+  @@unique([clinicId, serviceId])
+}
+
+// Appointments (for future use - FASE 1)
+model Appointment {
+  id                String     @id @default(cuid())
+  clinicId          String
+  companyId         String?    @db.Uuid
+  employeeId        String?    @db.Uuid
+  
+  appointmentDate   DateTime
+  appointmentTime   String     @db.VarChar(5) // "14:30"
+  
+  status            AppointmentStatus @default(PENDING)
+  notes             String?    @db.Text
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  
+  clinic            Clinic     @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  @@index([clinicId])
+  @@index([appointmentDate])
+  @@index([status])
+}
+
+enum ClinicStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}

@@ -1,7 +1,7 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización dashboard: 2026-01-12 21:15 UTC_
-> **🔧 VERCEL BUILD FIX APLICADO:** TypeScript version corregida + transpilePackages configurado. Pnpm-lock.yaml regenerado. Listo para redeploy en Vercel.
+> _Última actualización: 2026-01-12 22:50 UTC_
+> **🔧 VERCEL BUILD FIX ITERACIÓN 2:** Tipos de fechas normalizados (String HTTP / Date BD). Type-check sin errores. Listo para redeploy.
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.
@@ -67,12 +67,18 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] GET /api/citas/[id] (detail)
     - [✓] PUT /api/citas/[id] (update)
     - [✓] DELETE /api/citas/[id] (cancel)
-    - [✓] POST /api/citas/availability (search slots)
+    - [✓] POST /api/citas/availability (search slots) - TIPOS NORMALIZADOS
 - [✓] **Integración en Admin UI (Completado):**
     - [✓] /admin/citas page creada
     - [✓] AppointmentManager component (orquesta UI)
     - [✓] Menu item en sidebar navigation
     - Dependencias: MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ (satisfechas)
+- [✓] **Build Optimization - Vercel (COMPLETADO 2026-01-12):**
+    - [✓] Iteración 1: TypeScript ^5.2.2 + transpilePackages + pnpm-lock.yaml
+    - [✓] Iteración 2: Tipos de fechas normalizados (String HTTP, Date Prisma)
+    - [✓] Type-check sin errores (npx tsc --noEmit)
+    - [✓] Checkpoint: SOFIA-VERCEL-BUILD-FIX-ITER2-20260112.md
+    - Checkpoint anterior: SOFIA-VERCEL-BUILD-FIX-20260112.md
 - [ ] **Testing + Validación (Pendiente)**
 - [ ] **Documentación Final (Pendiente)**
 

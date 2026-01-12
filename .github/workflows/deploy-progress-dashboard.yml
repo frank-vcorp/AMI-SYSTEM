@@ -79,25 +79,19 @@ jobs:
           commit_author: 'GitHub Actions Bot <actions@github.com>'
 
       # ========================================
-      # 4. DEPLOY A CPANEL VIA FTP
+      # 4. DEPLOY JSON A CPANEL VIA FTP
       # ========================================
-      # Secrets: CPANEL_HOST, CPANEL_USERNAME, CPANEL_PASSWORD, CPANEL_PORT, FTP_REMOTE_DIR
-      - name: 🚀 Deploy a cPanel (FTP)
+      # Solo sube el JSON actualizado, los archivos estáticos ya están en el servidor
+      - name: 🚀 Deploy JSON a cPanel (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USERNAME }}
           password: ${{ secrets.CPANEL_PASSWORD }}
           port: ${{ secrets.CPANEL_PORT }}
-          local-dir: ./progressdashboard/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          local-dir: ./progressdashboard/data/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}data/
           protocol: ftp
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            parser.js
-            README.md
 
       # ========================================
       # 5. NOTIFICACIÓN (opcional)

@@ -17,13 +17,24 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - **Dashboard LIVE**: https://vcorp.mx/progress-ami/progressdashboard/
 
 ## 4. Actualización 2026-01-12
-- [✓] Importación de legacy `ami-rd` completada
-- [✓] Análisis exhaustivo del demo funcional (4,146 líneas)
-- [✓] Identificación de gaps (Clínicas, Citas, Servicios/Baterías)
-- [✓] ADRs de arquitectura (3 documentos)
-- [✓] SPECs de módulos y flujos
-- [✓] Guía de creación de módulos
-- [ ] Pendiente: Implementación FASE 0
+
+### Completado esta sesión (SOFIA):
+- [✓] Monorepo creado con pnpm workspaces (6 packages)
+- [✓] TypeScript paths configuradas (@ami/*, @/*)
+- [✓] Tipos compartidos definidos (10+ interfaces)
+- [✓] Stub implementations en todos los core-*
+- [✓] Next.js 14 app con PWA + Tailwind + AMI colors
+- [✓] MONOREPO-SETUP.md + MONOREPO-INSTALL-STATUS.md
+- [✓] CHECKPOINT-FASE0-PLANIFICACION.md con 5-week timeline
+- [✓] SPEC-UI-DESIGN-SYSTEM.md con paleta, componentes, flows
+
+### En Progreso:
+- [~] Instalar dependencias npm (issue de conectividad en dev container)
+- [~] Estrategia alternativa sin depender de npm registry
+
+### Próximo:
+- [ ] Resolver instalación de deps o implementar fallback
+- [ ] Iniciar implementación de FASE 0 (Semana 1 = MOD-CLINICAS MVP)
 
 ---
 
@@ -45,7 +56,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 <!-- progress-modules:start -->
 | id | name | phase | phaseOrder | owner | status | progress | summary | needs |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | pending | 0 | pnpm workspaces + Turborepo + TypeScript | ADRs aprobados |
+| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | in_progress | 95 | pnpm workspaces + Turborepo + TypeScript | npm install pending
 | core-auth | Core - Autenticación | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Firebase Auth + roles + Custom Claims | core-setup completado |
 | core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Prisma + PostgreSQL + multi-tenant middleware | core-setup completado |
 | core-storage | Core - Storage | FASE 0 – Cimientos | 0 | Backend | pending | 0 | GCP Cloud Storage + URLs firmadas | core-setup completado |

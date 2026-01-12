@@ -1,0 +1,333 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// MOD-CLINICAS: Clinic Management Models
+// ============================================================================
+
+model Clinic {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  description       String?           @db.Text
+  address           String            @db.VarChar(255)
+  city              String            @db.VarChar(100)
+  state             String            @db.VarChar(100)
+  zipCode           String            @db.VarChar(10)
+  phoneNumber       String?           @db.VarChar(20)
+  email             String?           @db.VarChar(255)
+  totalBeds         Int               @default(1)
+  availableBeds     Int               @default(1)
+  isHeadquarters    Boolean           @default(false)
+  status            ClinicStatus      @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  // Relations
+  schedules         ClinicSchedule[]
+  services          ClinicService[]
+  appointments      Appointment[]
+
+  // Indices
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+  @@index([city])
+  @@map("clinics")
+}
+
+model ClinicSchedule {
+  id                String            @id @default(cuid())
+  clinicId          String
+  dayOfWeek         Int               @db.SmallInt // 0-6: Monday-Sunday
+  openingTime       String            @db.VarChar(5) // HH:MM format
+  closingTime       String            @db.VarChar(5) // HH:MM format
+  lunchStart        String?           @db.VarChar(5)
+  lunchEnd          String?           @db.VarChar(5)
+  isOpen            Boolean           @default(true)
+  maxAppointmentsDay Int              @default(50)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([clinicId, dayOfWeek])
+  @@index([clinicId])
+  @@map("clinic_schedules")
+}
+
+model ClinicService {
+  id                String            @id @default(cuid())
+  clinicId          String
+  serviceId         String
+  isAvailable       Boolean           @default(true)
+  estimatedDays     Int?
+  price             Float?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([clinicId, serviceId])
+  @@index([clinicId])
+  @@index([serviceId])
+  @@map("clinic_services")
+}
+
+model Appointment {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  clinicId          String
+  companyId         String?
+  employeeId        String?
+  appointmentDate   DateTime
+  time              String            @db.VarChar(5) // HH:MM format
+  status            AppointmentStatus @default(PENDING)
+  notes             String?           @db.Text
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@index([tenantId])
+  @@index([clinicId])
+  @@index([status])
+  @@index([appointmentDate])
+  @@index([employeeId])
+  @@map("appointments")
+}
+
+enum ClinicStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum AppointmentStatus {
+  PENDING
+  SCHEDULED
+  CONFIRMED
+  CHECK_IN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+// ============================================================================
+// MOD-SERVICIOS: Service & Battery Management Models
+// ============================================================================
+
+model Service {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  code              String            @db.VarChar(50)
+  name              String            @db.VarChar(255)
+  description       String?           @db.Text
+  category          ServiceCategory   @default(OTROS)
+  estimatedMinutes  Int               @default(30)
+  requiresEquipment Boolean           @default(false)
+  equipmentName     String?           @db.VarChar(255)
+  costAmount        Float             @default(0)
+  sellingPrice      Float?
+  status            ServiceStatus     @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  batteries         BatteryService[]
+
+  // Indices
+  @@unique([tenantId, code])
+  @@index([tenantId])
+  @@index([status])
+  @@index([category])
+  @@map("services")
+}
+
+model Battery {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  description       String?           @db.Text
+  costTotal         Float             @default(0)
+  sellingPriceTotal Float?
+  estimatedMinutes  Int               @default(0)
+  status            BatteryStatus     @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  services          BatteryService[]
+  contractedBatteries CompanyBattery[]
+
+  // Indices
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+  @@map("batteries")
+}
+
+model BatteryService {
+  id                String            @id @default(cuid())
+  batteryId         String
+  serviceId         String
+  order             Int               @default(0)
+  costOverride      Float?
+  estimatedMinutesOverride Int?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  battery           Battery           @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([batteryId, serviceId])
+  @@index([batteryId])
+  @@index([serviceId])
+  @@map("battery_services")
+}
+
+enum ServiceCategory {
+  LABORATORIO
+  IMAGENES
+  ELECTROCARDIOGRAFIA
+  OFTALMOLOGIA
+  AUDIOMETRIA
+  ESPIROFOTOMETRIA
+  OTROS
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+  DEPRECATED
+  ARCHIVED
+}
+
+enum BatteryStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+// ============================================================================
+// MOD-EMPRESAS: Company & JobProfile Management Models
+// ============================================================================
+
+model Company {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  rfc               String            @db.VarChar(13) @unique // Globally unique
+  description       String?           @db.Text
+  address           String?           @db.VarChar(255)
+  city              String?           @db.VarChar(100)
+  state             String?           @db.VarChar(100)
+  zipCode           String?           @db.VarChar(10)
+  phoneNumber       String?           @db.VarChar(20)
+  email             String?           @db.VarChar(255)
+  contactPerson     String?           @db.VarChar(255)
+  contactPhone      String?           @db.VarChar(20)
+  isHeadquarters    Boolean           @default(true)
+  maxEmployees      Int               @default(100)
+  status            CompanyStatus     @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  batteries         CompanyBattery[]
+  jobProfiles       JobProfile[]
+
+  // Indices
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+  @@map("companies")
+}
+
+model CompanyBattery {
+  id                String            @id @default(cuid())
+  companyId         String
+  batteryId         String
+  contractDate      DateTime          @default(now())
+  validFrom         DateTime          @default(now())
+  validUntil        DateTime?
+  isActive          Boolean           @default(true)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  battery           Battery           @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([companyId, batteryId])
+  @@index([companyId])
+  @@index([batteryId])
+  @@map("company_batteries")
+}
+
+model JobProfile {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  companyId         String
+  name              String            @db.VarChar(255)
+  description       String?           @db.Text
+  riskLevel         RiskLevel         @default(BAJO)
+  requiredBatteryIds String[]          // JSON array of battery IDs
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([companyId, name])
+  @@index([tenantId])
+  @@index([companyId])
+  @@map("job_profiles")
+}
+
+enum RiskLevel {
+  BAJO
+  MEDIO
+  ALTO
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+// ============================================================================
+// MOD-CITAS: Extended Appointment Models (from mod-citas context)
+// ============================================================================
+// Note: The Appointment model above covers basic appointment data.
+// This section is reserved for appointment-specific extensions.

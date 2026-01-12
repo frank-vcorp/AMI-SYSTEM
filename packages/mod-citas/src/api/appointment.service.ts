@@ -248,7 +248,7 @@ export class AppointmentService {
         appointmentDate: data.appointmentDate,
         appointmentTime: data.appointmentTime,
         notes: data.notes,
-        status: data.status
+        status: data.status as any
       },
       include: {
         clinic: true,

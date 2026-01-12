@@ -16,6 +16,8 @@
     "dev": "turbo run dev --filter=@ami/web-app"
   },
   "devDependencies": {
+    "@prisma/client": "6.19.1",
+    "prisma": "6.19.1",
     "turbo": "^2.7.4",
     "typescript": "^5.2.2"
   }

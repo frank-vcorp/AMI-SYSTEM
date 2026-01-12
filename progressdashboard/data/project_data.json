@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-12T18:55:04.668Z",
-  "overallProgress": 28.94736842105263,
+  "lastUpdated": "2026-01-12T18:58:56.192Z",
+  "overallProgress": 34.21052631578947,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -108,15 +108,15 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 0,
+      "progress": 25,
       "modules": [
         {
           "id": "mod-citas",
           "name": "MOD-CITAS",
           "owner": "Frontend · Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Agenda, disponibilidad, check-in, recordatorios",
+          "status": "done",
+          "progress": 100,
+          "summary": "✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura.",
           "needs": "mod-clinicas + mod-empresas"
         },
         {
@@ -148,7 +148,8 @@
         }
       ],
       "statusCounts": {
-        "pending": 4
+        "done": 1,
+        "pending": 3
       }
     },
     {

@@ -1,5 +1,7 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
+> _Última actualización dashboard: 2026-01-12_
+
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.
 

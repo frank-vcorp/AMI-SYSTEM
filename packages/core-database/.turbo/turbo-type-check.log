@@ -1,0 +1,5 @@
+
+> @ami/core-database@0.1.0 type-check /workspaces/AMI-SYSTEM/packages/core-database
+> tsc --noEmit
+
+ ELIFECYCLE  Command failed.

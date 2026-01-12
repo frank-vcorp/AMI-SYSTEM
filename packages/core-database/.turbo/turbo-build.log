@@ -1,0 +1,11 @@
+
+> @ami/core-database@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-database
+> tsc --noEmit
+
+src/index.ts(11,30): error TS2307: Cannot find module '@prisma/client' or its corresponding type declarations.
+src/index.ts(16,5): error TS2580: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.
+src/index.ts(19,8): error TS2304: Cannot find name 'global'.
+src/index.ts(20,5): error TS2304: Cannot find name 'global'.
+src/index.ts(22,12): error TS2304: Cannot find name 'global'.
+ ELIFECYCLE  Command failed with exit code 2.
+ WARN   Local package.json exists, but node_modules missing, did you mean to install?

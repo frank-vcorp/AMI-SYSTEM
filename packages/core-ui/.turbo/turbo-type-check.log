@@ -1,0 +1,5 @@
+
+> @ami/core-ui@0.1.0 type-check /workspaces/AMI-SYSTEM/packages/core-ui
+> tsc --noEmit
+
+ ELIFECYCLE  Command failed.

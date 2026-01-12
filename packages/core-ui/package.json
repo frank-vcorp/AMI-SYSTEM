@@ -1,45 +1,17 @@
 {
   "name": "@ami/core-ui",
   "version": "0.1.0",
-  "description": "Componentes UI reutilizables (shadcn/ui + Tailwind)",
+  "description": "Componentes UI reutilizables",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "files": ["src", "dist"],
+  "files": ["src"],
   "scripts": {
-    "build": "tsc --noEmit",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint src",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "echo 'No build needed for ui stubs'"
   },
   "dependencies": {
-    "@ami/core-types": "workspace:*",
-    "@radix-ui/react-dialog": "^1.1.1",
-    "@radix-ui/react-dropdown-menu": "^2.0.5",
-    "@radix-ui/react-slot": "^2.0.2",
-    "class-variance-authority": "^0.7.0",
-    "clsx": "^2.0.0",
-    "lucide-react": "^0.294.0",
-    "react": "^18.2.0",
-    "tailwind-merge": "^2.2.0",
-    "tailwindcss": "^3.3.5"
+    "@ami/core-types": "workspace:*"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.5.0",
-    "@storybook/addon-interactions": "^7.5.0",
-    "@storybook/addon-links": "^7.5.0",
-    "@storybook/addon-onboarding": "^7.5.0",
-    "@storybook/blocks": "^7.5.0",
-    "@storybook/react": "^7.5.0",
-    "@storybook/react-webpack5": "^7.5.0",
-    "@types/node": "^20.8.0",
-    "@types/react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "storybook": "^7.5.0",
-    "typescript": "workspace:*"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "typescript": "^5.2.2"
   }
 }

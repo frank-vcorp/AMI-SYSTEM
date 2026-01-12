@@ -1,0 +1,4 @@
+
+> @ami/core-types@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-types
+> tsc --noEmit
+

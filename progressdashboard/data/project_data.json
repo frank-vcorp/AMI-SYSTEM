@@ -1,22 +1,13 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-12T06:17:07.238Z",
-  "overallProgress": 5,
+  "lastUpdated": "2026-01-12T16:37:56.808Z",
+  "overallProgress": 20.263157894736842,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
       "order": 0,
-      "progress": 9.090909090909092,
+      "progress": 38.5,
       "modules": [
-        {
-          "id": "core-setup",
-          "name": "Setup Monorepo + Tooling",
-          "owner": "DevOps",
-          "status": "pending",
-          "progress": 0,
-          "summary": "pnpm workspaces + Turborepo + TypeScript",
-          "needs": "ADRs aprobados"
-        },
         {
           "id": "core-auth",
           "name": "Core - Autenticación",
@@ -75,27 +66,27 @@
           "id": "mod-clinicas",
           "name": "MOD-CLINICAS",
           "owner": "Frontend · Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "CRUD clínicas, horarios, capacidad, servicios",
+          "status": "in_review",
+          "progress": 95,
+          "summary": "✅ Validación GEMINI completada. Schema + ClinicService + UI components. Pendiente: tests unitarios + PostgreSQL setup",
           "needs": "core-database completado"
         },
         {
           "id": "mod-servicios",
           "name": "MOD-SERVICIOS",
           "owner": "Frontend · Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Catálogo estudios + baterías (paquetes)",
+          "status": "in_review",
+          "progress": 95,
+          "summary": "✅ GEMINI QA: 3 fixes críticos aplicados (soft deletes ARCHIVED, cross-tenant validation). Schema + ServiceService (10 métodos) + UI. Pendiente: tests + PostgreSQL",
           "needs": "core-database completado"
         },
         {
           "id": "mod-empresas",
           "name": "MOD-EMPRESAS",
           "owner": "Frontend · Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "CRUD empresas + baterías contratadas + perfiles puesto",
+          "status": "in_review",
+          "progress": 95,
+          "summary": "✅ GEMINI QA: 3 fixes críticos aplicados (soft deletes ARCHIVED, BatteryNotFoundError validation en addBattery). Schema + CompanyService (11 métodos) + UI. Pendiente: tests + PostgreSQL",
           "needs": "mod-servicios completado"
         },
         {
@@ -109,7 +100,8 @@
         }
       ],
       "statusCounts": {
-        "pending": 10,
+        "pending": 6,
+        "in_review": 3,
         "done": 1
       }
     },
@@ -226,11 +218,6 @@
     }
   ],
   "needsAction": [
-    {
-      "module": "Setup Monorepo + Tooling",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "ADRs aprobados"
-    },
     {
       "module": "Core - Autenticación",
       "phase": "FASE 0 – Cimientos",

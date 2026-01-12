@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Módulos */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+
+    /* Tipos */
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Rutas */
+    "baseUrl": ".",
+    "paths": {
+      "@core/types": ["packages/core-types/src/index.ts"],
+      "@core/auth": ["packages/core-auth/src/index.ts"],
+      "@core/database": ["packages/core-database/src/index.ts"],
+      "@core/storage": ["packages/core-storage/src/index.ts"],
+      "@core/ui": ["packages/core-ui/src/index.ts"],
+      "@/*": ["packages/web-app/src/*"]
+    },
+
+    /* Salida */
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist"
+  },
+  "exclude": ["node_modules", "dist", "build", ".next"]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@ami/web-app",
+  "version": "0.1.0",
+  "description": "Next.js 14 web app - AMI-SYSTEM",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ami/core-auth": "workspace:*",
+    "@ami/core-database": "workspace:*",
+    "@ami/core-storage": "workspace:*",
+    "@ami/core-types": "workspace:*",
+    "@ami/core-ui": "workspace:*",
+    "@hookform/resolvers": "^3.3.2",
+    "@prisma/client": "^5.4.0",
+    "firebase": "^10.5.0",
+    "next": "^14.0.0",
+    "next-pwa": "^5.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.47.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^14.0.0",
+    "@tailwindcss/forms": "^0.5.6",
+    "@types/node": "^20.8.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "workspace:*",
+    "eslint-config-next": "^14.0.0",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "typescript": "workspace:*"
+  }
+}

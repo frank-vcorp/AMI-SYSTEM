@@ -1,0 +1,25 @@
+{
+  "name": "@ami/core-database",
+  "version": "0.1.0",
+  "description": "Prisma + PostgreSQL + tenant middleware",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": ["src", "dist", "prisma"],
+  "scripts": {
+    "build": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "ts-node prisma/seed.ts"
+  },
+  "dependencies": {
+    "@ami/core-types": "workspace:*",
+    "@prisma/client": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "prisma": "^5.4.0",
+    "typescript": "workspace:*"
+  }
+}

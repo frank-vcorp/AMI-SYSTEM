@@ -1,0 +1,22 @@
+{
+  "name": "@ami/core-auth",
+  "version": "0.1.0",
+  "description": "Autenticación Firebase + roles + middleware",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": ["src", "dist"],
+  "scripts": {
+    "build": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "@ami/core-types": "workspace:*",
+    "firebase-admin": "^12.0.0",
+    "next": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0",
+    "typescript": "workspace:*"
+  }
+}

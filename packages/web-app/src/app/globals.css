@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ami-turquoise: #00B5A5;
+  --ami-purple: #7B2D8E;
+  --ami-dark-gray: #4A5568;
+  --ami-light-turquoise: #4FD1C7;
+  --ami-light-purple: #9F7AEA;
+}
+
+* {
+  @apply border-gray-200;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900;
+}
+
+a {
+  @apply text-ami-turquoise hover:underline;
+}

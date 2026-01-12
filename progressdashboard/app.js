@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const actionItemsEl = document.getElementById("action-items");
   const statusBannerEl = document.getElementById("status-text");
 
-  fetch("data/project_data.json")
+  // Cache-buster: evita que el navegador use versión cacheada del JSON
+  const cacheBuster = new Date().getTime();
+  fetch(`data/project_data.json?v=${cacheBuster}`)
     .then((response) => response.json())
     .then((data) => {
       renderOverall(data, lastUpdatedEl, overallProgressBar);

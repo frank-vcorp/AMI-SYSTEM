@@ -170,6 +170,13 @@ export class InvalidJobProfileError extends Error {
   }
 }
 
+export class BatteryNotFoundError extends Error {
+  constructor(batteryId: string) {
+    super(`Battery not found: ${batteryId}`);
+    this.name = 'BatteryNotFoundError';
+  }
+}
+
 export class BatteryAlreadyContractedError extends Error {
   constructor(batteryId: string, companyId: string) {
     super(`Battery ${batteryId} is already contracted by company ${companyId}`);

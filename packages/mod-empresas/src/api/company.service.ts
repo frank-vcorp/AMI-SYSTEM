@@ -20,6 +20,7 @@ import {
   JobProfileNotFoundError,
   JobProfileAlreadyExistsError,
   InvalidJobProfileError,
+  BatteryNotFoundError,
   BatteryAlreadyContractedError
 } from '../types/company';
 
@@ -124,7 +125,11 @@ export class CompanyService {
     const skip = (page - 1) * pageSize;
 
     const where: any = { tenantId };
-    if (status) where.status = status;
+    if (status) {
+      where.status = status;
+    } else {
+      where.status = { not: 'ARCHIVED' }; // Default: exclude archived companies
+    }
     if (city) where.city = city;
     if (search) {
       where.OR = [
@@ -233,6 +238,15 @@ export class CompanyService {
 
     if (!company) {
       throw new CompanyNotFoundError(companyId);
+    }
+
+    // CRITICAL: Validate battery exists and belongs to tenant (prevent cross-tenant attack)
+    const battery = await this.prisma.battery.findFirst({
+      where: { id: data.batteryId, tenantId }
+    });
+
+    if (!battery) {
+      throw new BatteryNotFoundError(data.batteryId);
     }
 
     // Check if battery is already contracted

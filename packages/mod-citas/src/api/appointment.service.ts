@@ -204,7 +204,10 @@ export class AppointmentService {
 
     // If updating date/time, validate availability again
     if (data.appointmentDate || data.appointmentTime) {
-      const newDate = data.appointmentDate || appointment.appointmentDate;
+      const newDateStr = data.appointmentDate || (appointment.appointmentDate instanceof Date 
+        ? appointment.appointmentDate.toISOString().split('T')[0]
+        : appointment.appointmentDate);
+      const newDate = new Date(newDateStr);
       const newTime = data.appointmentTime || appointment.appointmentTime;
 
       // Validate clinic hours (simplified - reuse logic from create)
@@ -383,7 +386,7 @@ export class AppointmentService {
 
       slots.push({
         clinicId: '',
-        date,
+        date: date.toISOString().split('T')[0],  // Convert Date to ISO string (YYYY-MM-DD)
         time: timeStr,
         durationMin,
         available: true

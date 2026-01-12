@@ -81,7 +81,7 @@ export function AppointmentManager() {
           appointments={appointments}
           onDateSelect={setSelectedDate}
           onAppointmentClick={(apt) => {
-            setSelectedDate(apt.appointmentDate);
+            setSelectedDate(typeof apt.appointmentDate === 'string' ? apt.appointmentDate : new Date(apt.appointmentDate).toISOString().split('T')[0]);
             setShowForm(true);
           }}
         />

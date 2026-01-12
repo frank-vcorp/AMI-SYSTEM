@@ -47,7 +47,13 @@ export function CalendarView({
     if (!day) return [];
 
     const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-    return appointments.filter((apt) => apt.appointmentDate === dateStr);
+    return appointments.filter((apt) => {
+      // Compare string dates safely
+      const aptDateStr = typeof apt.appointmentDate === 'string' 
+        ? apt.appointmentDate 
+        : new Date(apt.appointmentDate).toISOString().split('T')[0];
+      return aptDateStr === dateStr;
+    });
   };
 
   const handlePrevMonth = () => {

@@ -5,7 +5,6 @@ import {
   CreateAppointmentRequest,
   AppointmentResponse,
   AvailabilitySlot,
-  AvailabilityRequest,
 } from '../types/appointment';
 
 interface AppointmentFormProps {
@@ -23,16 +22,18 @@ export function AppointmentForm({
   initialData,
   isLoading = false,
 }: AppointmentFormProps) {
+  const defaultFormData: CreateAppointmentRequest = {
+    clinicId: '',
+    companyId: '',
+    employeeId: '',
+    appointmentDate: '',
+    appointmentTime: '',
+    serviceIds: [],
+    notes: '',
+  };
+
   const [formData, setFormData] = useState<CreateAppointmentRequest>(
-    initialData || {
-      clinicId: '',
-      companyId: '',
-      employeeId: '',
-      appointmentDate: '',
-      appointmentTime: '',
-      serviceIds: [],
-      notes: '',
-    }
+    initialData ? { ...defaultFormData, ...initialData } : defaultFormData
   );
 
   const [availableSlots, setAvailableSlots] = useState<AvailabilitySlot[]>([]);
@@ -58,10 +59,12 @@ export function AppointmentForm({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          tenantId,
           clinicId: formData.clinicId,
-          appointmentDate: formData.appointmentDate,
-        } as AvailabilityRequest),
+          dateFrom: formData.appointmentDate,
+          dateTo: formData.appointmentDate,
+          serviceIds: formData.serviceIds,
+          durationMin: 30, // Default duration for searching slots
+        }),
       });
 
       if (!response.ok) {
@@ -128,14 +131,15 @@ export function AppointmentForm({
     }));
   };
 
-  const handleServiceToggle = (serviceId: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      serviceIds: prev.serviceIds.includes(serviceId)
-        ? prev.serviceIds.filter((id) => id !== serviceId)
-        : [...prev.serviceIds, serviceId],
-    }));
-  };
+  // TODO: Implement service selection in form UI
+  // const handleServiceToggle = (serviceId: string) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     serviceIds: prev.serviceIds.includes(serviceId)
+  //       ? prev.serviceIds.filter((id) => id !== serviceId)
+  //       : [...prev.serviceIds, serviceId],
+  //   }));
+  // };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">

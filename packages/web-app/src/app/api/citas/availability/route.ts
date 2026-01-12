@@ -12,26 +12,27 @@ const mockPrisma = {
 
 const appointmentService = new AppointmentService(mockPrisma as any);
 
-/**
- * POST /api/citas/availability
- * Find available time slots for a clinic on a given date
- */
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { tenantId, clinicId, appointmentDate } = body as AvailabilityRequest;
+    const { clinicId, dateFrom, dateTo, serviceIds, durationMin } = body as AvailabilityRequest;
+    
+    // Get tenantId from headers (from auth context in production)
+    const tenantId = request.headers.get('x-tenant-id') || 'default-tenant';
 
-    if (!tenantId || !clinicId || !appointmentDate) {
+    if (!clinicId || !dateFrom || !dateTo || !serviceIds || durationMin === undefined) {
       return NextResponse.json(
-        { error: 'tenantId, clinicId, and appointmentDate are required' },
+        { error: 'clinicId, dateFrom, dateTo, serviceIds, and durationMin are required' },
         { status: 400 }
       );
     }
 
     const slots = await appointmentService.findAvailableSlots(tenantId, {
-      tenantId,
       clinicId,
-      appointmentDate,
+      dateFrom,
+      dateTo,
+      serviceIds,
+      durationMin,
     });
 
     return NextResponse.json({ slots }, { status: 200 });

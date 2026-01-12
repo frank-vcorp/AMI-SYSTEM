@@ -40,8 +40,8 @@ export async function GET(request: NextRequest) {
 
     const result = await appointmentService.listAppointments({
       tenantId,
-      clinicId,
-      employeeId,
+      clinicId: clinicId ?? undefined,
+      employeeId: employeeId ?? undefined,
       status: status as any,
       page,
       pageSize,

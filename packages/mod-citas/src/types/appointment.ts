@@ -14,7 +14,7 @@ export interface CreateAppointmentRequest {
   clinicId: string;
   employeeId: string;        // Empleado / Paciente
   companyId: string;         // Empresa contratante
-  appointmentDate: Date;
+  appointmentDate: string;   // ISO 8601 date string (YYYY-MM-DD)
   appointmentTime: string;   // HH:MM format
   serviceIds: string[];      // Servicios/Baterías a realizar
   notes?: string;
@@ -22,14 +22,31 @@ export interface CreateAppointmentRequest {
 }
 
 export interface UpdateAppointmentRequest {
-  appointmentDate?: Date;
+  appointmentDate?: string;  // ISO 8601 date string (YYYY-MM-DD)
   appointmentTime?: string;
   serviceIds?: string[];
   notes?: string;
   status?: AppointmentStatus;
 }
 
-export interface AppointmentResponse extends Appointment {
+/**
+ * HTTP Response DTO for Appointment
+ * Dates are serialized as ISO 8601 strings for JSON transport
+ * This is separate from Appointment (Prisma) which uses DateTime
+ */
+export interface AppointmentResponse {
+  id: string;
+  tenantId: string;
+  clinicId: string;
+  employeeId: string;
+  companyId: string;
+  appointmentDate: string;   // ISO 8601 date string (YYYY-MM-DD)
+  appointmentTime: string;
+  status: AppointmentStatus;
+  notes: string | null;
+  createdAt: string;         // ISO 8601 timestamp
+  updatedAt: string;         // ISO 8601 timestamp
+  // Optional enriched fields
   clinicName?: string;
   employeeName?: string;
   companyName?: string;
@@ -50,8 +67,8 @@ export interface AppointmentListFilters {
   companyId?: string;
   employeeId?: string;
   status?: AppointmentStatus;
-  dateFrom?: Date;
-  dateTo?: Date;
+  dateFrom?: string;         // ISO 8601 date string (YYYY-MM-DD)
+  dateTo?: string;           // ISO 8601 date string (YYYY-MM-DD)
   search?: string;
   page?: number;
   pageSize?: number;
@@ -59,7 +76,7 @@ export interface AppointmentListFilters {
 
 export interface AvailabilitySlot {
   clinicId: string;
-  date: Date;
+  date: string;              // ISO 8601 date string (YYYY-MM-DD)
   time: string;
   durationMin: number;
   available: boolean;
@@ -67,8 +84,8 @@ export interface AvailabilitySlot {
 
 export interface AvailabilityRequest {
   clinicId: string;
-  dateFrom: Date;
-  dateTo: Date;
+  dateFrom: string;          // ISO 8601 date string (YYYY-MM-DD)
+  dateTo: string;            // ISO 8601 date string (YYYY-MM-DD)
   serviceIds: string[];
   durationMin: number;
 }
@@ -89,8 +106,11 @@ export class AppointmentConflictError extends Error {
 }
 
 export class ClinicNotAvailableError extends Error {
-  constructor(clinicId: string, date: Date) {
-    super(`Clinic ${clinicId} is not available on ${date.toISOString().split('T')[0]}`);
+  constructor(clinicId: string, dateOrString: Date | string) {
+    const dateStr = typeof dateOrString === 'string' 
+      ? dateOrString 
+      : dateOrString.toISOString().split('T')[0];
+    super(`Clinic ${clinicId} is not available on ${dateStr}`);
     this.name = 'ClinicNotAvailableError';
   }
 }

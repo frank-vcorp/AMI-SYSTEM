@@ -243,3 +243,49 @@ npx prisma db push  # O usar Railway
 ---
 
 **Estado:** ✅ Implementación completada. Esperando feedback de QA e INTEGRA.
+
+## Validación QA (Completada)
+
+**Fecha:** 2026-01-12
+**Validador:** GEMINI-CLOUD-QA
+**Estado:** ✅ APROBADO (con correcciones aplicadas)
+
+### Issues Encontrados (Auditoría GEMINI)
+
+| ID | Severidad | Componente | Descripción | Fix | Aplicado |
+|---|---|---|---|---|---|
+| GEM-001 | 🔴 CRÍTICO | ClinicService | Falta validación tenantId en upsertSchedule() - violación aislamiento multi-tenant | Agregar parámetro tenantId y validar clinic pertenece a tenant | ✅ |
+| GEM-002 | 🔴 CRÍTICO | ClinicService | Return type `any` implícito en upsertSchedule() | Cambiar a `Promise<ClinicSchedule>` | ✅ |
+| GEM-003 | 🟡 IMPORTANTE | ClinicModal | grid-cols-3 forzado en móviles - UX pobre | Cambiar a grid-cols-1 md:grid-cols-3 | ✅ |
+| GEM-004 | 🟡 IMPORTANTE | ClinicService | Validación hora permite "9:00" vs "09:00" | Regex estricta /^\d{2}:\d{2}$/ + normalización | ✅ |
+
+### Correcciones Aplicadas
+
+**ClinicService.upsertSchedule()** - tenantId isolation:
+- Firma: `async upsertSchedule(tenantId: string, data: CreateScheduleRequest): Promise<ClinicSchedule>`
+- Validación: Clinic findFirst by (id, tenantId) antes de upsert
+- Error: ClinicNotFoundError si clinic no pertenece a tenant
+
+**Tipado explícito:**
+- Retorno: `Promise<ClinicSchedule>` (Prisma type exportado)
+- Eliminado uso de `any`
+
+**Responsive Design:**
+- ClinicModal: `grid grid-cols-1 md:grid-cols-3` en campos ciudad/estado/zipCode
+- Ahora funciona en iPhone SE (375px), Pixel 4a (412px), tablets, desktop
+
+**Validación Hora:**
+- Regex estricto: `^\d{2}:\d{2}$` (fuerza HH:MM, no permite "9:00")
+- Normalización: Input automático formateado a 2 dígitos
+- Almacenamiento: Siempre VARCHAR(5) con formato correcto
+
+### Decisiones Tomadas
+
+- **Por qué tenantId en upsertSchedule():** Multi-tenancy requiere aislamiento explícito en *cada* operación, no delegable a contexto de sesión. Patrón INTEGRA: "Todos los métodos de servicio reciben tenantId como primer parámetro".
+- **Por qué grid-cols-1 md:grid-cols-3:** Mobile-first Tailwind según SPEC-UI-DESIGN-SYSTEM.md. Mejora UX en dispositivos ≤ 640px.
+- **Por qué HH:MM estricto:** Prisma schema VarChar(5) + ordenamiento correcto + UI consistency.
+
+**Referencias:**
+- SPEC-CODIGO.md - Multi-tenancy pattern
+- SPEC-UI-DESIGN-SYSTEM.md - Mobile-first responsive
+- soft-gates.md - Type safety (no `any`)

@@ -43,10 +43,15 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - Firebase Auth (2-3 horas)
     - GCP Cloud Storage (1-2 horas)
 
-### 🔜 FASE 1 Ready (Bloqueadores Satisfechos):
-- MOD-CLINICAS ✅ → Ready para MOD-CITAS
-- MOD-EMPRESAS ✅ → Ready para MOD-CITAS
-- PostgreSQL ⏳ → Required para MOD-CITAS (Depends on GEMINI)
+### � FASE 1 Iniciada (Kickoff - SOFIA):
+- [~] **MOD-CITAS (SOFIA - 10% - EN PROGRESO):**
+    - [✓] Estructura base creada (package.json, tsconfig, types)
+    - [✓] Modelo Appointment en @ami/core + relaciones (Clinic, Company)
+    - [✓] AppointmentService: CRUD, disponibilidad, validaciones
+    - [ ] Componentes UI (CalendarView, AppointmentForm, AppointmentTable)
+    - [ ] API Routes en web-app (/api/citas/*)
+    - [ ] Integración con web-app frontend
+    - Dependencias: MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ (satisfechas)
 
 ---
 
@@ -68,16 +73,16 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 <!-- progress-modules:start -->
 | id | name | phase | phaseOrder | owner | status | progress | summary | needs |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | in_progress | 95 | pnpm workspaces + Turborepo + TypeScript | npm install pending
+| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | done | 100 | pnpm workspaces + Turborepo + TypeScript | -
 | core-auth | Core - Autenticación | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Firebase Auth + roles + Custom Claims | core-setup completado |
-| core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Prisma + PostgreSQL + multi-tenant middleware | core-setup completado |
+| core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | done | 100 | Prisma Schema V2 Unificado (Centralizado en @ami/core) | - |
 | core-storage | Core - Storage | FASE 0 – Cimientos | 0 | Backend | pending | 0 | GCP Cloud Storage + URLs firmadas | core-setup completado |
-| core-ui | Core - UI Base | FASE 0 – Cimientos | 0 | Frontend | pending | 0 | shadcn/ui + tema AMI + layout mobile-first | core-setup completado |
+| core-ui | Core - UI Base | FASE 0 – Cimientos | 0 | Frontend | in_progress | 50 | shadcn/ui + tema AMI | core-setup completado |
 | core-pwa | Core - PWA | FASE 0 – Cimientos | 0 | Frontend | pending | 0 | next-pwa + service worker + offline | core-ui completado |
 | core-signatures | Core - Firmas | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Generador de firma única por médico | core-setup completado |
-| mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | in_review | 95 | ✅ Validación GEMINI completada. Schema + ClinicService + UI components. Pendiente: tests unitarios + PostgreSQL setup | core-database completado |
-| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | in_review | 95 | ✅ GEMINI QA: 3 fixes críticos aplicados (soft deletes ARCHIVED, cross-tenant validation). Schema + ServiceService (10 métodos) + UI. Pendiente: tests + PostgreSQL | core-database completado |
-| mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | in_review | 95 | ✅ GEMINI QA: 3 fixes críticos aplicados (soft deletes ARCHIVED, BatteryNotFoundError validation en addBattery). Schema + CompanyService (11 métodos) + UI. Pendiente: tests + PostgreSQL | mod-servicios completado |
+| mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. UI Client Components. | - |
+| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. Baterías logic fixed. | - |
+| mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. | - |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Agenda, disponibilidad, check-in, recordatorios | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | mod-citas completado |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | Extracción IA + semáforos + dictamen + firma | mod-expedientes completado |

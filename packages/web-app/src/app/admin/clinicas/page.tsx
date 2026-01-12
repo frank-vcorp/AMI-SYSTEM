@@ -42,8 +42,10 @@ export default async function ClinicsPage() {
         {/* Main Content */}
         <div className="bg-white rounded-lg shadow-lg overflow-hidden">
           <ClinicsTable 
-            initialData={clinics.data}
-            totalCount={clinics.total}
+            clinics={clinics.data}
+            total={clinics.total}
+            page={clinics.page}
+            pageSize={clinics.pageSize}
           />
         </div>
 

@@ -1,5 +1,5 @@
 // API service for MOD-CLINICAS
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@ami/core';
 import type {
   CreateClinicRequest,
   UpdateClinicRequest,
@@ -21,7 +21,7 @@ export class ClinicService {
   /**
    * Create a new clinic
    */
-  async createClinic(tenantId: string, data: CreateClinicRequest): Promise<ClinicResponse> {
+  async createClinic(tenantId: string, data: CreateClinicRequest, _createdBy?: string): Promise<ClinicResponse> {
     // Check if clinic already exists
     const existing = await this.prisma.clinic.findFirst({
       where: {
@@ -61,7 +61,7 @@ export class ClinicService {
   /**
    * Get clinic by ID
    */
-  async getClinic(clinicId: string, tenantId: string): Promise<ClinicResponse> {
+  async getClinic(tenantId: string, clinicId: string): Promise<ClinicResponse> {
     const clinic = await this.prisma.clinic.findFirst({
       where: {
         id: clinicId,
@@ -71,7 +71,7 @@ export class ClinicService {
         schedules: true,
         services: true,
         _count: {
-          select: { appointments: true }
+          select: { appointmentSlots: true }
         }
       }
     });
@@ -82,7 +82,7 @@ export class ClinicService {
 
     return {
       ...clinic,
-      appointmentCount: clinic._count.appointments
+      appointmentCount: clinic._count.appointmentSlots
     } as ClinicResponse;
   }
 
@@ -141,9 +141,10 @@ export class ClinicService {
    * Update clinic
    */
   async updateClinic(
-    clinicId: string,
     tenantId: string,
-    data: UpdateClinicRequest
+    clinicId: string,
+    data: UpdateClinicRequest,
+    _updatedBy?: string
   ): Promise<ClinicResponse> {
     const clinic = await this.prisma.clinic.findFirst({
       where: { id: clinicId, tenantId }
@@ -168,7 +169,7 @@ export class ClinicService {
   /**
    * Delete clinic (soft delete via status)
    */
-  async deleteClinic(clinicId: string, tenantId: string): Promise<void> {
+  async deleteClinic(tenantId: string, clinicId: string): Promise<void> {
     const clinic = await this.prisma.clinic.findFirst({
       where: { id: clinicId, tenantId }
     });
@@ -231,7 +232,7 @@ export class ClinicService {
         closingTime: data.closingTime,
         lunchStartTime: data.lunchStartTime,
         lunchEndTime: data.lunchEndTime,
-        isOpen: data.isOpen,
+        isActive: data.isOpen,
         maxAppointmentsDay: data.maxAppointmentsDay
       },
       create: {
@@ -241,7 +242,7 @@ export class ClinicService {
         closingTime: data.closingTime,
         lunchStartTime: data.lunchStartTime,
         lunchEndTime: data.lunchEndTime,
-        isOpen: data.isOpen,
+        isActive: data.isOpen,
         maxAppointmentsDay: data.maxAppointmentsDay
       }
     });

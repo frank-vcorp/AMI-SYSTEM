@@ -1,0 +1,334 @@
+// packages/core/prisma/schema.prisma
+// Core DB schema combining all modules
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// =================================================================================================
+// 1. CORE (Auth, Tenants)
+// =================================================================================================
+
+model Tenant {
+  id              String         @id @default(uuid()) @db.Uuid
+  name            String         @db.VarChar(100)
+  slug            String         @unique @db.VarChar(50)
+  status          String         @default("ACTIVE") // ACTIVE, SUSPENDED
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  users           User[]
+}
+
+model User {
+  id              String         @id @default(uuid()) @db.Uuid
+  tenantId        String         @db.Uuid
+  email           String         @unique @db.VarChar(255)
+  firstName       String         @db.VarChar(100)
+  lastName        String         @db.VarChar(100)
+  roles           String[]       // ["ADMIN", "MEDICO", "RECEPCION", "ENFERMERIA"]
+  status          String         @default("ACTIVE")
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  tenant          Tenant         @relation(fields: [tenantId], references: [id])
+  
+  @@index([tenantId])
+}
+
+// =================================================================================================
+// 2. MOD-CLINICAS
+// =================================================================================================
+
+enum ClinicStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Clinic {
+  id                String     @id @default(cuid())
+  tenantId          String     @db.Uuid
+  name              String     @db.VarChar(255)
+  description       String?    @db.Text
+  address           String     @db.VarChar(500)
+  city              String     @db.VarChar(100)
+  state             String     @db.VarChar(50)
+  zipCode           String     @db.VarChar(20)
+  phoneNumber       String?    @db.VarChar(20)
+  email             String?    @db.VarChar(255)
+  
+  totalBeds         Int        @default(1)
+  availableBeds     Int        @default(1)
+  status            ClinicStatus @default(ACTIVE)
+  isHeadquarters    Boolean    @default(false)
+  
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  createdBy         String?    @db.Uuid
+  updatedBy         String?    @db.Uuid
+  
+  schedules         ClinicSchedule[]
+  services          ClinicService[]
+  appointmentSlots  Appointment[]
+  
+  @@index([tenantId])
+  @@index([status])
+  @@unique([tenantId, name])
+}
+
+model ClinicSchedule {
+  id                String     @id @default(cuid())
+  clinicId          String
+  dayOfWeek         Int        
+  openingTime       String     @db.VarChar(5)
+  closingTime       String     @db.VarChar(5)
+  lunchStartTime    String?    @db.VarChar(5)
+  lunchEndTime      String?    @db.VarChar(5)
+  maxAppointmentsDay Int?
+  isActive          Boolean    @default(true)
+  
+  clinic            Clinic     @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  
+  @@index([clinicId])
+  @@unique([clinicId, dayOfWeek])
+}
+
+model ClinicService {
+  id                String     @id @default(cuid())
+  clinicId          String
+  serviceId         String
+  isActive          Boolean    @default(true)
+  clinic            Clinic     @relation(fields: [clinicId], references: [id])
+  service           Service    @relation(fields: [serviceId], references: [id])
+
+  @@unique([clinicId, serviceId])
+}
+
+// =================================================================================================
+// 3. MOD-SERVICIOS
+// =================================================================================================
+
+enum ServiceType {
+  LABORATORIO
+  RAYOS_X
+  CONSULTA
+  ESPECIALIDAD
+  OTROS
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model Service {
+  id          String        @id @default(cuid())
+  tenantId    String        @db.Uuid
+  code        String        @db.VarChar(50)
+  name        String        @db.VarChar(255)
+  description String?       @db.Text
+  type        ServiceType
+  status      ServiceStatus @default(ACTIVE)
+  
+  basePrice   Decimal       @db.Decimal(10, 2)
+  costPrice   Decimal?      @db.Decimal(10, 2)
+  taxRate     Decimal       @default(0) @db.Decimal(5, 2)
+  durationMin Int           @default(15)
+  
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  
+  inBatteries BatteryItem[]
+  clinics     ClinicService[]
+  
+  @@unique([tenantId, code])
+  @@index([tenantId])
+}
+
+model ServiceBattery {
+  id              String   @id @default(cuid())
+  tenantId        String   @db.Uuid
+  name            String   @db.VarChar(255)
+  description     String?  @db.Text
+  status          String   @default("ACTIVE")
+  totalPrice      Decimal  @db.Decimal(10, 2)
+  costTotal       Decimal? @db.Decimal(10, 2)
+  durationMin     Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  services        BatteryItem[]
+  
+  @@index([tenantId])
+}
+
+model BatteryItem {
+  id              String   @id @default(cuid())
+  batteryId       String
+  serviceId       String
+  quantity        Int      @default(1)
+  unitPrice       Decimal  @db.Decimal(10, 2)
+  
+  battery         ServiceBattery @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+  service         Service        @relation(fields: [serviceId], references: [id])
+  
+  @@index([batteryId])
+}
+
+// =================================================================================================
+// 4. MOD-EMPRESAS
+// =================================================================================================
+
+enum RiskLevel {
+  BAJO
+  MEDIO
+  ALTO
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+model Company {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  
+  name              String   @db.VarChar(255)
+  rfc               String?  @db.VarChar(13)
+  description       String?  @db.Text
+  
+  address           String?  @db.VarChar(500)
+  city              String?  @db.VarChar(100)
+  state             String?  @db.VarChar(100)
+  zipCode           String?  @db.VarChar(10)
+  phoneNumber       String?  @db.VarChar(20)
+  email             String?  @db.VarChar(255)
+  contactPerson     String?  @db.VarChar(255)
+  contactPhone      String?  @db.VarChar(20)
+  
+  isHeadquarters    Boolean  @default(false)
+  maxEmployees      Int      @default(100)
+  
+  status            CompanyStatus @default(ACTIVE)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String?   @db.Uuid
+  updatedBy         String?   @db.Uuid
+  
+  batteries         CompanyBattery[]
+  jobProfiles       JobProfile[]
+  appointments      Appointment[]
+  
+  @@unique([tenantId, rfc])
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+}
+
+model CompanyBattery {
+  id                String   @id @default(cuid())
+  
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  batteryId         String
+  
+  contractDate      DateTime  @default(now())
+  validFrom         DateTime  @default(now())
+  validUntil        DateTime?
+  isActive          Boolean   @default(true)
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@unique([companyId, batteryId])
+  @@index([companyId])
+  @@index([batteryId])
+}
+
+model JobProfile {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  companyId         String
+  company           Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  
+  name              String   @db.VarChar(255)
+  description       String?  @db.Text
+  
+  riskLevel         RiskLevel @default(MEDIO)
+  
+  requiredBatteryIds String[] @default([])
+  
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String?   @db.Uuid
+  updatedBy         String?   @db.Uuid
+  
+  @@unique([companyId, name])
+  @@index([companyId])
+  @@index([tenantId])
+}
+
+// =================================================================================================
+// 5. MOD-CITAS: Appointments
+// =================================================================================================
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  CHECK_IN
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+model Appointment {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  clinicId          String
+  employeeId        String            // Employee / Patient (from MOD-EMPRESAS)
+  companyId         String            // Company (from MOD-EMPRESAS)
+  
+  appointmentDate   DateTime
+  appointmentTime   String            @db.VarChar(5)  // HH:MM
+  
+  status            AppointmentStatus @default(SCHEDULED)
+  notes             String?           @db.Text
+  
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id])
+  company           Company           @relation(fields: [companyId], references: [id])
+  appointmentServices AppointmentService[]
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  @@index([tenantId])
+  @@index([clinicId])
+  @@index([companyId])
+  @@index([employeeId])
+  @@index([appointmentDate])
+  @@index([status])
+}
+
+model AppointmentService {
+  id              String        @id @default(cuid())
+  appointmentId   String
+  serviceId       String        // Service or Battery ID
+  
+  appointment     Appointment   @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  
+  @@unique([appointmentId, serviceId])
+}

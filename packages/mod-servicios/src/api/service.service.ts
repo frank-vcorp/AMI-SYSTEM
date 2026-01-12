@@ -1,5 +1,5 @@
 // API service for MOD-SERVICIOS
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@ami/core';
 import type {
   CreateServiceRequest,
   UpdateServiceRequest,
@@ -11,7 +11,7 @@ import type {
   BatteryResponse,
   BatteryListResponse,
   BatteryListFilters,
-  BatteryServiceDetail
+  BatteryService
 } from '../types/service';
 import {
   ServiceNotFoundError,
@@ -31,7 +31,7 @@ export class ServiceService {
   /**
    * Create a new service
    */
-  async createService(tenantId: string, data: CreateServiceRequest, createdBy: string): Promise<ServiceResponse> {
+  async createService(tenantId: string, data: CreateServiceRequest, _createdBy: string): Promise<ServiceResponse> {
     // Check if service code already exists in tenant
     const existing = await this.prisma.service.findFirst({
       where: {
@@ -41,7 +41,7 @@ export class ServiceService {
     });
 
     if (existing) {
-      throw new ServiceAlreadyExistsError(data.code, tenantId);
+      throw new ServiceAlreadyExistsError(data.code);
     }
 
     const service = await this.prisma.service.create({
@@ -50,17 +50,17 @@ export class ServiceService {
         code: data.code,
         name: data.name,
         description: data.description,
-        category: data.category,
-        estimatedMinutes: data.estimatedMinutes || 30,
-        requiresEquipment: data.requiresEquipment || false,
-        equipmentName: data.equipmentName,
-        costAmount: data.costAmount || 0,
-        sellingPrice: data.sellingPrice,
-        createdBy
+        type: data.type,
+        durationMin: data.durationMin || 30,
+        // requiresEquipment: data.requiresEquipment || false, // Not in Schema V2
+        // equipmentName: data.equipmentName,
+        costPrice: data.costPrice || 0,
+        basePrice: data.basePrice
+        // createdBy // Not in Schema V2
       }
     });
 
-    return service as ServiceResponse;
+    return service as unknown as ServiceResponse;
   }
 
   /**
@@ -78,11 +78,12 @@ export class ServiceService {
       throw new ServiceNotFoundError(serviceId);
     }
 
-    const batterieCount = await this.prisma.batteryService.count({
+    // Check usage in batteries
+    const batteryCount = await this.prisma.batteryItem.count({
       where: { serviceId }
     });
 
-    return { ...service, batterieCount } as ServiceResponse;
+    return { ...service, batteryCount } as unknown as ServiceResponse;
   }
 
   /**
@@ -92,7 +93,7 @@ export class ServiceService {
     const {
       tenantId,
       status,
-      category,
+      type,
       search,
       page = 1,
       pageSize = 10
@@ -104,9 +105,9 @@ export class ServiceService {
     if (status) {
       where.status = status;
     } else {
-      where.status = { not: 'ARCHIVED' }; // Default: exclude archived services
+      where.status = { not: 'ARCHIVED' };
     }
-    if (category) where.category = category;
+    if (type) where.type = type;
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
@@ -126,11 +127,11 @@ export class ServiceService {
     ]);
 
     return {
-      data: services as ServiceResponse[],
+      data: services as unknown as ServiceResponse[],
       total,
       page,
       pageSize,
-      hasMore: skip + services.length < total
+      totalPages: Math.ceil(total / pageSize)
     };
   }
 
@@ -141,7 +142,7 @@ export class ServiceService {
     tenantId: string,
     serviceId: string,
     data: UpdateServiceRequest,
-    updatedBy: string
+    _updatedBy: string
   ): Promise<ServiceResponse> {
     const service = await this.prisma.service.findFirst({
       where: { id: serviceId, tenantId }
@@ -154,12 +155,12 @@ export class ServiceService {
     const updated = await this.prisma.service.update({
       where: { id: serviceId },
       data: {
-        ...data,
-        updatedBy
+        ...data
+        // updatedBy 
       }
     });
 
-    return updated as ServiceResponse;
+    return updated as unknown as ServiceResponse;
   }
 
   /**
@@ -190,10 +191,10 @@ export class ServiceService {
   async createBattery(
     tenantId: string,
     data: CreateBatteryRequest,
-    createdBy: string
+    _createdBy: string
   ): Promise<BatteryResponse> {
     // Check if battery name already exists in tenant
-    const existing = await this.prisma.battery.findFirst({
+    const existing = await this.prisma.serviceBattery.findFirst({
       where: {
         tenantId,
         name: data.name
@@ -201,44 +202,55 @@ export class ServiceService {
     });
 
     if (existing) {
-      throw new BatteryAlreadyExistsError(data.name, tenantId);
+      throw new BatteryAlreadyExistsError(data.name);
     }
 
     // Validate services exist and belong to tenant
-    if (data.serviceIds.length === 0) {
+    if (data.services.length === 0) {
       throw new InvalidBatteryError('Battery must include at least one service');
     }
 
-    const services = await this.prisma.service.findMany({
+    const serviceIds = data.services.map(s => s.serviceId);
+    const dbServices = await this.prisma.service.findMany({
       where: {
-        id: { in: data.serviceIds },
+        id: { in: serviceIds },
         tenantId
       }
     });
 
-    if (services.length !== data.serviceIds.length) {
+    if (dbServices.length !== serviceIds.length) {
       throw new InvalidBatteryError('Some services not found or do not belong to this tenant');
     }
 
     // Calculate total cost and time
-    const costTotal = services.reduce((sum, s) => sum + s.costAmount, 0);
-    const estimatedMinutes = services.reduce((sum, s) => sum + s.estimatedMinutes, 0);
+    let costTotal = 0;
+    let durationMin = 0;
+
+    data.services.forEach(item => {
+      const service = dbServices.find(s => s.id === item.serviceId);
+      if (service) {
+        const qty = item.quantity || 1;
+        const cost = service.costPrice ? Number(service.costPrice) : 0;
+        costTotal += cost * qty;
+        durationMin += service.durationMin * qty;
+      }
+    });
 
     // Create battery with services
-    const battery = await this.prisma.battery.create({
+    const battery = await this.prisma.serviceBattery.create({
       data: {
         tenantId,
         name: data.name,
         description: data.description,
+        totalPrice: data.totalPrice,
         costTotal,
-        sellingPriceTotal: data.sellingPriceTotal || costTotal,
-        estimatedMinutes,
-        createdBy,
+        durationMin,
         services: {
           createMany: {
-            data: data.serviceIds.map((serviceId, index) => ({
-              serviceId,
-              order: index
+            data: data.services.map(item => ({
+              serviceId: item.serviceId,
+              quantity: item.quantity || 1,
+              unitPrice: item.unitPrice
             }))
           }
         }
@@ -259,15 +271,14 @@ export class ServiceService {
    * Get single battery with all services
    */
   async getBattery(tenantId: string, batteryId: string): Promise<BatteryResponse> {
-    const battery = await this.prisma.battery.findFirst({
+    const battery = await this.prisma.serviceBattery.findFirst({
       where: {
         id: batteryId,
         tenantId
       },
       include: {
         services: {
-          include: { service: true },
-          orderBy: { order: 'asc' }
+          include: { service: true }
         }
       }
     });
@@ -297,7 +308,7 @@ export class ServiceService {
     if (status) {
       where.status = status;
     } else {
-      where.status = { not: 'ARCHIVED' }; // Default: exclude archived batteries
+      where.status = { not: 'ARCHIVED' };
     }
     if (search) {
       where.OR = [
@@ -307,19 +318,18 @@ export class ServiceService {
     }
 
     const [batteries, total] = await Promise.all([
-      this.prisma.battery.findMany({
+      this.prisma.serviceBattery.findMany({
         where,
         skip,
         take: pageSize,
         include: {
           services: {
-            include: { service: true },
-            orderBy: { order: 'asc' }
+            include: { service: true }
           }
         },
         orderBy: { createdAt: 'desc' }
       }),
-      this.prisma.battery.count({ where })
+      this.prisma.serviceBattery.count({ where })
     ]);
 
     return {
@@ -327,7 +337,7 @@ export class ServiceService {
       total,
       page,
       pageSize,
-      hasMore: skip + batteries.length < total
+      totalPages: Math.ceil(total / pageSize)
     };
   }
 
@@ -338,9 +348,9 @@ export class ServiceService {
     tenantId: string,
     batteryId: string,
     data: UpdateBatteryRequest,
-    updatedBy: string
+    _updatedBy: string
   ): Promise<BatteryResponse> {
-    const battery = await this.prisma.battery.findFirst({
+    const battery = await this.prisma.serviceBattery.findFirst({
       where: { id: batteryId, tenantId }
     });
 
@@ -349,75 +359,80 @@ export class ServiceService {
     }
 
     // If updating services, recalculate cost and time
-    if (data.serviceIds) {
-      if (data.serviceIds.length === 0) {
+    if (data.services) {
+      if (data.services.length === 0) {
         throw new InvalidBatteryError('Battery must include at least one service');
       }
 
+      const serviceIds = data.services.map(s => s.serviceId);
       const services = await this.prisma.service.findMany({
         where: {
-          id: { in: data.serviceIds },
+          id: { in: serviceIds },
           tenantId
         }
       });
 
-      if (services.length !== data.serviceIds.length) {
+      if (services.length !== serviceIds.length) {
         throw new InvalidBatteryError('Some services not found or do not belong to this tenant');
       }
 
-      // Delete old relationships and create new ones
-      await this.prisma.batteryService.deleteMany({
+      // Delete old relationships
+      await this.prisma.batteryItem.deleteMany({
         where: { batteryId }
       });
 
       // Recalculate costs
-      const costTotal = services.reduce((sum, s) => sum + s.costAmount, 0);
-      const estimatedMinutes = services.reduce((sum, s) => sum + s.estimatedMinutes, 0);
+      let costTotal = 0;
+      let durationMin = 0;
+      data.services.forEach(item => {
+        const service = services.find(s => s.id === item.serviceId);
+        if (service) {
+           const qty = item.quantity || 1;
+           const cost = service.costPrice ? Number(service.costPrice) : 0;
+           costTotal += cost * qty;
+           durationMin += service.durationMin * qty;
+        }
+      });
 
       // Create new relationships
-      await this.prisma.batteryService.createMany({
-        data: data.serviceIds.map((serviceId, index) => ({
+      await this.prisma.batteryItem.createMany({
+        data: data.services.map(item => ({
           batteryId,
-          serviceId,
-          order: index
+          serviceId: item.serviceId,
+          quantity: item.quantity || 1,
+          unitPrice: item.unitPrice
         }))
       });
 
       // Update battery with new costs
-      const updated = await this.prisma.battery.update({
+      const updated = await this.prisma.serviceBattery.update({
         where: { id: batteryId },
         data: {
+          name: data.name,
+          description: data.description,
+          status: data.status,
+          totalPrice: data.totalPrice,
           costTotal,
-          estimatedMinutes,
-          sellingPriceTotal: data.sellingPriceTotal || costTotal,
-          updatedBy
+          durationMin
         },
         include: {
-          services: {
-            include: { service: true },
-            orderBy: { order: 'asc' }
-          }
+          services: { include: { service: true } }
         }
       });
-
       return this.mapBatteryResponse(updated);
     }
-
-    // Update only name, description, selling price
-    const updated = await this.prisma.battery.update({
+    
+    // Just update Basic Info
+    const updated = await this.prisma.serviceBattery.update({
       where: { id: batteryId },
       data: {
-        name: data.name || battery.name,
-        description: data.description !== undefined ? data.description : battery.description,
-        sellingPriceTotal: data.sellingPriceTotal || battery.sellingPriceTotal,
-        status: data.status || battery.status,
-        updatedBy
+        name: data.name,
+        description: data.description,
+        status: data.status,
+        totalPrice: data.totalPrice,
       },
       include: {
-        services: {
-          include: { service: true },
-          orderBy: { order: 'asc' }
-        }
+        services: { include: { service: true } }
       }
     });
 
@@ -428,7 +443,7 @@ export class ServiceService {
    * Delete battery (soft delete via status)
    */
   async deleteBattery(tenantId: string, batteryId: string): Promise<void> {
-    const battery = await this.prisma.battery.findFirst({
+    const battery = await this.prisma.serviceBattery.findFirst({
       where: { id: batteryId, tenantId }
     });
 
@@ -436,7 +451,7 @@ export class ServiceService {
       throw new BatteryNotFoundError(batteryId);
     }
 
-    await this.prisma.battery.update({
+    await this.prisma.serviceBattery.update({
       where: { id: batteryId },
       data: { status: 'ARCHIVED' }
     });
@@ -451,12 +466,13 @@ export class ServiceService {
       ...battery,
       services: battery.services.map((bs: any) => ({
         id: bs.id,
-        service: bs.service,
-        order: bs.order,
-        costOverride: bs.costOverride,
-        estimatedMinutesOverride: bs.estimatedMinutesOverride
-      })) as BatteryServiceDetail[],
+        batteryId: bs.batteryId,
+        serviceId: bs.serviceId,
+        quantity: bs.quantity,
+        unitPrice: bs.unitPrice,
+        service: bs.service
+      })) as unknown as BatteryService[],
       serviceCount: battery.services.length
-    };
+    } as unknown as BatteryResponse;
   }
 }

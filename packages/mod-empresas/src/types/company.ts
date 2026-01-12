@@ -5,7 +5,7 @@ import type {
   CompanyBattery,
   RiskLevel,
   CompanyStatus
-} from '@prisma/client';
+} from '@ami/core';
 
 // Export Prisma types
 export type {
@@ -158,7 +158,7 @@ export class JobProfileNotFoundError extends Error {
 
 export class JobProfileAlreadyExistsError extends Error {
   constructor(name: string, companyId: string) {
-    super(`Job profile with name ${name} already exists in this company`);
+    super(`Job profile with name ${name} already exists in this company (${companyId})`);
     this.name = 'JobProfileAlreadyExistsError';
   }
 }

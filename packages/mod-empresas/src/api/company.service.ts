@@ -1,5 +1,5 @@
 // API service for MOD-EMPRESAS
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@ami/core';
 import type {
   CreateCompanyRequest,
   UpdateCompanyRequest,
@@ -19,7 +19,6 @@ import {
   CompanyRFCAlreadyExistsError,
   JobProfileNotFoundError,
   JobProfileAlreadyExistsError,
-  InvalidJobProfileError,
   BatteryNotFoundError,
   BatteryAlreadyContractedError
 } from '../types/company';
@@ -241,7 +240,7 @@ export class CompanyService {
     }
 
     // CRITICAL: Validate battery exists and belongs to tenant (prevent cross-tenant attack)
-    const battery = await this.prisma.battery.findFirst({
+    const battery = await this.prisma.serviceBattery.findFirst({
       where: { id: data.batteryId, tenantId }
     });
 

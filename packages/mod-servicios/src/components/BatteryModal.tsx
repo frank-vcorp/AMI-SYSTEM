@@ -22,7 +22,7 @@ export function BatteryModal({
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    sellingPriceTotal: ''
+    totalPrice: ''
   });
 
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -72,24 +72,28 @@ export function BatteryModal({
     return Object.keys(newErrors).length === 0;
   };
 
+  const calculateCostTotal = () => {
+    const selectedData = availableServices.filter(s => selectedServices.includes(s.id));
+    return selectedData.reduce((sum, s) => sum + Number(s.costPrice || 0), 0);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
-    const selectedData = availableServices.filter(s => selectedServices.includes(s.id));
-    const costTotal = selectedData.reduce((sum, s) => sum + s.costAmount, 0);
+    const costTotal = calculateCostTotal();
 
     try {
       await onSubmit({
         name: formData.name.trim(),
         description: formData.description.trim() || undefined,
-        serviceIds: selectedServices,
-        sellingPriceTotal: formData.sellingPriceTotal ? parseFloat(formData.sellingPriceTotal) : costTotal
-      });
+        services: selectedServices.map(id => ({ serviceId: id, quantity: 1 })),
+        totalPrice: formData.totalPrice ? parseFloat(formData.totalPrice) : costTotal
+      } as unknown as CreateBatteryRequest);
 
       // Reset form
-      setFormData({ name: '', description: '', sellingPriceTotal: '' });
+      setFormData({ name: '', description: '', totalPrice: '' });
       setSelectedServices([]);
       onClose();
     } catch (error) {
@@ -99,8 +103,7 @@ export function BatteryModal({
 
   if (!isOpen) return null;
 
-  const selectedData = availableServices.filter(s => selectedServices.includes(s.id));
-  const costTotal = selectedData.reduce((sum, s) => sum + s.costAmount, 0);
+  const costTotal = calculateCostTotal();
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -173,7 +176,7 @@ export function BatteryModal({
                         {service.code} - {service.name}
                       </p>
                       <p className="text-xs text-gray-500">
-                        ${service.costAmount.toFixed(2)} · {service.estimatedMinutes} min
+                        ${Number(service.costPrice || 0).toFixed(2)} · {service.durationMin} min
                       </p>
                     </div>
                   </label>
@@ -201,41 +204,40 @@ export function BatteryModal({
           {/* Precio Venta */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Precio de Venta (opcional, por defecto = costo total)
+              Precio Total (opcional, por defecto = costo total)
             </label>
             <input
               type="number"
-              name="sellingPriceTotal"
-              value={formData.sellingPriceTotal}
+              name="totalPrice"
+              value={formData.totalPrice}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ami-turquoise"
-              placeholder="0.00"
-              step="0.01"
+              placeholder={`ej: ${costTotal.toFixed(2)}`}
               min="0"
+              step="0.01"
               disabled={isLoading}
             />
           </div>
-        </form>
 
-        {/* Footer */}
-        <div className="bg-gray-50 border-t border-gray-200 px-6 py-4 flex gap-2 justify-end sticky bottom-0">
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={isLoading}
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg font-medium hover:bg-gray-400 disabled:opacity-50"
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="px-4 py-2 bg-ami-turquoise text-white rounded-lg font-medium hover:opacity-90 disabled:opacity-50"
-          >
-            {isLoading ? 'Creando...' : 'Crear Batería'}
-          </button>
-        </div>
+          {/* Buttons */}
+          <div className="flex justify-end space-x-3 pt-4 border-t">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+              disabled={isLoading}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-2 bg-gradient-to-r from-ami-purple to-ami-turquoise text-white rounded-lg hover:shadow-lg transform transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Guardando...' : 'Crear Batería'}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

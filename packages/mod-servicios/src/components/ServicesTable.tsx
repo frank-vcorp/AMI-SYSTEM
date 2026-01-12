@@ -94,9 +94,9 @@ export function ServicesTable({
                       )}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-700">{getCategoryLabel(service.category)}</td>
+                  <td className="px-4 py-3 text-gray-700">{getCategoryLabel(service.type)}</td>
                   <td className="px-4 py-3 text-right text-gray-900 font-semibold">
-                    ${service.costAmount.toFixed(2)}
+                    ${Number(service.costPrice || 0).toFixed(2)}
                   </td>
                   <td className="px-4 py-3 text-center">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(service.status)}`}>

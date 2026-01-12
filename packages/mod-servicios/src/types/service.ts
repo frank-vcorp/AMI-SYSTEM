@@ -1,53 +1,56 @@
 // Types for MOD-SERVICIOS
-import type {
+import {
   Service,
-  Battery,
-  BatteryService,
-  ServiceCategory,
-  ServiceStatus,
-  BatteryStatus
-} from '@prisma/client';
+  ServiceBattery as Battery,
+  BatteryItem as BatteryService,
+  ServiceType as ServiceCategory,
+  ServiceStatus
+} from '@ami/core';
 
-// Export Prisma types
-export type {
-  Service,
-  Battery,
-  BatteryService,
-  ServiceCategory,
-  ServiceStatus,
-  BatteryStatus
+// Alias for BatteryStatus (String in Core, was Enum in Modulo)
+export type BatteryStatus = 'ACTIVE' | 'INACTIVE' | 'ARCHIVED';
+export const BatteryStatus = {
+  ACTIVE: 'ACTIVE' as BatteryStatus,
+  INACTIVE: 'INACTIVE' as BatteryStatus,
+  ARCHIVED: 'ARCHIVED' as BatteryStatus
 };
 
-// ============================================================================
-// REQUEST/RESPONSE DTOs
-// ============================================================================
+// Export Prisma types with aliases
+export {
+  Service,
+  Battery,
+  BatteryService,
+  ServiceCategory,
+  ServiceStatus
+};
 
+// DTOs for Service
 export interface CreateServiceRequest {
   code: string;
   name: string;
   description?: string;
-  category: ServiceCategory;
-  estimatedMinutes?: number;
-  requiresEquipment?: boolean;
-  equipmentName?: string;
-  costAmount?: number;
-  sellingPrice?: number;
+  type: ServiceCategory; // Use aliased Enum
+  basePrice: number;
+  costPrice?: number;
+  taxRate?: number;
+  durationMin?: number;
 }
 
-export interface UpdateServiceRequest {
-  name?: string;
-  description?: string;
-  category?: ServiceCategory;
-  estimatedMinutes?: number;
-  requiresEquipment?: boolean;
-  equipmentName?: string;
-  costAmount?: number;
-  sellingPrice?: number;
+export interface UpdateServiceRequest extends Partial<CreateServiceRequest> {
   status?: ServiceStatus;
 }
 
+export interface ServiceListFilters {
+  tenantId: string;
+  search?: string;
+  type?: ServiceCategory;
+  status?: ServiceStatus;
+  page?: number;
+  pageSize?: number;
+}
+
 export interface ServiceResponse extends Service {
-  batterieCount?: number;
+  // Extended props if any
 }
 
 export interface ServiceListResponse {
@@ -55,35 +58,36 @@ export interface ServiceListResponse {
   total: number;
   page: number;
   pageSize: number;
-  hasMore: boolean;
+  totalPages: number;
 }
 
+// DTOs for Battery
 export interface CreateBatteryRequest {
   name: string;
   description?: string;
-  serviceIds: string[]; // IDs de servicios a incluir
-  sellingPriceTotal?: number;
+  totalPrice: number;
+  services: {
+    serviceId: string;
+    quantity?: number;
+    unitPrice: number;
+  }[];
 }
 
-export interface UpdateBatteryRequest {
-  name?: string;
-  description?: string;
-  serviceIds?: string[];
-  sellingPriceTotal?: number;
+export interface UpdateBatteryRequest extends Partial<CreateBatteryRequest> {
   status?: BatteryStatus;
 }
 
-export interface BatteryResponse extends Battery {
-  services: BatteryServiceDetail[];
-  serviceCount: number;
+export interface BatteryListFilters {
+  tenantId: string;
+  search?: string;
+  status?: BatteryStatus;
+  page?: number;
+  pageSize?: number;
 }
 
-export interface BatteryServiceDetail {
-  id: string;
-  service: Service;
-  order: number;
-  costOverride?: number;
-  estimatedMinutesOverride?: number;
+export interface BatteryResponse extends Battery {
+  services: (BatteryService & { service: Service })[];
+  serviceCount: number;
 }
 
 export interface BatteryListResponse {
@@ -91,58 +95,34 @@ export interface BatteryListResponse {
   total: number;
   page: number;
   pageSize: number;
-  hasMore: boolean;
+  totalPages: number;
 }
 
-// ============================================================================
-// FILTER TYPES
-// ============================================================================
-
-export interface ServiceListFilters {
-  tenantId: string;
-  status?: ServiceStatus;
-  category?: ServiceCategory;
-  search?: string; // Busca en name, code, description
-  page?: number;
-  pageSize?: number;
-}
-
-export interface BatteryListFilters {
-  tenantId: string;
-  status?: BatteryStatus;
-  search?: string; // Busca en name, description
-  page?: number;
-  pageSize?: number;
-}
-
-// ============================================================================
-// CUSTOM ERRORS
-// ============================================================================
-
+// Errors
 export class ServiceNotFoundError extends Error {
-  constructor(serviceId: string) {
-    super(`Service not found: ${serviceId}`);
+  constructor(id: string) {
+    super(`Service not found: ${id}`);
     this.name = 'ServiceNotFoundError';
   }
 }
 
 export class ServiceAlreadyExistsError extends Error {
-  constructor(code: string, tenantId: string) {
-    super(`Service with code ${code} already exists in tenant ${tenantId}`);
+  constructor(code: string) {
+    super(`Service with code ${code} already exists`);
     this.name = 'ServiceAlreadyExistsError';
   }
 }
 
 export class BatteryNotFoundError extends Error {
-  constructor(batteryId: string) {
-    super(`Battery not found: ${batteryId}`);
+  constructor(id: string) {
+    super(`Battery not found: ${id}`);
     this.name = 'BatteryNotFoundError';
   }
 }
 
 export class BatteryAlreadyExistsError extends Error {
-  constructor(name: string, tenantId: string) {
-    super(`Battery with name ${name} already exists in tenant ${tenantId}`);
+  constructor(name: string) {
+    super(`Battery with name ${name} already exists`);
     this.name = 'BatteryAlreadyExistsError';
   }
 }

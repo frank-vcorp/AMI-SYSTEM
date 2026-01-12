@@ -12,9 +12,7 @@
     "dev": "next dev"
   },
   "dependencies": {
-    "@ami/core-auth": "workspace:*",
-    "@ami/core-database": "workspace:*",
-    "@ami/core-types": "workspace:*"
+    "@ami/core": "*"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

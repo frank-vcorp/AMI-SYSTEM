@@ -9,7 +9,7 @@
     "build": "echo 'No build needed for database stubs'"
   },
   "dependencies": {
-    "@ami/core-types": "workspace:*"
+    "@ami/core-types": "*"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

@@ -3,10 +3,10 @@ import type {
   Clinic, 
   ClinicSchedule, 
   ClinicService, 
-  Appointment,
-  ClinicStatus,
-  AppointmentStatus 
-} from '@prisma/client';
+  Appointment
+} from '@ami/core';
+
+import { ClinicStatus } from '@ami/core';
 
 // Export Prisma types
 export type {
@@ -14,9 +14,8 @@ export type {
   ClinicSchedule,
   ClinicService,
   Appointment,
-  ClinicStatus,
-  AppointmentStatus
 };
+export { ClinicStatus };
 
 // Request/Response DTOs
 export interface CreateClinicRequest {

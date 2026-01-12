@@ -8,13 +8,10 @@
 # 1. Detecta cambios en PROYECTO.md
 # 2. Ejecuta parser.js para generar project_data.json
 # 3. Hace commit del JSON actualizado
-# 4. Sube el dashboard completo a cPanel via FTP
+# 4. El webhook de Plesk en vcorp.mx detecta el push y hace git pull
 #
-# SECRETS REQUERIDOS (configurar en GitHub > Settings > Secrets):
-# - CPANEL_FTP_SERVER: servidor FTP (ej: ftp.vcorp.mx)
-# - CPANEL_FTP_USERNAME: usuario FTP
-# - CPANEL_FTP_PASSWORD: contraseña FTP
-# - CPANEL_FTP_PATH: ruta remota (ej: /public_html/ami-dashboard/)
+# NOTA: El servidor tiene configurado un webhook que sincroniza automáticamente
+# con el repo. NO se usa FTP.
 # ============================================================================
 
 name: Deploy Progress Dashboard
@@ -31,78 +28,36 @@ on:
   workflow_dispatch:
 
 jobs:
-  update-and-deploy:
+  update-data:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
-      # ========================================
-      # 1. CHECKOUT Y SETUP
-      # ========================================
       - name: 📥 Checkout código
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # ========================================
-      # 2. GENERAR DATOS DEL DASHBOARD
-      # ========================================
       - name: 📊 Generar project_data.json
-        id: generate_data
         run: |
           echo "Ejecutando parser..."
           node progressdashboard/parser.js
           echo "✅ JSON generado correctamente"
           
-          # Mostrar resumen
           if [ -f progressdashboard/data/project_data.json ]; then
             echo "📈 Progreso general: $(jq -r '.overallProgress' progressdashboard/data/project_data.json)%"
             echo "📦 Fases: $(jq -r '.phases | length' progressdashboard/data/project_data.json)"
           fi
 
-      # ========================================
-      # 3. COMMIT AUTOMÁTICO SI HAY CAMBIOS
-      # ========================================
       - name: 💾 Commit datos actualizados
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'chore(dashboard): Auto-update progress data [skip ci]'
+          commit_message: 'chore(dashboard): Auto-update progress data'
           file_pattern: 'progressdashboard/data/project_data.json'
           commit_user_name: 'GitHub Actions Bot'
           commit_user_email: 'actions@github.com'
           commit_author: 'GitHub Actions Bot <actions@github.com>'
-
-      # ========================================
-      # 4. DEPLOY JSON A CPANEL VIA FTP
-      # ========================================
-      # Solo sube el JSON actualizado, los archivos estáticos ya están en el servidor
-      - name: 🚀 Deploy JSON a cPanel (FTP)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.CPANEL_HOST }}
-          username: ${{ secrets.CPANEL_USERNAME }}
-          password: ${{ secrets.CPANEL_PASSWORD }}
-          port: ${{ secrets.CPANEL_PORT }}
-          local-dir: ./progressdashboard/data/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}data/
-          protocol: ftp
-
-      # ========================================
-      # 5. NOTIFICACIÓN (opcional)
-      # ========================================
-      - name: ✅ Resumen del deploy
-        if: success()
-        run: |
-          echo "=========================================="
-          echo "✅ DASHBOARD DESPLEGADO EXITOSAMENTE"
-          echo "=========================================="
-          echo "📅 Fecha: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-          echo "🔗 Commit: ${{ github.sha }}"
-          echo "👤 Autor: ${{ github.actor }}"
-          echo "=========================================="

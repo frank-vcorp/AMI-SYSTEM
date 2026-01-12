@@ -2,17 +2,20 @@
 
 ## 📋 Secrets Requeridos
 
+> **Nota:** Se usan los mismos nombres de secrets que el repo `ami-rd` anterior para reutilizar la configuración existente.
+
 Para que el GitHub Action funcione, debes configurar estos secrets en:  
 **GitHub → Repo → Settings → Secrets and variables → Actions → New repository secret**
 
 | Secret | Descripción | Ejemplo |
 |--------|-------------|---------|
-| `CPANEL_FTP_SERVER` | Servidor FTP de cPanel | `ftp.vcorp.mx` |
-| `CPANEL_FTP_USERNAME` | Usuario FTP | `usuario@vcorp.mx` |
-| `CPANEL_FTP_PASSWORD` | Contraseña FTP | `*********` |
-| `CPANEL_FTP_PATH` | Ruta destino en servidor | `/public_html/ami-dashboard/` |
+| `CPANEL_HOST` | Servidor FTP de cPanel | `ftp.vcorp.mx` |
+| `CPANEL_USERNAME` | Usuario FTP | `usuario@vcorp.mx` |
+| `CPANEL_PASSWORD` | Contraseña FTP | `*********` |
+| `CPANEL_PORT` | Puerto FTP (21 o 990 para FTPS) | `21` |
+| `CPANEL_TARGET_DIR` | Ruta destino en servidor | `/public_html/ami-dashboard/` |
 
-> ⚠️ **Importante**: La ruta `CPANEL_FTP_PATH` debe terminar en `/`
+> ⚠️ **Importante**: La ruta `CPANEL_TARGET_DIR` debe terminar en `/`
 
 ---
 

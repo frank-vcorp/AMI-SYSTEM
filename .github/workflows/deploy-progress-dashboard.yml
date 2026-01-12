@@ -81,14 +81,18 @@ jobs:
       # ========================================
       # 4. DEPLOY A CPANEL VIA FTP
       # ========================================
+      # Usa los mismos secrets que el repo ami-rd:
+      # CPANEL_HOST, CPANEL_USERNAME, CPANEL_PASSWORD, CPANEL_PORT, CPANEL_TARGET_DIR
       - name: 🚀 Deploy a cPanel (FTP)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.CPANEL_FTP_SERVER }}
-          username: ${{ secrets.CPANEL_FTP_USERNAME }}
-          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
+          server: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USERNAME }}
+          password: ${{ secrets.CPANEL_PASSWORD }}
+          port: ${{ secrets.CPANEL_PORT }}
           local-dir: ./progressdashboard/
-          server-dir: ${{ secrets.CPANEL_FTP_PATH }}
+          server-dir: ${{ secrets.CPANEL_TARGET_DIR }}
+          protocol: ftps
           exclude: |
             **/.git*
             **/.git*/**

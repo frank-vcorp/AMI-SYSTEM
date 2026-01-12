@@ -1,5 +1,4 @@
 {
-  "root": "packages/web-app",
   "buildCommand": "pnpm -r build --filter=@ami/web-app",
   "devCommand": "pnpm -r dev --filter=@ami/web-app",
   "installCommand": "pnpm install",

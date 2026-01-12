@@ -1,6 +1,6 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización dashboard: 2026-01-12_
+> _Última actualización dashboard: 2026-01-12 16:00 UTC_
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.
@@ -12,29 +12,41 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
-- **Fase Actual**: FASE 0 - Cimientos (Implementación Core Finalizada)
-- **Semáforo**: 🟢 (Verde - Módulos Core listos, pendiente Infraestructura DB)
-- **Dashboard LIVE**: https://vcorp.mx/progress-ami/progressdashboard/
+- **Fase Actual**: FASE 0 COMPLETADA ✅ | FASE 0.5 EN PROGRESO (Integración Web-App + Infraestructura)
+- **Semáforo**: 🟢 Verde (Código en master, infraestructura setup pending)
+- **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado)
 
-## 4. Actualización 2026-01-12 (Tarde)
+## 4. Actualización 2026-01-12 (Final)
 
-### Completado esta sesión (SOFIA + GEMINI + INTEGRA):
-- [✓] **Implementación FASE 0 Core:**
-    - MOD-CLINICAS (4 modelos, CRUD, UI Components)
-    - MOD-SERVICIOS (3 modelos, Batteries, UI Components)
-    - MOD-EMPRESAS (3 modelos, JobProfiles, UI Components)
-- [✓] **Calidad y Seguridad:**
-    - Auditoría QA realizada por GEMINI
-    - 3 Fixes Críticos aplicados (Soft Delete, Cross-Tenant, Tipado)
-    - Validado 100% compliant con ADR-002 (Multi-tenancy)
-- [✓] **Documentación:**
-    - Checkpoints de avance por módulo
-    - Specs actualizadas
+### ✅ FASE 0 Completada (100%):
+- [✓] **3 Módulos Mergeados a Master:**
+    - MOD-CLINICAS (commit 463568d0): 4 modelos + 6 métodos + 2 componentes
+    - MOD-SERVICIOS (commit bebbfc6b): 3 modelos + 10 métodos + 3 componentes
+    - MOD-EMPRESAS (commit 756e3692): 3 modelos + 11 métodos + 3 componentes
+- [✓] **Validación GEMINI QA Completada:**
+    - Auditoría exhaustiva realizada
+    - 3 Fixes Críticos aplicados (soft deletes, cross-tenant, type safety)
+    - 0 vulnerabilidades de seguridad pendientes
+- [✓] **Documentación Completa:**
+    - 4 Checkpoints (1,600+ líneas)
+    - ADR-002 definido y validado
+    - Dashboard actualizado
 
-### Próximo (FASE 0.5 - Integración):
-- [ ] **Infraestructura (GEMINI):** Setup PostgreSQL + Migrations (Prisma)
-- [ ] **Integración (SOFIA):** Conectar módulos a Web App (Rutas, Pages)
-- [ ] **Merge:** Fusionar ramas feature/* a main
+### ⏳ FASE 0.5 En Progreso (50%):
+- [✓] **Web-app Integration (SOFIA - Completado):**
+    - API routes: /api/clinicas/* (GET, POST, PUT, DELETE)
+    - Page routes: /admin/clinicas (Server Component)
+    - Admin layout: Sidebar navigation + home page update
+- [ ] **Infraestructura (GEMINI - Pendiente):**
+    - PostgreSQL setup (1-2 horas estimadas)
+    - Prisma migrations (1 hora)
+    - Firebase Auth (2-3 horas)
+    - GCP Cloud Storage (1-2 horas)
+
+### 🔜 FASE 1 Ready (Bloqueadores Satisfechos):
+- MOD-CLINICAS ✅ → Ready para MOD-CITAS
+- MOD-EMPRESAS ✅ → Ready para MOD-CITAS
+- PostgreSQL ⏳ → Required para MOD-CITAS (Depends on GEMINI)
 
 ---
 

@@ -12,29 +12,29 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
-- **Fase Actual**: Diseño de Arquitectura ✓ → Pendiente Implementación
-- **Semáforo**: 🟢 (Verde - Arquitectura definida, lista para desarrollo)
+- **Fase Actual**: FASE 0 - Cimientos (Implementación Core Finalizada)
+- **Semáforo**: 🟢 (Verde - Módulos Core listos, pendiente Infraestructura DB)
 - **Dashboard LIVE**: https://vcorp.mx/progress-ami/progressdashboard/
 
-## 4. Actualización 2026-01-12
+## 4. Actualización 2026-01-12 (Tarde)
 
-### Completado esta sesión (SOFIA):
-- [✓] Monorepo creado con pnpm workspaces (6 packages)
-- [✓] TypeScript paths configuradas (@ami/*, @/*)
-- [✓] Tipos compartidos definidos (10+ interfaces)
-- [✓] Stub implementations en todos los core-*
-- [✓] Next.js 14 app con PWA + Tailwind + AMI colors
-- [✓] MONOREPO-SETUP.md + MONOREPO-INSTALL-STATUS.md
-- [✓] CHECKPOINT-FASE0-PLANIFICACION.md con 5-week timeline
-- [✓] SPEC-UI-DESIGN-SYSTEM.md con paleta, componentes, flows
+### Completado esta sesión (SOFIA + GEMINI + INTEGRA):
+- [✓] **Implementación FASE 0 Core:**
+    - MOD-CLINICAS (4 modelos, CRUD, UI Components)
+    - MOD-SERVICIOS (3 modelos, Batteries, UI Components)
+    - MOD-EMPRESAS (3 modelos, JobProfiles, UI Components)
+- [✓] **Calidad y Seguridad:**
+    - Auditoría QA realizada por GEMINI
+    - 3 Fixes Críticos aplicados (Soft Delete, Cross-Tenant, Tipado)
+    - Validado 100% compliant con ADR-002 (Multi-tenancy)
+- [✓] **Documentación:**
+    - Checkpoints de avance por módulo
+    - Specs actualizadas
 
-### En Progreso:
-- [~] Instalar dependencias npm (issue de conectividad en dev container)
-- [~] Estrategia alternativa sin depender de npm registry
-
-### Próximo:
-- [ ] Resolver instalación de deps o implementar fallback
-- [ ] Iniciar implementación de FASE 0 (Semana 1 = MOD-CLINICAS MVP)
+### Próximo (FASE 0.5 - Integración):
+- [ ] **Infraestructura (GEMINI):** Setup PostgreSQL + Migrations (Prisma)
+- [ ] **Integración (SOFIA):** Conectar módulos a Web App (Rutas, Pages)
+- [ ] **Merge:** Fusionar ramas feature/* a main
 
 ---
 
@@ -42,7 +42,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 
 | Fase | Semanas | Objetivo | Entregables de salida | Estado |
 |------|---------|----------|----------------------|--------|
-| FASE 0 – Cimientos | Sem 1-5 | Infraestructura base + catálogos | Monorepo, Core (auth/db/storage/ui/pwa), MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS | Planeado |
+| FASE 0 – Cimientos | Sem 1-5 | Infraestructura base + catálogos | Monorepo, Core (auth/db/storage/ui/pwa), MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS | **Completado (95%)** |
 | FASE 1 – Flujo Principal | Sem 6-13 | Flujo completo de 1 paciente | MOD-CITAS, MOD-EXPEDIENTES, MOD-VALIDACION (IA), MOD-REPORTES | Planeado |
 | FASE 2 – Operaciones | Sem 14-23 | Sistema operativo completo | MOD-DASHBOARD, MOD-BITACORA, MOD-CALIDAD, MOD-ADMIN | Planeado |
 | FASE 3 – Expansión | Sem 24-29 | Portal clientes | MOD-PORTAL-EMPRESA, mejoras multi-tenant | Planeado |

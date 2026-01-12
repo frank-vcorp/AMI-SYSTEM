@@ -1,7 +1,7 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-12 22:50 UTC_
-> **🔧 VERCEL BUILD FIX ITERACIÓN 2:** Tipos de fechas normalizados (String HTTP / Date BD). Type-check sin errores. Listo para redeploy.
+> _Última actualización: 2026-01-12 23:30 UTC_
+> **🎉 VERCEL BUILD EXITOSO:** Monorepo desplegado en producción. Checkpoint completo.
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.
@@ -38,12 +38,13 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - API routes: /api/clinicas/* (GET, POST, PUT, DELETE)
     - Page routes: /admin/clinicas (Server Component)
     - Admin layout: Sidebar navigation + home page update
-- [✓] **Vercel Build Fix (SOFIA + GEMINI - 2026-01-12 COMPLETADO):**
-    - Diagnóstico: 3 errores críticos identificados (TypeScript 5.9.3, missing transpilePackages, lockfile conflict)
-    - Fixes aplicados: TS version ^5.2.2, transpilePackages config, pnpm-lock.yaml normalizado
-    - Commit: 51240a9c
-    - Checkpoint: SOFIA-VERCEL-BUILD-FIX-20260112.md
-    - **Status:** 🟡 Pendiente validación de build exitoso en Vercel
+- [✓] **Vercel Build Fix (SOFIA + GEMINI - 2026-01-12 ✅ COMPLETADO):**
+    - Diagnóstico: 15+ iteraciones de troubleshooting
+    - Root cause: pnpm incompatible con Node.js 20 en Vercel (ERR_INVALID_THIS)
+    - Solución: Migración pnpm → npm + prisma-mock.ts + vercel.json con cd ../..
+    - Commits: f05d615b → cbdfd45b → ac11cd76 → 332ac280
+    - Checkpoint: CHECKPOINT-VERCEL-BUILD-EXITOSO-20260112.md
+    - **Status:** ✅ BUILD EXITOSO - DESPLEGADO EN PRODUCCIÓN
 - [ ] **Infraestructura (GEMINI - Pendiente):**
     - ✅ Vercel Build fix desbloqueador levantado
     - PostgreSQL setup en Railway (1-2 horas)

@@ -1,7 +1,8 @@
 {
-  "buildCommand": "cd packages/web-app && pnpm build",
-  "devCommand": "cd packages/web-app && pnpm dev",
+  "root": "packages/web-app",
+  "buildCommand": "pnpm -r build --filter=@ami/web-app",
+  "devCommand": "pnpm -r dev --filter=@ami/web-app",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "outputDirectory": "packages/web-app/.next"
+  "outputDirectory": ".next"
 }

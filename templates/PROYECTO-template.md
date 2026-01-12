@@ -6,6 +6,37 @@
 - [✓] Hecho
 - [X] Aprobado
 
+---
+
+## Entregables Clave por Fase (Cronograma y Pagos)
+
+> **IMPORTANTE:** Esta sección vincula las fases del proyecto con los hitos de pago acordados con el cliente.
+
+| Fase | Semanas | Objetivo | Entregables de salida | Estado | Pago |
+|------|---------|----------|----------------------|--------|------|
+| FASE 0 – [Nombre] | Sem X-Y | [Objetivo principal] | [Lista de entregables] | Planeado | 💰 Pago 1 |
+| FASE 1 – [Nombre] | Sem X-Y | [Objetivo principal] | [Lista de entregables] | Planeado | 💰 Pago 2 |
+| FASE 2 – [Nombre] | Sem X-Y | [Objetivo principal] | [Lista de entregables] | Planeado | 💰 Pago 3 |
+| FASE N – [Nombre] | Sem X-Y | [Objetivo principal] | [Lista de entregables] | Planeado | 💰 Pago N |
+
+> **Nota:** El cronograma está alineado con los hitos de pago acordados. Cualquier cambio se documentará aquí.
+
+---
+
+## Tablero — Módulos (Progress Dashboard)
+
+Este listado alimenta el progress dashboard y debe mantenerse actualizado.  
+Usa los campos `status` (`pending|progress|blocked|done`) y `progress` (0-100).  
+En `owner` usa departamentos: `Frontend`, `Backend`, `Frontend · Backend`, `Backend · Data`, `Data`, `DevOps`, `Arquitectura`, `Operaciones`.
+
+<!-- progress-modules:start -->
+| id | name | phase | phaseOrder | owner | status | progress | summary | needs |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| modulo-ejemplo | Módulo Ejemplo | FASE 0 – [Nombre] | 0 | Frontend · Backend | pending | 0 | Descripción breve (Sem X-Y) | Dependencias |
+<!-- progress-modules:end -->
+
+---
+
 ## Backlog inicial
 - [ ] Bootstrap de estructura y artefactos
 - [ ] Definición de Esquema de Datos y Lógica de Negocio

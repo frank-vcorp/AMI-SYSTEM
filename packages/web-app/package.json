@@ -10,11 +10,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ami/core-auth": "workspace:*",
-    "@ami/core-database": "workspace:*",
-    "@ami/core-storage": "workspace:*",
-    "@ami/core-types": "workspace:*",
-    "@ami/core-ui": "workspace:*",
     "next": "^14.0.0",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
@@ -25,6 +20,7 @@
     "@types/node": "^20.8.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "autoprefixer": "^10.4.23",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2"

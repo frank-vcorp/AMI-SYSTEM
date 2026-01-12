@@ -27,7 +27,6 @@ export default function AdminLayout({
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">
               FASE 0 – Cimientos
             </h3>
-            
             {/* MOD-CLINICAS */}
             <Link
               href="/admin/clinicas"
@@ -37,6 +36,17 @@ export default function AdminLayout({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
               </svg>
               Clínicas
+            </Link>
+
+            {/* MOD-CITAS */}
+            <Link
+              href="/admin/citas"
+              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
+            >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Citas
             </Link>
 
             {/* MOD-SERVICIOS (Coming Soon) */}
@@ -72,7 +82,7 @@ export default function AdminLayout({
               FASE 1+ (Próximamente)
             </h3>
             <p className="text-xs text-slate-500 px-3 py-2">
-              Citas, Expedientes, Validación IA, Reportes...
+              Expedientes, Validación IA, Reportes...
             </p>
           </div>
         </nav>

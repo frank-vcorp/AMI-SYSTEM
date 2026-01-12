@@ -43,15 +43,30 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - Firebase Auth (2-3 horas)
     - GCP Cloud Storage (1-2 horas)
 
-### � FASE 1 Iniciada (Kickoff - SOFIA):
-- [~] **MOD-CITAS (SOFIA - 10% - EN PROGRESO):**
+### ✅ FASE 1 Iniciada - MOD-CITAS (SOFIA - 50%):
+- [✓] **Estructura Base + Service Layer (Completado):**
     - [✓] Estructura base creada (package.json, tsconfig, types)
     - [✓] Modelo Appointment en @ami/core + relaciones (Clinic, Company)
-    - [✓] AppointmentService: CRUD, disponibilidad, validaciones
-    - [ ] Componentes UI (CalendarView, AppointmentForm, AppointmentTable)
-    - [ ] API Routes en web-app (/api/citas/*)
-    - [ ] Integración con web-app frontend
+    - [✓] AppointmentService: CRUD, disponibilidad, validaciones (350+ líneas)
+    - [✓] Checkpoint: SOFIA-MOD-CITAS-20260112-01 documentado
+- [✓] **Componentes UI (Completado):**
+    - [✓] CalendarView component (mes/semana, estado visual)
+    - [✓] AppointmentForm modal (creación con disponibilidad en tiempo real)
+    - [✓] AppointmentTable (lista filtrable, cancelación, edición)
+- [✓] **API Routes en web-app (Completado):**
+    - [✓] POST /api/citas (create appointment)
+    - [✓] GET /api/citas (list con filtros)
+    - [✓] GET /api/citas/[id] (detail)
+    - [✓] PUT /api/citas/[id] (update)
+    - [✓] DELETE /api/citas/[id] (cancel)
+    - [✓] POST /api/citas/availability (search slots)
+- [✓] **Integración en Admin UI (Completado):**
+    - [✓] /admin/citas page creada
+    - [✓] AppointmentManager component (orquesta UI)
+    - [✓] Menu item en sidebar navigation
     - Dependencias: MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ (satisfechas)
+- [ ] **Testing + Validación (Pendiente)**
+- [ ] **Documentación Final (Pendiente)**
 
 ---
 
@@ -83,7 +98,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. UI Client Components. | - |
 | mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. Baterías logic fixed. | - |
 | mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. | - |
-| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Agenda, disponibilidad, check-in, recordatorios | mod-clinicas + mod-empresas |
+| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | ✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura. | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | mod-citas completado |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | Extracción IA + semáforos + dictamen + firma | mod-expedientes completado |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Generación PDF + envío email + URLs temporales | mod-validacion completado |

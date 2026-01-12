@@ -64,7 +64,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-pwa | Core - PWA | FASE 0 – Cimientos | 0 | Frontend | pending | 0 | next-pwa + service worker + offline | core-ui completado |
 | core-signatures | Core - Firmas | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Generador de firma única por médico | core-setup completado |
 | mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | in_review | 95 | ✅ Validación GEMINI completada. Schema + ClinicService + UI components. Pendiente: tests unitarios + PostgreSQL setup | core-database completado |
-| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | pending | 0 | Catálogo estudios + baterías (paquetes) | core-database completado |
+| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | in_progress | 90 | ✅ Implementación completa. Schema + ServiceService (10 métodos) + UI (multi-select baterías). Pendiente: validación GEMINI + tests + infraestructura | core-database completado |
 | mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | pending | 0 | CRUD empresas + baterías contratadas + perfiles puesto | mod-servicios completado |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Agenda, disponibilidad, check-in, recordatorios | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | mod-citas completado |

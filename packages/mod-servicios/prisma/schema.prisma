@@ -1,0 +1,139 @@
+// MOD-SERVICIOS: Catálogo de servicios y baterías (paquetes)
+// Multi-tenant con validaciones de negocio
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// ENUM DEFINITIONS
+// ============================================================================
+
+enum ServiceCategory {
+  LABORATORIO      // Análisis de sangre, orina, etc
+  IMAGENES         // Rayos X, Ecografía, TAC, RMN
+  ELECTROCARDIOGRAFIA
+  OFTALMOLOGIA
+  AUDIOMETRIA
+  ESPIROFOTOMETRIA
+  OTROS
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+  DEPRECATED
+  ARCHIVED
+}
+
+enum BatteryStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+// ============================================================================
+// SERVICE MODEL
+// ============================================================================
+
+model Service {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  
+  // Información del servicio
+  code              String                    // Código único (ej: "RX001")
+  name              String   @db.VarChar(255) // Nombre (ej: "Radiografía de Tórax")
+  description       String?  @db.Text
+  category          ServiceCategory
+  
+  // Configuración
+  estimatedMinutes  Int      @default(30)     // Tiempo estimado en minutos
+  requiresEquipment Boolean  @default(false)  // ¿Requiere equipo especial?
+  equipmentName     String?  @db.VarChar(255) // Nombre equipo (ej: "Equipo de Rayos X")
+  
+  // Precios
+  costAmount        Float    @default(0)      // Costo en unidades monetarias
+  sellingPrice      Float?                    // Precio de venta (puede diferir)
+  
+  // Estado y auditoría
+  status            ServiceStatus @default(ACTIVE)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String    @db.Uuid       // Usuario que creó
+  updatedBy         String?   @db.Uuid       // Último usuario que editó
+  
+  // Relaciones
+  batteries         BatteryService[]
+  
+  // Índices
+  @@unique([tenantId, code])
+  @@index([tenantId])
+  @@index([status])
+  @@index([category])
+}
+
+// ============================================================================
+// BATTERY MODEL (Paquetes de servicios)
+// ============================================================================
+
+model Battery {
+  id                String   @id @default(cuid())
+  tenantId          String   @db.Uuid
+  
+  // Información batería
+  name              String   @db.VarChar(255) // Ej: "Batería Completa", "Oftalmología"
+  description       String?  @db.Text
+  
+  // Configuración
+  costTotal         Float    @default(0)      // Suma de servicios
+  sellingPriceTotal Float?                    // Precio total de venta
+  estimatedMinutes  Int      @default(60)     // Suma de tiempos estimados
+  
+  // Estado
+  status            BatteryStatus @default(ACTIVE)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String    @db.Uuid
+  updatedBy         String?   @db.Uuid
+  
+  // Relaciones
+  services          BatteryService[]
+  
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+}
+
+// ============================================================================
+// BATTERY_SERVICE: Relación many-to-many con extra fields
+// ============================================================================
+
+model BatteryService {
+  id                String   @id @default(cuid())
+  
+  batteryId         String
+  battery           Battery  @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+  
+  serviceId         String
+  service           Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  
+  // Orden en la batería (para UI)
+  order             Int      @default(0)
+  
+  // Override de propiedades si la batería modifica precio/tiempo
+  costOverride      Float?   // null = usa el costo del servicio
+  estimatedMinutesOverride Int? // null = usa el tiempo del servicio
+  
+  // Auditoría
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  
+  @@unique([batteryId, serviceId])
+  @@index([batteryId])
+  @@index([serviceId])
+}

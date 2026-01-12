@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm install -g pnpm@7.33.1 && pnpm install --no-frozen-lockfile",
+  "installCommand": "npm install -g pnpm@7.33.1 && pnpm install",
   "buildCommand": "pnpm -r build --filter=@ami/web-app",
   "devCommand": "pnpm -r dev --filter=@ami/web-app",
   "framework": "nextjs",

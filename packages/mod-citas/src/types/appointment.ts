@@ -5,9 +5,13 @@
 // Mock types para desarrollo (remover cuando Prisma esté configurado)
 export enum AppointmentStatus {
   PENDING = 'PENDING',
+  SCHEDULED = 'SCHEDULED',
   CONFIRMED = 'CONFIRMED',
+  CHECK_IN = 'CHECK_IN',
+  IN_PROGRESS = 'IN_PROGRESS',
   COMPLETED = 'COMPLETED',
-  CANCELLED = 'CANCELLED'
+  CANCELLED = 'CANCELLED',
+  NO_SHOW = 'NO_SHOW'
 }
 
 export type Appointment = {

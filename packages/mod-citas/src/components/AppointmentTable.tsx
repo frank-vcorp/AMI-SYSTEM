@@ -40,6 +40,7 @@ export function AppointmentTable({
 
   const getStatusColor = (status: AppointmentStatus) => {
     const colors: Record<AppointmentStatus, string> = {
+      [AppointmentStatus.PENDING]: 'bg-amber-100 text-amber-800',
       [AppointmentStatus.SCHEDULED]: 'bg-blue-100 text-blue-800',
       [AppointmentStatus.CONFIRMED]: 'bg-green-100 text-green-800',
       [AppointmentStatus.CHECK_IN]: 'bg-yellow-100 text-yellow-800',
@@ -53,6 +54,7 @@ export function AppointmentTable({
 
   const getStatusLabel = (status: AppointmentStatus) => {
     const labels: Record<AppointmentStatus, string> = {
+      [AppointmentStatus.PENDING]: 'Pendiente',
       [AppointmentStatus.SCHEDULED]: 'Programada',
       [AppointmentStatus.CONFIRMED]: 'Confirmada',
       [AppointmentStatus.CHECK_IN]: 'Check-in',

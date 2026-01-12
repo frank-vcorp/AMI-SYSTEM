@@ -304,7 +304,7 @@ export class AppointmentService {
     // Iterate through each day
     while (currentDate <= endDate) {
       const dayOfWeek = currentDate.getDay();
-      const schedule = clinic.schedules.find((s: any) => s.dayOfWeek === dayOfWeek && s.isActive);
+      const schedule = clinic.schedules?.find((s: any) => s.dayOfWeek === dayOfWeek && s.isActive);
 
       if (schedule) {
         // Generate time slots for this day

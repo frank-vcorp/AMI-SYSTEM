@@ -70,6 +70,7 @@ export function CalendarView({
 
   const getStatusColor = (status: AppointmentStatus) => {
     const colors: Record<AppointmentStatus, string> = {
+      [AppointmentStatus.PENDING]: 'bg-amber-500',
       [AppointmentStatus.SCHEDULED]: 'bg-blue-500',
       [AppointmentStatus.CONFIRMED]: 'bg-green-500',
       [AppointmentStatus.CHECK_IN]: 'bg-yellow-500',

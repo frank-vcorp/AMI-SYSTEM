@@ -82,7 +82,7 @@ export class ClinicService {
 
     return {
       ...clinic,
-      appointmentCount: clinic._count.appointmentSlots
+      appointmentCount: clinic._count?.appointmentSlots ?? 0
     } as ClinicResponse;
   }
 

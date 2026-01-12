@@ -1,4 +1,0 @@
-{
-  "buildCommand": "cd packages/web-app && pnpm install && pnpm build",
-  "outputDirectory": "packages/web-app/.next"
-}

@@ -6,7 +6,8 @@ import type {
   CreateScheduleRequest,
   ClinicListFilters,
   ClinicResponse,
-  ClinicListResponse
+  ClinicListResponse,
+  ClinicSchedule
 } from '../types/clinic';
 import {
   ClinicNotFoundError,
@@ -185,7 +186,23 @@ export class ClinicService {
   /**
    * Create or update schedule for a clinic
    */
-  async upsertSchedule(data: CreateScheduleRequest): Promise<any> {
+  async upsertSchedule(tenantId: string, data: CreateScheduleRequest): Promise<ClinicSchedule> {
+    // Validate clinic belongs to tenant
+    const clinic = await this.prisma.clinic.findFirst({
+      where: { id: data.clinicId, tenantId },
+      select: { id: true }
+    });
+
+    if (!clinic) {
+      throw new ClinicNotFoundError(data.clinicId);
+    }
+
+    // Normalize times
+    data.openingTime = data.openingTime.padStart(5, '0');
+    data.closingTime = data.closingTime.padStart(5, '0');
+    if (data.lunchStartTime) data.lunchStartTime = data.lunchStartTime.padStart(5, '0');
+    if (data.lunchEndTime) data.lunchEndTime = data.lunchEndTime.padStart(5, '0');
+
     // Validate times
     if (!this.isValidTimeFormat(data.openingTime)) {
       throw new InvalidScheduleError('Invalid opening time format (use HH:MM)');
@@ -231,7 +248,7 @@ export class ClinicService {
   }
 
   private isValidTimeFormat(time: string): boolean {
-    const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    const timeRegex = /^\d{2}:\d{2}$/;
     return timeRegex.test(time);
   }
 }

@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "integra-rh",
-    "ami-system": "integra-rh"
+    "default": "ami-system-mvp",
+    "ami-system": "ami-system-mvp"
   },
   "targets": {},
   "etags": {}

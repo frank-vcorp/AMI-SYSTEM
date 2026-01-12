@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RD‑AMI · Carga con IA (Versión Definitiva)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { background:#0a0a0a; color:#f3f4f6; }
+    .drop{border:2px dashed #374151;border-radius:1rem;padding:1.25rem;text-align:center;cursor:pointer;transition:all .15s ease}
+    .drop.dragover{background:rgba(255,255,255,.05); border-color:#60a5fa}
+    .card{border:1px solid #1f2937;border-radius:.75rem;background:rgba(17,24,39,.5);padding:1rem}
+    pre{white-space:pre-wrap}
+    .err{background:#7f1d1d;border:1px solid #b91c1c;color:#fecaca;padding:.5rem .75rem;border-radius:.5rem;font-size:.8rem;margin-top:.5rem;white-space:pre-wrap}
+    .spinner{width:16px;height:16px;border:2px solid #9ca3af;border-top-color:#f3f4f6;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-right:.5rem}
+    @keyframes spin{to {transform:rotate(360deg)}}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    }
+  </script>
+</head>
+<body class="min-h-screen w-full px-4 py-8 md:px-10">
+  <header class="mb-6">
+    <h1 class="text-2xl md:text-3xl font-semibold">RD‑AMI · Carga con IA (Potenciado por Gemini)</h1>
+    <p class="text-sm opacity-80 mt-1">Versión definitiva con OCR universal para PDFs y prompts especializados.</p>
+    <div id="api-error" class="err" style="display:none"></div>
+  </header>
+
+  <main>
+    <section class="card mb-6">
+      <div id="drop" class="drop">Suelte sus archivos aquí o haga clic para seleccionar<br/><span class="text-xs opacity-60">PDF o imágenes (JPG/PNG). Múltiples permitidos.</span></div>
+      <input id="file" type="file" class="hidden" accept="application/pdf,image/*" multiple />
+    </section>
+
+    <section id="list" class="grid gap-4"></section>
+  </main>
+
+  <footer class="mt-10 text-xs opacity-60">
+    * PDFs son analizados con OCR para máxima compatibilidad.<br/>
+    * Imágenes son analizadas con prompts especializados.
+  </footer>
+
+<script>
+(() => {
+  const pdfjs = window.pdfjsLib;
+  const list = document.querySelector("#list");
+  const apiErr = document.querySelector("#api-error");
+  const zone = document.getElementById("drop");
+  const input = document.getElementById("file");
+
+  const API_KEY = window.RD_AMI_GEMINI_KEY || ""; // definir via inyección segura, nunca hardcodear
+  const MODEL = "gemini-2.5-flash-preview-05-20";
+  const API_URL = API_KEY
+    ? `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${API_KEY}`
+    : null;
+
+  async function convertPdfPageToImage(file) {
+    try {
+      const buf = await file.arrayBuffer();
+      const pdf = await pdfjs.getDocument({ data: buf }).promise;
+      const page = await pdf.getPage(1);
+      const viewport = page.getViewport({ scale: 2.0 });
+      const canvas = document.createElement("canvas");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      const context = canvas.getContext("2d");
+      await page.render({ canvasContext: context, viewport: viewport }).promise;
+      return canvas.toDataURL("image/jpeg", 0.9);
+    } catch (e) { return null; }
+  }
+
+  async function fileToDataURL(file){
+    return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);});
+  }
+
+  function showProcessingCard(filename, tipo){
+    const id = "card-" + Math.random().toString(36).slice(2);
+    const div = document.createElement("div");
+    div.className = "card";
+    div.id = id;
+    div.innerHTML = `<div class="text-sm font-semibold">${filename}</div><div class="text-xs opacity-70 mb-2">Estudio: ${tipo || "Detectando..."}</div><div class="text-xs"><span class="spinner"></span>Procesando con Gemini…</div>`;
+    list.prepend(div);
+    return id;
+  }
+  function updateCard(id, tipo, texto, rawText, thumbnailUrl){
+    const div = document.getElementById(id);
+    if (!div) return;
+    const filename = div.querySelector('.text-sm')?.textContent || "";
+    const thumbnailHtml = thumbnailUrl ? `<div class="w-1/3 pl-4 flex-shrink-0"><img src="${thumbnailUrl}" alt="Miniatura" class="rounded-md border border-gray-700 max-h-48 w-full object-contain"></div>` : '';
+    const rawTextHtml = rawText ? `\n\n--- DATOS CRUDOS EXTRAÍDOS ---\n${rawText}` : '';
+    div.innerHTML = `<div class="text-sm font-semibold">${filename}</div><div class="text-xs opacity-70 mb-2">Estudio: ${tipo}</div><div class="flex"><div class="w-full flex-grow"><pre class="text-xs leading-5 bg-neutral-950/60 border border-neutral-800 rounded p-3">${texto}${rawTextHtml}</pre></div>${thumbnailHtml}</div>`;
+  }
+  function errorCard(id, msg){
+    const div = document.getElementById(id);
+    if (!div) return;
+    div.innerHTML = `<div class="text-sm font-semibold">Error</div><pre class="text-xs leading-5 bg-red-950/60 border border-red-700 rounded p-3">${msg}</pre>`;
+  }
+
+  zone.addEventListener("click", () => input.click());
+  zone.addEventListener("dragover", e => { e.preventDefault(); e.stopPropagation(); zone.classList.add("dragover"); });
+  zone.addEventListener("dragleave", e => { e.preventDefault(); e.stopPropagation(); zone.classList.remove("dragover"); });
+  zone.addEventListener("drop", e => { e.preventDefault(); e.stopPropagation(); zone.classList.remove("dragover"); if (e.dataTransfer?.files.length) processFiles(Array.from(e.dataTransfer.files)); });
+  input.addEventListener("change", e => { if (input.files?.length) processFiles(Array.from(input.files)); input.value = ""; });
+
+  // Función para obtener el texto crudo para la depuración
+  async function getRawTextForDebug(file) {
+      if (file.type === "application/pdf") {
+          return await extractPdfText(file);
+      }
+      // Para imágenes, no hay texto "crudo" antes del OCR
+      return "Análisis realizado directamente desde la imagen (no hay texto crudo previo).";
+  }
+  
+  async function extractPdfText(file){
+    const buf = await file.arrayBuffer();
+    const pdf = await pdfjs.getDocument({ data: buf }).promise;
+    let text = "";
+    for (let i=1; i<=pdf.numPages; i++){
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map(it => it.str).join(" ") + "\n";
+    }
+    return text;
+  }
+  
+  function detectTipo(filename){
+    const fname = filename.toLowerCase();
+    if (/(rx|radiograf)/.test(fname)) return "Radiografía";
+    if (/(audiometr[ií]a)/.test(fname)) return "Audiometría";
+    if (/(examen medico)/.test(fname)) return "Examen Médico";
+    // Podríamos añadir más detecciones por nombre de archivo aquí
+    return "Documento General";
+  }
+
+  const PROMPT_TEMPLATES = {
+    "Radiografía": `Tu tarea es realizar un análisis visual y de texto (OCR) de una radiografía.
+**Instrucciones Clave:**
+1.  **Análisis Visual:** Determina la **Proyección**. Una vista **Lateral** muestra la columna de perfil. Una vista **Anteroposterior (AP)** la muestra de frente. Confirma con el texto de la imagen (ej. 'AP' o 'LAT'). El nombre del archivo es una pista de alta confianza.
+2.  **Lectura de Texto (OCR):** Extrae **Nombre del Paciente** y **Fecha del Estudio**.
+**Formato de Salida Obligatorio (SOLO TEXTO PLANO):**
+MATRIZ DE DATOS:
+- Nombre del Paciente:
+- Fecha del Estudio:
+- Proyección:
+- Región Anatómica: Columna Lumbar
+- Calidad de Imagen:
+INTERPRETACION:
+- Descripción técnica de 2-3 líneas. **PROHIBIDO dar diagnósticos.**`,
+    "Audiometría": `Tu tarea es analizar la imagen de este estudio de Audiometría y extraer sus datos.
+**Regla Crítica:** El nombre del **Paciente** está en la parte superior (ej. APELLIDO, NOMBRE). El nombre del **Médico** está al final (ej. ERIKA RODRIGUEZ LOPEZ). **NO LOS CONFUNDAS**.
+**Formato de Salida Obligatorio (SOLO TEXTO PLANO):**
+MATRIZ DE DATOS:
+- Nombre: (El del PACIENTE)
+- Fecha de Nacimiento:
+- Fecha del Estudio:
+- Diagnóstico Oído Derecho:
+- Diagnóstico Oído Izquierdo:
+- Hallazgos de Otoscopia:
+INTERPRETACION:
+- Resume los hallazgos audiológicos en 2-3 líneas.`,
+    "default": `Tu tarea es realizar un OCR y extraer los datos más importantes de la imagen de este documento.
+**Formato de Salida Obligatorio (SOLO TEXTO PLANO):**
+MATRIZ DE DATOS:
+- Nombre:
+- Edad:
+- Fecha del Estudio:
+- (Otros datos clínicos relevantes)
+INTERPRETACION:
+- Resume los hallazgos en 2-3 líneas.`
+  };
+
+  async function callGoogleAI(prompt, dataUrl, mimeType) {
+    const parts = [{ text: prompt }];
+    if (dataUrl) {
+      const base64Data = dataUrl.split(',')[1];
+      parts.push({ inline_data: { mime_type: mimeType, data: base64Data } });
+    }
+    const body = { contents: [{ parts }] };
+    const res = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!res.ok) { const err = await res.json(); throw new Error(`Google AI ${res.status}: ${err?.error?.message}`); }
+    const data = await res.json();
+    return data?.candidates?.[0]?.content?.parts?.[0]?.text || "No se recibió respuesta.";
+  }
+
+  async function processFiles(files){
+    for (const f of files){
+      let tempId = null;
+      try {
+        const tipo = detectTipo(f.name);
+        tempId = showProcessingCard(f.name, tipo);
+        
+        let out, thumbnailUrl, rawTextForDebug;
+        const prompt = PROMPT_TEMPLATES[tipo] || PROMPT_TEMPLATES["default"];
+
+        if (f.type.startsWith("image/")) {
+          thumbnailUrl = await fileToDataURL(f);
+          rawTextForDebug = "Análisis visual directo de imagen (no hay texto crudo previo).";
+          out = await callGoogleAI(prompt, thumbnailUrl, f.type);
+          updateCard(tempId, tipo, out, rawTextForDebug, thumbnailUrl);
+
+        } else if (f.type === "application/pdf") {
+          rawTextForDebug = await getRawTextForDebug(f); // Obtenemos texto crudo para depuración
+          updateCard(tempId, tipo, "Analizando PDF como imagen (OCR)...", rawTextForDebug, null);
+          thumbnailUrl = await convertPdfPageToImage(f);
+          if (!thumbnailUrl) throw new Error("No se pudo convertir el PDF a imagen.");
+
+          out = await callGoogleAI(prompt, thumbnailUrl, "image/jpeg");
+          updateCard(tempId, tipo + " (OCR)", out, rawTextForDebug, thumbnailUrl);
+          
+        } else {
+          errorCard(tempId, "Tipo de archivo no soportado.");
+        }
+        apiErr.style.display = "none";
+      } catch(e){
+        apiErr.style.display = "block";
+        apiErr.textContent = String(e?.message||e);
+        if (tempId) errorCard(tempId, "Error en procesamiento.");
+      }
+    }
+  }
+})();
+</script>
+</body>
+</html>

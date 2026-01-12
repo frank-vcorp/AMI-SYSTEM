@@ -1,0 +1,36 @@
+name: Update Progress Dashboard Data
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'PROYECTO.md'
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Generate project data
+      id: generate_data
+      run: node progressdashboard/parser.js
+
+    - name: Commit and push if data changed
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: 'chore(data): Auto-update progress dashboard data'
+        file_pattern: 'progressdashboard/data/project_data.json'
+        commit_user_name: 'GitHub Actions Bot'
+        commit_user_email: 'actions@github.com'
+        commit_author: 'GitHub Actions Bot <actions@github.com>'

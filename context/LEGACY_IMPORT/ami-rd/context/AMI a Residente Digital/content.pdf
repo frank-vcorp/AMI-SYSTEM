@@ -1,0 +1,27 @@
+fi
+Prompt completo para Operator (Mapeo AMI RD)
+Contexto: Eres un agente de campo que debe mapear todos los datos visibles en el sistema AMI
+(cuenta de pruebas) para normalizarlos en el proyecto Residente Digital (RD). El objetivo es producir
+un Excel con la estructura de mapeo ya preparada (Mapa_Campos_Sistema_AMI_RD.xlsx). Acceso: -
+URL: https://devcami.azurewebsites.net/Seguridad/Login.aspx?ReturnUrl=%2F - Usuario: DEMO -
+Contraseña: 123456 Instrucciones de trabajo: 1. Login: Ingresa al sistema con las credenciales
+proporcionadas. 2. Explora cada módulo/pantalla: - Ficha de Paciente - Datos de Empresa - Órdenes
+de servicio/estudio - Captura de Estudios (Audiometría, Espirometría, ECG/Campimetría, RX,
+Laboratorio, Toxicología, Riesgo Cardiovascular, Examen Médico, Resumen Médico). 3. Por cada
+campo visible (input, columna de tabla, etiqueta en encabezados, resultados en reportes): - Registra
+en una fila del Excel: (cid:127) Módulo/Sec. (cid:127) Pantalla/URL (cid:127) Etiqueta en sistema (cid:127) Clave interna (si existe) (cid:127)
+Tipo de dato (texto/número/fecha/categoría/booleano) (cid:127) Formato/Unidad (cid:127) Obligatorio (S/N) (cid:127) PII/PHI
+(S/N) (cid:127) Ancla de identidad (S/N) (folio, empresa, paciente, fecha) (cid:127) Entidad RD destino (cid:127) Campo RD
+destino (cid:127) Regla de normalización (ej.: CURP fi Mayúsculas, Fecha fi AAAA-MM-DD) (cid:127) Regla de
+validación (ej.: valores entre 0–100) (cid:127) Semáforo (regla/umbral) (ej.: Glucosa ‡126 mg/dL fi Rojo) (cid:127)
+Bloqueante (S/N) (cid:127) Ejemplo sistema (texto real capturado) (cid:127) Ejemplo PDF (si está en expediente) (cid:127)
+Fuente (captura/ID/URL) (cid:127) Notas (inconsistencias, duplicados, riesgos). 4. Completa las hojas
+correctas del Excel: - 01_Identidad, 02_Paciente, 03_Empresa, 04_Orden, 05_Estudio_General. -
+06–14: módulos específicos (Audiometría, Espirometría, ECG/Campimetria, RX, Laboratorio,
+Toxicología, Riesgo CV, Examen Médico, Resumen Médico). - 99_Cat_Datos: usa los valores
+sugeridos para marcar campos estandarizados. 5. Cobertura total: No omitas ningún campo, aunque
+parezca irrelevante. Marca en “Notas” si no se encuentra en PDFs. 6. Privacidad y seguridad: Marca
+siempre PII/PHI = S en datos de identidad y salud; registra riesgos si se muestran en listados sin
+control. 7. Entrega final: Devuelve un único Excel completo con todos los campos poblados, siguiendo
+la plantilla. Objetivo final: El Excel será la matriz de normalización entre el sistema actual de AMI y el
+RD. Servirá para demostrar que se preserva toda la información, pero optimizada y trazable.

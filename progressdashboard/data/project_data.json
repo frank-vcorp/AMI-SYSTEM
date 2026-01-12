@@ -1,0 +1,62 @@
+{
+  "projectName": "RD-AMI Progress",
+  "lastUpdated": "2026-01-12T03:24:59.008Z",
+  "overallProgress": 30,
+  "phases": [
+    {
+      "name": "FASE 0 – Inicialización",
+      "order": 0,
+      "progress": 30,
+      "modules": [
+        {
+          "id": "test-arquitectura",
+          "name": "Definición de Arquitectura",
+          "owner": "INTEGRA",
+          "status": "progress",
+          "progress": 60,
+          "summary": "Análisis y diseño de arquitectura v2.0",
+          "needs": "Confirmación de decisiones técnicas"
+        },
+        {
+          "id": "test-dashboard",
+          "name": "Prueba Progress Dashboard",
+          "owner": "INTEGRA",
+          "status": "progress",
+          "progress": 30,
+          "summary": "Validar que el dashboard funciona en nuevo repo",
+          "needs": "Parser y datos de prueba"
+        },
+        {
+          "id": "test-cronograma",
+          "name": "Actualizar Cronograma",
+          "owner": "INTEGRA",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Ajustar cronograma con nuevo alcance",
+          "needs": "Dashboard funcionando"
+        }
+      ],
+      "statusCounts": {
+        "progress": 2,
+        "pending": 1
+      }
+    }
+  ],
+  "needsAction": [
+    {
+      "module": "Definición de Arquitectura",
+      "phase": "FASE 0 – Inicialización",
+      "detail": "Confirmación de decisiones técnicas"
+    },
+    {
+      "module": "Prueba Progress Dashboard",
+      "phase": "FASE 0 – Inicialización",
+      "detail": "Parser y datos de prueba"
+    },
+    {
+      "module": "Actualizar Cronograma",
+      "phase": "FASE 0 – Inicialización",
+      "detail": "Dashboard funcionando"
+    }
+  ]
+}

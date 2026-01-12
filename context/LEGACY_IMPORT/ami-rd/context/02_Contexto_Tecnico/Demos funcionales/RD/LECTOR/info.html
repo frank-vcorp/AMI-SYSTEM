@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografía: Transformación del Flujo de Trabajo con RD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8;
+            color: #003F5C;
+        }
+        .flow-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+            border: 1px solid #CCE0ED;
+        }
+        .flow-step {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-left: 2px dashed #CCE0ED;
+        }
+        .flow-step:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+        .flow-icon {
+            position: absolute;
+            left: -1.2rem;
+            top: -0.25rem;
+            background-color: white;
+            border-radius: 50%;
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #CCE0ED;
+            font-size: 1.25rem;
+        }
+         .flow-card.future .flow-step {
+            border-left: 2px solid #28a745;
+        }
+        .flow-card.future .flow-icon {
+            border: 2px solid #28a745;
+            background-color: #28a745;
+            color: white;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#003F5C]">Transformación Digital del Flujo Médico</h1>
+            <p class="text-xl mt-4 text-[#34657F]">De lo Manual a lo Inteligente con el Residente Digital</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            
+            <section id="antes" class="space-y-6">
+                <h2 class="text-3xl font-bold text-center text-[#003F5C]">📉 El Reto Actual</h2>
+                <div class="flow-card">
+                    <p class="text-center text-[#34657F] mb-6">El proceso es fragmentado, manual y propenso a errores, consumiendo tiempo valioso.</p>
+                    <div class="flow-steps-container">
+                        <div class="flow-step">
+                            <div class="flow-icon">📄</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Múltiples Orígenes</h3>
+                            <p class="text-[#34657F]">Cada sistema (SIM, NOVA, RX, Audio) genera un PDF aislado y desconectado.</p>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">📁</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Paso Intermedio Caótico</h3>
+                            <p class="text-[#34657F]">Los PDFs se mueven manualmente a correos y carpetas, perdiendo la trazabilidad.</p>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">✍️</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Proceso Manual y Lento</h3>
+                            <p class="text-[#34657F]">El personal invierte horas en buscar, leer y consolidar datos en resúmenes.</p>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">📤</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Entrega Insegura</h3>
+                            <p class="text-[#34657F]">Se envían carpetas ZIP por correo, con alto riesgo de errores y fallos de confidencialidad.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="flow-card">
+                    <h3 class="font-bold text-lg text-center text-[#003F5C] mb-4">Impacto: Horas por Expediente</h3>
+                     <div class="chart-container" style="height: 150px;">
+                        <canvas id="horasChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-[#34657F] mt-2">El tiempo administrativo por expediente es significativamente alto, reduciendo la capacidad operativa.</p>
+                </div>
+            </section>
+
+            <section id="despues" class="space-y-6">
+                 <h2 class="text-3xl font-bold text-center text-[#003F5C]">🚀 La Solución con RD</h2>
+                <div class="flow-card future">
+                     <p class="text-center text-[#34657F] mb-6">El nuevo flujo es centralizado, automatizado e inteligente, liberando al personal médico.</p>
+                     <div class="flow-steps-container">
+                        <div class="flow-step">
+                            <div class="flow-icon">🎯</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Un Solo Núcleo</h3>
+                            <p class="text-[#34657F]">Todos los PDFs se envían a un único buzón donde el <strong>Residente Digital</strong> los procesa y centraliza.</p>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">💡</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Validación Ágil y Asistida</h3>
+                            <p class="text-[#34657F]">El sistema presenta un expediente consolidado con pre-diagnóstico y alertas. El médico solo necesita validar.</p>
+                        </div>
+                        <div class="flow-step">
+                            <div class="flow-icon">🔒</div>
+                            <h3 class="font-bold text-lg text-[#003F5C]">Entrega Segura y Profesional</h3>
+                            <p class="text-[#34657F]">Con un clic se genera un <strong>enlace seguro</strong> para el cliente y se habilita un <strong>portal</strong> para consultas históricas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-card">
+                    <h3 class="font-bold text-lg text-center text-[#003F5C] mb-4">Impacto: Eficiencia Operativa</h3>
+                    <div class="chart-container">
+                        <canvas id="eficienciaChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="mt-12 pt-8 border-t border-[#CCE0ED] text-center">
+             <h2 class="text-3xl font-bold text-center text-[#003F5C] mb-6">Comparativa de Beneficios</h2>
+             <div class="overflow-x-auto">
+                 <table class="min-w-full text-left text-sm">
+                    <thead class="bg-[#CCE0ED] font-semibold">
+                        <tr>
+                            <th class="p-3">Característica</th>
+                            <th class="p-3 text-center">Flujo Actual</th>
+                            <th class="p-3 text-center">Con Residente Digital</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="border-b border-[#CCE0ED]">
+                            <td class="p-3 font-semibold">Eficiencia</td>
+                            <td class="p-3 text-center text-red-600">❌ Lento y Manual</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✅ Rápido y Automatizado</td>
+                        </tr>
+                        <tr class="border-b border-[#CCE0ED]">
+                            <td class="p-3 font-semibold">Trazabilidad</td>
+                            <td class="p-3 text-center text-red-600">❌ Fragmentada</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✅ Centralizada y Completa</td>
+                        </tr>
+                        <tr class="border-b border-[#CCE0ED]">
+                            <td class="p-3 font-semibold">Seguridad</td>
+                            <td class="p-3 text-center text-red-600">❌ Alto Riesgo</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✅ Enlaces Seguros y Portal</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-semibold">Experiencia del Cliente</td>
+                            <td class="p-3 text-center text-red-600">❌ Básica e Inconsistente</td>
+                            <td class="p-3 text-center text-green-600 font-bold">✅ Profesional y Moderna</td>
+                        </tr>
+                    </tbody>
+                 </table>
+             </div>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const tooltipCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            const horasCtx = document.getElementById('horasChart').getContext('2d');
+            new Chart(horasCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Tiempo Manual por Expediente'],
+                    datasets: [{
+                        label: 'Horas',
+                        data: [100],
+                        backgroundColor: ['#FFC107'],
+                        borderColor: ['#FFC107'],
+                        borderWidth: 1,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                             ticks: { display: false },
+                             grid: { display: false }
+                        },
+                        y: {
+                            ticks: { display: false },
+                            grid: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                }
+            });
+
+            const eficienciaCtx = document.getElementById('eficienciaChart').getContext('2d');
+            new Chart(eficienciaCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Tiempo Administrativo Reducido', 'Tiempo Restante'],
+                    datasets: [{
+                        data: [85, 15],
+                        backgroundColor: ['#28a745', '#CCE0ED'],
+                        hoverBackgroundColor: ['#218838', '#b8d1e2'],
+                        borderColor: '#F0F4F8',
+                        borderWidth: 4,
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#003F5C'
+                            }
+                        },
+                         tooltip: tooltipCallback.plugins.tooltip
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

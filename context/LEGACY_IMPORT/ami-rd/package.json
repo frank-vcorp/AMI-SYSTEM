@@ -1,0 +1,23 @@
+{
+  "name": "ami-rd",
+  "version": "1.0.0",
+  "description": "Residente Digital con IA (RD-AMI) sobre el ecosistema de Google Cloud.",
+  "main": "index.js",
+  "scripts": {
+    "sync:dashboard": "node scripts/sync-dashboard.js",
+    "test": "echo \"No test suite configurada\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frank-vcorp/ami-rd.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/frank-vcorp/ami-rd/issues"
+  },
+  "homepage": "https://github.com/frank-vcorp/ami-rd#readme",
+  "dependencies": {}
+}

@@ -1,0 +1,16 @@
+# Copia este archivo como terraform.tfvars y llena los valores reales.
+project_id              = "rd-ami-dev"
+project_name            = "RD AMI Dev"
+enable_project_creation = false
+org_id                  = null
+billing_account         = null
+region                  = "us-central1"
+zone                    = "us-central1-a"
+firestore_location      = "us-central"
+bucket_location         = "US"
+
+labels = {
+  owner     = "rd-ami"
+  env       = "dev"
+  managedBy = "terraform"
+}

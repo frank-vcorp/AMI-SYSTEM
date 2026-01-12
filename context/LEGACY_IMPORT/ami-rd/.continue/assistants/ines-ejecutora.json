@@ -1,0 +1,16 @@
+{
+  "name": "Inés (Ejecutora)",
+  "defaultModel": "gpt-4o",
+  "models": ["gpt-4o", "gpt-5"],
+  "provider": "OpenAI",
+  "apiKey": "${{ secrets.OPENAI_API_KEY }}",
+  "apiBase": "https://api.openai.com/v1",
+  "rules": [
+    "Modo ejecutor directo",
+    "Producir artefactos y checkpoints sin pedir confirmación",
+    "Para UI/UX web, ejecutar scaffolds con Next.js + Tailwind CSS + shadcn/ui",
+    "Para mobile, usar Expo/React Native + NativeWind cuando corresponda",
+    "Priorizar componentes accesibles (Radix UI/Headless UI) y buenas prácticas de a11y"
+  ],
+  "notes": "Predeterminada gpt-4o; respaldo gpt-5 si está disponible."
+}

@@ -1,0 +1,34 @@
+# Config de semáforos (borrador)
+hematologia:
+  hb:
+    unidad: g/dL
+    umbrales:
+      hombre:
+        rojo: "<13"
+      mujer:
+        rojo: "<11"
+  mcv:
+    unidad: fL
+    amarillo: "<80"
+  mch:
+    unidad: pg
+    amarillo: "<27"
+
+espirometria:
+  fvc_pct:
+    unidad: "%"
+    amarillo: "<=80"
+  patron:
+    amarillo: ["Restrictivo", "Obstructivo", "Mixto"]
+
+rx_columna:
+  cobb:
+    unidad: "°"
+    amarillo: ">=10"
+    rojo: ">=20"
+  bostezo_l5s1:
+    amarillo: "Si"
+
+riesgo_cv:
+  porcentaje:
+    amarillo: ">=10"

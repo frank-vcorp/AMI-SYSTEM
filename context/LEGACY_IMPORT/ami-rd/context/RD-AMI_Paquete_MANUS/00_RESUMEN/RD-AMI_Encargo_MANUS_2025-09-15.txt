@@ -1,0 +1,82 @@
+RD-AMI — Resumen de avances y encargo para MANUS (2025-09-15)
+
+1) Objetivo del piloto (recordatorio)
+- Residente Digital con IA asistida (AMI) que ingesta PDFs nativos; ordena por Empresa→Paciente→Orden→Estudio→Fecha; extrae y normaliza (Lab, RX, Audiometría, Espirometría, ECG/Campimetría, +SIM adm.); aplica semáforos; propone borrador de dictamen; tras validación médica emite Reporte de Aptitud y Expediente (PDF con folio/QR), con entrega controlada y trazabilidad. Reglas: IA asiste (no dicta), validación médica obligatoria, no usar datos para entrenar servicios externos, accesos por rol/cliente/sede, enlaces caducables, bitácora total.
+
+2) Lo tratado en la junta (acuerdos y directrices)
+- Usar únicamente los archivos nativos enviados por AMI (Dra. Erika) para el demo.
+- Mantener la línea de diseño y practicidad de DEMO 7.1; el prototipo previo se percibió obsoleto.
+- Preparar un DEMO web interactivo, empaquetado en ZIP, con carpeta dedicada para subir el expediente demo.
+- Verificar que los nombres de archivos coincidan exactamente con el expediente y la estructura propuesta.
+- Considerar dos perfiles de consumo: (a) Médico validador; (b) Cliente/Empresa (lectura/descarga con enlaces caducables).
+- Añadir “Papeleta” de Aptitud como salida rápida y controlada (tamaño compacto, con QR y folio) además del Reporte.
+- Estándares de identidad: Nombre normalizado, Empresa en catálogo, ID Paciente único, trazabilidad por Orden/Estudio/Fecha.
+- Métricas del piloto: % extracción correcta, tiempos por etapa, concordancia de identidad, tasa de ajustes post-validación, SLA.
+- Seguridad y privacidad: no entrenamiento externo, roles y sedes, expiración de enlaces, bitácora total, sellado de tiempo en PDF.
+
+3) Versiones de DEMO y lecciones
+- v7.0 (descartada): Diseño visual obsoleto y navegación poco práctica; inconsistencias en nombres de archivos; sin “Papeleta”;
+  semáforos no parametrizados; sin panel claro de identidad y coincidencias; empaquetado ZIP poco claro y algunos archivos faltantes.
+- v7.1 (base actual): Mantiene la línea de diseño pactada; estructura de carpetas /Empresa/Paciente/Folio/Estudio/AAAA-MM-DD/;
+  doble perfil (Médico/Cliente), semáforos por sistema, borrador de dictamen, bitácora y QR/folio en PDF institucional.
+  Pendientes: “Papeleta” formal, visor lado-a-lado (PDF vs. datos extraídos con resaltado), tablero de incidencias de identidad.
+- v7.2 (objetivo próximo): Integra “Papeleta” oficial; modo Validador de pantalla completa con PDF+datos resaltados;
+  comparador de plantillas (proveedores) y pruebas unitarias de extractores; tablero de identidad (coincidencias, conflictos,
+  merges); drag&drop de ingesta; métricas en vivo; controles de versión y firma con cédula; reimpresión auditada.
+  UX: mantener estética clínica, limpia, moderna; accesible; tiempos y estados claros.
+
+4) “Papeleta” de Aptitud (requerimiento funcional)
+- Formato compacto (media carta/A6) para entrega rápida; incluye: Empresa, Paciente, Folio/QR, Fecha y Vigencia,
+  Semáforo global (y breve lista de restricciones si aplica), Dictamen de Aptitud (Apto/Apto con restricciones/No Apto),
+  Nombre y cédula del médico validador, sello/firmas; enlace caducable para verificación.
+- Flujo: se emite sólo tras validación y firma; reimpresiones registradas en bitácora; QR apunta a una URL temporal con antifraude.
+
+5) Interface del software (línea de 7.1 y mejoras 7.2)
+- Home (Tablero): cola de expedientes con estados (Ingesta→Match→Extracción→Validación→Emisión→Entrega), KPIs, filtros por Empresa/Sede.
+- Validador: vista de doble panel PDF/JSON con resaltado de campos extraídos, equivalencias (ancla→campo), edición rápida y versionado.
+- Identidad: módulo de reconciliación (coincidencia por nombre normalizado, fecha de nacimiento, sexo, folio, fecha estudio), reglas y overrides.
+- Semáforos: motor parametrizable por sistema; show/hide de justificaciones; enlaces a evidencia (campo de origen).
+- Emisión: generador de PDF institucional con folio/QR; generación de “Papeleta”; enlaces caducables y registro de descargas.
+- Entrega: panel para Cliente/Empresa (lectura/descarga con permisos), registros de acceso, expiración.
+- Auditoría: bitácora completa por expediente; sello de tiempo, versiones, firmas, motivo de cambio y usuario.
+- Seguridad: roles por cliente/sede; no entrenamiento externo; logs; configuración de retención.
+- UX clínica: diseño limpio, tipografía legible, codificación de color estricta para semáforos, responsive y accesible.
+
+6) Extracción y normalización (núcleo para MANUS)
+- Identidad transversal: Paciente (nombre normalizado), Sexo, Edad, Fecha de nacimiento, Empresa (catálogo), Estudio, Orden, Fechas,
+  Folio, Realizó/Revisó + Cédulas.
+- Laboratorio: BH (Hb, VCM, MCH, MCHC, RDW), EGO (aspecto, células uretrales, pH, densidad), QS24 (glucosa, perfil lipídico, enzimas, electrolitos).
+- Imagen RX: Ángulo de Cobb, Ferguson, “bostezo” L5–S1, fracturas/listesis.
+- Espirometría: FVC(%), patrón, calidad, repetibilidad, recomendaciones.
+- Audiometría/Campimetría/ECG: diagnósticos/resumen, umbrales clave, recomendaciones y aptitud visual.
+- Riesgo CV: % riesgo, edad cardiovascular, factores (HTA/DM/fumador), valores base (PAS, Col/HDL).
+
+7) Semáforos y dictamen (parámetros mínimos)
+- BH: umbrales por sexo/edad; microcítico/hipocrómico con Hb baja → alerta; recomendaciones sugeridas sin automatizar diagnóstico.
+- Espiro: FVC ≤80% o patrón restrictivo → alerta y seguimiento.
+- RX columna: desviación leve/moderada; higiene postural; seguimiento según criterio.
+- Audiometría/ECG/Tox/Campimetría/QS24: verdes en el demo observado; parametrizable.
+- Riesgo CV: estratos (<10% bajo, etc.). El médico siempre valida y firma.
+
+8) Encargo a MANUS (entregables)
+- SIM (DEMO): inventario de pantallas, diccionario de campos, mapa de identidad (Paciente/Empresa/Orden/Estudio/Fecha),
+  flujos de alta/cambio/firma/versionado, y brechas para el piloto RD.
+- PDFs: extractores por plantilla (ancla→campo), normalización (fechas ISO, unidades, catálogos), tabla de firmantes
+  y log de confianza por campo.
+- Semáforos + Borrador de dictamen: reglas parametrizables, semáforo por estudio y global, sugerencias basadas en hallazgos fuente.
+- Emisión y Entrega: PDF institucional con folio/QR, Papeleta, enlaces caducables, bitácora; métricas operativas.
+- Métricas del piloto: extracción correcta, tiempos, concordancia identidad, tasa de ajustes, SLA.
+
+9) Bloqueantes y riesgos
+- ID Paciente único (fuente maestra) y catálogo unificado de Empresas.
+- Variabilidad de plantillas por proveedor; necesidad de pruebas unitarias por extractor.
+- Privacidad/seguridad: roles, caducidad de enlaces, bitácora, no entrenamiento externo.
+- Versionado y firmas: bloqueo post-firma, sellado de tiempo, control de reimpresión (Papeleta/Reporte).
+
+Estructura de carpetas del DEMO (ZIP)
+/RD-AMI-DEMO/
+  /01_fuentes_pdf/Empresa/Paciente/Folio/Estudio/AAAA-MM-DD/*.pdf
+  /02_json_extraccion/*.json
+  /03_reportes_pdf/*.pdf   (Reporte de Aptitud, Papeleta, Resumen)
+  /04_logs_bitacora/*.json (validación, firmas, versiones)
+  /README_demo.md          (cómo recorrer el demo)

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>RD-AMI — Validador Lado-a-Lado (Mock 7.2)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>RD-AMI — Validador</h1>
+    <nav>
+      <span>Expediente #RD-DEM-001</span>
+      <span class="pill estado">Extracción</span>
+      <button>Guardar</button>
+      <button class="primary">Enviar a Validación</button>
+    </nav>
+  </header>
+  <main class="split">
+    <section class="pane pdf">
+      <h2>PDF Fuente</h2>
+      <div class="pdfbox">[Aquí se visualiza el PDF con resaltado de anclas]</div>
+    </section>
+    <section class="pane datos">
+      <h2>Datos Extraídos</h2>
+      <div class="card">
+        <h3>Identidad</h3>
+        <label>Paciente</label><input value="CONTADOR FRANCO YERALDIN GUADALUPE">
+        <label>Empresa</label><input value="ABBOTT MEDICAL MEXICO">
+        <label>Fecha estudio</label><input value="2025-08-31">
+      </div>
+      <div class="card">
+        <h3>Laboratorio (BH)</h3>
+        <label>Hemoglobina (g/dL)</label><input value="9.1">
+        <label>VCM (fL)</label><input value="61.9">
+        <label>MCH (pg)</label><input value="17.7">
+        <label>MCHC (g/dL)</label><input value="28.6">
+        <div class="sem">Semáforo: <span class="rojo">ROJO</span></div>
+      </div>
+      <div class="card">
+        <h3>Espirometría</h3>
+        <label>FVC (%)</label><input value="70">
+        <label>Patrón</label><input value="Restrictivo">
+        <div class="sem">Semáforo: <span class="amarillo">AMARILLO</span></div>
+      </div>
+      <div class="card">
+        <h3>RX Columna</h3>
+        <label>Cobb (°)</label><input value="8">
+        <label>Ferguson (°)</label><input value="40">
+        <label>Bostezo L5–S1</label><input value="Sí">
+        <div class="sem">Semáforo: <span class="amarillo">AMARILLO</span></div>
+      </div>
+      <div class="card">
+        <h3>Dictamen (borrador)</h3>
+        <select>
+          <option>Apto</option>
+          <option selected>Apto con restricciones</option>
+          <option>No apto</option>
+        </select>
+        <textarea rows="4">Sugerencia: manejo de anemia; higiene postural; ejercicios respiratorios; correctivos visuales.</textarea>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <small>RD-AMI — Mock de interfaz 7.2 (no productivo)</small>
+  </footer>
+</body>
+</html>

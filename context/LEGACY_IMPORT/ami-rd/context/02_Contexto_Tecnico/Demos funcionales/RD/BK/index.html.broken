@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RD-AMI - Residente Digital con IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ami-turquoise': '#00B5A5',
+                        'ami-purple': '#7B2D8E',
+                        'ami-dark-gray': '#4A5568',
+                        'ami-light-turquoise': '#4FD1C7',
+                        'ami-light-purple': '#9F7AEA',
+                        'ami-blue': '#00B5A5',
+                        'ami-green': '#00B5A5',
+                        'ami-red': '#ef4444',
+                        'ami-yellow': '#f59e0b',
+                        'ami-gray': '#6b7280'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Estilos básicos para el demo */
+        .notification {
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <!-- Logo AMI -->
+                    <div class="flex items-center space-x-3">
+                        <img src="logo-ami.png" alt="AMI - Salud Responsable" class="h-12 w-auto">
+                        <div class="border-l border-gray-300 pl-3">
+                            <h1 class="text-xl font-bold text-ami-purple">RD-AMI</h1>
+                            <p class="text-xs text-ami-turquoise font-medium">Residente Digital con IA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 text-sm text-gray-600">
+                    <span class="font-medium">Folio: <span class="text-ami-blue">#RD-2025-001</span></span>
+                    <span id="fechaActual"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-2 md:space-x-8 overflow-x-auto scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+                <style>
+                    .scrollbar-hide::-webkit-scrollbar {
+                        display: none;
+                    }
+                    .nav-tab {
+                        flex-shrink: 0;
+                        min-width: fit-content;
+                    }
+                </style>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-ami-blue text-ami-blue font-medium text-xs md:text-sm whitespace-nowrap" data-tab="dashboard">
+                    <i class="fas fa-chart-dashboard text-sm"></i>
+                    <span class="hidden sm:inline">Dashboard</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="recepcion">
+                    <i class="fas fa-clipboard-list text-sm"></i>
+                    <span class="hidden sm:inline">Recepción</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="examen">
+                    <i class="fas fa-stethoscope text-sm"></i>
+                    <span class="hidden sm:inline">Examen</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="estudios">
+                    <i class="fas fa-upload text-sm"></i>
+                    <span class="hidden sm:inline">Estudios</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="validacion">
+                    <i class="fas fa-user-md text-sm"></i>
+                    <span class="hidden sm:inline">Validación</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="reportes">
+                    <i class="fas fa-file-pdf text-sm"></i>
+                    <span class="hidden sm:inline">Reportes</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="papeletas">
+                    <i class="fas fa-list text-sm"></i>
+                    <span class="hidden sm:inline">Papeletas</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="empresas">
+                    <i class="fas fa-building text-sm"></i>
+                    <span class="hidden sm:inline">Empresas</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="expedientes">
+                    <i class="fas fa-folder-open text-sm"></i>
+                    <span class="hidden sm:inline">Expedientes</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="bitacora">
+                    <i class="fas fa-history text-sm"></i>
+                    <span class="hidden sm:inline">Bitácora</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="analytics">
+                    <i class="fas fa-chart-line text-sm"></i>
+                    <span class="hidden sm:inline">Analytics</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="calidad">
+                    <i class="fas fa-shield-alt text-sm"></i>
+                    <span class="hidden sm:inline">Calidad</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="comunicaciones">
+                    <i class="fas fa-comments text-sm"></i>
+                    <span class="hidden sm:inline">Comunicaciones</span>
+                </button>
+                <button class="nav-tab flex items-center space-x-1 py-3 px-2 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-xs md:text-sm whitespace-nowrap" data-tab="admin">
+                    <i class="fas fa-cog text-sm"></i>
+                    <span class="hidden sm:inline">Admin</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- Dashboard Tab -->
+        <div class="tab-content" id="dashboard">
+            <!-- Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-users text-ami-blue text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-500">Pacientes en Proceso</p>
+                            <p class="text-2xl font-semibold text-gray-900">47</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-ami-green text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-500">Dictámenes Emitidos (Hoy)</p>
+                            <p class="text-2xl font-semibold text-gray-900">12</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-clock text-ami-yellow text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-500">TAT Promedio</p>
+                            <p class="text-2xl font-semibold text-gray-900">5.8 hrs</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-robot text-purple-500 text-2xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-500">Precisión IA</p>
+                            <p class="text-2xl font-semibold text-gray-900">94.2%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Estado de Expedientes</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Recepción</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900">8</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Examen Médico</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900">12</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Estudios</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900">15</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-orange-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Validación</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900">9</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-gray-600">Completado</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-900">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Productividad por Clínica</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Centro</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-ami-blue h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900">24</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Norte</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-ami-green h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900">18</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Móvil</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-32 bg-gray-200 rounded-full h-2">
+                                    <div class="bg-ami-yellow h-2 rounded-full" style="width: 40%"></div>
+                                </div>
+                                <span class="text-sm font-medium text-gray-900">12</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-900">Actividad Reciente</h3>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-ami-green"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-900">Dictamen emitido para CONTADOR FRANCO, YERALDIN - Folio #RD-2025-001</p>
+                                <p class="text-xs text-gray-500">Hace 5 min</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-upload text-ami-blue"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-900">Estudios cargados para MARTINEZ LOPEZ, CARLOS - Folio #RD-2025-002</p>
+                                <p class="text-xs text-gray-500">Hace 12 min</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-robot text-ami-yellow"></i>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-900">IA detectó anemia en laboratorio - Folio #RD-2025-003</p>
+                                <p class="text-xs text-gray-500">Hace 18 min</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recepción Tab -->
+        <div class="tab-content hidden" id="recepcion">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Crear Nueva Papeleta</h2>
+                <p class="text-gray-600">Registro inicial del paciente y asignación de estudios</p>
+            </div>
+
+            <form class="bg-white rounded-lg shadow p-6" id="recepcionForm">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Datos del Paciente -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Datos del Paciente</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nombrePaciente" class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo *</label>
+                                <input type="text" id="nombrePaciente" name="nombrePaciente" 
+                                       placeholder="Apellido Paterno, Apellido Materno, Nombres" 
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="fechaNacimiento" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Nacimiento *</label>
+                                    <input type="date" id="fechaNacimiento" name="fechaNacimiento" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                                </div>
+                                <div>
+                                    <label for="sexo" class="block text-sm font-medium text-gray-700 mb-1">Sexo *</label>
+                                    <select id="sexo" name="sexo" 
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                                        <option value="">Seleccionar</option>
+                                        <option value="FEMENINO">Femenino</option>
+                                        <option value="MASCULINO">Masculino</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="10 dígitos"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                            </div>
+
+                            <div>
+                                <label for="empresa" class="block text-sm font-medium text-gray-700 mb-1">Empresa *</label>
+                                <select id="empresa" name="empresa" 
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                                    <option value="">Seleccionar empresa</option>
+                                    <option value="ABBOTT MEDICAL MEXICO">ABBOTT MEDICAL MEXICO</option>
+                                    <option value="ALFA CONSTRUCCIONES">ALFA CONSTRUCCIONES</option>
+                                    <option value="BETA LOGISTICA">BETA LOGÍSTICA</option>
+                                    <option value="GAMMA INDUSTRIAL">GAMMA INDUSTRIAL</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="puestoSolicitado" class="block text-sm font-medium text-gray-700 mb-1">Puesto Solicitado</label>
+                                <input type="text" id="puestoSolicitado" name="puestoSolicitado" 
+                                       placeholder="Ej: Operador, Supervisor, etc."
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Programación de Estudios -->
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Programación de Estudios</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="fechaCita" class="block text-sm font-medium text-gray-700 mb-1">Fecha de Cita *</label>
+                                    <input type="date" id="fechaCita" name="fechaCita" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                                </div>
+                                <div>
+                                    <label for="horaCita" class="block text-sm font-medium text-gray-700 mb-1">Hora de Cita *</label>
+                                    <input type="time" id="horaCita" name="horaCita" 
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue focus:border-transparent" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Estudios a Realizar *</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md bg-gray-50">
+                                        <input type="checkbox" name="estudios" value="EXAMEN_MEDICO" checked disabled
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Examen Médico (Obligatorio)</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="LABORATORIO"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Laboratorio (BH, EGO, QS24)</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="RADIOGRAFIAS"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Radiografías</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="ESPIROMETRIA"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Espirometría</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="AUDIOMETRIA"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Audiometría</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="ELECTROCARDIOGRAMA"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Electrocardiograma</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="CAMPIMETRIA"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Campimetría</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer">
+                                        <input type="checkbox" name="estudios" value="TOXICOLOGICO"
+                                               class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                                        <span class="text-sm text-gray-700">Toxicológico</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-end">
+                    <button type="submit" class="bg-ami-blue text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:ring-offset-2 flex items-center space-x-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Crear Papeleta</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Examen Médico Tab -->
+        <div class="tab-content hidden" id="examen">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Examen Médico</h2>
+                <p class="text-gray-600">Formulario de captura del examen médico realizado por AMI</p>
+            </div>
+
+            <!-- Patient Info Bar -->
+            <div class="bg-ami-blue text-white rounded-lg p-4 mb-6">
+                <div class="flex flex-wrap items-center justify-between text-sm">
+                    <span><strong>Paciente:</strong> CONTADOR FRANCO, YERALDIN GUADALUPE</span>
+                    <span><strong>Empresa:</strong> ABBOTT MEDICAL MEXICO</span>
+                    <span><strong>Folio:</strong> #RD-2025-001</span>
+                </div>
+            </div>
+
+            <form class="space-y-8" id="examenMedicoForm">
+                <!-- Signos Vitales -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Somatometría / Signos Vitales</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div>
+                            <label for="ta" class="block text-sm font-medium text-gray-700 mb-1">T.A. (mmHg)</label>
+                            <input type="text" id="ta" value="110/60"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="fc" class="block text-sm font-medium text-gray-700 mb-1">F.C. / min</label>
+                            <input type="number" id="fc" value="78"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="fr" class="block text-sm font-medium text-gray-700 mb-1">F.R. / min</label>
+                            <input type="number" id="fr" value="17"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="temperatura" class="block text-sm font-medium text-gray-700 mb-1">T°</label>
+                            <input type="number" id="temperatura" step="0.1" value="36.5"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="peso" class="block text-sm font-medium text-gray-700 mb-1">Peso (Kg)</label>
+                            <input type="number" id="peso" step="0.1" value="58.50"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="talla" class="block text-sm font-medium text-gray-700 mb-1">Talla (m)</label>
+                            <input type="number" id="talla" step="0.01" value="1.63"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="imc" class="block text-sm font-medium text-gray-700 mb-1">IMC</label>
+                            <input type="number" id="imc" step="0.01" value="22.02" readonly
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50">
+                        </div>
+                        <div>
+                            <label for="complexion" class="block text-sm font-medium text-gray-700 mb-1">Complexión</label>
+                            <input type="text" id="complexion" value="NORMAL"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agudeza Visual -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Agudeza Visual</h3>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                            <label class="text-sm font-medium text-gray-700">Visión Lejana:</label>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">O.D.</label>
+                                <input type="text" value="20/30" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">O.I.</label>
+                                <input type="text" value="20/70" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                            <label class="text-sm font-medium text-gray-700">Visión Cercana:</label>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">O.D.</label>
+                                <input type="text" value=".75" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">O.I.</label>
+                                <input type="text" value=".75" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <label for="reflejos" class="block text-sm font-medium text-gray-700 mb-1">Reflejos</label>
+                            <input type="text" id="reflejos" value="Presentes y Normorreflexicos"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="testIshihara" class="block text-sm font-medium text-gray-700 mb-1">Test Ishihara</label>
+                            <input type="text" id="testIshihara" value="NORMAL"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                        <div>
+                            <label for="campimetria" class="block text-sm font-medium text-gray-700 mb-1">Campimetría</label>
+                            <input type="text" id="campimetria" value="NA"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aptitud y Recomendaciones -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Aptitud y Recomendaciones</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" id="aptitudCumple" checked
+                                   class="h-4 w-4 text-ami-blue focus:ring-ami-blue border-gray-300 rounded">
+                            <label for="aptitudCumple" class="text-sm text-gray-700">CUMPLE con los requerimientos de salud para el puesto propuesto</label>
+                        </div>
+                        
+                        <div>
+                            <label for="recomendaciones" class="block text-sm font-medium text-gray-700 mb-1">Recomendaciones</label>
+                            <textarea id="recomendaciones" rows="4" 
+                                      class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">CITA CON ODONTOLOGIA PARA TRATAMIENTO DENTAL DE SARRO, USO OBLIGATORIO DE CORRECTIVOS VISUALES PARA LABORAR
+
+VALORACIÓN MÉDICA Y VISUAL ANUAL.</textarea>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="realizoEm" class="block text-sm font-medium text-gray-700 mb-1">Realizó EM</label>
+                                <input type="text" id="realizoEm" value="MARIA ELENA URIBE GONZALEZ"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                            <div>
+                                <label for="cedulaRealizo" class="block text-sm font-medium text-gray-700 mb-1">Ced. Prof.</label>
+                                <input type="text" id="cedulaRealizo" value="00018040"
+                                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-ami-blue">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="submit" class="bg-ami-blue text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-ami-blue focus:ring-offset-2 flex items-center space-x-2">
+                        <i class="fas fa-save"></i>
+                        <span>Guardar Examen Médico</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Estudios Tab -->
+        <div class="tab-content hidden" id="estudios">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Carga de Estudios</h2>
+                <p class="text-gray-600">Arrastra y suelta los PDFs de estudios - La IA los clasificará automáticamente</p>
+            </div>
+
+            <!-- Patient Info Bar -->
+            <div class="bg-ami-blue text-white rounded-lg p-4 mb-6">
+                <div class="flex flex-wrap items-center justify-between text-sm">
+                    <span><strong>Paciente:</strong> CONTADOR FRANCO, YERALDIN GUADALUPE</span>
+                    <span><strong>Empresa:</strong> ABBOTT MEDICAL MEXICO</span>
+                    <span><strong>Folio:</strong> #RD-2025-001</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Estudios SIM -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Estudios SIM (Clínicos)</h3>
+                        <div class="flex items-center space-x-2 text-sm text-gray-600">
+                            <i class="fas fa-robot text-ami-blue"></i>
+                            <span>IA Clasificador v2.1</span>
+                        </div>
+                    </div>
+                    <div class="drop-zone border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-ami-blue transition-colors cursor-pointer" id="dropZoneSIM">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2">Arrastra archivos aquí o haz clic para seleccionar</p>
+                        <p class="text-sm text-gray-500">Espirometría, Audiometría, ECG, Campimetría</p>
+                        <input type="file" id="fileInputSIM" multiple accept=".pdf" class="hidden">
+                    </div>
+                    <div id="uploadedFilesSIM" class="mt-4 space-y-2">
+                        <!-- Archivos pre-cargados con clasificación avanzada -->
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-pdf text-red-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">ESPIROMETRIA.pdf</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">Plantilla AMI-v2</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Proveedor: Clínica Respiratoria</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-green-600 font-medium">✓ Patrón Restrictivo Leve</span>
+                                <p class="text-xs text-gray-500">Confianza: 96.8%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-pdf text-red-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">AUDIOMETRIA.pdf</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Plantilla AMI-v3</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Proveedor: AudioSalud</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-green-600 font-medium">✓ Audición Normal</span>
+                                <p class="text-xs text-gray-500">Confianza: 98.2%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-pdf text-red-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">ELECTROCARDIOGRAMA.pdf</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded-full">Plantilla Externa</span>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Proveedor: CardioCenter</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-green-600 font-medium">✓ Ritmo Sinusal Normal</span>
+                                <p class="text-xs text-gray-500">Confianza: 94.5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estudios NOVA -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Estudios NOVA (Laboratorio)</h3>
+                        <div class="flex items-center space-x-2 text-sm text-gray-600">
+                            <i class="fas fa-flask text-ami-green"></i>
+                            <span>Integración NOVA API</span>
+                        </div>
+                    </div>
+                    <div class="drop-zone border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-ami-blue transition-colors cursor-pointer" id="dropZoneNOVA">
+                        <i class="fas fa-flask text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2">Arrastra archivos aquí o haz clic para seleccionar</p>
+                        <p class="text-sm text-gray-500">Biometría Hemática, EGO, Química Sanguínea</p>
+                        <input type="file" id="fileInputNOVA" multiple accept=".pdf" class="hidden">
+                    </div>
+                    <div id="uploadedFilesNOVA" class="mt-4 space-y-2">
+                        <!-- Archivos pre-cargados con clasificación avanzada -->
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-pdf text-red-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">LABORATORIO (1).pdf</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">Lab Chopo</span>
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Formato Estándar</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-yellow-600 font-medium">⚠ Anemia Microcítica</span>
+                                <p class="text-xs text-gray-500">BH + QS24 + EGO</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-pdf text-red-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">TOXICOLOGICO.pdf</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-orange-100 text-orange-800 text-xs rounded-full">Lab Salud Digna</span>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">5 Elementos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-green-600 font-medium">✓ Negativo</span>
+                                <p class="text-xs text-gray-500">Confianza: 99.1%</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-file-image text-blue-500"></i>
+                                <div>
+                                    <p class="text-sm font-medium">RX_COLUMNA_AP.jpg</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full">DICOM Estándar</span>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">Radiología Digital</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs text-green-600 font-medium">✓ Sin Alteraciones</span>
+                                <p class="text-xs text-gray-500">OCR: 97.3%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Panel de Clasificación IA Avanzada -->
+            <div class="bg-white rounded-lg shadow p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Clasificador IA - Soporte Multi-Plantilla</h3>
+                    <span class="px-3 py-1 bg-ami-blue text-white text-sm rounded-full">v2.1 Activo</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-semibold text-blue-900 mb-2">Plantillas AMI</h4>
+                        <div class="space-y-1 text-sm text-blue-800">
+                            <div class="flex justify-between">
+                                <span>• AMI-v2 (Espirometría)</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• AMI-v3 (Audiometría)</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• AMI-v1 (ECG)</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <h4 class="font-semibold text-green-900 mb-2">Laboratorios</h4>
+                        <div class="space-y-1 text-sm text-green-800">
+                            <div class="flex justify-between">
+                                <span>• Lab Chopo</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• Salud Digna</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• NOVA API</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-purple-50 rounded-lg">
+                        <h4 class="font-semibold text-purple-900 mb-2">Externos</h4>
+                        <div class="space-y-1 text-sm text-purple-800">
+                            <div class="flex justify-between">
+                                <span>• DICOM Estándar</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• Plantillas Externas</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>• OCR Genérico</span>
+                                <span class="text-green-600">✓</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-info-circle text-yellow-600"></i>
+                        <p class="text-sm text-yellow-800">
+                            <strong>IA Adaptativa:</strong> El sistema aprende automáticamente nuevas plantillas y formatos. 
+                            Precisión actual: <strong>96.8%</strong> • Tiempo promedio: <strong>2.3 segundos</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Processing -->
+            <div id="aiProcessing" class="hidden bg-white rounded-lg shadow p-6 mb-6">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-robot text-3xl text-ami-blue animate-spin"></i>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-medium text-gray-900">IA Procesando Estudios...</h3>
+                        <p class="text-gray-600">Clasificando archivos y extrayendo datos médicos</p>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                            <div id="progressFill" class="bg-ami-blue h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estudios Procesados -->
+            <div id="estudiosProcesados" class="space-y-4"></div>
+        </div>
+
+        <!-- Validación Tab -->
+        <div class="tab-content hidden" id="validacion">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Validación Médica</h2>
+                <p class="text-gray-600">Revisión y validación de datos extraídos por IA</p>
+            </div>
+
+            <!-- Patient Info Bar -->
+            <div class="bg-ami-blue text-white rounded-lg p-4 mb-6">
+                <div class="flex flex-wrap items-center justify-between text-sm">
+                    <span><strong>Paciente:</strong> CONTADOR FRANCO, YERALDIN GUADALUPE</span>
+                    <span><strong>Empresa:</strong> ABBOTT MEDICAL MEXICO</span>
+                    <span><strong>Folio:</strong> #RD-2025-001</span>
+                    <span class="bg-yellow-500 text-yellow-900 px-2 py-1 rounded text-xs font-medium">Pendiente Validación</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- PDF Viewer -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Documentos del Expediente</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <button class="pdf-tab px-3 py-1 text-xs bg-ami-blue text-white rounded hover:bg-blue-700" data-pdf="laboratorio">Laboratorio</button>
+                            <button class="pdf-tab px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300" data-pdf="espirometria">Espirometría</button>
+                            <button class="pdf-tab px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300" data-pdf="audiometria">Audiometría</button>
+                            <button class="pdf-tab px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300" data-pdf="radiografias">Radiografías</button>
+                            <button class="pdf-tab px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300" data-pdf="ecg">ECG</button>
+                            <button class="pdf-tab px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300" data-pdf="examen_medico">Examen Médico</button>
+                        </div>
+                    </div>
+                       <!-- PDF/Image Viewer -->
+                    <div id="fileViewer" class="bg-gray-100 rounded-lg p-4 h-96 flex items-center justify-center">
+                        <div id="viewerPlaceholder" class="text-center text-gray-500">
+                            <i class="fas fa-file-pdf text-4xl mb-2"></i>
+                            <p>Selecciona un estudio para visualizar</p>
+                        </div>
+                        
+                        <!-- PDF Viewer -->
+                        <iframe id="pdfViewer" class="w-full h-full rounded hidden" frameborder="0"></iframe>
+                        
+                        <!-- Image Viewer -->
+                        <div id="imageViewer" class="w-full h-full hidden flex flex-col">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 id="imageTitle" class="font-medium text-gray-900"></h4>
+                                <div class="flex space-x-2">
+                                    <button id="zoomOut" class="px-2 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300">
+                                        <i class="fas fa-search-minus"></i>
+                                    </button>
+                                    <button id="zoomIn" class="px-2 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300">
+                                        <i class="fas fa-search-plus"></i>
+                                    </button>
+                                    <button id="resetZoom" class="px-2 py-1 bg-gray-200 rounded text-sm hover:bg-gray-300">
+                                        <i class="fas fa-expand-arrows-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex-1 overflow-auto bg-white rounded border">
+                                <img id="viewerImage" class="max-w-none transition-transform duration-200" style="transform-origin: top left;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extracted Data -->
+                <div class="space-y-4">
+                    <!-- Laboratorio -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Laboratorio - Biometría Hemática</h4>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Confianza: 96%</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">Hemoglobina (g/dL)</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="number" value="9.1" step="0.1" class="flex-1 px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <span class="text-red-500" title="Valor bajo - Anemia">🔴</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">VCM (fL)</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="number" value="61.9" step="0.1" class="flex-1 px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <span class="text-yellow-500" title="Microcítica">🟡</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-2 bg-blue-50 rounded text-xs">
+                            <i class="fas fa-robot text-ami-blue"></i>
+                            <strong>Sugerencia IA:</strong> Anemia microcítica hipocrómica. Recomendar evaluación hematológica.
+                        </div>
+                    </div>
+
+                    <!-- Espirometría -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <h4 class="font-medium text-gray-900">Espirometría</h4>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Confianza: 94%</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">FVC (%)</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="number" value="70" class="flex-1 px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <span class="text-yellow-500" title="Patrón restrictivo">🟡</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-gray-500 mb-1">Patrón</label>
+                                <div class="flex items-center space-x-2">
+                                    <select class="flex-1 px-2 py-1 border border-gray-300 rounded text-sm">
+                                        <option value="Restrictivo" selected>Restrictivo</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Obstructivo">Obstructivo</option>
+                                    </select>
+                                    <span class="text-yellow-500" title="Requiere seguimiento">🟡</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-2 bg-blue-50 rounded text-xs">
+                            <i class="fas fa-robot text-ami-blue"></i>
+                            <strong>Sugerencia IA:</strong> Patrón restrictivo leve. Recomendar ejercicios respiratorios.
+                        </div>
+                    </div>
+
+                    <!-- Evaluación Global -->
+                    <div class="bg-white rounded-lg shadow p-4">
+                        <h4 class="font-medium text-gray-900 mb-3">Evaluación Global</h4>
+                        <div class="flex space-x-4 mb-4 text-sm">
+                            <span class="flex items-center space-x-1">
+                                <span class="text-red-500">🔴</span>
+                                <span>1 Crítico</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <span class="text-yellow-500">🟡</span>
+                                <span>4 Seguimiento</span>
+                            </span>
+                            <span class="flex items-center space-x-1">
+                                <span class="text-green-500">🟢</span>
+                                <span>2 Normal</span>
+                            </span>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Dictamen Sugerido por IA</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                                    <option value="APTO">Apto</option>
+                                    <option value="APTO_RESTRICCIONES" selected>Apto con Restricciones</option>
+                                    <option value="NO_APTO">No Apto</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Observaciones</label>
+                                <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">Manejo de anemia; ejercicios respiratorios; higiene postural; uso obligatorio de correctivos visuales.</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-3 mt-4">
+                            <button class="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 text-sm">
+                                <i class="fas fa-edit mr-1"></i>
+                                Editar
+                            </button>
+                            <button class="flex-1 bg-ami-green text-white px-4 py-2 rounded-md hover:bg-green-600 text-sm">
+                                <i class="fas fa-check mr-1"></i>
+                                Validar y Firmar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reportes Tab -->
+        <div class="tab-content hidden" id="reportes">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Generación de Reportes</h2>
+                <p class="text-gray-600">Papeleta de aptitud y reporte completo</p>
+            </div>
+
+            <!-- Patient Info Bar -->
+            <div class="bg-ami-blue text-white rounded-lg p-4 mb-6">
+                <div class="flex flex-wrap items-center justify-between text-sm">
+                    <span><strong>Paciente:</strong> CONTADOR FRANCO, YERALDIN GUADALUPE</span>
+                    <span><strong>Empresa:</strong> ABBOTT MEDICAL MEXICO</span>
+                    <span><strong>Folio:</strong> #RD-2025-001</span>
+                    <span class="bg-green-500 text-green-900 px-2 py-1 rounded text-xs font-medium">Validado</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <!-- Papeleta Institucional -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Papeleta de Aptitud Institucional</h3>
+                        <p class="text-sm text-gray-600">Documento oficial con firma digital y QR de verificación</p>
+                    </div>
+                    <div class="p-4">
+                          <div class="bg-white border-2 border-gray-300 rounded-lg p-8 max-w-2xl mx-auto">
+                        <!-- Header Institucional -->
+                        <div class="border-b-2 border-ami-turquoise pb-4 mb-6">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-4">
+                                    <img src="logo-ami.png" alt="AMI - Salud Responsable" class="h-16 w-auto">
+                                    <div>
+                                        <h2 class="text-2xl font-bold text-ami-purple">AMI - SALUD RESPONSABLE</h2>
+                                        <p class="text-ami-turquoise font-medium">Medicina Ocupacional Integral</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-gray-100 border border-gray-300 flex items-center justify-center">
+                                        <i class="fas fa-qrcode text-lg text-gray-400"></i>
+                                    </div>
+                                    <p class="text-xs text-gray-500 mt-1">QR-001</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Título -->
+                            <div class="text-center mb-3">
+                                <h3 class="text-sm font-bold text-gray-900 uppercase">CERTIFICADO DE APTITUD MÉDICA</h3>
+                                <p class="text-xs text-gray-600">NOM-030-STPS-2009</p>
+                            </div>
+                            
+                            <!-- Datos Principales -->
+                            <div class="grid grid-cols-2 gap-2 mb-3 text-xs">
+                                <div>
+                                    <p><span class="font-semibold">Folio:</span> <span class="text-ami-blue font-bold">#RD-2025-001</span></p>
+                                    <p><span class="font-semibold">Fecha:</span> 16/09/2025</p>
+                                    <p><span class="font-semibold">Vigencia:</span> 16/09/2026</p>
+                                </div>
+                                <div>
+                                    <p><span class="font-semibold">Versión:</span> <span class="text-ami-blue">v1.0</span></p>
+                                    <p><span class="font-semibold">Estado:</span> <span class="px-1 bg-green-100 text-green-800 rounded text-xs">VIGENTE</span></p>
+                                </div>
+                            </div>
+                            
+                            <!-- Datos del Trabajador -->
+                            <div class="mb-3 p-2 bg-gray-50 rounded">
+                                <h4 class="font-bold text-gray-900 mb-1 text-xs">DATOS DEL TRABAJADOR</h4>
+                                <div class="text-xs space-y-1">
+                                    <p><span class="font-semibold">Nombre:</span> CONTADOR FRANCO, YERALDIN GUADALUPE</p>
+                                    <p><span class="font-semibold">Empresa:</span> ABBOTT MEDICAL MEXICO S.A. DE C.V.</p>
+                                    <p><span class="font-semibold">Puesto:</span> Contador General</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Dictamen -->
+                            <div class="mb-3 p-2 bg-green-50 border-l-2 border-green-500">
+                                <div class="flex items-center space-x-2 mb-1">
+                                    <div class="text-lg font-bold text-green-600">APTO</div>
+                                    <div class="text-xs">
+                                        <p>Sin restricciones laborales</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-700"><strong>Obs:</strong> Seguimiento por anemia microcítica leve</p>
+                            </div>
+                            
+                            <!-- Estudios -->
+                            <div class="mb-3">
+                                <h4 class="font-bold text-gray-900 mb-1 text-xs">ESTUDIOS REALIZADOS</h4>
+                                <div class="grid grid-cols-2 gap-1 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-check-circle text-green-500 text-xs"></i>
+                                        <span>Examen Médico</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-check-circle text-green-500 text-xs"></i>
+                                        <span>Laboratorio</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-check-circle text-green-500 text-xs"></i>
+                                        <span>Espirometría</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-check-circle text-green-500 text-xs"></i>
+                                        <span>Audiometría</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Firma Digital -->
+                            <div class="border-t border-gray-200 pt-2">
+                                <div class="flex justify-between items-end">
+                                    <div class="text-center">
+                                        <div class="w-24 h-8 bg-blue-50 border border-dashed border-ami-blue rounded flex items-center justify-center mb-1">
+                                            <i class="fas fa-signature text-ami-blue text-xs"></i>
+                                        </div>
+                                        <div class="text-xs">
+                                            <p class="font-bold">Dr. Francisco Saavedra</p>
+                                            <p>Cédula: 1234567</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right text-xs text-gray-500">
+                                        <p><strong>Sellado:</strong> 16/09/2025 12:45</p>
+                                        <p class="text-ami-blue">
+                                            <i class="fas fa-shield-check mr-1"></i>Verificado
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Footer -->
+                            <div class="mt-2 pt-1 border-t border-gray-200 text-center text-xs text-gray-500">
+                                <p>Válido con firma digital • ami-verificacion.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-2 mt-4">
+                            <button class="flex-1 bg-ami-blue text-white px-3 py-2 rounded text-sm hover:bg-blue-700">
+                                <i class="fas fa-download mr-1"></i>
+                                PDF Oficial
+                            </button>
+                            <button class="flex-1 bg-green-600 text-white px-3 py-2 rounded text-sm hover:bg-green-700">
+                                <i class="fas fa-share mr-1"></i>
+                                Enviar
+                            </button>
+                            <button class="flex-1 bg-gray-200 text-gray-700 px-3 py-2 rounded text-sm hover:bg-gray-300">
+                                <i class="fas fa-print mr-1"></i>
+                                Imprimir
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reporte Completo -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h3 class="text-lg font-medium text-gray-900">Reporte Completo</h3>
+                        <p class="text-sm text-gray-600">Expediente médico detallado</p>
+                    </div>
+                    <div class="p-4">
+                        <div class="border border-gray-300 rounded-lg p-4 bg-gray-50 mb-4">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-bold text-sm">REPORTE DE APTITUD</h4>
+                                <div class="text-right text-xs">
+                                    <p>Folio: #RD-2025-001</p>
+                                    <div class="text-lg">📱</div>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <h5 class="font-semibold">Estudios Realizados</h5>
+                                    <ul class="text-xs">
+                                        <li>✅ Examen Médico</li>
+                                        <li>✅ Laboratorio</li>
+                                        <li>✅ Espirometría</li>
+                                        <li>✅ Radiografías</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold">Hallazgos</h5>
+                                    <p class="text-xs">🔴 Anemia microcítica</p>
+                                    <p class="text-xs">🟡 Patrón restrictivo leve</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-ami-blue text-white px-3 py-2 rounded text-sm hover:bg-blue-700">
+                                <i class="fas fa-download mr-1"></i>
+                                Descargar
+                            </button>
+                            <button class="flex-1 bg-gray-200 text-gray-700 px-3 py-2 rounded text-sm hover:bg-gray-300">
+                                <i class="fas fa-share mr-1"></i>
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entrega Controlada -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Entrega Controlada</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <i class="fas fa-envelope text-ami-blue text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Envío por Correo</h4>
+                                <p class="text-sm text-gray-600">Enlace caducable con acceso seguro</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <input type="email" placeholder="correo@empresa.com" value="rh@abbott.com.mx"
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                            <button class="w-full bg-ami-blue text-white px-3 py-2 rounded-md text-sm hover:bg-blue-700">
+                                Enviar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <i class="fas fa-link text-ami-blue text-xl"></i>
+                            <div>
+                                <h4 class="font-medium text-gray-900">Enlace Directo</h4>
+                                <p class="text-sm text-gray-600">URL temporal (válido 7 días)</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <input type="text" value="https://rd-ami.com/download/RD-2025-001" readonly
+                                   class="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm bg-gray-50">
+                            <button class="bg-gray-200 text-gray-700 px-3 py-2 rounded-md text-sm hover:bg-gray-300">
+                                Copiar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Papeletas Tab -->
+        <div class="tab-content hidden" id="papeletas">
+            <div class="bg-white rounded-lg shadow">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-semibold text-gray-900">Gestión de Papeletas</h2>
+                        <div class="flex space-x-2">
+                            <input type="text" placeholder="Buscar por folio, paciente o empresa..." 
+                                   class="px-3 py-2 border border-gray-300 rounded-md text-sm w-64">
+                            <button class="bg-ami-blue text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                                <i class="fas fa-plus mr-1"></i>Nueva Papeleta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Folio</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Paciente</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Empresa</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fecha</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-ami-blue">#RD-2025-001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">CONTADOR FRANCO, YERALDIN</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">ABBOTT MEDICAL MEXICO</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">Completado</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16/09/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-ami-blue hover:text-blue-700 mr-3">Ver</button>
+                                    <button class="text-gray-600 hover:text-gray-900">Editar</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-ami-blue">#RD-2025-002</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">MARTINEZ LOPEZ, CARLOS</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">PEMEX TRANSFORMACION</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">En Validación</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">16/09/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-ami-blue hover:text-blue-700 mr-3">Ver</button>
+                                    <button class="text-gray-600 hover:text-gray-900">Editar</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-ami-blue">#RD-2025-003</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">GARCIA HERNANDEZ, MARIA</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">BIMBO GRUPO INDUSTRIAL</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">En Estudios</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">15/09/2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <button class="text-ami-blue hover:text-blue-700 mr-3">Ver</button>
+                                    <button class="text-gray-600 hover:text-gray-900">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empresas Tab -->
+        <div class="tab-content hidden" id="empresas">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-xl font-semibold text-gray-900">Catálogo de Empresas</h2>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">ABBOTT MEDICAL MEXICO</h3>
+                                        <p class="text-sm text-gray-600">Farmacéutica • 1,250 empleados</p>
+                                        <p class="text-xs text-gray-500">Contacto: rh@abbott.com.mx</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-ami-blue">47 expedientes</p>
+                                        <p class="text-xs text-gray-500">Este mes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">PEMEX TRANSFORMACION</h3>
+                                        <p class="text-sm text-gray-600">Energía • 2,800 empleados</p>
+                                        <p class="text-xs text-gray-500">Contacto: salud@pemex.com</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-ami-blue">32 expedientes</p>
+                                        <p class="text-xs text-gray-500">Este mes</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="font-medium text-gray-900">BIMBO GRUPO INDUSTRIAL</h3>
+                                        <p class="text-sm text-gray-600">Alimentos • 950 empleados</p>
+                                        <p class="text-xs text-gray-500">Contacto: medicina@bimbo.com</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm font-medium text-ami-blue">28 expedientes</p>
+                                        <p class="text-xs text-gray-500">Este mes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Estadísticas</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Empresas Activas</span>
+                                    <span class="font-medium">24</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                                    <div class="bg-ami-blue h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm">
+                                    <span>Expedientes Totales</span>
+                                    <span class="font-medium">1,247</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2 mt-1">
+                                    <div class="bg-ami-green h-2 rounded-full" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expedientes Tab -->
+        <div class="tab-content hidden" id="expedientes">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-6">Generador de Expedientes</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Configuración del Expediente</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Paciente</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                                    <option>CONTADOR FRANCO, YERALDIN GUADALUPE</option>
+                                    <option>MARTINEZ LOPEZ, CARLOS ALBERTO</option>
+                                    <option>GARCIA HERNANDEZ, MARIA ELENA</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Tipo de Expediente</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-ami-blue">
+                                        <span class="ml-2 text-sm">Papeleta de Aptitud</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" checked class="rounded border-gray-300 text-ami-blue">
+                                        <span class="ml-2 text-sm">Reporte Completo</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" class="rounded border-gray-300 text-ami-blue">
+                                        <span class="ml-2 text-sm">Estudios Individuales</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Método de Entrega</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-md text-sm">
+                                    <option>Correo Electrónico</option>
+                                    <option>Enlace Temporal</option>
+                                    <option>Descarga Directa</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Vista Previa</h3>
+                        <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                            <div class="text-center">
+                                <i class="fas fa-file-pdf text-4xl text-red-500 mb-2"></i>
+                                <p class="text-sm font-medium">Expediente_RD-2025-001.pdf</p>
+                                <p class="text-xs text-gray-500">Generado: 16/09/2025 12:50</p>
+                            </div>
+                            <div class="mt-4 space-y-2">
+                                <button class="w-full bg-ami-blue text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">
+                                    <i class="fas fa-eye mr-1"></i>Vista Previa
+                                </button>
+                                <button class="w-full bg-ami-green text-white px-4 py-2 rounded-md text-sm hover:bg-green-700">
+                                    <i class="fas fa-paper-plane mr-1"></i>Enviar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bitácora Tab -->
+        <div class="tab-content hidden" id="bitacora">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Bitácora General -->
+                <div class="lg:col-span-2 bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-semibold text-gray-900">Bitácora del Sistema</h2>
+                            <div class="flex space-x-2">
+                                <select class="px-3 py-1 border border-gray-300 rounded text-sm">
+                                    <option>Todas las actividades</option>
+                                    <option>Solo cambios médicos</option>
+                                    <option>Solo IA</option>
+                                    <option>Solo usuarios</option>
+                                </select>
+                                <button class="bg-ami-turquoise text-white px-3 py-1 rounded text-sm hover:bg-ami-purple">
+                                    <i class="fas fa-download mr-1"></i>Exportar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <!-- Entrada con Control de Versiones -->
+                            <div class="flex items-start space-x-3 p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                                <i class="fas fa-signature text-green-500 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-gray-900">Dictamen firmado digitalmente</p>
+                                        <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-semibold">v1.0 FINAL</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        <strong>Folio:</strong> #RD-2025-001 • <strong>Paciente:</strong> CONTADOR FRANCO, YERALDIN
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-4 text-xs text-gray-500">
+                                        <div>
+                                            <p><strong>Médico:</strong> Dr. Francisco Saavedra</p>
+                                            <p><strong>Cédula:</strong> 1234567</p>
+                                            <p><strong>Timestamp:</strong> 16/09/2025 12:45:33 CST</p>
+                                        </div>
+                                        <div>
+                                            <p><strong>Hash Digital:</strong> A1B2C3D4E5F6</p>
+                                            <p><strong>IP:</strong> 192.168.1.45</p>
+                                            <p><strong>Dispositivo:</strong> Desktop Chrome</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Revalidación Médica -->
+                            <div class="flex items-start space-x-3 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                                <i class="fas fa-edit text-yellow-500 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-gray-900">Dictamen revalidado por médico</p>
+                                        <span class="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-semibold">v0.9 → v1.0</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        <strong>Cambio:</strong> Modificación en observaciones - agregado seguimiento por anemia
+                                    </p>
+                                    <div class="text-xs text-gray-500">
+                                        <p><strong>Dr. Francisco Saavedra</strong> • 16/09/2025 12:40:15 CST</p>
+                                        <p><strong>Razón:</strong> Precisión en recomendaciones médicas</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Validación IA -->
+                            <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                                <i class="fas fa-robot text-blue-500 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-gray-900">IA completó análisis de estudios</p>
+                                        <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-semibold">PROCESADO</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        <strong>Hallazgos:</strong> Anemia microcítica leve (Hb: 11.8 g/dL), Espirometría normal
+                                    </p>
+                                    <div class="text-xs text-gray-500">
+                                        <p><strong>Sistema RD-AMI v2.1</strong> • 16/09/2025 12:35:42 CST</p>
+                                        <p><strong>Confianza:</strong> 94.2% • <strong>Tiempo:</strong> 2.3 segundos</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Carga de Estudios -->
+                            <div class="flex items-start space-x-3 p-4 bg-purple-50 rounded-lg border-l-4 border-purple-500">
+                                <i class="fas fa-upload text-purple-500 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-gray-900">Estudios médicos cargados</p>
+                                        <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full font-semibold">6 ARCHIVOS</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        <strong>Archivos:</strong> Laboratorio.pdf, Espirometría.pdf, RX-Columna.jpg (3 más)
+                                    </p>
+                                    <div class="text-xs text-gray-500">
+                                        <p><strong>Técnico Lab:</strong> María González • 16/09/2025 12:30:18 CST</p>
+                                        <p><strong>Clasificación IA:</strong> 100% exitosa • <strong>Tamaño:</strong> 2.4 MB</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Creación de Papeleta -->
+                            <div class="flex items-start space-x-3 p-4 bg-gray-50 rounded-lg border-l-4 border-gray-500">
+                                <i class="fas fa-file-medical text-gray-500 mt-1"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <p class="text-sm font-medium text-gray-900">Papeleta inicial creada</p>
+                                        <span class="px-2 py-1 bg-gray-100 text-gray-800 text-xs rounded-full font-semibold">INICIADO</span>
+                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        <strong>Empresa:</strong> ABBOTT MEDICAL MEXICO • <strong>Estudios:</strong> 8 programados
+                                    </p>
+                                    <div class="text-xs text-gray-500">
+                                        <p><strong>Recepcionista:</strong> Ana Martínez • 16/09/2025 09:15:00 CST</p>
+                                        <p><strong>Folio asignado:</strong> #RD-2025-001</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control de Versiones por Expediente -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="px-6 py-4 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900">Control de Versiones</h3>
+                        <p class="text-sm text-gray-600">Expediente #RD-2025-001</p>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <!-- Versión Actual -->
+                            <div class="p-3 bg-green-50 border border-green-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-green-800">v1.0 ACTUAL</span>
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-1">
+                                    <strong>Cambios:</strong> Firma digital aplicada
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    16/09/2025 12:45 • Dr. Saavedra
+                                </p>
+                            </div>
+
+                            <!-- Versión Anterior -->
+                            <div class="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-yellow-800">v0.9</span>
+                                    <i class="fas fa-edit text-yellow-500"></i>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-1">
+                                    <strong>Cambios:</strong> Observaciones modificadas
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    16/09/2025 12:40 • Dr. Saavedra
+                                </p>
+                            </div>
+
+                            <!-- Versión IA -->
+                            <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-blue-800">v0.8</span>
+                                    <i class="fas fa-robot text-blue-500"></i>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-1">
+                                    <strong>Cambios:</strong> Dictamen IA generado
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    16/09/2025 12:35 • Sistema IA
+                                </p>
+                            </div>
+
+                            <!-- Versión Inicial -->
+                            <div class="p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-semibold text-gray-800">v0.1</span>
+                                    <i class="fas fa-plus-circle text-gray-500"></i>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-1">
+                                    <strong>Cambios:</strong> Expediente creado
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    16/09/2025 09:15 • Recepción
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 pt-4 border-t border-gray-200">
+                            <button class="w-full bg-ami-turquoise text-white px-3 py-2 rounded text-sm hover:bg-ami-purple">
+                                <i class="fas fa-history mr-1"></i>
+                                Ver Historial Completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Tab -->
+        <div class="tab-content hidden" id="analytics">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">KPIs Ejecutivos</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Tiempo Promedio de Procesamiento</span>
+                            <span class="text-lg font-semibold text-ami-blue">5.8 hrs</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Precisión de IA</span>
+                            <span class="text-lg font-semibold text-ami-green">94.2%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Satisfacción del Cliente</span>
+                            <span class="text-lg font-semibold text-ami-blue">4.8/5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Productividad por Médico</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Dr. Francisco Saavedra</span>
+                            <span class="text-sm font-medium">24 expedientes</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Dra. Erika Rodríguez</span>
+                            <span class="text-sm font-medium">18 expedientes</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm">Dr. Alan Hernández</span>
+                            <span class="text-sm font-medium">12 expedientes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calidad Tab -->
+        <div class="tab-content hidden" id="calidad">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-6">Gestión de Calidad</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-shield-check text-green-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-green-800">98.5%</p>
+                                <p class="text-sm text-green-600">Precisión IA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-blue-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-blue-800">2.3 min</p>
+                                <p class="text-sm text-blue-600">Tiempo Validación</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl mr-3"></i>
+                            <div>
+                                <p class="text-lg font-semibold text-yellow-800">3</p>
+                                <p class="text-sm text-yellow-600">Alertas Pendientes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comunicaciones Tab -->
+        <div class="tab-content hidden" id="comunicaciones">
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-6">Centro de Comunicaciones</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Notificaciones Recientes</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg">
+                                <i class="fas fa-bell text-blue-500 mt-1"></i>
+                                <div>
+                                    <p class="text-sm font-medium">Nuevo expediente asignado</p>
+                                    <p class="text-xs text-gray-500">Hace 5 minutos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3 p-3 bg-green-50 rounded-lg">
+                                <i class="fas fa-check text-green-500 mt-1"></i>
+                                <div>
+                                    <p class="text-sm font-medium">Dictamen enviado a cliente</p>
+                                    <p class="text-xs text-gray-500">Hace 12 minutos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Mensajes Internos</h3>
+                        <div class="space-y-3">
+                            <div class="p-3 border border-gray-200 rounded-lg">
+                                <p class="text-sm font-medium">Dr. Francisco Saavedra</p>
+                                <p class="text-xs text-gray-600">Revisar expediente #RD-2025-001</p>
+                                <p class="text-xs text-gray-500">Hace 8 minutos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Tab -->
+        <div class="tab-content hidden" id="admin">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Gestión de Usuarios</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium">Dr. Francisco Saavedra</p>
+                                <p class="text-xs text-gray-500">Médico Principal</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Activo</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                            <div>
+                                <p class="text-sm font-medium">Dra. Erika Rodríguez</p>
+                                <p class="text-xs text-gray-500">Médico Validador</p>
+                            </div>
+                            <span class="px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Activo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Configuración de Semáforos</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Hemoglobina (g/dL)</span>
+                            <div class="flex space-x-2 text-xs">
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded">&lt;12</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded">12-14</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded">&gt;14</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Presión Arterial</span>
+                            <div class="flex space-x-2 text-xs">
+                                <span class="px-2 py-1 bg-red-100 text-red-800 rounded">&gt;140/90</span>
+                                <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded">130-140</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-800 rounded">&lt;130</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

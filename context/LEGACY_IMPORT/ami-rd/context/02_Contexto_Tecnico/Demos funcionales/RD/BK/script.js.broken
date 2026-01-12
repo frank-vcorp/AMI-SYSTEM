@@ -1,0 +1,389 @@
+// Global variables
+let currentZoom = 1;
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing app...');
+    
+    // Set current date
+    const fechaActual = document.getElementById('fechaActual');
+    if (fechaActual) {
+        fechaActual.textContent = new Date().toLocaleDateString('es-ES');
+    }
+    
+    // Setup tab navigation
+    setupTabNavigation();
+    
+    // Setup form handlers
+    setupFormHandlers();
+    
+    // Setup file upload handlers
+    setupFileUpload();
+    
+    // Setup PDF tab handlers
+    setupPDFTabs();
+    
+    // Setup zoom controls
+    setupZoomControls();
+    
+    // Show dashboard by default
+    showTab('dashboard');
+    
+    console.log('App initialized successfully');
+});
+
+function setupTabNavigation() {
+    const tabButtons = document.querySelectorAll('.nav-tab');
+    console.log('Setting up event listeners for', tabButtons.length, 'buttons');
+    
+    tabButtons.forEach(button => {
+        const tabId = button.getAttribute('data-tab');
+        console.log('Setting up listener for:', tabId);
+        
+        button.addEventListener('click', function() {
+            console.log('Clicked tab:', tabId);
+            showTab(tabId);
+        });
+    });
+}
+
+function showTab(tabId) {
+    console.log('Showing tab:', tabId);
+    
+    // Hide all tab contents
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
+        content.style.display = 'none';
+        content.classList.add('hidden');
+    });
+    
+    // Remove active class from all tab buttons
+    const tabButtons = document.querySelectorAll('.nav-tab');
+    tabButtons.forEach(button => {
+        button.classList.remove('border-ami-turquoise', 'text-ami-turquoise', 'border-ami-blue', 'text-ami-blue');
+        button.classList.add('border-transparent', 'text-gray-500');
+    });
+    
+    // Show selected tab content
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+        selectedTab.style.display = 'block';
+        selectedTab.classList.remove('hidden');
+        console.log('Showing section:', tabId);
+        
+        // Special handling for specific tabs
+        switch(tabId) {
+            case 'validacion':
+                // Auto-load laboratory PDF when entering validation
+                setTimeout(() => {
+                    loadFile('expedientes/RD-2025-001/LABORATORIO (1).pdf', 'pdf');
+                }, 500);
+                break;
+            case 'estudios':
+                // Initialize file upload areas
+                initializeFileUploadAreas();
+                break;
+        }
+    }
+    
+    // Activate selected tab button
+    const selectedButton = document.querySelector(`[data-tab="${tabId}"]`);
+    if (selectedButton) {
+        selectedButton.classList.remove('border-transparent', 'text-gray-500');
+        selectedButton.classList.add('border-ami-turquoise', 'text-ami-turquoise');
+    }
+}
+
+function setupFormHandlers() {
+    // Recepción form
+    const recepcionForm = document.getElementById('recepcionForm');
+    if (recepcionForm) {
+        recepcionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Papeleta creada exitosamente', 'success');
+            setTimeout(() => showTab('examen'), 1000);
+        });
+    }
+    
+    // Examen form
+    const examenForm = document.getElementById('examenForm');
+    if (examenForm) {
+        examenForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Examen médico guardado', 'success');
+            setTimeout(() => showTab('estudios'), 1000);
+        });
+    }
+    
+    // Validación form
+    const validacionForm = document.getElementById('validacionForm');
+    if (validacionForm) {
+        validacionForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('Validación completada', 'success');
+            setTimeout(() => showTab('reportes'), 1000);
+        });
+    }
+}
+
+function setupFileUpload() {
+    // Setup drag and drop for file upload areas
+    const uploadAreas = document.querySelectorAll('.upload-area');
+    uploadAreas.forEach(area => {
+        area.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('border-blue-500', 'bg-blue-50');
+        });
+        
+        area.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('border-blue-500', 'bg-blue-50');
+        });
+        
+        area.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('border-blue-500', 'bg-blue-50');
+            
+            const files = e.dataTransfer.files;
+            handleFileUpload(files, this);
+        });
+        
+        area.addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.accept = '.pdf,.jpg,.jpeg,.png';
+            input.onchange = (e) => handleFileUpload(e.target.files, this);
+            input.click();
+        });
+    });
+}
+
+function handleFileUpload(files, uploadArea) {
+    Array.from(files).forEach(file => {
+        const fileType = file.type.includes('pdf') ? 'pdf' : 'image';
+        const confidence = Math.floor(Math.random() * 10) + 90; // 90-99%
+        
+        // Simulate AI classification
+        let classification = 'Documento General';
+        let provider = 'Proveedor Externo';
+        
+        if (file.name.toLowerCase().includes('laboratorio')) {
+            classification = 'Biometría Hemática + QS24';
+            provider = 'Lab Chopo';
+        } else if (file.name.toLowerCase().includes('espirometria')) {
+            classification = 'Espirometría Completa';
+            provider = 'Clínica Respiratoria';
+        } else if (file.name.toLowerCase().includes('audiometria')) {
+            classification = 'Audiometría Ocupacional';
+            provider = 'AudioSalud';
+        }
+        
+        // Add file to the upload area
+        const fileDiv = document.createElement('div');
+        fileDiv.className = 'bg-green-50 border border-green-200 rounded-lg p-3 mt-2';
+        fileDiv.innerHTML = `
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="font-medium text-green-800">${file.name}</p>
+                    <p class="text-sm text-green-600">${classification}</p>
+                    <p class="text-xs text-gray-500">${provider} • Confianza: ${confidence}%</p>
+                </div>
+                <i class="fas fa-check-circle text-green-500"></i>
+            </div>
+        `;
+        
+        uploadArea.appendChild(fileDiv);
+        
+        showNotification(`Archivo clasificado: ${classification}`, 'success');
+    });
+    
+    // Auto-advance to validation after file upload
+    setTimeout(() => {
+        showNotification('Todos los estudios procesados. Procediendo a validación...', 'info');
+        setTimeout(() => showTab('validacion'), 1500);
+    }, 2000);
+}
+
+function setupPDFTabs() {
+    // Setup PDF tab buttons
+    const pdfButtons = document.querySelectorAll('.pdf-tab');
+    pdfButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const pdfType = this.getAttribute('data-pdf');
+            let fileName = '';
+            let fileType = 'pdf';
+            
+            // Map PDF types to actual file names
+            switch(pdfType) {
+                case 'laboratorio':
+                    fileName = 'expedientes/RD-2025-001/LABORATORIO (1).pdf';
+                    break;
+                case 'espirometria':
+                    fileName = 'expedientes/RD-2025-001/ESPIROMETRIA.pdf';
+                    break;
+                case 'audiometria':
+                    fileName = 'expedientes/RD-2025-001/AUDIOMETRIA.pdf';
+                    break;
+                case 'radiografias':
+                    fileName = 'expedientes/RD-2025-001/RX COLUMNA AP IMAGEN.jpg';
+                    fileType = 'image';
+                    break;
+                case 'ecg':
+                    fileName = 'expedientes/RD-2025-001/ELECTROCCARDIOGRAMA.pdf';
+                    break;
+                case 'examen_medico':
+                    fileName = 'expedientes/RD-2025-001/EXAMEN MEDICO.pdf';
+                    break;
+                default:
+                    fileName = 'expedientes/RD-2025-001/LABORATORIO (1).pdf';
+            }
+            
+            loadFile(fileName, fileType);
+            
+            // Update active button
+            pdfButtons.forEach(btn => {
+                btn.classList.remove('bg-ami-blue', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            this.classList.remove('bg-gray-200', 'text-gray-700');
+            this.classList.add('bg-ami-blue', 'text-white');
+        });
+    });
+}
+
+function loadFile(fileName, fileType) {
+    const viewer = document.getElementById('fileViewer');
+    const placeholder = document.getElementById('viewerPlaceholder');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const imageViewer = document.getElementById('imageViewer');
+    
+    if (!viewer) return;
+    
+    console.log('Loading file:', fileName, 'type:', fileType);
+    
+    // Hide placeholder and other viewers
+    if (placeholder) placeholder.classList.add('hidden');
+    if (pdfViewer) pdfViewer.classList.add('hidden');
+    if (imageViewer) imageViewer.classList.add('hidden');
+    
+    if (fileType === 'pdf') {
+        if (pdfViewer) {
+            pdfViewer.src = fileName;
+            pdfViewer.classList.remove('hidden');
+        }
+    } else if (fileType === 'image') {
+        if (imageViewer) {
+            const imageTitle = document.getElementById('imageTitle');
+            const imageElement = document.getElementById('zoomableImage');
+            
+            if (imageTitle) {
+                imageTitle.textContent = fileName.split('/').pop();
+            }
+            
+            // Create or update the image element
+            let img = imageElement;
+            if (!img) {
+                img = document.createElement('img');
+                img.id = 'zoomableImage';
+                img.className = 'max-w-full max-h-full object-contain transition-transform duration-200';
+                img.style.transform = 'scale(1)';
+                
+                // Find the image container and add the image
+                const imageContainer = imageViewer.querySelector('.flex-1') || imageViewer;
+                imageContainer.appendChild(img);
+            }
+            
+            img.src = fileName;
+            img.alt = 'Radiografía';
+            currentZoom = 1;
+            
+            imageViewer.classList.remove('hidden');
+        }
+    }
+    
+    showNotification(`Cargando ${fileName.split('/').pop()}...`, 'info');
+}
+
+function setupZoomControls() {
+    // Zoom functions are defined globally for onclick handlers
+    window.zoomIn = function() {
+        currentZoom = Math.min(currentZoom + 0.25, 3);
+        updateZoom();
+    };
+    
+    window.zoomOut = function() {
+        currentZoom = Math.max(currentZoom - 0.25, 0.25);
+        updateZoom();
+    };
+    
+    window.resetZoom = function() {
+        currentZoom = 1;
+        updateZoom();
+    };
+    
+    window.downloadFile = function(fileName) {
+        const link = document.createElement('a');
+        link.href = fileName;
+        link.download = fileName.split('/').pop();
+        link.click();
+        showNotification('Descarga iniciada', 'success');
+    };
+}
+
+function updateZoom() {
+    const image = document.getElementById('zoomableImage');
+    if (image) {
+        image.style.transform = `scale(${currentZoom})`;
+    }
+}
+
+function initializeFileUploadAreas() {
+    // Add sample files to demonstrate the system
+    const simArea = document.querySelector('#estudios .upload-area');
+    if (simArea && !simArea.querySelector('.bg-green-50')) {
+        // Add sample files
+        const sampleFiles = [
+            { name: 'ESPIROMETRIA.pdf', type: 'Espirometría Completa', provider: 'Clínica Respiratoria', confidence: 96.8 },
+            { name: 'AUDIOMETRIA.pdf', type: 'Audiometría Ocupacional', provider: 'AudioSalud', confidence: 98.2 },
+            { name: 'ELECTROCARDIOGRAMA.pdf', type: 'ECG 12 Derivaciones', provider: 'CardioCenter', confidence: 94.5 }
+        ];
+        
+        sampleFiles.forEach(file => {
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'bg-green-50 border border-green-200 rounded-lg p-3 mt-2';
+            fileDiv.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="font-medium text-green-800">${file.name}</p>
+                        <p class="text-sm text-green-600">${file.type}</p>
+                        <p class="text-xs text-gray-500">${file.provider} • Confianza: ${file.confidence}%</p>
+                    </div>
+                    <i class="fas fa-check-circle text-green-500"></i>
+                </div>
+            `;
+            simArea.appendChild(fileDiv);
+        });
+    }
+}
+
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+        type === 'success' ? 'bg-green-500 text-white' :
+        type === 'error' ? 'bg-red-500 text-white' :
+        'bg-blue-500 text-white'
+    }`;
+    notification.innerHTML = `
+        <div class="flex items-center">
+            <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'} mr-2"></i>
+            ${message}
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}

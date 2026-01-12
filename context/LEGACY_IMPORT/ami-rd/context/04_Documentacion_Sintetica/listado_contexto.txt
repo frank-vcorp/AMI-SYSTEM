@@ -1,0 +1,29 @@
+Listado de Contexto y Pistas Técnicas
+=====================================
+
+01_Contexto_Clinico/
+- AUDIOMETRIA.pdf → Umbrales bilaterales normales; seguimiento anual.
+- ESPIROMETRIA.pdf → Patrón restrictivo (FVC 70%), calidad A.
+- LABORATORIO (1).pdf → EGO: células uretrales moderadas, demás dentro de rangos.
+- LABORATORIO (2).pdf → QS24: parámetros normales; colesterol total 151 mg/dL, HDL 47.9 mg/dL.
+- LABORATORIO (3).pdf → BH: anemia microcítica/hipocrómica (Hb 9.1 g/dL; VCM 61.9 fL).
+- FORMATO RIESGO CARDIOVASCULAR.pdf → Riesgo 10 años: 0%, edad cardiovascular 30.
+- RX INTERP.pdf → Dextroconvexa 8°, hiperlordosis (Ferguson 40°), L5-S1; sin fracturas/listesis.
+- ELECTROCCARDIOGRAMA.pdf → ECG de reposo normal.
+- TOXICOLOGICO 5 ELEMENTOS.pdf → Todos negativos.
+- CAMPIMETRIA.pdf → Campos normales; Ishihara normal.
+- EXAMEN MEDICO.pdf → Aptitud clínica base; recomendaciones (odontología, correctivos visuales).
+- RESUMEN MEDICO.pdf → Apto condicionado; anemia hipocrómica; higiene postural.
+- RX COLUMNA AP/LAT IMAGEN.jpg → Evidencias gráficas asociadas al informe RX.
+
+02_Contexto_Tecnico/
+- EJEMPLO EXPEDIENTE.zip → Referencia de formato institucional para expediente/folio/QR.
+- README_Tecnico.txt → Flujo E2E, módulos, requisitos no funcionales, riesgos.
+
+03_Contexto_Legal/
+- CONTRATO DESARROLLO DE SOFTWARE V 1.0 SME-VCORP.docx → Base contractual.
+- Borrador_Contrato_RD-AMI_Puntos.docx → Observaciones clave y ajustes recomendados.
+- Notas_Revision_RD-AMI_Implantacion.docx → Implementación y cobros (VCORP 100%).
+
+04_Documentacion_Sintetica/
+- resumen_para_arquitecto.md → Guía ejecutiva para arquitectura.

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RD‑AMI · Carga con IA (PDF + RX no diagnóstica)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { background:#0a0a0a; color:#f3f4f6; }
+    .drop{border:2px dashed #374151;border-radius:1rem;padding:1.25rem;text-align:center;cursor:pointer;transition:all .15s ease}
+    .drop.dragover{background:rgba(255,255,255,.05); border-color:#60a5fa}
+    .card{border:1px solid #1f2937;border-radius:.75rem;background:rgba(17,24,39,.5);padding:1rem}
+    pre{white-space:pre-wrap}
+    .err{background:#7f1d1d;border:1px solid #b91c1c;color:#fecaca;padding:.5rem .75rem;border-radius:.5rem;font-size:.8rem;margin-top:.5rem;white-space:pre-wrap}
+    .spinner{width:16px;height:16px;border:2px solid #9ca3af;border-top-color:#f3f4f6;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-right:.5rem}
+    @keyframes spin{to {transform:rotate(360deg)}}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+    }
+  </script>
+</head>
+<body class="min-h-screen w-full px-4 py-8 md:px-10">
+  <header class="mb-6">
+    <h1 class="text-2xl md:text-3xl font-semibold">RD‑AMI · Carga con IA (PDF + Radiografía no diagnóstica)</h1>
+    <p class="text-sm opacity-80 mt-1">API Key embebida (demo controlado). Arrastre y suelte o haga clic; verá <b>Procesando…</b> y luego la respuesta.</p>
+    <div id="api-error" class="err" style="display:none"></div>
+  </header>
+
+  <main>
+    <section class="card mb-6">
+      <div id="drop" class="drop">Suelte sus archivos aquí o haga clic para seleccionar<br/><span class="text-xs opacity-60">PDF o imágenes (JPG/PNG). Múltiples permitidos.</span></div>
+      <input id="file" type="file" class="hidden" accept="application/pdf,image/*" multiple />
+    </section>
+
+    <section id="list" class="grid gap-4"></section>
+  </main>
+
+  <footer class="mt-10 text-xs opacity-60">
+    * PDF: extracción de texto + IA (MATRIZ DE DATOS + INTERPRETACION).<br/>
+    * Imagen RX: descripción técnica <u>no diagnóstica</u> (proyección, calidad, artefactos, campos visibles, dispositivos). Requiere informe radiológico para decisiones clínicas.
+  </footer>
+
+<script>
+(() => {
+  const pdfjs = window.pdfjsLib;
+  const list = document.querySelector("#list");
+  const apiErr = document.querySelector("#api-error");
+  const zone = document.getElementById("drop");
+  const input = document.getElementById("file");
+
+  const API_KEY = window.RD_AMI_OPENAI_KEY || ""; // clave inyectada externamente (ej. prompt o config)
+  const MODEL = "gpt-4o-mini";
+
+  // UX helpers (sin cambios)
+  function showProcessingCard(filename, tipo){
+    const id = "card-" + Math.random().toString(36).slice(2);
+    const div = document.createElement("div");
+    div.className = "card";
+    div.id = id;
+    div.dataset.filename = filename;
+    div.innerHTML = `<div class="flex items-center gap-2 text-sm font-semibold"><span>${filename}</span></div>
+      <div class="text-xs opacity-70 mb-2">Estudio: ${tipo || "Detectando..."}</div>
+      <div class="text-xs"><span class="spinner"></span>Procesando con IA…</div>`;
+    list.prepend(div);
+    return id;
+  }
+  function updateCard(id, tipo, texto){
+    const div = document.getElementById(id);
+    if (!div) return;
+    const filename = div.dataset.filename || "";
+    div.innerHTML = `<div class="text-sm font-semibold">${filename}</div>
+      <div class="text-xs opacity-70 mb-2">Estudio: ${tipo}</div>
+      <pre class="text-xs leading-5 bg-neutral-950/60 border border-neutral-800 rounded p-3">${texto}</pre>`;
+  }
+  function errorCard(id, msg){
+    const div = document.getElementById(id);
+    if (!div) return;
+    div.innerHTML = `<div class="text-sm font-semibold">Error</div>
+      <pre class="text-xs leading-5 bg-red-950/60 border border-red-700 rounded p-3">${msg}</pre>`;
+  }
+
+  // Robust DnD (sin cambios)
+  zone.addEventListener("click", () => input.click());
+  zone.addEventListener("dragover", e => { e.preventDefault(); e.stopPropagation(); zone.classList.add("dragover"); });
+  zone.addEventListener("dragleave", e => { e.preventDefault(); e.stopPropagation(); zone.classList.remove("dragover"); });
+  zone.addEventListener("drop", e => {
+    e.preventDefault(); e.stopPropagation(); zone.classList.remove("dragover");
+    const files = Array.from(e.dataTransfer?.files || []);
+    if (files.length) processFiles(files);
+  });
+  input.addEventListener("change", e => {
+    const files = Array.from(input.files || []);
+    input.value = "";
+    if (files.length) processFiles(files);
+  });
+
+  // Parsing (sin cambios)
+  async function extractPdfText(file){
+    const buf = await file.arrayBuffer();
+    const loadingTask = pdfjs.getDocument({ data: buf });
+    const pdf = await loadingTask.promise;
+    let text = "";
+    for (let i=1; i<=pdf.numPages; i++){
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      // Unimos con espacio para un manejo de texto más predecible
+      text += content.items.map(it => it.str).join(" ") + "\n";
+    }
+    return text;
+  }
+  
+  // --- INICIO DE LA LÓGICA DE CALIBRACIÓN PRECISA ---
+
+  // 1. DETECTOR DE TIPO DETALLADO
+  function detectTipo(text){
+    const t = text.toLowerCase();
+    if (/(biometria hematica)/.test(t)) return "Biometría Hemática";
+    if (/(quimica sanguinea)/.test(t)) return "Química Sanguínea";
+    if (/(examen general de orina)/.test(t)) return "Examen General de Orina";
+    if (/(audiometr[ií]a)/.test(t)) return "Audiometría";
+    if (/(espirometr[ií]a)/.test(t)) return "Espirometría";
+    if (/(electrocardiograma|ecg)/.test(t)) return "Electrocardiograma";
+    if (/(campimetr[ií]a|examen visual)/.test(t)) return "Campimetría";
+    if (/(riesgo cardiovascular)/.test(t)) return "Riesgo Cardiovascular";
+    if (/(rayos x|radiograf[ií]a|rx)/.test(t)) return "Radiografía";
+    if (/(toxicolog[ií]co|antidoping|5 elementos)/.test(t)) return "Toxicológico";
+    if (/(sim|sistema integral m[eé]dico)/.test(t)) return "SIM (administrativo)";
+    return "—";
+  }
+
+  // Lógica común para cabeceras de laboratorio
+  const labHeaderMap = {
+      nombre: (text) => text.match(/Paciente\s*([A-ZÁÉÍÓÚÑ ,]+)/i)?.[1],
+      empresa: (text) => text.match(/Empresa\s*([A-ZÁÉÍÓÚÑ ]+)/i)?.[1],
+      fecha: (text) => text.match(/Fecha de registro\s*([0-9\-]+)/i)?.[1],
+      edad: (text) => {
+        const match = text.match(/Edad\s*([0-9]+\s*A,\s*[0-9]+\s*M,\s*[0-9]+\s*D)/i)?.[1];
+        if (match) return match;
+        const dobMatch = text.match(/F\. de nacimiento\s*([0-9]{4}-[0-9]{2}-[0-9]{2})/i)?.[1];
+        if (dobMatch) {
+            const dob = new Date(dobMatch);
+            const ageDifMs = Date.now() - dob.getTime();
+            const ageDate = new Date(ageDifMs);
+            return Math.abs(ageDate.getUTCFullYear() - 1970) + " Años";
+        }
+        return null;
+      }
+  };
+
+  // 2. MAPA DE EXTRACCIÓN DETALLADO Y CORREGIDO
+  const EXTRACTION_MAPS = {
+    "Biometría Hemática": labHeaderMap,
+    "Química Sanguínea": labHeaderMap,
+    "Examen General de Orina": labHeaderMap,
+    "Espirometría": {
+      nombre: (text) => text.match(/Nombre:\s*([A-ZÁÉÍÓÚÑ ]+)/i)?.[1],
+      empresa: (text) => text.match(/Procedencia:\s*([A-ZÁÉÍÓÚÑ ]+)/i)?.[1],
+      fecha: (text) => text.match(/Fecha:\s*([0-9\-]+)/i)?.[1],
+      edad: (text) => text.match(/Edad\(a\):\s*([0-9]+)/i)?.[1]
+    },
+    "Audiometría": {
+      nombre: (text) => text.match(/\b([A-ZÁÉÍÓÚÑ]+,\s[A-ZÁÉÍÓÚÑ]+\s[A-ZÁÉÍÓÚÑ]+)\b/i)?.[1],
+      empresa: (text) => text.match(/(AMI)\s+NVO ING/i)?.[1],
+      fecha: (text) => text.match(/Fecha de la acción:\s*([0-9\/]+)/i)?.[1],
+      edad: (text) => {
+        const dobMatch = text.match(/Fecha de Nacimiento:\s*([0-9]{2}\/[0-9]{2}\/[0-9]{4})/i)?.[1];
+        if (dobMatch) {
+            const parts = dobMatch.split('/');
+            if (parts.length !== 3) return null;
+            const dob = new Date(+parts[2], parts[1] - 1, +parts[0]);
+            const studyDateMatch = text.match(/Fecha de la acción:\s*([0-9]{2}\/[0-9]{2}\/[0-9]{4})/i)?.[1];
+            const studyDateParts = studyDateMatch ? studyDateMatch.split('/') : null;
+            if (!studyDateParts || studyDateParts.length !== 3) return null;
+            const studyDate = new Date(+studyDateParts[2], studyDateParts[1] - 1, +studyDateParts[0]);
+            let age = studyDate.getFullYear() - dob.getFullYear();
+            const m = studyDate.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && studyDate.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age + " Años";
+        }
+        return null;
+      }
+    },
+    "Campimetría": {
+      nombre: (text) => text.match(/NOMBRE:\s*([A-ZÁÉÍÓÚÑ ]+)/i)?.[1],
+      empresa: (text) => text.match(/EMPRESA:\s*([A-ZÁÉÍÓÚÑ ]+)/i)?.[1],
+      fecha: (text) => text.match(/FECHA:\s*([0-9\/]+)/i)?.[1],
+      edad: (text) => text.match(/EDAD:\s*([0-9]+\s*AÑOS)/i)?.[1]
+    },
+     "Electrocardiograma": {
+      nombre: (text) => text.match(/Paciente:\s*(.+?)\s*Sexo:/i)?.[1],
+      empresa: (text) => text.match(/Empresa:\s*(.+?)\s*Tipo de Estudio/i)?.[1] || text.match(/AMI SALUD RESPONSABLE SA DE CV/i)?.[0],
+      edad: (text) => text.match(/Edad:\s*([0-9]+)/i)?.[1]
+    },
+    "Riesgo Cardiovascular": {
+      nombre: (text) => text.match(/Nombre paciente:\s*(.*?)\s*Empresa:/i)?.[1],
+      fecha: (text) => text.match(/a,\s*([0-9]+\s*de\s*[a-z]+\s*de\s*[0-9]{4})/i)?.[1],
+      edad: (text) => text.match(/Edad\s+([0-9.]+)/i)?.[1]
+    }
+  };
+
+  // 3. FUNCIÓN DE EXTRACCIÓN DE PISTAS
+  function extractCalibratedHints(text, tipo) {
+    const map = EXTRACTION_MAPS[tipo];
+    // No reemplazamos saltos de línea aquí para que los regex más complejos funcionen
+    if (!map) return {};
+
+    const hints = {};
+    for (const key in map) {
+      try {
+        // Pasamos el texto original sin modificar
+        const result = map[key](text);
+        if (result) {
+          hints[key] = String(result).trim().replace(/\s+/g, ' ');
+        }
+      } catch (e) {
+        console.error(`Error extracting hint '${key}' for type '${tipo}':`, e);
+      }
+    }
+    return hints;
+  }
+
+  // --- FIN DE LA LÓGICA DE CALIBRACIÓN ---
+
+
+  // OpenAI calls (sin cambios)
+  async function callOpenAI_Text({ texto, tipo, hints }){
+    const hintLines = Object.entries(hints||{}).filter(([,v])=>v).map(([k,v])=>`- ${k.toUpperCase()}: ${v}`).join("\n") || "(sin pistas)";
+    const sys = `Eres un asistente clínico de extracción para salud ocupacional.
+ANTES DE ARMAR LA MATRIZ, BUSCA EXPLÍCITAMENTE: NOMBRE, EMPRESA, EDAD, FECHA. Si hay pistas, úsalas.
+PISTAS DETECTADAS:
+${hintLines}
+
+Devuelve SOLO TEXTO PLANO con este formato exacto:
+
+MATRIZ DE DATOS:
+- Campo: Valor
+- ... (tantas filas como apliquen)
+
+INTERPRETACION:
+- Redacta 2–4 líneas específicas para el estudio (${
+ tipo }).
+Reglas:
+- No inventes datos; si no aparece, omítelo.
+- Usa unidades y lateridad cuando apliquen.
+- Si hay contradicciones, menciónalas brevemente en INTERPRETACION.
+- No incluyas JSON ni markdown.
+- La IA asiste y no dicta; requiere validación médica.`;
+    const body = {
+      model: MODEL,
+      messages: [
+        { role: "system", content: sys },
+        { role: "user", content: "TEXTO DEL DOCUMENTO:\n\n" + texto.slice(0,180000) }
+      ],
+      temperature: 0
+    };
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + API_KEY },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error("OpenAI " + res.status);
+    const data = await res.json();
+    return String(data?.choices?.[0]?.message?.content||"").trim();
+  }
+  async function fileToDataURL(file){
+    return await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file);});
+  }
+  async function callOpenAI_VisionNoDx({ dataUrl }){
+    const sys = `Eres un asistente de apoyo radiológico. Realiza una DESCRIPCION TECNICA NO DIAGNOSTICA de la radiografía. PROHIBIDO dar diagnósticos.`;
+    const body = {
+      model: MODEL,
+      messages: [
+        { role: "system", content: sys },
+        { role: "user", content: [{ type:"text", text:"Radiografía para descripción técnica NO DIAGNÓSTICA" }, { type:"image_url", image_url: { url: dataUrl } }] }
+      ],
+      temperature: 0
+    };
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + API_KEY },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error("OpenAI " + res.status);
+    const data = await res.json();
+    return String(data?.choices?.[0]?.message?.content||"").trim();
+  }
+
+  // Main processing (sin cambios)
+  async function processFiles(files){
+    for (const f of files){
+      const tempId = showProcessingCard(f.name, "Detectando…");
+      try {
+        if (f.type === "application/pdf") {
+          let text = "";
+          try { text = await extractPdfText(f); } catch(e){ errorCard(tempId, "No se pudo leer PDF: " + (e?.message||e)); continue; }
+          
+          const tipo = detectTipo(text);
+          const hints = extractCalibratedHints(text, tipo);
+          
+          const out = await callOpenAI_Text({ texto: text, tipo, hints });
+          updateCard(tempId, tipo, out);
+
+        } else if (f.type.startsWith("image/")) {
+          const dataUrl = await fileToDataURL(f);
+          const out = await callOpenAI_VisionNoDx({ dataUrl });
+          updateCard(tempId, "Radiografía (imagen)", out);
+        } else {
+          errorCard(tempId, "Tipo de archivo no soportado en este demo.");
+        }
+        apiErr.style.display = "none";
+      } catch(e){
+        apiErr.style.display = "block";
+        apiErr.textContent = String(e?.message||e);
+        errorCard(tempId, "Error en procesamiento.");
+      }
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+{
+  "generatedAt": "2025-11-06T22:56:49.134Z",
+  "totalModules": 8,
+  "overallProgress": 11,
+  "phases": [
+    {
+      "phase": "FASE 0 – MVS",
+      "order": 0,
+      "progress": 28,
+      "totalModules": 3,
+      "statusCounts": {
+        "progress": 2,
+        "pending": 1
+      },
+      "modules": [
+        {
+          "id": "fase0-arquitectura",
+          "name": "Arquitectura GCP + Firebase",
+          "phase": "FASE 0 – MVS",
+          "phaseOrder": 0,
+          "owner": "Arquitectura",
+          "status": "progress",
+          "progress": 45,
+          "summary": "Provisionar proyecto GCP/Firebase, Firestore, Storage e IAM base.",
+          "needs": "Aprobación de presupuesto GCP y cuentas de servicio."
+        },
+        {
+          "id": "fase0-ocr",
+          "name": "Pipeline de Ingesta y OCR",
+          "phase": "FASE 0 – MVS",
+          "phaseOrder": 0,
+          "owner": "Backend · Data",
+          "status": "progress",
+          "progress": 30,
+          "summary": "Watcher manual y pipeline Document AI/PyMuPDF para Laboratorio, RX, Audiometría y Espirometría.",
+          "needs": "PDFs con sello médico y rangos de referencia validados."
+        },
+        {
+          "id": "fase0-panel-medico",
+          "name": "Panel Médico MVS",
+          "phase": "FASE 0 – MVS",
+          "phaseOrder": 0,
+          "owner": "Frontend",
+          "status": "pending",
+          "progress": 10,
+          "summary": "Next.js + Firebase Auth con vista básica de validación y emisión de PDF.",
+          "needs": "Wireframes finales y usuarios médicos confirmados."
+        }
+      ]
+    },
+    {
+      "phase": "FASE 1 – Piloto",
+      "order": 1,
+      "progress": 3,
+      "totalModules": 2,
+      "statusCounts": {
+        "pending": 2
+      },
+      "modules": [
+        {
+          "id": "fase1-ingesta-automatica",
+          "name": "Ingesta automática + Semáforos",
+          "phase": "FASE 1 – Piloto",
+          "phaseOrder": 1,
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 5,
+          "summary": "Monitoreo SFTP/Eventarc, control de duplicados y motor de reglas declarativo.",
+          "needs": "Acceso a carpeta compartida y responsables de observabilidad."
+        },
+        {
+          "id": "fase1-dashboard",
+          "name": "Dashboard Operativo y Bitácora",
+          "phase": "FASE 1 – Piloto",
+          "phaseOrder": 1,
+          "owner": "Data",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Métricas TAT, rechazo y reprocesos con Looker Studio sobre BigQuery.",
+          "needs": "KPIs definidos y dataset de auditoría aprobado."
+        }
+      ]
+    },
+    {
+      "phase": "FASE 2 – Consolidación",
+      "order": 2,
+      "progress": 0,
+      "totalModules": 2,
+      "statusCounts": {
+        "pending": 2
+      },
+      "modules": [
+        {
+          "id": "fase2-integraciones",
+          "name": "Integraciones ECG/Campimetría/Toxicológico",
+          "phase": "FASE 2 – Consolidación",
+          "phaseOrder": 2,
+          "owner": "Data · Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Nuevas plantillas de extracción, validación clínica y versionado de reglas.",
+          "needs": "Estudios de muestra y médicos líderes por especialidad."
+        },
+        {
+          "id": "fase2-roles",
+          "name": "Gobierno de datos y roles multi-sede",
+          "phase": "FASE 2 – Consolidación",
+          "phaseOrder": 2,
+          "owner": "Arquitectura",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Custom Claims, segregación por empresa, DRP y documentación NOM/LFPDPPP.",
+          "needs": "Inventario de sedes/clientes y matriz de acceso aprobada."
+        }
+      ]
+    },
+    {
+      "phase": "FASE 3 – Producción",
+      "order": 3,
+      "progress": 0,
+      "totalModules": 1,
+      "statusCounts": {
+        "pending": 1
+      },
+      "modules": [
+        {
+          "id": "fase3-sla",
+          "name": "Operación comercial y SLA",
+          "phase": "FASE 3 – Producción",
+          "phaseOrder": 3,
+          "owner": "Operaciones",
+          "status": "pending",
+          "progress": 0,
+          "summary": "SLA activo, monitoreo 24/7 y mantenimiento evolutivo.",
+          "needs": "Catálogo de incidentes y runbooks por severidad."
+        }
+      ]
+    }
+  ]
+}

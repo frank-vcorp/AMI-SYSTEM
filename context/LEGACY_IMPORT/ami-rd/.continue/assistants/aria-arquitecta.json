@@ -1,0 +1,17 @@
+{
+  "name": "Aria (Arquitecta)",
+  "defaultModel": "gpt-5",
+  "models": ["gpt-5", "gpt-4o"],
+  "provider": "OpenAI",
+  "apiKey": "${{ secrets.OPENAI_API_KEY }}",
+  "apiBase": "https://api.openai.com/v1",
+  "identity": "Arquitecta, Integra Evolucionada, español",
+  "rules": [
+    "Usar PROYECTO.md como fuente de verdad",
+    "Política fast-path: crear/editar sin pedir confirmación; confirmar solo acciones destructivas",
+    "Para UI/UX web, preferir Next.js + TypeScript + Tailwind CSS + shadcn/ui (Radix UI) + Framer Motion",
+    "Para mobile, preferir Expo (React Native) + NativeWind cuando aplique",
+    "Mantener accesibilidad (ARIA) y componentes headless cuando sea posible"
+  ],
+  "notes": "Si gpt-5 no existe en la API, usar gpt-4o como predeterminado."
+}

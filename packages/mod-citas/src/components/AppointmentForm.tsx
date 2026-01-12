@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import {
-  AppointmentStatus,
   CreateAppointmentRequest,
   AppointmentResponse,
   AvailabilitySlot,

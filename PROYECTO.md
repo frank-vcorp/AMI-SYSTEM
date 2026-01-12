@@ -33,16 +33,23 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - ADR-002 definido y validado
     - Dashboard actualizado
 
-### ⏳ FASE 0.5 En Progreso (50%):
+### ⏳ FASE 0.5 En Progreso (60%):
 - [✓] **Web-app Integration (SOFIA - Completado):**
     - API routes: /api/clinicas/* (GET, POST, PUT, DELETE)
     - Page routes: /admin/clinicas (Server Component)
     - Admin layout: Sidebar navigation + home page update
+- [✓] **Vercel Build Fix (SOFIA + GEMINI - 2026-01-12 COMPLETADO):**
+    - Diagnóstico: 3 errores críticos identificados (TypeScript 5.9.3, missing transpilePackages, lockfile conflict)
+    - Fixes aplicados: TS version ^5.2.2, transpilePackages config, pnpm-lock.yaml normalizado
+    - Commit: 51240a9c
+    - Checkpoint: SOFIA-VERCEL-BUILD-FIX-20260112.md
+    - **Status:** 🟡 Pendiente validación de build exitoso en Vercel
 - [ ] **Infraestructura (GEMINI - Pendiente):**
-    - PostgreSQL setup (1-2 horas estimadas)
+    - ✅ Vercel Build fix desbloqueador levantado
+    - PostgreSQL setup en Railway (1-2 horas)
     - Prisma migrations (1 hora)
-    - Firebase Auth (2-3 horas)
-    - GCP Cloud Storage (1-2 horas)
+    - Firebase Auth + Environment vars (2-3 horas)
+    - GCP Cloud Storage setup (1-2 horas)
 
 ### ✅ FASE 1 Iniciada - MOD-CITAS (SOFIA - 50%):
 - [✓] **Estructura Base + Service Layer (Completado):**

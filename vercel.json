@@ -1,7 +1,6 @@
 {
-  "installCommand": "npm install -g pnpm@7.33.1 && pnpm install",
-  "buildCommand": "pnpm -r build --filter=@ami/web-app",
-  "devCommand": "pnpm -r dev --filter=@ami/web-app",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
   "framework": "nextjs",
-  "outputDirectory": ".next"
+  "outputDirectory": "packages/web-app/.next"
 }

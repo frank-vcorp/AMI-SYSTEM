@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "AMI-SYSTEM v2.0 - Monorepo con Next.js + Prisma + TypeScript",
   "private": true,
-  "packageManager": "pnpm@7.33.1",
   "engines": {
     "node": ">=18.0.0"
   },
@@ -11,7 +10,9 @@
     "packages/*"
   ],
   "scripts": {
-    "type-check": "tsc --version"
+    "type-check": "tsc --version",
+    "build": "turbo run build --filter=@ami/web-app",
+    "dev": "turbo run dev --filter=@ami/web-app"
   },
   "devDependencies": {
     "turbo": "^2.7.4",

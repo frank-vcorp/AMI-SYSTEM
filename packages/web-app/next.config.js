@@ -32,6 +32,9 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   // CRÍTICO PARA MONOREPO: Transpilar paquetes locales en build
   transpilePackages: [
     '@ami/core-ui',

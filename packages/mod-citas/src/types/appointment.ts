@@ -1,13 +1,31 @@
 // Types for MOD-CITAS
-import type {
-  Appointment as PrismaAppointment,
-} from '@ami/core';
+// Nota: Prisma client será generado cuando se configure la BD
+// Por ahora usamos tipos primitivos para desarrollo
 
-import { AppointmentStatus } from '@ami/core';
+// Mock types para desarrollo (remover cuando Prisma esté configurado)
+export enum AppointmentStatus {
+  PENDING = 'PENDING',
+  CONFIRMED = 'CONFIRMED',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED'
+}
 
-// Export Prisma types
-export type Appointment = PrismaAppointment;
-export { AppointmentStatus };
+export type Appointment = {
+  id: string;
+  tenantId: string;
+  clinicId: string;
+  appointmentDate: Date | string;
+  appointmentTime: string;
+  employeeId: string;
+  companyId: string;
+  status: AppointmentStatus;
+  notes: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  appointmentServices?: any[];
+  clinic?: any;
+  company?: any;
+};
 
 // Request/Response DTOs
 export interface CreateAppointmentRequest {

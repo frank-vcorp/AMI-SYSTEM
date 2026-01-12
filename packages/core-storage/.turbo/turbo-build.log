@@ -1,6 +1,0 @@
-
-> @ami/core-storage@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-storage
-> tsc --noEmit
-
- ELIFECYCLE  Command failed.
- WARN   Local package.json exists, but node_modules missing, did you mean to install?

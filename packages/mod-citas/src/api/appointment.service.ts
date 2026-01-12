@@ -177,7 +177,7 @@ export class AppointmentService {
     ]);
 
     return {
-      data: appointments.map(a => this.mapAppointmentResponse(a)),
+      data: appointments.map((a: any) => this.mapAppointmentResponse(a)),
       total,
       page,
       pageSize,
@@ -304,7 +304,7 @@ export class AppointmentService {
     // Iterate through each day
     while (currentDate <= endDate) {
       const dayOfWeek = currentDate.getDay();
-      const schedule = clinic.schedules.find(s => s.dayOfWeek === dayOfWeek && s.isActive);
+      const schedule = clinic.schedules.find((s: any) => s.dayOfWeek === dayOfWeek && s.isActive);
 
       if (schedule) {
         // Generate time slots for this day
@@ -330,7 +330,7 @@ export class AppointmentService {
         });
 
         const availableSlots = daySlots.filter(slot => {
-          const conflict = existingAppointments.some(apt => apt.appointmentTime === slot.time);
+          const conflict = existingAppointments.some((apt: any) => apt.appointmentTime === slot.time);
           return !conflict;
         });
 

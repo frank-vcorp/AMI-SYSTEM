@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "AMI-SYSTEM v2.0 - Monorepo con Next.js + Prisma + TypeScript",
   "private": true,
+  "packageManager": "npm@10.8.2",
   "engines": {
     "node": ">=18.0.0"
   },

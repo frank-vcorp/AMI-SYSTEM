@@ -10,12 +10,12 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@ami/core-types": "workspace:*",
-    "@ami/core-ui": "workspace:*",
-    "@ami/mod-citas": "workspace:*",
-    "@ami/mod-clinicas": "workspace:*",
-    "@ami/mod-empresas": "workspace:*",
-    "@ami/mod-servicios": "workspace:*",
+    "@ami/core-types": "*",
+    "@ami/core-ui": "*",
+    "@ami/mod-citas": "*",
+    "@ami/mod-clinicas": "*",
+    "@ami/mod-empresas": "*",
+    "@ami/mod-servicios": "*",
     "next": "^14.0.0",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",

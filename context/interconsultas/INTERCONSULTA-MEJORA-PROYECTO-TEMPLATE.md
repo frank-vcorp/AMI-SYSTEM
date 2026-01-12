@@ -100,5 +100,84 @@ Puede usarse como referencia para el merge al repo oficial.
 
 ---
 
+## ANEXO: Progress Dashboard - Lecciones Aprendidas (2026-01-12)
+
+### Arquitectura del Dashboard
+
+El progress dashboard es un **sitio estático** que:
+1. Lee `PROYECTO.md` con un parser Node.js (`progressdashboard/parser.js`)
+2. Genera `progressdashboard/data/project_data.json`
+3. El frontend (`app.js`) hace fetch del JSON y renderiza
+
+### Deployment: Webhook Plesk vs FTP
+
+**❌ FTP desde GitHub Actions NO funciona bien:**
+- Timeout en conexiones de datos (modo pasivo)
+- Firewalls de hosting bloquean IPs de GitHub
+- La action `SamKirkland/FTP-Deploy-Action` falla frecuentemente
+
+**✅ Webhook de Plesk SÍ funciona:**
+- Plesk detecta push en GitHub y hace `git pull` automático
+- Configuración: Git > Repositories > Remote Repository
+- El workflow de GitHub Actions solo genera y hace commit del JSON
+- Plesk sincroniza automáticamente
+
+### Configuración Recomendada
+
+**GitHub Actions (`.github/workflows/deploy-progress-dashboard.yml`):**
+```yaml
+name: Deploy Progress Dashboard
+on:
+  push:
+    branches: [master, main]
+    paths: ['PROYECTO.md', 'progressdashboard/**']
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node progressdashboard/parser.js
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(dashboard): Auto-update progress data'
+          file_pattern: 'progressdashboard/data/project_data.json'
+```
+
+**Plesk:**
+- URL: `https://github.com/{org}/{repo}`
+- Branch: `master` o `main`
+- Deployment mode: `Automatic`
+- Server path: `/httpdocs/{ruta-al-dashboard}`
+
+### Cache-Buster para el JSON
+
+El navegador cachea el JSON. Para evitar que el cliente vea datos viejos:
+
+```javascript
+// app.js
+const cacheBuster = new Date().getTime();
+fetch(`data/project_data.json?v=${cacheBuster}`)
+```
+
+Esto agrega un query param único en cada carga, forzando al navegador a pedir el archivo fresco.
+
+### Checklist para Nuevos Proyectos
+
+- [ ] Crear `progressdashboard/` con parser.js, app.js, index.html, styles.css
+- [ ] Agregar marcadores `<!-- progress-modules:start/end -->` a PROYECTO.md
+- [ ] Configurar workflow de GitHub Actions (solo commit, sin FTP)
+- [ ] Configurar webhook de Plesk apuntando al repo correcto
+- [ ] Agregar cache-buster al fetch del JSON
+- [ ] Verificar que el JSON se genera correctamente con `node progressdashboard/parser.js`
+
+---
+
 **🏗️ ARCH REFERENCE:** INTERCONSULTA-20260112-01  
 **🤖 AUTHOR:** INTEGRA (Arquitecto IA)

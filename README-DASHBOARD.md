@@ -58,8 +58,6 @@
 
 ---
 
-### FASE 1: Flujo Principal (� INICIANDO SEMANA 7)
-### FASE 1: Flujo Principal (🚀 INICIANDO SEMANA 7)
 ### FASE 1: FLUJO DE PACIENTES EN VIVO - Cronograma Dinámico (Sem 5-12) ⏱️
 
 **¿Qué se va a hacer?** El sistema comenzará a procesar pacientes REALES:
@@ -135,7 +133,7 @@ Las semanas **NO son fechas fijas**, son duración estimada. Si algo termina ant
 
 ---
 
-## ✅ Ciclo INTEGRA Completado (FASE 0) | FASE 1 Iniciando (Semana 7)
+## ✅ Ciclo INTEGRA Completado (FASE 0) | FASE 1 Iniciando (Semana 5)
 
 ### Checklist FASE 0 (✅ COMPLETADO)
 
@@ -162,42 +160,63 @@ Las semanas **NO son fechas fijas**, son duración estimada. Si algo termina ant
 - [x] Aprobación FASE 0 (código + arquitectura)
 - [x] Gate 3 result processing (PASSED)
 - [x] Authorization FASE 1 ✅
-- [x] Documentación timing de Core modules
+- [x] Documentación timing de Core modules + MVS milestone
 
 ---
 
-### Checklist FASE 1 (🚀 INICIANDO SEMANA 7)
+### Checklist FASE 1 (🚀 INICIANDO SEMANA 5 - CRONOGRAMA DINÁMICO)
 
-**SOFIA (Builder) - FASE 1 Core Modules + Módulos [⏳ IN PROGRESS]**
+**SOFIA (Builder) - FASE 1 Gates + Entregables [⏳ IN PROGRESS]**
 
-*Semana 7 (Esta semana):*
-- [ ] Implementar Core-Auth (Firebase + roles + middleware)
-- [ ] Implementar Core-Storage (GCP + upload + URLs firmadas)
+*Semana 5-6 (Gate A):*
+- [ ] **Core-Auth:** Firebase + roles + middleware (Firebase Auth setup + Custom Claims + Middleware protección)
+- [ ] **Core-Storage:** GCP Cloud Storage + upload handler + URLs firmadas (GCP bucket + Node.js upload)
+- ⏳ Objetivo: Usuarios logeados + upload funcional
 
-*Semana 8-9:*
-- [ ] Implementar MOD-EXPEDIENTES (Recepción + Examen Médico + Carga estudios)
+*Semana 6-7 (Gate B - MVS MILESTONE):*
+- [ ] **MVS FASE 1:** 1 expediente procesado end-to-end (Recepción → Examen → Carga → GCP)
+- [ ] Flujo básico funcional: Recepcionista check-in + Médico captura + Técnico carga
+- [ ] 🎯 **PRIMER MILESTONE:** 1 expediente completado
+- ✅ Objetivo: Sistema procesa pacientes REALES (básico)
+
+*Semana 7-8 (Gate C):*
+- [ ] **MOD-EXPEDIENTES escalado:** 2-5 expedientes procesados
+- [ ] Optimizaciones de performance
 - [ ] Test suites MOD-EXPEDIENTES
 
-*Semana 9:*
-- [ ] Implementar Core-Signatures (Generador de firma médica)
+*Semana 8-9 (Gate D):*
+- [ ] **Core-Signatures:** Generador de firma médica
+- [ ] **MOD-VALIDACION setup:** Base para validación (sin IA aún)
+- [ ] 2-5 expedientes validados + firmados
 
-*Semana 10-11:*
-- [ ] Implementar MOD-VALIDACION (Extracción IA + semáforos + dictamen)
+*Semana 9-11 (Gate E):*
+- [ ] **MOD-VALIDACION:** Extracción IA + semáforos + dictamen
+- [ ] **MOD-REPORTES:** PDF + Email + URLs temporales
 - [ ] Integración OpenAI API
+- [ ] 5-10 expedientes validados en lote
 
-*Semana 12:*
-- [ ] Implementar MOD-REPORTES (PDF + Email + URLs temporales)
+*Semana 11-12 (Gate F - Cierre):*
+- [ ] Testing, refinamientos finales
+- [ ] Documentación para Go-Live
+- [ ] Training equipo AMI
+- [ ] 10 expedientes completos + reportes
 
-**GEMINI (QA Mentor) - FASE 1 QA [🔜 NEXT]**
-- [ ] Core-Auth review (security, tokens, roles)
-- [ ] Core-Storage review (GCP setup, URLs, permissions)
-- [ ] MOD-EXPEDIENTES integration test
-- [ ] MOD-VALIDACION IA safety review
+**GEMINI (QA Mentor) - FASE 1 QA [🔜 GATES]**
+- [ ] Gate A: Auditoría Core-Auth (security, tokens, roles)
+- [ ] Gate A: Auditoría Core-Storage (GCP setup, permissions, URLs)
+- [ ] Gate B: Validación MVS (flujo completo, calidad)
+- [ ] Gate C: Validación MOD-EXPEDIENTES escalado
+- [ ] Gate D: Validación Core-Signatures + MOD-VALIDACION setup
+- [ ] Gate E: Validación MOD-VALIDACION scaled + MOD-REPORTES
+- [ ] Gate F: Auditoría final FASE 1
 
-**INTEGRA (Arquitecto) - FASE 1 Governance [🔜 NEXT]**
-- [ ] Approve Core-Auth implementation
-- [ ] Approve Core-Storage setup
-- [ ] Review MOD-EXPEDIENTES architecture
+**INTEGRA (Arquitecto) - FASE 1 Governance [🔜 GATES]**
+- [ ] Aprobación Gate A (Core modules)
+- [ ] Aprobación Gate B (MVS milestone)
+- [ ] Aprobación Gate C (escalado a 2-5)
+- [ ] Aprobación Gate D (validación + firma)
+- [ ] Aprobación Gate E (IA + reportes)
+- [ ] Aprobación final FASE 1
 - [ ] Review MOD-VALIDACION IA integration
 
 ---
@@ -353,52 +372,41 @@ edaf0413 - docs: GEMINI QA Fixes checkpoint + PROYECTO actualizado
 | **MOD-EMPRESAS** | in_review | 95% | ✅ GEMINI QA fixes aplicados. Schema (3 modelos) + Service (11 métodos) + UI (3 componentes). Tests pendientes. |
 | **Core Modules** | pending | 0% | Firebase Auth, Prisma DB, GCP Storage, UI Base, PWA, Firmas. Bloqueados por infraestructura. |
 
-**Próximo:** INTEGRA aprobó merge. Fase 0.5 inicia integración web-app + PostgreSQL setup.
+**Próximo:** Core-Auth + Core-Storage (Gate A, Sem 5-6) → MVS MILESTONE (Gate B, Sem 6-7)
 
 ---
 
-### FASE 1: Flujo Principal (Sem 6-13)
-**Estado:** 🟡 PLANIFICACIÓN
+### FASE 2: Operaciones (Sem 12-24)
+**Estado:** � PLANIFICACIÓN (Bloqueado hasta cierre FASE 1)
 
-| Módulo | Status | % | Bloqueador |
+| Módulo | Status | % | Descripción |
 |--------|--------|---|-----------|
-| MOD-CITAS | pending | 0% | Requiere MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
-| MOD-EXPEDIENTES | pending | 0% | Requiere MOD-CITAS |
-| MOD-VALIDACION (IA) | pending | 0% | Requiere MOD-EXPEDIENTES + OpenAI |
-| MOD-REPORTES | pending | 0% | Requiere MOD-VALIDACION |
+| MOD-DASHBOARD | ⏳ Pending | 0% | Panel de control con KPIs |
+| MOD-BITACORA | ⏳ Pending | 0% | Auditoría: quién hizo qué |
+| MOD-CALIDAD | ⏳ Pending | 0% | Control de calidad IA |
+| MOD-ADMIN | ⏳ Pending | 0% | Gestión de usuarios y roles |
 
 ---
 
-### FASE 2: Operaciones (Sem 14-23)
-**Estado:** 🔴 BLOQUEADO (Requiere FASE 1)
-
-| Módulo | Status | % |
-|--------|--------|---|
-| MOD-DASHBOARD | pending | 0% |
-| MOD-BITACORA | pending | 0% |
-| MOD-CALIDAD | pending | 0% |
-| MOD-ADMIN | pending | 0% |
-
----
-
-### FASE 3: Expansión (Sem 24-29)
+### FASE 3: Expansión (Sem 24+)
 **Estado:** 🔴 BLOQUEADO (Requiere FASE 2)
 
-| Módulo | Status | % |
-|--------|--------|---|
-| MOD-PORTAL-EMPRESA | pending | 0% |
+| Módulo | Status | % | Descripción |
+|--------|--------|---|-----------|
+| MOD-PORTAL-EMPRESA | ⏳ Pending | 0% | Acceso RH empresas clientes |
 
 ---
 
-## 🔧 Infraestructura & Dependencias
+## 🔧 Infraestructura Crítica - FASE 1
 
-| Componente | Status | Prioridad | ETA |
-|------------|--------|-----------|-----|
-| **PostgreSQL Setup** | ⏳ PENDIENTE | 🔴 CRÍTICA | 1-2 horas (GEMINI) |
-| **Prisma Migrations** | ⏳ PENDIENTE | 🔴 CRÍTICA | 1 hora (post DB) |
-| **Firebase Auth** | ⏳ PENDIENTE | 🟡 IMPORTANTE | 2-3 horas (GEMINI) |
-| **GCP Cloud Storage** | ⏳ PENDIENTE | 🟡 IMPORTANTE | 1-2 horas (GEMINI) |
-| **Web-app Integration** | ⏳ PENDIENTE | 🟡 IMPORTANTE | 2-3 horas (SOFIA) |
+| Componente | Status | Prioridad | Sem | Gate |
+|------------|--------|-----------|-----|------|
+| **Core-Auth (Firebase)** | ⏳ Gate A | 🔴 CRÍTICA | 5-6 | A |
+| **Core-Storage (GCP)** | ⏳ Gate A | 🔴 CRÍTICA | 5-6 | A |
+| **MOD-EXPEDIENTES** | ⏳ Gate B/C | 🔴 CRÍTICA | 6-8 | B-C |
+| **Core-Signatures** | ⏳ Gate D | 🟡 IMPORTANTE | 8-9 | D |
+| **MOD-VALIDACION (IA)** | ⏳ Gate E | 🔴 CRÍTICA | 9-11 | E |
+| **MOD-REPORTES** | ⏳ Gate E/F | 🟡 IMPORTANTE | 9-12 | E-F |
 | **Unit Tests** | ⏳ PENDIENTE | 🟡 IMPORTANTE | 8+ horas (SOFIA+GEMINI) |
 
 ---

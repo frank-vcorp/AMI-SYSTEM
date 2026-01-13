@@ -1,5 +1,6 @@
 /**
  * Página inicial del dashboard
+ * Updated: 2026-01-13 DATABASE_URL live
  */
 import Link from 'next/link';
 

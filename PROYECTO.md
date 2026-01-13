@@ -162,20 +162,19 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - PWA (Core-PWA) - Nice to have
 - Core-UI (shadcn) - 50% done, continue FASE 1
 
-#### Epic: Setup del Monorepo
+#### Epic: Setup del Monorepo [✓ COMPLETADO EN FASE 0]
 | ID | Tarea | Estado | Responsable |
 |----|-------|--------|-------------|
-| F0-001 | Crear estructura `packages/core/` | [ ] Pendiente | SOFIA |
-| F0-002 | Configurar pnpm workspaces | [ ] Pendiente | SOFIA |
-| F0-003 | Configurar Turborepo | [ ] Pendiente | SOFIA |
-| F0-004 | Setup TypeScript base | [ ] Pendiente | SOFIA |
-| F0-005 | Setup ESLint + Prettier | [ ] Pendiente | SOFIA |
+| F0-001 | Crear estructura `packages/core/` | [✓] Completado | SOFIA |
+| F0-002 | Configurar npm workspaces (pnpm→npm migration) | [✓] Completado | SOFIA |
+| F0-003 | Configurar Turborepo | [✓] Completado | SOFIA |
+| F0-004 | Setup TypeScript base | [✓] Completado | SOFIA |
+| F0-005 | Setup ESLint + Prettier | [✓] Completado | SOFIA |
 
-#### Epic: Core Components
+#### Epic: Core Components [✓ FASE 0 COMPLETADO]
 | ID | Tarea | Estado | Responsable |
 |----|-------|--------|-------------|
 | F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [✓] Completado (FASE 0.5) | SOFIA |
-| F0-040 | Core UI: shadcn + tema + layout responsive | [~] En Progreso (50%) | SOFIA |
 
 #### Epic: Módulos Base
 | ID | Tarea | Estado | Responsable |
@@ -187,20 +186,33 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 ### FASE 1: FLUJO PRINCIPAL (6-8 semanas)
 **Objetivo:** Un paciente puede completar el flujo completo + Core de Servicios
 
-**⚠️ IMPORTANTE - Timing de Core Modules:**
-- **Core-Auth** (Firebase): Semana 7 - BLOQUEADOR para MOD-EXPEDIENTES
-- **Core-Storage** (GCP): Semana 7 - BLOQUEADOR para MOD-EXPEDIENTES (upload PDFs)
-- **Core-Signatures** (Firma): Semana 9 - BLOQUEADOR para MOD-VALIDACION
+**✅ FASE 0 [100% COMPLETADA] - Requerimiento para iniciar FASE 1:**
+- ✅ Epic: Setup del Monorepo [5/5 tareas completadas]
+- ✅ Epic: Módulos Base [3/3 tareas completadas - MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS]
+- ✅ Epic: Core Components (FASE 0) [1/1 - Core-Database ✅]
+- ✅ Vercel deployment + Railway PostgreSQL LIVE
+- ✅ 4/4 Soft Gates PASSED
+
+**⏳ FASE 1 [INICIANDO SEMANA 7]:**
+FASE 1 tiene 2 ÉPICAS en paralelo:
+1. **Core Components (Bloqueadores críticos):** Core-Auth, Core-Storage, Core-Signatures, Core-UI, Core-PWA
+2. **Módulos Flujo Principal:** MOD-EXPEDIENTES, MOD-VALIDACION, MOD-REPORTES
+
+**⚠️ TIMING CRÍTICO:**
+- **Semana 7:** PRIMERO Core-Auth + Core-Storage (bloquean MOD-EXPEDIENTES)
+- **Semana 8-9:** MOD-EXPEDIENTES (depende de Auth + Storage)
+- **Semana 9:** Core-Signatures (bloquea MOD-VALIDACION)
+- **Semana 10-11:** MOD-VALIDACION + MOD-REPORTES
 - **Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
 
-#### Epic: Core Components (Bloqueadores FASE 1)
-| ID | Tarea | Semana | Estado | Bloqueador |
-|----|-------|--------|--------|-----------|
-| F1-010 | Core Auth: Firebase + roles + middleware | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES |
-| F1-030 | Core Storage: GCP + upload + URLs firmadas | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES |
-| F1-040 | Core UI: Completar shadcn + tema + layout | Sem 8-9 | [~] En Progreso (50%) | UX improvement |
-| F1-050 | Core PWA: next-pwa + manifest + service worker | Sem 11+ | [ ] Pendiente | FASE 2 |
-| F1-060 | Core Signatures: Generador de firma médica | Sem 9 | [ ] Pendiente | MOD-VALIDACION |
+#### Epic: Core Components (FASE 1)
+| ID | Tarea | Semana | Estado | Bloqueador | Prioridad |
+|----|-------|--------|--------|-----------|-----------|
+| F1-010 | Core Auth: Firebase + roles + middleware | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES | 🔴 CRÍTICO |
+| F1-030 | Core Storage: GCP + upload + URLs firmadas | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES | 🔴 CRÍTICO |
+| F1-040 | Core UI: Completar shadcn + tema + layout | Sem 8-9 | [ ] Pendiente (50% hecho) | UX improvement | 🟡 IMPORTANTE |
+| F1-050 | Core PWA: next-pwa + manifest + service worker | Sem 11+ | [ ] Pendiente | FASE 2 | 🟢 NICE-TO-HAVE |
+| F1-060 | Core Signatures: Generador de firma médica | Sem 9 | [ ] Pendiente | MOD-VALIDACION | 🔴 CRÍTICO |
 
 #### Epic: Módulos Flujo Principal
 | ID | Módulo | Descripción | Dependencias | Estado |

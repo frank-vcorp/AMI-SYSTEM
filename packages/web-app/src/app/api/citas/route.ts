@@ -30,9 +30,13 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error('[GET /api/citas]', error);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('[GET /api/citas] Error:', errorMessage, error);
     return NextResponse.json(
-      { error: 'Failed to list appointments' },
+      { 
+        error: 'Failed to list appointments',
+        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      },
       { status: 500 }
     );
   }

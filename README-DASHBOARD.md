@@ -60,7 +60,7 @@
 
 ### FASE 1: Flujo Principal (� INICIANDO SEMANA 7)
 ### FASE 1: Flujo Principal (🚀 INICIANDO SEMANA 7)
-### FASE 1: FLUJO DE PACIENTES EN VIVO - Cronograma Dinámico (3-5 semanas) ⏱️
+### FASE 1: FLUJO DE PACIENTES EN VIVO - Cronograma Dinámico (Sem 5-12) ⏱️
 
 **¿Qué se va a hacer?** El sistema comenzará a procesar pacientes REALES:
 - Médico loguea en el sistema (seguro con usuario y contraseña)
@@ -72,40 +72,44 @@
 - Sistema genera PDF firmado digitalmente
 - Reporte se envía a la empresa cliente
 
-**Cronograma Dinámico (se adapta según avance):**
+**Cronograma Dinámico (Presupuesto Cliente: Sem 5-12 = 8 semanas):**
 Las semanas **NO son fechas fijas**, son duración estimada. Si algo termina antes, lo siguiente comienza antes.
 
-| Gate | Entregable | Duración Est. | Criterio de Éxito |
-|------|-----------|----------|----------|
-| **Gate A** | ✅ Core-Auth + Core-Storage | 3-5 días | Usuarios logeados + upload funcional |
-| **Gate B** | ✅ MOD-EXPEDIENTES v1 | 5-7 días | **2 expedientes procesados** |
-| **Gate C** | ✅ MOD-VALIDACION setup | 3-4 días | **2 expedientes validados + firmados** |
-| **Gate D** | ✅ MOD-VALIDACION scaled | 7-10 días | **5 expedientes validados en lote** |
-| **Gate E** | ✅ FASE 1 Cierre | 5-7 días | **10 expedientes completos + reportes** |
+| Gate | Entregable | Duración Est. | Semana | Criterio de Éxito |
+|------|-----------|----------|--------|----------|
+| **A** | ✅ Core-Auth + Core-Storage | 6-10 días | 5-6 | Usuarios logeados + upload funcional |
+| **B** | 🎯 **MVS FASE 1** | 5-7 días | 6-7 | **1 expediente procesado** (PRIMER MILESTONE) |
+| **C** | ✅ MOD-EXPEDIENTES escalado | 5-7 días | 7-8 | **2-5 expedientes procesados** |
+| **D** | ✅ MOD-VALIDACION setup | 3-4 días | 8-9 | **2-5 expedientes validados + firmados** |
+| **E** | ✅ MOD-VALIDACION scaled | 10-14 días | 9-11 | **5-10 expedientes validados en lote** |
+| **F** | ✅ FASE 1 Cierre | 5-7 días | 11-12 | **10 expedientes completos + documentación** |
 
-**⏰ Duración total:** 24-36 días estimado (3-5 semanas con paralelización)
+**⏰ Duración total estimada:** 34-49 días (5-7 semanas reales)  
+**📊 Presupuesto:** Sem 5-12 (8 semanas) con **buffer de 1-3 semanas** para remediación
 
 **✅ Cómo funciona:**
-- Si Core-Auth termina en 3 días → MOD-EXPEDIENTES empieza 2 días antes de lo estimado
-- Si MOD-EXPEDIENTES está listo → validamos 2 expedientes inmediatamente
-- Entregables **incrementales**: No esperamos 10 al final, sino 2 → 5 → 10
+- Si Core-Auth termina en 6 días → MVS empieza 2-4 días antes de lo estimado
+- Si MVS está listo → validamos 2-5 expedientes inmediatamente
+- Entregables **incrementales**: 1 → 2-5 → 10 (no esperamos todo al final)
 - Cada Gate debe PASAR antes de avanzar (control de calidad)
+- **Las semanas se adaptan según el avance REAL, no a fechas fijas**
 
 **Ver detalles completos:** [context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md](context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md)
 
-**Estado:** 🟡 INICIANDO - Bloqueadores de FASE 0 ya resueltos ✅
+**Estado:** 🟡 PRÓXIMAMENTE (Semana 5) - Bloqueadores de FASE 0 ya resueltos ✅
 
 **Módulos & Dependencias:**
 
 | Módulo | Status | Duración | Dependencias |
 |--------|--------|----------|--------------|
 | MOD-CITAS | ✅ Completado | - | MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
-| **Core-Auth** | ⏳ Gate A | 3-5 días | Firebase |
-| **Core-Storage** | ⏳ Gate A | 3-5 días | GCP (paralelo con Auth) |
-| **MOD-EXPEDIENTES** | 🔜 Gate B | 5-7 días | MOD-CITAS ✅ + Core-Auth + Core-Storage |
-| **Core-Signatures** | ⏳ Gate C | 3-4 días | Canvas/PDF lib (paralelo si es posible) |
-| **MOD-VALIDACION** | 🔜 Gate D | 7-10 días | MOD-EXPEDIENTES + Core-Signatures + OpenAI API |
-| **MOD-REPORTES** | 🔜 Gate E | 5-7 días | MOD-VALIDACION + Core-Storage ✅ |
+| **Core-Auth** | ⏳ Gate A | 6-10 días | Firebase |
+| **Core-Storage** | ⏳ Gate A | 6-10 días | GCP (paralelo con Auth) |
+| **MVS (1 expediente)** | 🎯 Gate B | 5-7 días | Core-Auth + Core-Storage |
+| **MOD-EXPEDIENTES** | ⏳ Gate C | 5-7 días | MVS + Core-Storage |
+| **Core-Signatures** | ⏳ Gate D | 3-4 días | Canvas/PDF lib (paralelo si es posible) |
+| **MOD-VALIDACION** | ⏳ Gate E | 10-14 días | MOD-EXPEDIENTES + Core-Signatures + OpenAI API |
+| **MOD-REPORTES** | ⏳ Gate F | 5-7 días | MOD-VALIDACION + Core-Storage ✅ |
 
 ---
 

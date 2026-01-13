@@ -197,24 +197,26 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - **Automatización con IA:** Lectura automática de resultados de laboratorio
 - **Firmas digitales:** Los reportes finales serán firmados digitalmente por el médico
 
-**Objetivo técnico:** Un paciente puede completar el flujo completo + Core de Servicios
+**Objetivo técnico FASE 0:** Infraestructura lista (catálogos, BD, deploy) → FASE 1: Flujo de pacientes real
 
 **✅ FASE 0 [100% COMPLETADA] - Requerimiento para iniciar FASE 1:**
 - ✅ Epic: Setup del Monorepo [5/5 tareas completadas]
 - ✅ Epic: Módulos Base [3/3 tareas completadas - MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS]
-- ✅ Epic: Core Components (FASE 0) [1/1 - Core-Database ✅]
-- ✅ Vercel deployment + Railway PostgreSQL LIVE
+- ✅ Epic: Core Database [1/1 - Railway PostgreSQL con 10 tablas]
+- ✅ Vercel deployment LIVE
 - ✅ 4/4 Soft Gates PASSED
+- ℹ️ **Nota:** MVS (1 expediente procesado) = Primer entregable de FASE 1, no FASE 0
 
-**⏳ FASE 1 [INICIANDO SEMANA 7 - CRONOGRAMA DINÁMICO]:**
-FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance. NO son fechas fijas, sino **duración estimada + factores reales**.
+**⏳ FASE 1 [INICIANDO SEMANA 5 - CRONOGRAMA DINÁMICO ALINEADO]:**
+FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance (Sem 5-12 acordadas).
 
-**Entregables Incrementales (DINÁMICOS):**
-- ✅ Semana 7: Core-Auth + Core-Storage (bloqueadores listos)
-- ✅ Semana 8-9: MOD-EXPEDIENTES FUNC (primeras 2 expedientes procesadas)
-- ✅ Semana 9: Core-Signatures implementado
-- 🎯 **Semana 10-11: MOD-VALIDACION + MOD-REPORTES** (5 expedientes validados)
-- 🎯 **Semana 12-13: OPTIMIZACIÓN + TESTING** (10 expedientes validados + documentación)
+**Entregables Incrementales (DINÁMICOS) - Alineados con cronograma cliente:**
+- ✅ Semana 5-6: Core-Auth + Core-Storage (bloqueadores listos)
+- 🎯 **Semana 6-7: MVS FASE 1** (1 expediente procesado end-to-end) ← **PRIMER MILESTONE**
+- ✅ Semana 7-8: MOD-EXPEDIENTES escalado (2-5 expedientes)
+- ✅ Semana 8-9: Core-Signatures implementado
+- 🎯 **Semana 9-11: MOD-VALIDACION + MOD-REPORTES** (5-10 expedientes validados)
+- 🎯 **Semana 11-12: CIERRE + DOCUMENTACIÓN** (10 expedientes validados + training)
 
 **Cómo funciona el cronograma dinámico:**
 - Si Core-Auth termina en 4 días: MOD-EXPEDIENTES puede empezar en Sem 7.5 (no en Sem 8)
@@ -250,8 +252,9 @@ FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance. NO 
 | ID | Módulo | Descripción | Dependencias | Entregable Incremental |
 |----|--------|-------------|--------------|--------|
 | F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | MOD-CLINICAS ✅, MOD-EMPRESAS ✅ | [✓] Completado |
-| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | MOD-CITAS ✅, Core-Auth, Core-Storage | **2 expedientes procesados** |
-| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures | **5 expedientes validados** |
+| F1-MVS | **MVS FASE 1** | **1 expediente procesado end-to-end** | Core-Auth, Core-Storage | **🎯 PRIMER MILESTONE (Sem 6-7)** |
+| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios escalado | MOD-CITAS ✅, Core-Auth, Core-Storage, MVS | **2-5 expedientes procesados** |
+| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures | **5-10 expedientes validados** |
 | F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | **10 expedientes reportes generados** |
 
 ### FASE 2: OPERACIONES (8-10 semanas) 📊 PLANEADO

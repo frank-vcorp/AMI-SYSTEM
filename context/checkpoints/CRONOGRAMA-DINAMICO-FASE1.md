@@ -1,7 +1,9 @@
-# 📊 Cronograma Dinámico FASE 1
+# 📊 Cronograma Dinámico FASE 1 - Alineado con Cliente
 **Fecha:** 13 Enero 2026  
 **Metodología:** INTEGRA v2.0 + Cronograma Ágil/Dinámico  
-**Objetivo:** 10 expedientes validados al final de FASE 1
+**Cronograma Cliente:** Sem 5-12 (8 semanas presupuestadas)  
+**Objetivo:** MVS (1 expediente) → 10 expedientes validados  
+**Estimado Real:** 3-5 semanas de ejecución + buffer
 
 ---
 
@@ -33,49 +35,56 @@ En lugar de tener fechas fijas (Sem 7, Sem 8, etc.), el cronograma se **adapta s
 ## Timeline Estimado (pero flexible)
 
 ```
-Inicio FASE 1: Semana 7 (Lunes)
+Inicio FASE 1: Semana 5 (Lunes)
 
-SEMANA 7 (3-5 días):
+SEMANA 5-6 (6-10 días):
 ├── Core-Auth implementación
 ├── Core-Storage implementación
-└── GATE A PASS → MOD-EXPEDIENTES autorizado
+└── GATE A PASS → MVS autorizado
 
-SEMANA 8 (5-7 días):
-├── MOD-EXPEDIENTES desarrollo
+SEMANA 6-7 (5-7 días):
+├── MOD-EXPEDIENTES v1 MINIMAL (solo 1 expediente)
 ├── Setup flujo: Recepción → Examen → Carga
-└── GATE B PASS → Primeros 2 expedientes procesados
+├── Procesar 1 expediente piloto
+└── GATE B PASS → **MVS COMPLETADO** (1 expediente procesado)
 
-SEMANA 9 (3-4 días):
+SEMANA 7-8 (5-7 días):
+├── MOD-EXPEDIENTES escalado (2-5 expedientes)
+└── GATE C PASS → 2-5 expedientes procesados
+
+SEMANA 8-9 (3-4 días):
 ├── Core-Signatures implementación (paralelo si es posible)
-├── Validación manual de los 2 expedientes
-└── GATE C PASS → 2 expedientes validados, calidad OK
+├── Validación manual de expedientes
+└── GATE D PASS → Primeros expedientes validados
 
-SEMANA 10-11 (7-10 días):
+SEMANA 9-11 (10-14 días):
 ├── MOD-VALIDACION desarrollo
 ├── MOD-REPORTES desarrollo
-├── Procesar batch de 5 expedientes
-└── GATE D PASS → 5 expedientes con reportes generados
+├── Procesar batch de 5-10 expedientes
+└── GATE E PASS → 5-10 expedientes con reportes generados
 
-SEMANA 12-13 (5-7 días):
-├── Testing, refinamientos
-├── Procesar batch de 10 expedientes
-├── Documentación + Training
-└── CIERRE: 10 expedientes validados + reportes
+SEMANA 11-12 (5-7 días):
+├── Testing, refinamientos, documentación
+├── Training para staff AMI
+└── CIERRE FASE 1: 10 expedientes validados + documentación
 
-TOTAL: 24-36 días (4-5 semanas reales si no hay blockers)
+PRESUPUESTO TOTAL: Sem 5-12 (8 semanas)
+ESTIMADO REAL: 34-49 días (5-7 semanas reales si no hay blockers)
+BUFFER: 1-3 semanas para remediación/validación adicional
 ```
 
 ---
 
 ## Tabla de Entregables Dinámicos
 
-| Fase | Entregable | Criterio de Aceptación | Duración Est. | Flexible? |
+| Fase | Entregable | Criterio de Aceptación | Duración Est. | Semana |
 |------|-----------|--------|--------|----------|
-| **A** | Core-Auth + Storage | Firebase login + GCP bucket funcional | 3-5 días | ±1 día |
-| **B** | MOD-EXPEDIENTES v1 | 2 expedientes flujo completo | 5-7 días | ±2 días |
-| **C** | MOD-VALIDACION setup | 2 expedientes validados sin errores | 3-4 días | ±1 día |
-| **D** | MOD-VALIDACION scaled | 5 expedientes en lote | 7-10 días | ±3 días |
-| **E** | MOD-REPORTES | 10 expedientes con reportes PDF | 5-7 días | ±2 días |
+| **A** | Core-Auth + Storage | Firebase login + GCP bucket funcional | 6-10 días | Sem 5-6 |
+| **B** | MVS FASE 1 | 1 expediente flujo completo (Recepción → Examen → Carga) | 5-7 días | Sem 6-7 |
+| **C** | MOD-EXPEDIENTES escalado | 2-5 expedientes procesados sin errores críticos | 5-7 días | Sem 7-8 |
+| **D** | MOD-VALIDACION setup | 2-5 expedientes validados + firmados digitalmente | 3-4 días | Sem 8-9 |
+| **E** | MOD-VALIDACION scaled | 5-10 expedientes en lote con reportes | 10-14 días | Sem 9-11 |
+| **F** | FASE 1 Cierre | 10 expedientes validados + documentación + training | 5-7 días | Sem 11-12 |
 
 ---
 
@@ -126,60 +135,62 @@ Las 2 primeras expedientes tienen errores críticos en GATE C
 
 ---
 
-### GATE B: MOD-EXPEDIENTES Piloto ✅
+### GATE B: MVS FASE 1 - Primer Expediente ✅
 **Criterios:**
-- [ ] 2 expedientes completados end-to-end
+- [ ] 1 expediente completado end-to-end
 - [ ] Flujo: Recepción → Examen → Carga estudios → Almacenado en GCP
 - [ ] UI responsive en desktop + tablet
 - [ ] No hay errores críticos en logs
+- [ ] Documentación: Flujo de usuario explicado
 
 **Responsable:** SOFIA  
 **Aprobador:** INTEGRA  
-**Si PASA:** Proceder a 5 expedientes + empezar MOD-VALIDACION  
-**Si FALLA:** Fix bugs (máx 3 días), retest con 2 nuevos expedientes
+**Entregable:** **MVS FASE 1 - PRIMER MILESTONE**  
+**Si PASA:** Proceder a escalar a 2-5 expedientes  
+**Si FALLA:** Fix bugs (máx 2 días), retest con nuevo expediente
 
 ---
 
-### GATE C: MOD-VALIDACION Setup ✅
+### GATE C: MOD-EXPEDIENTES Escalado ✅
+**Criterios:**
+- [ ] 2-5 expedientes procesados sin errores críticos
+- [ ] Flujo estable: Recepción → Examen → Carga → GCP
+- [ ] Core-Signatures listo para siguiente step
+- [ ] Performance: <10 seg por expediente
+
+**Responsable:** SOFIA  
+**Aprobador:** GEMINI-QA  
+**Si PASA:** Proceder a validación + reportes  
+**Si FALLA:** Fix + optimization (máx 3 días)
+
+---
+
+### GATE D: MOD-VALIDACION Setup ✅
 **Criterios:**
 - [ ] Core-Signatures implementado y probado
-- [ ] 2 expedientes validados + firmados digitalmente
+- [ ] 2-5 expedientes validados + firmados digitalmente
 - [ ] Reportes en PDF generados (sin IA aún, solo template)
 - [ ] Firma médica visible + verificable en PDF
 
 **Responsable:** SOFIA  
 **Aprobador:** GEMINI-QA  
-**Si PASA:** Proceder a batch de 5 expedientes  
+**Si PASA:** Proceder a batch de 5-10 expedientes  
 **Si FALLA:** Fix + remediación (máx 3 días)
 
 ---
 
-### GATE D: MOD-VALIDACION Scaled ✅
+### GATE E: MOD-VALIDACION Scaled ✅
 **Criterios:**
-- [ ] 5 expedientes procesados en lote (sin errores)
+- [ ] 5-10 expedientes procesados en lote (sin errores)
 - [ ] IA extrae datos (semáforos, resultados, etc.)
 - [ ] Médico validador revisa y aprueba
-- [ ] 5 reportes PDF generados + emails enviados
+- [ ] 5-10 reportes PDF generados + emails enviados
 - [ ] Performance: <10 seg por expediente
 
 **Responsable:** SOFIA  
 **Aprobador:** INTEGRA + GEMINI-QA  
-**Si PASA:** Final batch de 10 expedientes  
+**Si PASA:** Final push a 10 expedientes  
 **Si FALLA:** Debugging + optimization (máx 5 días)
-
----
-
-### GATE E: FASE 1 Cierre ✅
-**Criterios:**
-- [ ] 10 expedientes completos (Recepción → Validación → Reporte)
-- [ ] 100% de validaciones exitosas
-- [ ] Documentación para Go-Live
-- [ ] Training completado (AMI staff)
-
-**Responsable:** SOFIA  
-**Aprobador:** INTEGRA + GEMINI-QA  
-**Si PASA:** FASE 1 CERRADA, listo para FASE 2  
-**Si FALLA:** No hay falla aceptable aquí (es el cierre)
 
 ---
 

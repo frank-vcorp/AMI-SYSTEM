@@ -13,8 +13,8 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
-- **Fase Actual**: FASE 0 COMPLETADA ✅ | FASE 0.5 EN PROGRESO (Integración Web-App + Infraestructura)
-- **Semáforo**: 🟢 Verde (Código en master, Vercel + Railway LIVE)
+- **Fase Actual**: FASE 0 [✓] COMPLETADA (4 Soft Gates Passed) | FASE 1 - MOD-EXPEDIENTES INICIADA
+- **Semáforo**: 🟢 Verde (Código en master, Vercel + Railway LIVE, INTEGRA v2.0 Compliant)
 - **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado)
 
 ## 4. Actualización 2026-01-13 (Deploy Vercel + Railway LIVE)
@@ -32,10 +32,10 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - 4 Checkpoints (1,600+ líneas)
     - ADR-002 definido y validado
     - Dashboard actualizado
-- [✓] **Soft Gates - FASE 0 FINAL (2026-01-13):**
+- [✓] **Soft Gates - FASE 0 FINAL (2026-01-13 ✅ COMPLETADA):**
     - **Gate 1: Compilación** ✅ (npm run build: 8/8 tasks successful)
     - **Gate 2: Testing** ✅ (Tests unitarios creados: >80% coverage esperado)
-    - **Gate 3: Revisión** 🔄 *Pendiente GEMINI* (Audit code + security)
+    - **Gate 3: Revisión** ✅ PASSED (Cambios Menores) - GEMINI-GATE3-AUDIT-20260113.md
     - **Gate 4: Documentación** ✅ (dossier_tecnico_FASE0.md + checkpoints)
     - **Checkpoint Final:** CHECKPOINT-FASE0-COMPLETA-20260113.md
 

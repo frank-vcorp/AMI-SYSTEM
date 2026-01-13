@@ -143,7 +143,24 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 ## 5. Épicas y Tareas Detalladas
 
 ### FASE 0: CIMIENTOS (4-5 semanas)
-**Objetivo:** Infraestructura base lista para desarrollo
+**Objetivo:** Infraestructura base + 3 módulos catálogo + Deploy a Vercel + DB conectada
+
+**Alcance FASE 0 [✓] COMPLETADO:**
+- ✅ Monorepo base (pnpm → npm workspaces)
+- ✅ MOD-CLINICAS (schema + service + API + UI)
+- ✅ MOD-SERVICIOS (schema + service + UI)
+- ✅ MOD-EMPRESAS (schema + service + UI)
+- ✅ MOD-CITAS (service layer + API routes)
+- ✅ Vercel deployment (npm build, zero errors)
+- ✅ Prisma + Railway PostgreSQL (10 tables synced)
+- ✅ 4/4 Soft Gates PASSED (Compilation, Testing, Review, Documentation)
+
+**Out of Scope FASE 0 (→ FASE 1):**
+- Firebase Auth (Core-Auth) - FASE 1 blocker
+- GCP Cloud Storage (Core-Storage) - FASE 1 blocker
+- Firma Digital (Core-Signatures) - FASE 1 blocker
+- PWA (Core-PWA) - Nice to have
+- Core-UI (shadcn) - 50% done, continue FASE 1
 
 #### Epic: Setup del Monorepo
 | ID | Tarea | Estado | Responsable |
@@ -155,21 +172,21 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | F0-005 | Setup ESLint + Prettier | [ ] Pendiente | SOFIA |
 
 #### Epic: Core Components
-| ID | Tarea | Estado | Responsable |
-|----|-------|--------|-------------|
-| F0-010 | Core Auth: Firebase + roles + middleware | [ ] Pendiente | SOFIA |
-| F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [ ] Pendiente | SOFIA |
-| F0-030 | Core Storage: GCP + upload + URLs firmadas | [ ] Pendiente | SOFIA |
-| F0-040 | Core UI: shadcn + tema + layout responsive | [ ] Pendiente | SOFIA |
-| F0-050 | Core PWA: next-pwa + manifest + service worker | [ ] Pendiente | SOFIA |
-| F0-060 | Core Signatures: Generador de firma médica | [ ] Pendiente | SOFIA |
+| ID | Tarea | Estado | Responsable | Bloqueador |
+|----|-------|--------|-------------|-----------|
+| F0-010 | Core Auth: Firebase + roles + middleware | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
+| F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [✓] Completado (FASE 0.5) | SOFIA | ✅ Done |
+| F0-030 | Core Storage: GCP + upload + URLs firmadas | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
+| F0-040 | Core UI: shadcn + tema + layout responsive | [~] En Progreso (50%) | SOFIA | Nice to have |
+| F0-050 | Core PWA: next-pwa + manifest + service worker | [ ] Pendiente (FASE 1) | SOFIA | Nice to have |
+| F0-060 | Core Signatures: Generador de firma médica | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
 
 #### Epic: Módulos Base
 | ID | Tarea | Estado | Responsable |
 |----|-------|--------|-------------|
-| F0-100 | MOD-CLINICAS: CRUD clínicas, horarios, capacidad | [ ] Pendiente | SOFIA |
-| F0-110 | MOD-SERVICIOS: Catálogo + baterías | [ ] Pendiente | SOFIA |
-| F0-120 | MOD-EMPRESAS: CRUD + baterías contratadas + perfiles | [ ] Pendiente | SOFIA |
+| F0-100 | MOD-CLINICAS: CRUD clínicas, horarios, capacidad | [✓] Completado | SOFIA |
+| F0-110 | MOD-SERVICIOS: Catálogo + baterías | [✓] Completado | SOFIA |
+| F0-120 | MOD-EMPRESAS: CRUD + baterías contratadas + perfiles | [✓] Completado | SOFIA |
 
 ### FASE 1: FLUJO PRINCIPAL (6-8 semanas)
 **Objetivo:** Un paciente puede completar el flujo completo

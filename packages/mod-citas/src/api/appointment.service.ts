@@ -19,6 +19,11 @@ import {
 export class AppointmentService {
   constructor(private prisma: PrismaClient) {}
 
+  private isUuid(value: string): boolean {
+    // Accept any RFC 4122 UUID version
+    return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+  }
+
   /**
    * Create a new appointment
    */
@@ -27,6 +32,9 @@ export class AppointmentService {
     data: CreateAppointmentRequest,
     _createdBy?: string
   ): Promise<AppointmentResponse> {
+    if (!this.isUuid(tenantId)) {
+      throw new InvalidAppointmentError('tenantId must be a UUID');
+    }
     // Validate clinic exists and belongs to tenant
     const clinic = await this.prisma.clinic.findFirst({
       where: { id: data.clinicId, tenantId }
@@ -44,7 +52,8 @@ export class AppointmentService {
       where: {
         clinicId: data.clinicId,
         dayOfWeek,
-        isActive: true
+        // Compatible with current schema (uses isOpen) and future schema (uses isActive)
+        OR: [{ isOpen: true } as any, { isActive: true } as any]
       }
     });
 
@@ -61,8 +70,10 @@ export class AppointmentService {
     }
 
     // Check for lunch break if applicable
-    if (schedule.lunchStartTime && schedule.lunchEndTime) {
-      if (appointmentTime >= schedule.lunchStartTime && appointmentTime < schedule.lunchEndTime) {
+    const lunchStart = (schedule as any).lunchStartTime ?? (schedule as any).lunchStart;
+    const lunchEnd = (schedule as any).lunchEndTime ?? (schedule as any).lunchEnd;
+    if (lunchStart && lunchEnd) {
+      if (appointmentTime >= lunchStart && appointmentTime < lunchEnd) {
         throw new InvalidAppointmentError('Time falls during lunch break');
       }
     }
@@ -75,7 +86,8 @@ export class AppointmentService {
           gte: appointmentDate,
           lt: new Date(appointmentDate.getTime() + 24 * 60 * 60 * 1000)
         },
-        appointmentTime,
+        // Current schema uses `time`, core schema uses `appointmentTime`
+        OR: [{ time: appointmentTime } as any, { appointmentTime } as any],
         status: { not: 'CANCELLED' }
       }
     });
@@ -92,19 +104,13 @@ export class AppointmentService {
         employeeId: data.employeeId,
         companyId: data.companyId,
         appointmentDate,
-        appointmentTime,
+        // Current schema stores this as `time`
+        time: appointmentTime,
         notes: data.notes,
-        appointmentServices: {
-          createMany: {
-            data: data.serviceIds.map(serviceId => ({ serviceId }))
-          }
-        }
-      },
+      } as any,
       include: {
         clinic: true,
-        company: true,
-        appointmentServices: true
-      }
+      } as any,
     });
 
     return this.mapAppointmentResponse(appointment);
@@ -115,12 +121,13 @@ export class AppointmentService {
    */
   async getAppointment(tenantId: string, appointmentId: string): Promise<AppointmentResponse> {
     const appointment = await this.prisma.appointment.findFirst({
-      where: { id: appointmentId, tenantId },
+      where: {
+        id: appointmentId,
+        ...(this.isUuid(tenantId) ? { tenantId } : {})
+      } as any,
       include: {
         clinic: true,
-        company: true,
-        appointmentServices: true
-      }
+      } as any
     });
 
     if (!appointment) {
@@ -148,7 +155,10 @@ export class AppointmentService {
 
     const skip = (page - 1) * pageSize;
 
-    const where: any = { tenantId };
+    const where: any = {};
+    // `default-tenant` (non-UUID) causes Postgres UUID cast errors.
+    // While auth/multitenancy is not wired yet, omit tenantId filtering if invalid.
+    if (tenantId && this.isUuid(tenantId)) where.tenantId = tenantId;
 
     if (clinicId) where.clinicId = clinicId;
     if (companyId) where.companyId = companyId;
@@ -168,9 +178,7 @@ export class AppointmentService {
         take: pageSize,
         include: {
           clinic: true,
-          company: true,
-          appointmentServices: true
-        },
+        } as any,
         orderBy: { appointmentDate: 'desc' }
       }),
       this.prisma.appointment.count({ where })
@@ -194,6 +202,9 @@ export class AppointmentService {
     data: UpdateAppointmentRequest,
     _updatedBy?: string
   ): Promise<AppointmentResponse> {
+    if (!this.isUuid(tenantId)) {
+      throw new InvalidAppointmentError('tenantId must be a UUID');
+    }
     const appointment = await this.prisma.appointment.findFirst({
       where: { id: appointmentId, tenantId }
     });
@@ -208,14 +219,15 @@ export class AppointmentService {
         ? appointment.appointmentDate.toISOString().split('T')[0]
         : appointment.appointmentDate);
       const newDate = new Date(newDateStr);
-      const newTime = data.appointmentTime || appointment.appointmentTime;
+      const persistedTime = (appointment as any).appointmentTime ?? (appointment as any).time;
+      const newTime = data.appointmentTime || persistedTime;
 
       // Validate clinic hours (simplified - reuse logic from create)
       const schedule = await this.prisma.clinicSchedule.findFirst({
         where: {
           clinicId: appointment.clinicId,
           dayOfWeek: newDate.getDay(),
-          isActive: true
+          OR: [{ isOpen: true } as any, { isActive: true } as any]
         }
       });
 
@@ -228,33 +240,19 @@ export class AppointmentService {
       }
     }
 
-    // If updating services, remove old and add new
-    if (data.serviceIds) {
-      await this.prisma.appointmentService.deleteMany({
-        where: { appointmentId }
-      });
-
-      await this.prisma.appointmentService.createMany({
-        data: data.serviceIds.map(serviceId => ({
-          appointmentId,
-          serviceId
-        }))
-      });
-    }
+    // Current schema does not model appointmentServices join yet.
 
     const updated = await this.prisma.appointment.update({
       where: { id: appointmentId },
       data: {
         appointmentDate: data.appointmentDate,
-        appointmentTime: data.appointmentTime,
+        time: data.appointmentTime,
         notes: data.notes,
         status: data.status as any
-      },
+      } as any,
       include: {
         clinic: true,
-        company: true,
-        appointmentServices: true
-      }
+      } as any
     });
 
     return this.mapAppointmentResponse(updated);
@@ -264,6 +262,9 @@ export class AppointmentService {
    * Cancel appointment
    */
   async cancelAppointment(tenantId: string, appointmentId: string): Promise<void> {
+    if (!this.isUuid(tenantId)) {
+      throw new InvalidAppointmentError('tenantId must be a UUID');
+    }
     const appointment = await this.prisma.appointment.findFirst({
       where: { id: appointmentId, tenantId }
     });
@@ -285,12 +286,15 @@ export class AppointmentService {
     tenantId: string,
     request: AvailabilityRequest
   ): Promise<AvailabilitySlot[]> {
+    if (!this.isUuid(tenantId)) {
+      throw new InvalidAppointmentError('tenantId must be a UUID');
+    }
     const { clinicId, dateFrom, dateTo, durationMin } = request;
 
     // Get clinic schedule
     const clinic = await this.prisma.clinic.findFirst({
       where: { id: clinicId, tenantId },
-      include: { schedules: true }
+      include: { schedules: true } as any
     });
 
     if (!clinic) {
@@ -304,7 +308,9 @@ export class AppointmentService {
     // Iterate through each day
     while (currentDate <= endDate) {
       const dayOfWeek = currentDate.getDay();
-      const schedule = clinic.schedules?.find((s: any) => s.dayOfWeek === dayOfWeek && s.isActive);
+      const schedule: any = clinic.schedules?.find(
+        (s: any) => s.dayOfWeek === dayOfWeek && ((s.isActive ?? s.isOpen) === true)
+      );
 
       if (schedule) {
         // Generate time slots for this day
@@ -313,8 +319,8 @@ export class AppointmentService {
           schedule.openingTime,
           schedule.closingTime,
           durationMin,
-          schedule.lunchStartTime,
-          schedule.lunchEndTime
+          (schedule as any).lunchStartTime ?? (schedule as any).lunchStart,
+          (schedule as any).lunchEndTime ?? (schedule as any).lunchEnd
         );
 
         // Check which slots have no conflicts
@@ -330,7 +336,7 @@ export class AppointmentService {
         });
 
         const availableSlots = daySlots.filter(slot => {
-          const conflict = existingAppointments.some((apt: any) => apt.appointmentTime === slot.time);
+          const conflict = existingAppointments.some((apt: any) => (apt.appointmentTime ?? apt.time) === slot.time);
           return !conflict;
         });
 
@@ -348,8 +354,24 @@ export class AppointmentService {
   // ========================================================================
 
   private mapAppointmentResponse(appointment: any): AppointmentResponse {
+    const appointmentDate = appointment.appointmentDate instanceof Date
+      ? appointment.appointmentDate
+      : new Date(appointment.appointmentDate);
+    const createdAt = appointment.createdAt instanceof Date ? appointment.createdAt : new Date(appointment.createdAt);
+    const updatedAt = appointment.updatedAt instanceof Date ? appointment.updatedAt : new Date(appointment.updatedAt);
+
     return {
-      ...appointment,
+      id: appointment.id,
+      tenantId: appointment.tenantId,
+      clinicId: appointment.clinicId,
+      employeeId: appointment.employeeId,
+      companyId: appointment.companyId,
+      appointmentDate: appointmentDate.toISOString().split('T')[0],
+      appointmentTime: appointment.appointmentTime ?? appointment.time,
+      status: appointment.status,
+      notes: appointment.notes ?? null,
+      createdAt: createdAt.toISOString(),
+      updatedAt: updatedAt.toISOString(),
       clinicName: appointment.clinic?.name,
       companyName: appointment.company?.name
     };

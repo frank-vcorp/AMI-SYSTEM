@@ -1,22 +1,13 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-13T02:33:39.829Z",
+  "lastUpdated": "2026-01-13T03:16:40.231Z",
   "overallProgress": 34.21052631578947,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
       "order": 0,
-      "progress": 55,
+      "progress": 100,
       "modules": [
-        {
-          "id": "core-auth",
-          "name": "Core - Autenticación",
-          "owner": "Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Firebase Auth + roles + Custom Claims",
-          "needs": "core-setup completado"
-        },
         {
           "id": "core-database",
           "name": "Core - Base de Datos",
@@ -25,42 +16,6 @@
           "progress": 100,
           "summary": "Prisma Schema V2 Unificado (Centralizado en @ami/core)",
           "needs": "-"
-        },
-        {
-          "id": "core-storage",
-          "name": "Core - Storage",
-          "owner": "Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "GCP Cloud Storage + URLs firmadas",
-          "needs": "core-setup completado"
-        },
-        {
-          "id": "core-ui",
-          "name": "Core - UI Base",
-          "owner": "Frontend",
-          "status": "in_progress",
-          "progress": 50,
-          "summary": "shadcn/ui + tema AMI",
-          "needs": "core-setup completado"
-        },
-        {
-          "id": "core-pwa",
-          "name": "Core - PWA",
-          "owner": "Frontend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "next-pwa + service worker + offline",
-          "needs": "core-ui completado"
-        },
-        {
-          "id": "core-signatures",
-          "name": "Core - Firmas",
-          "owner": "Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Generador de firma única por médico",
-          "needs": "core-setup completado"
         },
         {
           "id": "mod-clinicas",
@@ -100,16 +55,59 @@
         }
       ],
       "statusCounts": {
-        "pending": 4,
-        "done": 5,
-        "in_progress": 1
+        "done": 5
       }
     },
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 25,
+      "progress": 16.666666666666668,
       "modules": [
+        {
+          "id": "core-auth",
+          "name": "Core - Autenticación",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Firebase Auth + roles + Custom Claims",
+          "needs": "Semana 7"
+        },
+        {
+          "id": "core-storage",
+          "name": "Core - Storage",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "GCP Cloud Storage + URLs firmadas",
+          "needs": "Semana 7"
+        },
+        {
+          "id": "core-ui",
+          "name": "Core - UI Base",
+          "owner": "Frontend",
+          "status": "in_progress",
+          "progress": 50,
+          "summary": "shadcn/ui + tema AMI (completar del 50%)",
+          "needs": "core-database"
+        },
+        {
+          "id": "core-pwa",
+          "name": "Core - PWA",
+          "owner": "Frontend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "next-pwa + service worker + offline",
+          "needs": "Semana 11+"
+        },
+        {
+          "id": "core-signatures",
+          "name": "Core - Firmas",
+          "owner": "Backend",
+          "status": "pending",
+          "progress": 0,
+          "summary": "Generador de firma única por médico",
+          "needs": "Semana 9"
+        },
         {
           "id": "mod-citas",
           "name": "MOD-CITAS",
@@ -126,7 +124,7 @@
           "status": "pending",
           "progress": 0,
           "summary": "Recepción + Examen Médico + Carga de Estudios",
-          "needs": "mod-citas completado"
+          "needs": "core-auth + core-storage (Sem 7)"
         },
         {
           "id": "mod-validacion",
@@ -135,7 +133,7 @@
           "status": "pending",
           "progress": 0,
           "summary": "Extracción IA + semáforos + dictamen + firma",
-          "needs": "mod-expedientes completado"
+          "needs": "mod-expedientes + core-signatures (Sem 9)"
         },
         {
           "id": "mod-reportes",
@@ -144,12 +142,13 @@
           "status": "pending",
           "progress": 0,
           "summary": "Generación PDF + envío email + URLs temporales",
-          "needs": "mod-validacion completado"
+          "needs": "mod-validacion + core-storage"
         }
       ],
       "statusCounts": {
-        "done": 1,
-        "pending": 3
+        "pending": 7,
+        "in_progress": 1,
+        "done": 1
       }
     },
     {
@@ -173,7 +172,7 @@
           "status": "pending",
           "progress": 0,
           "summary": "Audit log, timeline, filtros, export Excel",
-          "needs": "core-database completado"
+          "needs": "core-database"
         },
         {
           "id": "mod-calidad",
@@ -182,7 +181,7 @@
           "status": "pending",
           "progress": 0,
           "summary": "Precisión IA, alertas activas, auditorías",
-          "needs": "mod-validacion completado"
+          "needs": "mod-validacion"
         },
         {
           "id": "mod-admin",
@@ -191,7 +190,7 @@
           "status": "pending",
           "progress": 0,
           "summary": "Usuarios, roles, semáforos, configuración",
-          "needs": "core-auth completado"
+          "needs": "core-auth"
         }
       ],
       "statusCounts": {
@@ -220,34 +219,9 @@
   ],
   "needsAction": [
     {
-      "module": "Core - Autenticación",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "core-setup completado"
-    },
-    {
       "module": "Core - Base de Datos",
       "phase": "FASE 0 – Cimientos",
       "detail": "-"
-    },
-    {
-      "module": "Core - Storage",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "core-setup completado"
-    },
-    {
-      "module": "Core - UI Base",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "core-setup completado"
-    },
-    {
-      "module": "Core - PWA",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "core-ui completado"
-    },
-    {
-      "module": "Core - Firmas",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "core-setup completado"
     },
     {
       "module": "MOD-CLINICAS",
@@ -265,6 +239,36 @@
       "detail": "-"
     },
     {
+      "module": "Arquitectura y Documentación",
+      "phase": "FASE 0 – Cimientos",
+      "detail": "N/A"
+    },
+    {
+      "module": "Core - Autenticación",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "Semana 7"
+    },
+    {
+      "module": "Core - Storage",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "Semana 7"
+    },
+    {
+      "module": "Core - UI Base",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "core-database"
+    },
+    {
+      "module": "Core - PWA",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "Semana 11+"
+    },
+    {
+      "module": "Core - Firmas",
+      "phase": "FASE 1 – Flujo Principal",
+      "detail": "Semana 9"
+    },
+    {
       "module": "MOD-CITAS",
       "phase": "FASE 1 – Flujo Principal",
       "detail": "mod-clinicas + mod-empresas"
@@ -272,17 +276,17 @@
     {
       "module": "MOD-EXPEDIENTES",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-citas completado"
+      "detail": "core-auth + core-storage (Sem 7)"
     },
     {
       "module": "MOD-VALIDACION",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-expedientes completado"
+      "detail": "mod-expedientes + core-signatures (Sem 9)"
     },
     {
       "module": "MOD-REPORTES",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-validacion completado"
+      "detail": "mod-validacion + core-storage"
     },
     {
       "module": "MOD-DASHBOARD",
@@ -292,27 +296,22 @@
     {
       "module": "MOD-BITACORA",
       "phase": "FASE 2 – Operaciones",
-      "detail": "core-database completado"
+      "detail": "core-database"
     },
     {
       "module": "MOD-CALIDAD",
       "phase": "FASE 2 – Operaciones",
-      "detail": "mod-validacion completado"
+      "detail": "mod-validacion"
     },
     {
       "module": "MOD-ADMIN",
       "phase": "FASE 2 – Operaciones",
-      "detail": "core-auth completado"
+      "detail": "core-auth"
     },
     {
       "module": "MOD-PORTAL-EMPRESA",
       "phase": "FASE 3 – Expansión",
       "detail": "todos FASE 2 completados"
-    },
-    {
-      "module": "Arquitectura y Documentación",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "N/A"
     }
   ]
 }

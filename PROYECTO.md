@@ -172,14 +172,10 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | F0-005 | Setup ESLint + Prettier | [ ] Pendiente | SOFIA |
 
 #### Epic: Core Components
-| ID | Tarea | Estado | Responsable | Bloqueador |
-|----|-------|--------|-------------|-----------|
-| F0-010 | Core Auth: Firebase + roles + middleware | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
-| F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [✓] Completado (FASE 0.5) | SOFIA | ✅ Done |
-| F0-030 | Core Storage: GCP + upload + URLs firmadas | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
-| F0-040 | Core UI: shadcn + tema + layout responsive | [~] En Progreso (50%) | SOFIA | Nice to have |
-| F0-050 | Core PWA: next-pwa + manifest + service worker | [ ] Pendiente (FASE 1) | SOFIA | Nice to have |
-| F0-060 | Core Signatures: Generador de firma médica | [ ] Pendiente (FASE 1) | SOFIA | FASE 1 blocker |
+| ID | Tarea | Estado | Responsable |
+|----|-------|--------|-------------|
+| F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [✓] Completado (FASE 0.5) | SOFIA |
+| F0-040 | Core UI: shadcn + tema + layout responsive | [~] En Progreso (50%) | SOFIA |
 
 #### Epic: Módulos Base
 | ID | Tarea | Estado | Responsable |
@@ -189,11 +185,21 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | F0-120 | MOD-EMPRESAS: CRUD + baterías contratadas + perfiles | [✓] Completado | SOFIA |
 
 ### FASE 1: FLUJO PRINCIPAL (6-8 semanas)
-**Objetivo:** Un paciente puede completar el flujo completo
+**Objetivo:** Un paciente puede completar el flujo completo + Core modules críticos
 
+#### Epic: Core Components (Bloqueadores FASE 1)
+| ID | Tarea | Estado | Responsable | Bloqueador |
+|----|-------|--------|-------------|-----------|
+| F1-010 | Core Auth: Firebase + roles + middleware | [ ] Pendiente | SOFIA | Crítico |
+| F1-030 | Core Storage: GCP + upload + URLs firmadas | [ ] Pendiente | SOFIA | Crítico |
+| F1-040 | Core UI: Completar shadcn + tema + layout | [~] En Progreso (50%) | SOFIA | Nice to have |
+| F1-050 | Core PWA: next-pwa + manifest + service worker | [ ] Pendiente | SOFIA | Nice to have |
+| F1-060 | Core Signatures: Generador de firma médica | [ ] Pendiente | SOFIA | Crítico |
+
+#### Epic: Módulos Flujo Principal
 | ID | Módulo | Descripción | Estado |
 |----|--------|-------------|--------|
-| F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | [ ] Pendiente |
+| F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | [✓] Completado (FASE 0.5) |
 | F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | [ ] Pendiente |
 | F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen | [ ] Pendiente |
 | F1-270 | MOD-REPORTES | PDF + email + URLs temporales | [ ] Pendiente |

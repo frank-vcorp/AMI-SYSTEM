@@ -60,6 +60,8 @@
 
 ### FASE 1: Flujo Principal (� INICIANDO SEMANA 7)
 ### FASE 1: Flujo Principal (🚀 INICIANDO SEMANA 7)
+### FASE 1: FLUJO DE PACIENTES EN VIVO - Cronograma Dinámico (3-5 semanas) ⏱️
+
 **¿Qué se va a hacer?** El sistema comenzará a procesar pacientes REALES:
 - Médico loguea en el sistema (seguro con usuario y contraseña)
 - Recepcionista recibe al paciente, genera folio
@@ -70,32 +72,40 @@
 - Sistema genera PDF firmado digitalmente
 - Reporte se envía a la empresa cliente
 
-**Cronograma de construcción:**
+**Cronograma Dinámico (se adapta según avance):**
+Las semanas **NO son fechas fijas**, son duración estimada. Si algo termina antes, lo siguiente comienza antes.
 
-| Semana | Qué construimos | Por qué es crítico | Duración |
-|--------|-----------------|-------------------|----------|
-| **7** | **Login seguro** | Sin esto cualquiera accede. Identificar a cada usuario | 3-4 días |
-| **7** | **Almacenamiento en nube** | Guardar imágenes y PDFs de forma segura | 2-3 días |
-| **8-9** | **Modulo de Expedientes** | Captura completa del examen del paciente | 7-10 días |
-| **9** | **Firmas digitales** | Reportes deben estar firmados legalmente | 2-3 días |
-| **10-11** | **Validación con IA** | Lectura automática de estudios | 7-10 días |
-| **12** | **Reportes PDF** | Documento profesional para enviar a cliente | 5-7 días |
+| Gate | Entregable | Duración Est. | Criterio de Éxito |
+|------|-----------|----------|----------|
+| **Gate A** | ✅ Core-Auth + Core-Storage | 3-5 días | Usuarios logeados + upload funcional |
+| **Gate B** | ✅ MOD-EXPEDIENTES v1 | 5-7 días | **2 expedientes procesados** |
+| **Gate C** | ✅ MOD-VALIDACION setup | 3-4 días | **2 expedientes validados + firmados** |
+| **Gate D** | ✅ MOD-VALIDACION scaled | 7-10 días | **5 expedientes validados en lote** |
+| **Gate E** | ✅ FASE 1 Cierre | 5-7 días | **10 expedientes completos + reportes** |
+
+**⏰ Duración total:** 24-36 días estimado (3-5 semanas con paralelización)
+
+**✅ Cómo funciona:**
+- Si Core-Auth termina en 3 días → MOD-EXPEDIENTES empieza 2 días antes de lo estimado
+- Si MOD-EXPEDIENTES está listo → validamos 2 expedientes inmediatamente
+- Entregables **incrementales**: No esperamos 10 al final, sino 2 → 5 → 10
+- Cada Gate debe PASAR antes de avanzar (control de calidad)
+
+**Ver detalles completos:** [context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md](context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md)
 
 **Estado:** 🟡 INICIANDO - Bloqueadores de FASE 0 ya resueltos ✅
 
-**Ver detalles técnicos:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
-
 **Módulos & Dependencias:**
 
-| Módulo | Status | Dependencias |
-|--------|--------|--------------|
-| MOD-CITAS | ✅ Completado | MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
-| **[SEMANA 7]** Core-Auth | ⏳ Iniciando | Firebase |
-| **[SEMANA 7]** Core-Storage | ⏳ Iniciando | GCP |
-| MOD-EXPEDIENTES | 🔜 Sem 8-9 | MOD-CITAS ✅ + Core-Auth (Sem 7) + Core-Storage (Sem 7) |
-| **[SEMANA 9]** Core-Signatures | ⏳ Pendiente | Canvas/PDF lib |
-| MOD-VALIDACION | 🔜 Sem 10-11 | MOD-EXPEDIENTES + Core-Signatures (Sem 9) + OpenAI API |
-| MOD-REPORTES | 🔜 Sem 12 | MOD-VALIDACION + Core-Storage ✅ |
+| Módulo | Status | Duración | Dependencias |
+|--------|--------|----------|--------------|
+| MOD-CITAS | ✅ Completado | - | MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
+| **Core-Auth** | ⏳ Gate A | 3-5 días | Firebase |
+| **Core-Storage** | ⏳ Gate A | 3-5 días | GCP (paralelo con Auth) |
+| **MOD-EXPEDIENTES** | 🔜 Gate B | 5-7 días | MOD-CITAS ✅ + Core-Auth + Core-Storage |
+| **Core-Signatures** | ⏳ Gate C | 3-4 días | Canvas/PDF lib (paralelo si es posible) |
+| **MOD-VALIDACION** | 🔜 Gate D | 7-10 días | MOD-EXPEDIENTES + Core-Signatures + OpenAI API |
+| **MOD-REPORTES** | 🔜 Gate E | 5-7 días | MOD-VALIDACION + Core-Storage ✅ |
 
 ---
 

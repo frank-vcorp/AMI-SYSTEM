@@ -206,17 +206,23 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - ✅ Vercel deployment + Railway PostgreSQL LIVE
 - ✅ 4/4 Soft Gates PASSED
 
-**⏳ FASE 1 [INICIANDO SEMANA 7]:**
-FASE 1 tiene 2 ÉPICAS en paralelo:
-1. **Core Components (Bloqueadores críticos):** Core-Auth, Core-Storage, Core-Signatures, Core-UI, Core-PWA
-2. **Módulos Flujo Principal:** MOD-EXPEDIENTES, MOD-VALIDACION, MOD-REPORTES
+**⏳ FASE 1 [INICIANDO SEMANA 7 - CRONOGRAMA DINÁMICO]:**
+FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance. NO son fechas fijas, sino **duración estimada + factores reales**.
 
-**⚠️ TIMING CRÍTICO:**
-- **Semana 7:** PRIMERO Core-Auth + Core-Storage (bloquean MOD-EXPEDIENTES)
-- **Semana 8-9:** MOD-EXPEDIENTES (depende de Auth + Storage)
-- **Semana 9:** Core-Signatures (bloquea MOD-VALIDACION)
-- **Semana 10-11:** MOD-VALIDACION + MOD-REPORTES
-- **Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
+**Entregables Incrementales (DINÁMICOS):**
+- ✅ Semana 7: Core-Auth + Core-Storage (bloqueadores listos)
+- ✅ Semana 8-9: MOD-EXPEDIENTES FUNC (primeras 2 expedientes procesadas)
+- ✅ Semana 9: Core-Signatures implementado
+- 🎯 **Semana 10-11: MOD-VALIDACION + MOD-REPORTES** (5 expedientes validados)
+- 🎯 **Semana 12-13: OPTIMIZACIÓN + TESTING** (10 expedientes validados + documentación)
+
+**Cómo funciona el cronograma dinámico:**
+- Si Core-Auth termina en 4 días: MOD-EXPEDIENTES puede empezar en Sem 7.5 (no en Sem 8)
+- Si MOD-EXPEDIENTES está operativo en Sem 8: podemos validar 2 expedientes piloto inmediatamente
+- Si las primeras 2 validaciones son OK: aceleramos batches de 5 y luego 10
+- Las semanas son **referencias de progreso**, no puntos de quiebre (pueden comprimirse)
+
+**Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md) + [context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md](context/checkpoints/CRONOGRAMA-DINAMICO-FASE1.md)
 
 #### Epic: Core Components (FASE 1)
 **Para personas de negocio:** Estos son los "servicios de infraestructura" que necesita el sistema para funcionar:
@@ -226,13 +232,13 @@ FASE 1 tiene 2 ÉPICAS en paralelo:
 - **Interfaz visual:** Mejorar la apariencia y usabilidad de la plataforma
 - **Aplicación móvil:** Permitir trabajar sin internet (offline mode)
 
-| ID | Tarea | Semana | Estado | Bloqueador | Prioridad |
+| ID | Tarea | Duración Est. | Estado | Bloqueador | Entregable |
 |----|-------|--------|--------|-----------|-----------|
-| F1-010 | Core Auth: Firebase + roles + middleware | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES | 🔴 CRÍTICO |
-| F1-030 | Core Storage: GCP + upload + URLs firmadas | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES | 🔴 CRÍTICO |
-| F1-040 | Core UI: Completar shadcn + tema + layout | Sem 8-9 | [ ] Pendiente (50% hecho) | UX improvement | 🟡 IMPORTANTE |
-| F1-050 | Core PWA: next-pwa + manifest + service worker | Sem 11+ | [ ] Pendiente | FASE 2 | 🟢 NICE-TO-HAVE |
-| F1-060 | Core Signatures: Generador de firma médica | Sem 9 | [ ] Pendiente | MOD-VALIDACION | 🔴 CRÍTICO |
+| F1-010 | Core Auth: Firebase + roles + middleware | 3-5 días | [ ] Pendiente | MOD-EXPEDIENTES | ✅ Usuarios logeados |
+| F1-030 | Core Storage: GCP + upload + URLs firmadas | 3-5 días | [ ] Pendiente | MOD-EXPEDIENTES | ✅ Upload funcional |
+| F1-040 | Core UI: Completar shadcn + tema + layout | 5-7 días | [ ] Pendiente (50% hecho) | UX/Velocidad | 🎯 Interfaz profesional |
+| F1-050 | Core PWA: next-pwa + manifest + service worker | 3-4 días | [ ] Pendiente | FASE 2 | 🎯 Offline mode |
+| F1-060 | Core Signatures: Generador de firma médica | 3-4 días | [ ] Pendiente | MOD-VALIDACION | ✅ Firma digital lista |
 
 #### Epic: Módulos Flujo Principal (FASE 1)
 **Para personas de negocio:** Estos son los módulos que hacen que el sistema funcione de inicio a fin:
@@ -241,12 +247,12 @@ FASE 1 tiene 2 ÉPICAS en paralelo:
 - **MOD-VALIDACION:** IA que lee automáticamente los estudios y un médico valida los resultados
 - **MOD-REPORTES:** Generar reportes en PDF y enviarlos por email al cliente
 
-| ID | Módulo | Descripción | Dependencias | Estado |
+| ID | Módulo | Descripción | Dependencias | Entregable Incremental |
 |----|--------|-------------|--------------|--------|
 | F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | MOD-CLINICAS ✅, MOD-EMPRESAS ✅ | [✓] Completado |
-| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | MOD-CITAS ✅, Core-Auth (Sem 7), Core-Storage (Sem 7) | [ ] Sem 8-9 |
-| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures (Sem 9) | [ ] Sem 10-11 |
-| F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | [ ] Sem 12 |
+| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | MOD-CITAS ✅, Core-Auth, Core-Storage | **2 expedientes procesados** |
+| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures | **5 expedientes validados** |
+| F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | **10 expedientes reportes generados** |
 
 ### FASE 2: OPERACIONES (8-10 semanas) 📊 PLANEADO
 **Para personas de negocio:** Una vez que el flujo básico funciona (FASE 1), en esta fase agregamos herramientas para que los administradores puedan:

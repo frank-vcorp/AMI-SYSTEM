@@ -21,11 +21,6 @@
       "purpose": "any"
     }
   ],
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
   "categories": ["medical", "productivity"],
   "screenshots": []
 }

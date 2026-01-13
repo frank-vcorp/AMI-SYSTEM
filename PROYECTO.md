@@ -116,26 +116,26 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 <!-- progress-modules:start -->
 | id | name | phase | phaseOrder | owner | status | progress | summary | needs |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | done | 100 | pnpm workspaces + Turborepo + TypeScript | -
-| core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | done | 100 | Prisma Schema V2 Unificado (Centralizado en @ami/core) | - |
-| mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. UI Client Components. | - |
-| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. Baterías logic fixed. | - |
-| mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. | - |
-| arquitectura | Arquitectura y Documentación | FASE 0 – Cimientos | 0 | Arquitectura | done | 100 | ADRs, SPECs, Guías - COMPLETADO | N/A |
-| core-auth | Core - Autenticación | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Firebase Auth + roles + Custom Claims | Semana 7 |
-| core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | GCP Cloud Storage + URLs firmadas | Semana 7 |
-| core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | shadcn/ui + tema AMI (completar del 50%) | core-database |
-| core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | next-pwa + service worker + offline | Semana 11+ |
-| core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Generador de firma única por médico | Semana 9 |
-| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | ✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura. | mod-clinicas + mod-empresas |
-| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | core-auth + core-storage (Sem 7) |
-| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | Extracción IA + semáforos + dictamen + firma | mod-expedientes + core-signatures (Sem 9) |
-| mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Generación PDF + envío email + URLs temporales | mod-validacion + core-storage |
-| mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | KPIs, gráficas, alertas, pendientes | todos FASE 1 completados |
-| mod-bitacora | MOD-BITACORA | FASE 2 – Operaciones | 2 | Backend · Data | pending | 0 | Audit log, timeline, filtros, export Excel | core-database |
-| mod-calidad | MOD-CALIDAD | FASE 2 – Operaciones | 2 | Data | pending | 0 | Precisión IA, alertas activas, auditorías | mod-validacion |
-| mod-admin | MOD-ADMIN | FASE 2 – Operaciones | 2 | Frontend · Backend | pending | 0 | Usuarios, roles, semáforos, configuración | core-auth |
-| mod-portal-empresa | MOD-PORTAL-EMPRESA | FASE 3 – Expansión | 3 | Frontend | pending | 0 | Portal RH: expedientes, descargas, agendar | todos FASE 2 completados |
+| core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | done | 100 | Almacén central donde vive todo el código. Organizado y automatizado. | -
+| core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | done | 100 | Base de datos conectada. Guardamos clínicas, servicios, empresas, citas. | - |
+| mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | Registro de sedes: dónde se hacen los exámenes, horarios y capacidad. | - |
+| mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | Catálogo de exámenes: estudios individuales y paquetes (baterías). | - |
+| mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | Registro de clientes: empresas que contratan exámenes y sus perfiles de puesto. | - |
+| arquitectura | Arquitectura y Documentación | FASE 0 – Cimientos | 0 | Arquitectura | done | 100 | Planos y manuales: cómo funciona el sistema, decisiones técnicas documentadas. | N/A |
+| core-auth | Core - Autenticación | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Login seguro: solo médicos, recepcionistas, coordinadores autorizados acceden. | Semana 7 |
+| core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura. | Semana 7 |
+| core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado. | core-database |
+| core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
+| core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | Semana 9 |
+| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | Agenda de citas: pacientes agendados, recordatorios automáticos, check-in. | mod-clinicas + mod-empresas |
+| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción del paciente, captura de examen médico, subida de estudios a la nube. | core-auth + core-storage (Sem 7) |
+| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
+| mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |
+| mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado. | todos FASE 1 completados |
+| mod-bitacora | MOD-BITACORA | FASE 2 – Operaciones | 2 | Backend · Data | pending | 0 | Registro completo: quién hizo qué, cuándo lo hizo. Cumple normativas de auditoría. | core-database |
+| mod-calidad | MOD-CALIDAD | FASE 2 – Operaciones | 2 | Data | pending | 0 | Control de calidad: qué tan precisa es la IA. Auditorías médicas automáticas. | mod-validacion |
+| mod-admin | MOD-ADMIN | FASE 2 – Operaciones | 2 | Frontend · Backend | pending | 0 | Administración: crear usuarios, asignar roles, configurar parámetros del sistema. | core-auth |
+| mod-portal-empresa | MOD-PORTAL-EMPRESA | FASE 3 – Expansión | 3 | Frontend | pending | 0 | Portal para RH: empresas clientes ven resultados de sus empleados, descargan reportes. | todos FASE 2 completados |
 <!-- progress-modules:end -->
 
 ---

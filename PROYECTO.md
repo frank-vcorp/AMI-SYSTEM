@@ -117,25 +117,25 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | id | name | phase | phaseOrder | owner | status | progress | summary | needs |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | core-setup | Setup Monorepo + Tooling | FASE 0 – Cimientos | 0 | DevOps | done | 100 | pnpm workspaces + Turborepo + TypeScript | -
-| core-auth | Core - Autenticación | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Firebase Auth + roles + Custom Claims | core-setup completado |
 | core-database | Core - Base de Datos | FASE 0 – Cimientos | 0 | Backend | done | 100 | Prisma Schema V2 Unificado (Centralizado en @ami/core) | - |
-| core-storage | Core - Storage | FASE 0 – Cimientos | 0 | Backend | pending | 0 | GCP Cloud Storage + URLs firmadas | core-setup completado |
-| core-ui | Core - UI Base | FASE 0 – Cimientos | 0 | Frontend | in_progress | 50 | shadcn/ui + tema AMI | core-setup completado |
-| core-pwa | Core - PWA | FASE 0 – Cimientos | 0 | Frontend | pending | 0 | next-pwa + service worker + offline | core-ui completado |
-| core-signatures | Core - Firmas | FASE 0 – Cimientos | 0 | Backend | pending | 0 | Generador de firma única por médico | core-setup completado |
 | mod-clinicas | MOD-CLINICAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. UI Client Components. | - |
 | mod-servicios | MOD-SERVICIOS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. Baterías logic fixed. | - |
 | mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | ✅ Validado globalmente. Schema V2 sync. | - |
-| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | ✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura. | mod-clinicas + mod-empresas |
-| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | mod-citas completado |
-| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | Extracción IA + semáforos + dictamen + firma | mod-expedientes completado |
-| mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Generación PDF + envío email + URLs temporales | mod-validacion completado |
-| mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | KPIs, gráficas, alertas, pendientes | todos FASE 1 completados |
-| mod-bitacora | MOD-BITACORA | FASE 2 – Operaciones | 2 | Backend · Data | pending | 0 | Audit log, timeline, filtros, export Excel | core-database completado |
-| mod-calidad | MOD-CALIDAD | FASE 2 – Operaciones | 2 | Data | pending | 0 | Precisión IA, alertas activas, auditorías | mod-validacion completado |
-| mod-admin | MOD-ADMIN | FASE 2 – Operaciones | 2 | Frontend · Backend | pending | 0 | Usuarios, roles, semáforos, configuración | core-auth completado |
-| mod-portal-empresa | MOD-PORTAL-EMPRESA | FASE 3 – Expansión | 3 | Frontend | pending | 0 | Portal RH: expedientes, descargas, agendar | todos FASE 2 completados |
 | arquitectura | Arquitectura y Documentación | FASE 0 – Cimientos | 0 | Arquitectura | done | 100 | ADRs, SPECs, Guías - COMPLETADO | N/A |
+| core-auth | Core - Autenticación | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Firebase Auth + roles + Custom Claims | Semana 7 |
+| core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | GCP Cloud Storage + URLs firmadas | Semana 7 |
+| core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | shadcn/ui + tema AMI (completar del 50%) | core-database |
+| core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | next-pwa + service worker + offline | Semana 11+ |
+| core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Generador de firma única por médico | Semana 9 |
+| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | ✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura. | mod-clinicas + mod-empresas |
+| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción + Examen Médico + Carga de Estudios | core-auth + core-storage (Sem 7) |
+| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | Extracción IA + semáforos + dictamen + firma | mod-expedientes + core-signatures (Sem 9) |
+| mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Generación PDF + envío email + URLs temporales | mod-validacion + core-storage |
+| mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | KPIs, gráficas, alertas, pendientes | todos FASE 1 completados |
+| mod-bitacora | MOD-BITACORA | FASE 2 – Operaciones | 2 | Backend · Data | pending | 0 | Audit log, timeline, filtros, export Excel | core-database |
+| mod-calidad | MOD-CALIDAD | FASE 2 – Operaciones | 2 | Data | pending | 0 | Precisión IA, alertas activas, auditorías | mod-validacion |
+| mod-admin | MOD-ADMIN | FASE 2 – Operaciones | 2 | Frontend · Backend | pending | 0 | Usuarios, roles, semáforos, configuración | core-auth |
+| mod-portal-empresa | MOD-PORTAL-EMPRESA | FASE 3 – Expansión | 3 | Frontend | pending | 0 | Portal RH: expedientes, descargas, agendar | todos FASE 2 completados |
 <!-- progress-modules:end -->
 
 ---

@@ -142,8 +142,8 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 
 ## 5. Épicas y Tareas Detalladas
 
-### FASE 0: CIMIENTOS (4-5 semanas)
-**Objetivo:** Infraestructura base + 3 módulos catálogo + Deploy a Vercel + DB conectada
+### FASE 0: CIMIENTOS (4-5 semanas) ✅ COMPLETADA
+**Para personas de negocio:** En esta fase, hemos construido la "casa" del sistema. Preparamos la infraestructura básica (servidores, base de datos), y creamos los módulos de configuración inicial: lugares donde se realizan los exámenes (clínicas), tipos de exámenes disponibles (servicios), y empresas clientes. El sistema ahora está desplegado en internet y listo para recibir datos.
 
 **Alcance FASE 0 [✓] COMPLETADO:**
 - ✅ Monorepo base (pnpm → npm workspaces)
@@ -163,6 +163,8 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - Core-UI (shadcn) - 50% done, continue FASE 1
 
 #### Epic: Setup del Monorepo [✓ COMPLETADO EN FASE 0]
+**Para personas de negocio:** Se configuró el "almacén central" donde vive el código. Todos los módulos están organizados en un único lugar, usando herramientas que automatizan pruebas y detección de errores.
+
 | ID | Tarea | Estado | Responsable |
 |----|-------|--------|-------------|
 | F0-001 | Crear estructura `packages/core/` | [✓] Completado | SOFIA |
@@ -176,15 +178,26 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 |----|-------|--------|-------------|
 | F0-020 | Core Database: Prisma + PostgreSQL + tenant middleware | [✓] Completado (FASE 0.5) | SOFIA |
 
-#### Epic: Módulos Base
+#### Epic: Módulos Base [✓ COMPLETADO EN FASE 0]
+**Para personas de negocio:** Se crearon tres módulos de administración:
+- **Clínicas:** Registro de todas las sedes, sus horarios y capacidad
+- **Servicios:** Catálogo de exámenes individuales y paquetes (baterías)
+- **Empresas:** Registro de empresas clientes, qué exámenes contratan y perfiles de puesto
+
 | ID | Tarea | Estado | Responsable |
 |----|-------|--------|-------------|
 | F0-100 | MOD-CLINICAS: CRUD clínicas, horarios, capacidad | [✓] Completado | SOFIA |
 | F0-110 | MOD-SERVICIOS: Catálogo + baterías | [✓] Completado | SOFIA |
 | F0-120 | MOD-EMPRESAS: CRUD + baterías contratadas + perfiles | [✓] Completado | SOFIA |
 
-### FASE 1: FLUJO PRINCIPAL (6-8 semanas)
-**Objetivo:** Un paciente puede completar el flujo completo + Core de Servicios
+### FASE 1: FLUJO PRINCIPAL (6-8 semanas) 🚀 INICIANDO
+**Para personas de negocio:** En esta fase, el sistema comenzará a trabajar "de verdad". Un paciente podrá agendar una cita, presentarse el día de la cita, un médico le realizará exámenes, se subirán los estudios (radiografías, análisis), y un sistema de IA extraerá automáticamente los datos importantes de esos documentos. Finalmente, un médico validará los datos y generará un reporte. Esto incluye:
+- **Sistemas de seguridad:** Cada persona logeada (médicos, recepcionistas, técnicos) verá solo lo que le corresponde
+- **Almacenamiento de documentos:** Las imágenes y PDFs de exámenes se guardarán de forma segura en la nube
+- **Automatización con IA:** Lectura automática de resultados de laboratorio
+- **Firmas digitales:** Los reportes finales serán firmados digitalmente por el médico
+
+**Objetivo técnico:** Un paciente puede completar el flujo completo + Core de Servicios
 
 **✅ FASE 0 [100% COMPLETADA] - Requerimiento para iniciar FASE 1:**
 - ✅ Epic: Setup del Monorepo [5/5 tareas completadas]
@@ -206,6 +219,13 @@ FASE 1 tiene 2 ÉPICAS en paralelo:
 - **Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
 
 #### Epic: Core Components (FASE 1)
+**Para personas de negocio:** Estos son los "servicios de infraestructura" que necesita el sistema para funcionar:
+- **Autenticación:** Login seguro para médicos, recepcionistas, coordinadores
+- **Almacenamiento en la nube:** Guardar imágenes y PDFs de forma segura
+- **Firmas digitales:** Los reportes finales serán firmados digitalmente (legal y seguro)
+- **Interfaz visual:** Mejorar la apariencia y usabilidad de la plataforma
+- **Aplicación móvil:** Permitir trabajar sin internet (offline mode)
+
 | ID | Tarea | Semana | Estado | Bloqueador | Prioridad |
 |----|-------|--------|--------|-----------|-----------|
 | F1-010 | Core Auth: Firebase + roles + middleware | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES | 🔴 CRÍTICO |
@@ -214,7 +234,13 @@ FASE 1 tiene 2 ÉPICAS en paralelo:
 | F1-050 | Core PWA: next-pwa + manifest + service worker | Sem 11+ | [ ] Pendiente | FASE 2 | 🟢 NICE-TO-HAVE |
 | F1-060 | Core Signatures: Generador de firma médica | Sem 9 | [ ] Pendiente | MOD-VALIDACION | 🔴 CRÍTICO |
 
-#### Epic: Módulos Flujo Principal
+#### Epic: Módulos Flujo Principal (FASE 1)
+**Para personas de negocio:** Estos son los módulos que hacen que el sistema funcione de inicio a fin:
+- **MOD-CITAS:** Agendar citas con médicos (ya completado)
+- **MOD-EXPEDIENTES:** Recibir al paciente, capturar examen médico, guardar estudios (radiografías, análisis)
+- **MOD-VALIDACION:** IA que lee automáticamente los estudios y un médico valida los resultados
+- **MOD-REPORTES:** Generar reportes en PDF y enviarlos por email al cliente
+
 | ID | Módulo | Descripción | Dependencias | Estado |
 |----|--------|-------------|--------------|--------|
 | F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | MOD-CLINICAS ✅, MOD-EMPRESAS ✅ | [✓] Completado |
@@ -222,22 +248,30 @@ FASE 1 tiene 2 ÉPICAS en paralelo:
 | F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures (Sem 9) | [ ] Sem 10-11 |
 | F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | [ ] Sem 12 |
 
-### FASE 2: OPERACIONES (8-10 semanas)
-**Objetivo:** Sistema operativo completo
+### FASE 2: OPERACIONES (8-10 semanas) 📊 PLANEADO
+**Para personas de negocio:** Una vez que el flujo básico funciona (FASE 1), en esta fase agregamos herramientas para que los administradores puedan:
+- **Ver el desempeño:** Gráficas con cuántos exámenes se hacen por día, por clínica, qué empresas tienen más citas
+- **Alertas automáticas:** El sistema les notifica si algo está atrasado o hay problemas
+- **Control de calidad:** Revisar qué tan precisa es la IA en la extracción de datos
+- **Auditoría:** Un registro completo de quién hizo qué y cuándo (para cumplir normativas)
+- **Administración:** Crear usuarios, asignar roles, configurar parámetros del sistema
 
 | ID | Módulo | Descripción | Estado |
 |----|--------|-------------|--------|
-| F2-300 | MOD-DASHBOARD | KPIs, gráficas, alertas | [ ] Pendiente |
-| F2-310 | MOD-BITACORA | Audit log, timeline, export | [ ] Pendiente |
-| F2-320 | MOD-CALIDAD | Precisión IA, auditorías | [ ] Pendiente |
-| F2-330 | MOD-ADMIN | Usuarios, roles, config | [ ] Pendiente |
+| F2-300 | MOD-DASHBOARD | Panel de control: KPIs, gráficas, alertas en tiempo real | [ ] Pendiente |
+| F2-310 | MOD-BITACORA | Registro de auditoría: quién hizo qué y cuándo | [ ] Pendiente |
+| F2-320 | MOD-CALIDAD | Control de calidad: precisión de IA, auditorías médicas | [ ] Pendiente |
+| F2-330 | MOD-ADMIN | Administración: usuarios, roles, configuración del sistema | [ ] Pendiente |
 
-### FASE 3: EXPANSIÓN (4-6 semanas)
-**Objetivo:** Portal para empresas cliente
+### FASE 3: EXPANSIÓN (4-6 semanas) 🌍 FUTURO
+**Para personas de negocio:** Una vez que el sistema funciona bien internamente, en esta fase lo abrimos para que las empresas clientes accedan directamente. Las áreas de RH de las empresas podrán:
+- **Ver sus expedientes:** Consultar resultados de exámenes de sus empleados
+- **Descargar reportes:** Bajar PDFs listos para auditorías o registros internos
+- **Agendar citas:** Directamente sin pasar por el coordinador de AMI
 
 | ID | Módulo | Descripción | Estado |
 |----|--------|-------------|--------|
-| F3-400 | MOD-PORTAL-EMPRESA | Dashboard RH, expedientes, agendar | [ ] Pendiente |
+| F3-400 | MOD-PORTAL-EMPRESA | Portal para RH: ver expedientes, descargar reportes, agendar citas | [ ] Pendiente |
 
 ---
 

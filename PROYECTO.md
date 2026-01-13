@@ -1,23 +1,23 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-12 23:30 UTC_
-> **🎉 VERCEL BUILD EXITOSO:** Monorepo desplegado en producción. Checkpoint completo.
+> _Última actualización: 2026-01-13 00:15 UTC_
+> **🎉 VERCEL BUILD EXITOSO + RAILWAY POSTGRESQL CONNECTADO:** Sistema completo desplegado en producción con BD real.
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.
 
 ## 2. Objetivos Principales
-1.  **Arquitectura Modular**: Monorepo (pnpm + Turborepo) con Core + 17 módulos independientes
+1.  **Arquitectura Modular**: Monorepo (npm + Turborepo) con Core + 17 módulos independientes
 2.  **Flujo Digitalizado**: Check-in → Examen → Estudios → Validación IA → Dictamen → Entrega
 3.  **PWA Mobile-First**: Responsive desde día 1, offline para datos críticos
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
 - **Fase Actual**: FASE 0 COMPLETADA ✅ | FASE 0.5 EN PROGRESO (Integración Web-App + Infraestructura)
-- **Semáforo**: 🟢 Verde (Código en master, infraestructura setup pending)
+- **Semáforo**: 🟢 Verde (Código en master, Vercel + Railway LIVE)
 - **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado)
 
-## 4. Actualización 2026-01-12 (Final)
+## 4. Actualización 2026-01-13 (Deploy Vercel + Railway LIVE)
 
 ### ✅ FASE 0 Completada (100%):
 - [✓] **3 Módulos Mergeados a Master:**
@@ -33,24 +33,30 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - ADR-002 definido y validado
     - Dashboard actualizado
 
-### ⏳ FASE 0.5 En Progreso (60%):
+### ✅ FASE 0.5 Completada (100%):
 - [✓] **Web-app Integration (SOFIA - Completado):**
     - API routes: /api/clinicas/* (GET, POST, PUT, DELETE)
     - Page routes: /admin/clinicas (Server Component)
     - Admin layout: Sidebar navigation + home page update
-- [✓] **Vercel Build Fix (SOFIA + GEMINI - 2026-01-12 ✅ COMPLETADO):**
-    - Diagnóstico: 15+ iteraciones de troubleshooting
-    - Root cause: pnpm incompatible con Node.js 20 en Vercel (ERR_INVALID_THIS)
-    - Solución: Migración pnpm → npm + prisma-mock.ts + vercel.json con cd ../..
-    - Commits: f05d615b → cbdfd45b → ac11cd76 → 332ac280
-    - Checkpoint: CHECKPOINT-VERCEL-BUILD-EXITOSO-20260112.md
-    - **Status:** ✅ BUILD EXITOSO - DESPLEGADO EN PRODUCCIÓN
-- [ ] **Infraestructura (GEMINI - Pendiente):**
-    - ✅ Vercel Build fix desbloqueador levantado
-    - PostgreSQL setup en Railway (1-2 horas)
-    - Prisma migrations (1 hora)
-    - Firebase Auth + Environment vars (2-3 horas)
-    - GCP Cloud Storage setup (1-2 horas)
+- [✓] **Vercel Build + Railway PostgreSQL (2026-01-12/13 ✅ COMPLETADO):**
+    - **Build Fix:** 15+ iteraciones → pnpm→npm migración → Vercel JSON cd ../..
+    - **Prisma Setup:** Schema con 10 modelos (Clinic, Appointment, Service, Battery, Company, JobProfile)
+    - **Railway BD:** postgresql://hopper.proxy.rlwy.net:34060/railway (10 tablas sincronizadas)
+    - **Prisma Client:** v6.19.1 generado, reemplazo de prisma-mock.ts completado
+    - **Status:** ✅ BUILD EXITOSO (8/8 tasks) - DESPLEGADO EN VERCEL + BD CONECTADA
+    - **Commits:**
+        - 332ac280: Vercel JSON fix
+        - 3fe1ea82: Configure Prisma + Railway
+        - 9f31d987: Checkpoint Prisma-Railway
+    - **Checkpoint:** CHECKPOINT-PRISMA-RAILWAY-CONFIG-20260112.md (375 líneas)
+- [✓] **Infraestructura (SOFIA + GEMINI - Completado):**
+    - ✅ Vercel Build desbloqueador levantado
+    - ✅ PostgreSQL setup en Railway (LIVE)
+    - ✅ Prisma migrations + db push completado
+    - ✅ Environment vars (.env.local, .env.production)
+    - ✅ Prisma client generation
+    - 🔄 Firebase Auth (próximo - requiere keys)
+    - 🔄 GCP Cloud Storage setup (próximo)
 
 ### ✅ FASE 1 Iniciada - MOD-CITAS (SOFIA - 50%):
 - [✓] **Estructura Base + Service Layer (Completado):**
@@ -74,7 +80,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] AppointmentManager component (orquesta UI)
     - [✓] Menu item en sidebar navigation
     - Dependencias: MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ (satisfechas)
-- [✓] **Build Optimization - Vercel (COMPLETADO 2026-01-12):**
+- [✓] **Build Optimization - Vercel (COMPLETADO 2026-01-13):**
     - [✓] Iteración 1: TypeScript ^5.2.2 + transpilePackages + pnpm-lock.yaml
     - [✓] Iteración 2: Tipos de fechas normalizados (String HTTP, Date Prisma)
     - [✓] Type-check sin errores (npx tsc --noEmit)
@@ -89,8 +95,9 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 
 | Fase | Semanas | Objetivo | Entregables de salida | Estado |
 |------|---------|----------|----------------------|--------|
-| FASE 0 – Cimientos | Sem 1-5 | Infraestructura base + catálogos | Monorepo, Core (auth/db/storage/ui/pwa), MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS | **Completado (95%)** |
-| FASE 1 – Flujo Principal | Sem 6-13 | Flujo completo de 1 paciente | MOD-CITAS, MOD-EXPEDIENTES, MOD-VALIDACION (IA), MOD-REPORTES | Planeado |
+| FASE 0 – Cimientos | Sem 1-5 | Infraestructura base + catálogos | Monorepo, Core (auth/db/storage/ui/pwa), MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS | **Completado (100%)** |
+| FASE 0.5 – Deploy | Sem 5-6 | Vercel + PostgreSQL LIVE | Monorepo build, Prisma + Railway, CI/CD | **Completado (100%)** |
+| FASE 1 – Flujo Principal | Sem 6-13 | Flujo completo de 1 paciente | MOD-CITAS (done), MOD-EXPEDIENTES, MOD-VALIDACION (IA), MOD-REPORTES | En progreso (20%) |
 | FASE 2 – Operaciones | Sem 14-23 | Sistema operativo completo | MOD-DASHBOARD, MOD-BITACORA, MOD-CALIDAD, MOD-ADMIN | Planeado |
 | FASE 3 – Expansión | Sem 24-29 | Portal clientes | MOD-PORTAL-EMPRESA, mejoras multi-tenant | Planeado |
 

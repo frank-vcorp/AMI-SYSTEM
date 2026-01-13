@@ -57,15 +57,32 @@
 
 ---
 
-### FASE 1: Flujo Principal (🔜 LISTA PARA INICIAR)
-**Estado:** 🟢 MOD-CITAS DONE | MOD-EXPEDIENTES READY (Bloqueadores satisfechos ✅)
+### FASE 1: Flujo Principal (� INICIANDO SEMANA 7)
+**Estado:** 🟡 INICIANDO | Core modules críticos requieren implementación ANTES de MOD-EXPEDIENTES
 
-| Módulo | Status | Bloqueador |
-|--------|--------|-----------|
-| MOD-CITAS | ✅ merged | MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
-| MOD-EXPEDIENTES | ready_to_start | MOD-CITAS ✅ |
-| MOD-VALIDACION (IA) | ready_to_start | MOD-EXPEDIENTES |
-| MOD-REPORTES | ready_to_start | MOD-VALIDACION |
+**Timing Crítico de Core Modules:**
+| Semana | Tarea | Bloqueador para | Estimado |
+|--------|-------|-----------------|----------|
+| **7** | Core-Auth (Firebase + Roles) | MOD-EXPEDIENTES | 3-4 días |
+| **7** | Core-Storage (GCP Cloud) | MOD-EXPEDIENTES | 2-3 días |
+| **8-9** | MOD-EXPEDIENTES (Recepción + Examen) | MOD-VALIDACION | 7-10 días |
+| **9** | Core-Signatures (Firma Digital) | MOD-VALIDACION | 2-3 días |
+| **10-11** | MOD-VALIDACION (IA + Validación) | MOD-REPORTES | 7-10 días |
+| **12** | MOD-REPORTES (PDF + Email) | Final | 5-7 días |
+
+**Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md) para detalles
+
+**Módulos & Dependencias:**
+
+| Módulo | Status | Dependencias |
+|--------|--------|--------------|
+| MOD-CITAS | ✅ Completado | MOD-CLINICAS ✅ + MOD-EMPRESAS ✅ |
+| **[SEMANA 7]** Core-Auth | ⏳ Iniciando | Firebase |
+| **[SEMANA 7]** Core-Storage | ⏳ Iniciando | GCP |
+| MOD-EXPEDIENTES | 🔜 Sem 8-9 | MOD-CITAS ✅ + Core-Auth (Sem 7) + Core-Storage (Sem 7) |
+| **[SEMANA 9]** Core-Signatures | ⏳ Pendiente | Canvas/PDF lib |
+| MOD-VALIDACION | 🔜 Sem 10-11 | MOD-EXPEDIENTES + Core-Signatures (Sem 9) + OpenAI API |
+| MOD-REPORTES | 🔜 Sem 12 | MOD-VALIDACION + Core-Storage ✅ |
 
 ---
 
@@ -91,31 +108,70 @@
 
 ---
 
-## ✅ Ciclo INTEGRA Completado (FASE 0)
+## ✅ Ciclo INTEGRA Completado (FASE 0) | FASE 1 Iniciando (Semana 7)
 
-### Checklist por Agente
+### Checklist FASE 0 (✅ COMPLETADO)
 
-**SOFIA (Builder) - Implementación + Integración**
+**SOFIA (Builder) - Implementación + Integración [✓ DONE]**
 - [x] Implementar 3 módulos (MOD-CLINICAS, MOD-SERVICIOS, MOD-EMPRESAS)
-- [x] Gemini QA fixes aplicados
+- [x] GEMINI QA fixes aplicados
 - [x] Mergear 3 feature branches a master (3 PRs atómicas)
-- [x] Crear API routes /api/clinicas/*
+- [x] Implementar MOD-CITAS (service layer + API routes + UI)
+- [x] Crear API routes /api/citas/*, /api/clinicas/*, /api/diagnostics
 - [x] Crear page routes /admin/clinicas
 - [x] Crear admin sidebar navigation
 - [x] Actualizar home page con links y status
+- [x] Gate 2: Test suites (citas, clinicas) con >80% coverage
+- [x] Gate 4: Dossier técnico + checkpoint enriquecido + handoff
 
-**GEMINI (QA Mentor) - Auditoría + Infrastructure (PENDING)**
-- [x] Code review exhaustiva (identificó 3 issues críticos)
-- [x] Recomendaciones documentadas (CHECKPOINT-GEMINI-QA-FIXES.md)
-- [ ] PostgreSQL setup + migrations (⏳ NEXT)
-- [ ] Firebase Auth credentials (⏳ NEXT)
-- [ ] GCP Cloud Storage setup (⏳ NEXT)
+**GEMINI (QA Mentor) - Gate 3 Code Review [✓ DONE]**
+- [x] Code review exhaustiva 
+- [x] Gate 3 Audit: ⚠️ PASSED (Cambios Menores)
+- [x] PostgreSQL setup + Railway (10 tablas synced)
+- [x] Prisma v6.19.1 generated + mocks replaced
+- [x] Verify API endpoints + DB connectivity (/api/diagnostics)
 
-**INTEGRA (Arquitecto) - Aprobación**
+**INTEGRA (Arquitecto) - Aprobación & Planning [✓ DONE]**
 - [x] Aprobación FASE 0 (código + arquitectura)
-- [x] Decisión merge (3 PRs granulares) ✅
-- [x] Roadmap FASE 0.5 (paralelo: SOFIA web-app + GEMINI infra)
-- [x] Authorization para FASE 1 (MOD-CITAS) cuando DB ready
+- [x] Gate 3 result processing (PASSED)
+- [x] Authorization FASE 1 ✅
+- [x] Documentación timing de Core modules
+
+---
+
+### Checklist FASE 1 (🚀 INICIANDO SEMANA 7)
+
+**SOFIA (Builder) - FASE 1 Core Modules + Módulos [⏳ IN PROGRESS]**
+
+*Semana 7 (Esta semana):*
+- [ ] Implementar Core-Auth (Firebase + roles + middleware)
+- [ ] Implementar Core-Storage (GCP + upload + URLs firmadas)
+
+*Semana 8-9:*
+- [ ] Implementar MOD-EXPEDIENTES (Recepción + Examen Médico + Carga estudios)
+- [ ] Test suites MOD-EXPEDIENTES
+
+*Semana 9:*
+- [ ] Implementar Core-Signatures (Generador de firma médica)
+
+*Semana 10-11:*
+- [ ] Implementar MOD-VALIDACION (Extracción IA + semáforos + dictamen)
+- [ ] Integración OpenAI API
+
+*Semana 12:*
+- [ ] Implementar MOD-REPORTES (PDF + Email + URLs temporales)
+
+**GEMINI (QA Mentor) - FASE 1 QA [🔜 NEXT]**
+- [ ] Core-Auth review (security, tokens, roles)
+- [ ] Core-Storage review (GCP setup, URLs, permissions)
+- [ ] MOD-EXPEDIENTES integration test
+- [ ] MOD-VALIDACION IA safety review
+
+**INTEGRA (Arquitecto) - FASE 1 Governance [🔜 NEXT]**
+- [ ] Approve Core-Auth implementation
+- [ ] Approve Core-Storage setup
+- [ ] Review MOD-EXPEDIENTES architecture
+- [ ] Review MOD-VALIDACION IA integration
 
 ---
 
@@ -154,14 +210,36 @@
 
 ---
 
-## 🚀 Próximas Acciones (FASE 1)
+## 🚀 Próximas Acciones (FASE 1 - Semana 7)
 
-**MOD-EXPEDIENTES (Próximo)**
-Objetivo: Digitalizar flujo de Examen Médico (Recepción → Examen → Carga Estudios)
+**ORDEN DE IMPLEMENTACIÓN (Semana 7-12):**
 
-**Bloqueadores:** Ninguno ✅ (MOD-CITAS done, FASE 0 gates passed)
+1. **ESTA SEMANA (Semana 7):**
+   - [ ] Implementar **Core-Auth** (Firebase + roles + middleware)
+     - Setup Firebase project + credentials
+     - Crear AuthContext + hooks (useAuth, useRequiredRole)
+     - Middleware para proteger rutas
+     - Roles: Admin, Coordinador, Recepcionista, Médico Examinador, Técnico, Médico Validador
+     - ETA: 3-4 días
+   
+   - [ ] Implementar **Core-Storage** (GCP Cloud Storage)
+     - Setup GCP bucket + service account
+     - Crear upload service (images, PDFs)
+     - Generar URLs firmadas (temporal access)
+     - ETA: 2-3 días
 
-**Timeline:** 2-3 semanas (semanas 7-8 del cronograma)
+2. **Semana 8-9:** MOD-EXPEDIENTES (depende de Core-Auth + Core-Storage)
+   - Recepción (check-in, generación de folio)
+   - Examen Médico (captura de vitales, IMC)
+   - Carga de Estudios (upload de PDFs)
+
+3. **Semana 9:** Core-Signatures (generador de firma médica)
+
+4. **Semana 10-11:** MOD-VALIDACION (IA + validación + firma)
+
+5. **Semana 12:** MOD-REPORTES (PDF + Email)
+
+**Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
 
 ---
 

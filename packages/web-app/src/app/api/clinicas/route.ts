@@ -1,24 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { ClinicService } from '@ami/mod-clinicas';
+import { prisma } from '@/lib/prisma';
 
-// Note: This is a simplified implementation. In production, you would:
-// 1. Initialize Prisma client with real database connection
-// 2. Implement proper authentication/authorization
-// 3. Add error handling and validation
-// 4. Add rate limiting and logging
-
-// Mock Prisma client (replace with real when DB is ready)
-const mockPrisma = {
-  clinic: {
-    findMany: async () => [],
-    findFirst: async () => null,
-    create: async (data: any) => ({ id: 'mock-1', ...data.data }),
-    update: async (data: any) => ({ ...data.data.data }),
-    delete: async () => ({})
-  }
-};
-
-const clinicService = new ClinicService(mockPrisma as any);
+// Initialize ClinicService with real Prisma client
+const clinicService = new ClinicService(prisma as any);
 
 /**
  * GET /api/clinicas

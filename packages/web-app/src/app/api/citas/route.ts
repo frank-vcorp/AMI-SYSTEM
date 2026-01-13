@@ -1,28 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { AppointmentService } from '@ami/mod-citas';
+import { prisma } from '@/lib/prisma';
 
-/**
- * Mock Prisma client (replace with real database when infrastructure ready)
- * In production: Use real PrismaClient connected to PostgreSQL
- */
-const mockPrisma = {
-  appointment: {
-    findMany: async () => [],
-    findFirst: async () => null,
-    create: async (data: any) => ({ id: 'mock-' + Date.now(), ...data.data }),
-    update: async (data: any) => ({ ...data.data.data }),
-    delete: async () => ({})
-  },
-  clinicSchedule: {
-    findFirst: async () => null,
-    findMany: async () => [],
-  },
-  appointmentService: {
-    createMany: async () => ({})
-  }
-};
-
-const appointmentService = new AppointmentService(mockPrisma as any);
+// Initialize AppointmentService with real Prisma client
+const appointmentService = new AppointmentService(prisma as any);
 
 /**
  * GET /api/citas

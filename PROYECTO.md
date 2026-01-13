@@ -185,24 +185,30 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | F0-120 | MOD-EMPRESAS: CRUD + baterías contratadas + perfiles | [✓] Completado | SOFIA |
 
 ### FASE 1: FLUJO PRINCIPAL (6-8 semanas)
-**Objetivo:** Un paciente puede completar el flujo completo + Core modules críticos
+**Objetivo:** Un paciente puede completar el flujo completo + Core de Servicios
+
+**⚠️ IMPORTANTE - Timing de Core Modules:**
+- **Core-Auth** (Firebase): Semana 7 - BLOQUEADOR para MOD-EXPEDIENTES
+- **Core-Storage** (GCP): Semana 7 - BLOQUEADOR para MOD-EXPEDIENTES (upload PDFs)
+- **Core-Signatures** (Firma): Semana 9 - BLOQUEADOR para MOD-VALIDACION
+- **Ver:** [context/ANALISIS-CORE-MODULES-TIMING.md](context/ANALISIS-CORE-MODULES-TIMING.md)
 
 #### Epic: Core Components (Bloqueadores FASE 1)
-| ID | Tarea | Estado | Responsable | Bloqueador |
-|----|-------|--------|-------------|-----------|
-| F1-010 | Core Auth: Firebase + roles + middleware | [ ] Pendiente | SOFIA | Crítico |
-| F1-030 | Core Storage: GCP + upload + URLs firmadas | [ ] Pendiente | SOFIA | Crítico |
-| F1-040 | Core UI: Completar shadcn + tema + layout | [~] En Progreso (50%) | SOFIA | Nice to have |
-| F1-050 | Core PWA: next-pwa + manifest + service worker | [ ] Pendiente | SOFIA | Nice to have |
-| F1-060 | Core Signatures: Generador de firma médica | [ ] Pendiente | SOFIA | Crítico |
+| ID | Tarea | Semana | Estado | Bloqueador |
+|----|-------|--------|--------|-----------|
+| F1-010 | Core Auth: Firebase + roles + middleware | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES |
+| F1-030 | Core Storage: GCP + upload + URLs firmadas | Sem 7 | [ ] Pendiente | MOD-EXPEDIENTES |
+| F1-040 | Core UI: Completar shadcn + tema + layout | Sem 8-9 | [~] En Progreso (50%) | UX improvement |
+| F1-050 | Core PWA: next-pwa + manifest + service worker | Sem 11+ | [ ] Pendiente | FASE 2 |
+| F1-060 | Core Signatures: Generador de firma médica | Sem 9 | [ ] Pendiente | MOD-VALIDACION |
 
 #### Epic: Módulos Flujo Principal
-| ID | Módulo | Descripción | Estado |
-|----|--------|-------------|--------|
-| F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | [✓] Completado (FASE 0.5) |
-| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | [ ] Pendiente |
-| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen | [ ] Pendiente |
-| F1-270 | MOD-REPORTES | PDF + email + URLs temporales | [ ] Pendiente |
+| ID | Módulo | Descripción | Dependencias | Estado |
+|----|--------|-------------|--------------|--------|
+| F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | MOD-CLINICAS ✅, MOD-EMPRESAS ✅ | [✓] Completado |
+| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios | MOD-CITAS ✅, Core-Auth (Sem 7), Core-Storage (Sem 7) | [ ] Sem 8-9 |
+| F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures (Sem 9) | [ ] Sem 10-11 |
+| F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | [ ] Sem 12 |
 
 ### FASE 2: OPERACIONES (8-10 semanas)
 **Objetivo:** Sistema operativo completo

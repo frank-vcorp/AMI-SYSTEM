@@ -1,6 +1,6 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-13T03:16:40.231Z",
+  "lastUpdated": "2026-01-13T03:19:54.146Z",
   "overallProgress": 34.21052631578947,
   "phases": [
     {
@@ -14,7 +14,7 @@
           "owner": "Backend",
           "status": "done",
           "progress": 100,
-          "summary": "Prisma Schema V2 Unificado (Centralizado en @ami/core)",
+          "summary": "Base de datos conectada. Guardamos clínicas, servicios, empresas, citas.",
           "needs": "-"
         },
         {
@@ -23,7 +23,7 @@
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
-          "summary": "✅ Validado globalmente. Schema V2 sync. UI Client Components.",
+          "summary": "Registro de sedes: dónde se hacen los exámenes, horarios y capacidad.",
           "needs": "-"
         },
         {
@@ -32,7 +32,7 @@
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
-          "summary": "✅ Validado globalmente. Schema V2 sync. Baterías logic fixed.",
+          "summary": "Catálogo de exámenes: estudios individuales y paquetes (baterías).",
           "needs": "-"
         },
         {
@@ -41,7 +41,7 @@
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
-          "summary": "✅ Validado globalmente. Schema V2 sync.",
+          "summary": "Registro de clientes: empresas que contratan exámenes y sus perfiles de puesto.",
           "needs": "-"
         },
         {
@@ -50,7 +50,7 @@
           "owner": "Arquitectura",
           "status": "done",
           "progress": 100,
-          "summary": "ADRs, SPECs, Guías - COMPLETADO",
+          "summary": "Planos y manuales: cómo funciona el sistema, decisiones técnicas documentadas.",
           "needs": "N/A"
         }
       ],
@@ -69,7 +69,7 @@
           "owner": "Backend",
           "status": "pending",
           "progress": 0,
-          "summary": "Firebase Auth + roles + Custom Claims",
+          "summary": "Login seguro: solo médicos, recepcionistas, coordinadores autorizados acceden.",
           "needs": "Semana 7"
         },
         {
@@ -78,7 +78,7 @@
           "owner": "Backend",
           "status": "pending",
           "progress": 0,
-          "summary": "GCP Cloud Storage + URLs firmadas",
+          "summary": "Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura.",
           "needs": "Semana 7"
         },
         {
@@ -87,7 +87,7 @@
           "owner": "Frontend",
           "status": "in_progress",
           "progress": 50,
-          "summary": "shadcn/ui + tema AMI (completar del 50%)",
+          "summary": "Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado.",
           "needs": "core-database"
         },
         {
@@ -96,7 +96,7 @@
           "owner": "Frontend",
           "status": "pending",
           "progress": 0,
-          "summary": "next-pwa + service worker + offline",
+          "summary": "Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline.",
           "needs": "Semana 11+"
         },
         {
@@ -105,7 +105,7 @@
           "owner": "Backend",
           "status": "pending",
           "progress": 0,
-          "summary": "Generador de firma única por médico",
+          "summary": "Firma digital: reportes firmados legalmente por el médico. Cumple normativas.",
           "needs": "Semana 9"
         },
         {
@@ -114,7 +114,7 @@
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
-          "summary": "✅ Service layer DONE. UI Components + API Routes DONE. Ready para infraestructura.",
+          "summary": "Agenda de citas: pacientes agendados, recordatorios automáticos, check-in.",
           "needs": "mod-clinicas + mod-empresas"
         },
         {
@@ -123,7 +123,7 @@
           "owner": "Frontend · Backend",
           "status": "pending",
           "progress": 0,
-          "summary": "Recepción + Examen Médico + Carga de Estudios",
+          "summary": "Recepción del paciente, captura de examen médico, subida de estudios a la nube.",
           "needs": "core-auth + core-storage (Sem 7)"
         },
         {
@@ -132,7 +132,7 @@
           "owner": "Backend · Data",
           "status": "pending",
           "progress": 0,
-          "summary": "Extracción IA + semáforos + dictamen + firma",
+          "summary": "IA inteligente lee estudios automáticamente. Médico valida y firma los resultados.",
           "needs": "mod-expedientes + core-signatures (Sem 9)"
         },
         {
@@ -141,7 +141,7 @@
           "owner": "Backend · Frontend",
           "status": "pending",
           "progress": 0,
-          "summary": "Generación PDF + envío email + URLs temporales",
+          "summary": "Genera PDF profesional con resultados. Se envía por email a la empresa cliente.",
           "needs": "mod-validacion + core-storage"
         }
       ],
@@ -162,7 +162,7 @@
           "owner": "Frontend · Data",
           "status": "pending",
           "progress": 0,
-          "summary": "KPIs, gráficas, alertas, pendientes",
+          "summary": "Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado.",
           "needs": "todos FASE 1 completados"
         },
         {
@@ -171,7 +171,7 @@
           "owner": "Backend · Data",
           "status": "pending",
           "progress": 0,
-          "summary": "Audit log, timeline, filtros, export Excel",
+          "summary": "Registro completo: quién hizo qué, cuándo lo hizo. Cumple normativas de auditoría.",
           "needs": "core-database"
         },
         {
@@ -180,7 +180,7 @@
           "owner": "Data",
           "status": "pending",
           "progress": 0,
-          "summary": "Precisión IA, alertas activas, auditorías",
+          "summary": "Control de calidad: qué tan precisa es la IA. Auditorías médicas automáticas.",
           "needs": "mod-validacion"
         },
         {
@@ -189,7 +189,7 @@
           "owner": "Frontend · Backend",
           "status": "pending",
           "progress": 0,
-          "summary": "Usuarios, roles, semáforos, configuración",
+          "summary": "Administración: crear usuarios, asignar roles, configurar parámetros del sistema.",
           "needs": "core-auth"
         }
       ],
@@ -208,7 +208,7 @@
           "owner": "Frontend",
           "status": "pending",
           "progress": 0,
-          "summary": "Portal RH: expedientes, descargas, agendar",
+          "summary": "Portal para RH: empresas clientes ven resultados de sus empleados, descargan reportes.",
           "needs": "todos FASE 2 completados"
         }
       ],

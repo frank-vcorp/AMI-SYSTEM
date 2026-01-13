@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: 'AMI-SYSTEM - Residente Digital con IA',
   description: 'Sistema modular de gestión de salud ocupacional',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico' }
+    ]
+  }
 };
 
 export default function RootLayout({

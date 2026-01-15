@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-15T16:33:30.487Z",
-  "overallProgress": 34.21052631578947,
+  "lastUpdated": "2026-01-15T21:13:22.231Z",
+  "overallProgress": 39.473684210526315,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 16.666666666666668,
+      "progress": 27.77777777777778,
       "modules": [
         {
           "id": "core-auth",
@@ -76,10 +76,10 @@
           "id": "core-storage",
           "name": "Core - Storage",
           "owner": "Backend",
-          "status": "pending",
-          "progress": 0,
+          "status": "done",
+          "progress": 100,
           "summary": "Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura.",
-          "needs": "Semana 7"
+          "needs": "-"
         },
         {
           "id": "core-ui",
@@ -146,9 +146,9 @@
         }
       ],
       "statusCounts": {
-        "pending": 7,
-        "in_progress": 1,
-        "done": 1
+        "pending": 6,
+        "done": 2,
+        "in_progress": 1
       }
     },
     {
@@ -251,7 +251,7 @@
     {
       "module": "Core - Storage",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "Semana 7"
+      "detail": "-"
     },
     {
       "module": "Core - UI Base",

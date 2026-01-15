@@ -4,12 +4,15 @@
   "description": "GCP Cloud Storage + signed URLs",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "build": "echo 'No build needed for storage stubs'"
   },
   "dependencies": {
-    "@ami/core-types": "*"
+    "@ami/core-types": "*",
+    "@google-cloud/storage": "^7.18.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2"

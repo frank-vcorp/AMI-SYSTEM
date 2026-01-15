@@ -123,7 +123,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | mod-empresas | MOD-EMPRESAS | FASE 0 – Cimientos | 0 | Frontend · Backend | done | 100 | Registro de clientes: empresas que contratan exámenes y sus perfiles de puesto. | - |
 | arquitectura | Arquitectura y Documentación | FASE 0 – Cimientos | 0 | Arquitectura | done | 100 | Planos y manuales: cómo funciona el sistema, decisiones técnicas documentadas. | N/A |
 | core-auth | Core - Autenticación | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Login seguro: solo médicos, recepcionistas, coordinadores autorizados acceden. | Semana 7 |
-| core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura. | Semana 7 |
+| core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura. | - |
 | core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado. | core-database |
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | Semana 9 |
@@ -256,6 +256,8 @@ FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance (Sem
 | F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios escalado | MOD-CITAS ✅, Core-Auth, Core-Storage, MVS | **2-5 expedientes procesados** |
 | F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures | **5-10 expedientes validados** |
 | F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | **10 expedientes reportes generados** |
+| F1-REV-1 | **REVISIÓN MVS (AMI)** | Sesión de demo y feedback con Staff Médico (1 exp) | MVS Terminada | **✅ Feedback aprobado** |
+| F1-REV-2 | **UAT FINAL (AMI)** | Pruebas de aceptación con usuarios reales (10 exp) | MOD-REPORTES | **✅ Acta de aceptación** |
 
 ### FASE 2: OPERACIONES (8-10 semanas) 📊 PLANEADO
 **Para personas de negocio:** Una vez que el flujo básico funciona (FASE 1), en esta fase agregamos herramientas para que los administradores puedan:

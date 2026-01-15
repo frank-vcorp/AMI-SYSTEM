@@ -46,6 +46,7 @@ SEMANA 6-7 (5-7 días):
 ├── MOD-EXPEDIENTES v1 MINIMAL (solo 1 expediente)
 ├── Setup flujo: Recepción → Examen → Carga
 ├── Procesar 1 expediente piloto
+├── **SESIÓN REVISIÓN 1 (AMI):** Demo MVS con médico líder
 └── GATE B PASS → **MVS COMPLETADO** (1 expediente procesado)
 
 SEMANA 7-8 (5-7 días):
@@ -65,6 +66,7 @@ SEMANA 9-11 (10-14 días):
 
 SEMANA 11-12 (5-7 días):
 ├── Testing, refinamientos, documentación
+├── **SESIÓN REVISIÓN 2 (AMI):** UAT Final con usuarios reales
 ├── Training para staff AMI
 └── CIERRE FASE 1: 10 expedientes validados + documentación
 

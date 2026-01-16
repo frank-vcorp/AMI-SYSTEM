@@ -10,12 +10,14 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@ami/core-auth": "*",
     "@ami/core-types": "*",
     "@ami/core-ui": "*",
     "@ami/mod-citas": "*",
     "@ami/mod-clinicas": "*",
     "@ami/mod-empresas": "*",
     "@ami/mod-servicios": "*",
+    "firebase": "^10.7.0",
     "next": "^14.0.0",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",

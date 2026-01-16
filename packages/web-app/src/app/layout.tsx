@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { AuthProvider } from '@/lib/auth-context';
 import './globals.css';
 
 export const viewport: Viewport = {
@@ -24,7 +25,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className="bg-gray-50">{children}</body>
+      <body className="bg-gray-50">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

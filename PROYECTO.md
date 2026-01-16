@@ -236,8 +236,8 @@ FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance (Sem
 
 | ID | Tarea | Duración Est. | Estado | Bloqueador | Entregable |
 |----|-------|--------|--------|-----------|-----------|
-| F1-010 | Core Auth: Firebase + roles + middleware | 3-5 días | [ ] Pendiente | MOD-EXPEDIENTES | ✅ Usuarios logeados |
-| F1-030 | Core Storage: GCP + upload + URLs firmadas | 3-5 días | [ ] Pendiente | MOD-EXPEDIENTES | ✅ Upload funcional |
+| F1-010 | Core Auth: Firebase + roles + middleware | 3-5 días | [V] Login Implementado | MOD-EXPEDIENTES | ✅ Usuarios logeados |
+| F1-030 | Core Storage: GCP + upload + URLs firmadas | 3-5 días | [~] En Progreso (Libs OK) | MOD-EXPEDIENTES | ✅ Upload funcional |
 | F1-040 | Core UI: Completar shadcn + tema + layout | 5-7 días | [ ] Pendiente (50% hecho) | UX/Velocidad | 🎯 Interfaz profesional |
 | F1-050 | Core PWA: next-pwa + manifest + service worker | 3-4 días | [ ] Pendiente | FASE 2 | 🎯 Offline mode |
 | F1-060 | Core Signatures: Generador de firma médica | 3-4 días | [ ] Pendiente | MOD-VALIDACION | ✅ Firma digital lista |

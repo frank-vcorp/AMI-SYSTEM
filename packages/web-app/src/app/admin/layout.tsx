@@ -76,6 +76,23 @@ export default function AdminLayout({
             </Link>
           </div>
 
+          {/* Core Utilities */}
+          <div className="pt-4 border-t border-slate-700">
+            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">
+              Utilidades
+            </h3>
+            {/* File Upload */}
+            <Link
+              href="/admin/upload"
+              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
+            >
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              Carga de Archivos
+            </Link>
+          </div>
+
           {/* FASE 1+ Modules */}
           <div className="pt-4 border-t border-slate-700">
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">

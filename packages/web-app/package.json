@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ami/core-auth": "*",
+    "@ami/core-storage": "*",
     "@ami/core-types": "*",
     "@ami/core-ui": "*",
     "@ami/mod-citas": "*",

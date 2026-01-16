@@ -1,0 +1,48 @@
+{
+  "name": "@ami/core-signatures",
+  "version": "0.1.0",
+  "description": "Digital signature engine for medical reports - PDF signing and validation",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "pdf-lib": "^1.17.1",
+    "pem": "^1.14.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "@types/pem": "^1.14.4",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "keywords": [
+    "signatures",
+    "digital-signature",
+    "pdf",
+    "medical",
+    "certificates",
+    "x509"
+  ],
+  "author": "AMI-SYSTEM",
+  "license": "MIT"
+}

@@ -126,7 +126,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-storage | Core - Storage | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Almacenamiento en la nube: radiografías, análisis, PDFs guardados de forma segura. | - |
 | core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado. | core-database |
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
-| core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | pending | 0 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | Semana 9 |
+| core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | Agenda de citas: pacientes agendados, recordatorios automáticos, check-in. | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción del paciente, captura de examen médico, subida de estudios a la nube. | core-auth + core-storage (Sem 7) |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |

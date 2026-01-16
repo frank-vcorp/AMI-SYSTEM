@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-16T14:09:29.768Z",
-  "overallProgress": 44.73684210526316,
+  "lastUpdated": "2026-01-16T22:25:15.298Z",
+  "overallProgress": 48.421052631578945,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 38.888888888888886,
+      "progress": 46.666666666666664,
       "modules": [
         {
           "id": "core-auth",
@@ -130,8 +130,8 @@
           "id": "mod-validacion",
           "name": "MOD-VALIDACION",
           "owner": "Backend · Data",
-          "status": "pending",
-          "progress": 0,
+          "status": "in_progress",
+          "progress": 70,
           "summary": "IA inteligente lee estudios automáticamente. Médico valida y firma los resultados.",
           "needs": "mod-expedientes + core-signatures (Sem 9)"
         },
@@ -146,9 +146,9 @@
         }
       ],
       "statusCounts": {
-        "pending": 5,
+        "pending": 4,
         "done": 3,
-        "in_progress": 1
+        "in_progress": 2
       }
     },
     {

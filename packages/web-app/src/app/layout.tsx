@@ -1,32 +1,28 @@
-import type { Metadata, Viewport } from 'next';
-import { AuthProvider } from '@/lib/auth-context';
+import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import RootLayoutClient from './layout-client';
 import './globals.css';
-
-export const viewport: Viewport = {
-  themeColor: '#00B5A5',
-};
 
 export const metadata: Metadata = {
   title: 'AMI-SYSTEM - Residente Digital con IA',
   description: 'Sistema modular de gestión de salud ocupacional',
+  viewport: 'width=device-width, initial-scale=1',
   manifest: '/manifest.json',
-  icons: {
-    icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico' }
-    ]
-  }
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body className="bg-gray-50">
-        <AuthProvider>{children}</AuthProvider>
+        <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>
   );

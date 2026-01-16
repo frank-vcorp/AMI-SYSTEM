@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-16T03:04:28.021Z",
-  "overallProgress": 39.473684210526315,
+  "lastUpdated": "2026-01-16T13:50:50.204Z",
+  "overallProgress": 44.73684210526316,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 27.77777777777778,
+      "progress": 38.888888888888886,
       "modules": [
         {
           "id": "core-auth",
@@ -103,10 +103,10 @@
           "id": "core-signatures",
           "name": "Core - Firmas",
           "owner": "Backend",
-          "status": "pending",
-          "progress": 0,
+          "status": "done",
+          "progress": 100,
           "summary": "Firma digital: reportes firmados legalmente por el médico. Cumple normativas.",
-          "needs": "Semana 9"
+          "needs": "-"
         },
         {
           "id": "mod-citas",
@@ -146,8 +146,8 @@
         }
       ],
       "statusCounts": {
-        "pending": 6,
-        "done": 2,
+        "pending": 5,
+        "done": 3,
         "in_progress": 1
       }
     },
@@ -266,7 +266,7 @@
     {
       "module": "Core - Firmas",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "Semana 9"
+      "detail": "-"
     },
     {
       "module": "MOD-CITAS",

@@ -36,6 +36,7 @@ model Clinic {
   schedules         ClinicSchedule[]
   services          ClinicService[]
   appointments      Appointment[]
+  expedients        Expedient[]
 
   // Indices
   @@unique([tenantId, name])
@@ -324,6 +325,153 @@ enum CompanyStatus {
   INACTIVE
   SUSPENDED
   ARCHIVED
+}
+
+// ============================================================================
+// MOD-EXPEDIENTES: Patient & Medical Records Models
+// ============================================================================
+
+model Patient {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  email             String            @db.VarChar(255)
+  phone             String            @db.VarChar(20)
+  birthDate         DateTime
+  gender            Gender
+  documentId        String            @db.VarChar(50)
+  status            PatientStatus     @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  expedients        Expedient[]
+
+  // Indices
+  @@unique([tenantId, documentId])
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([status])
+  @@map("patients")
+}
+
+model Expedient {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  patientId         String
+  clinicId          String
+  companyId         String?
+  status            ExpedientStatus   @default(DRAFT)
+  notes             String?           @db.Text
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  patient           Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  medicalExams      MedicalExam[]
+  studies           StudyUpload[]
+
+  // Indices
+  @@unique([patientId, clinicId])
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([clinicId])
+  @@index([companyId])
+  @@index([status])
+  @@map("expedients")
+}
+
+model MedicalExam {
+  id                String            @id @default(cuid())
+  expedientId       String
+  bloodPressure     String?           @db.VarChar(20) // e.g., "120/80"
+  heartRate         Int?              // bpm
+  respiratoryRate   Int?              // breaths per minute
+  temperature       Float?            // Celsius
+  weight            Float?            // kg
+  height            Float?            // cm
+  physicalExam      String?           @db.Text
+  notes             String?           @db.Text
+  examinedAt        DateTime          @default(now())
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+
+  // Relations
+  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@index([expedientId])
+  @@index([examinedAt])
+  @@map("medical_exams")
+}
+
+model StudyUpload {
+  id                String            @id @default(cuid())
+  expedientId       String
+  type              StudyType
+  fileName          String            @db.VarChar(255)
+  fileUrl           String            @db.Text // URL en GCP Storage
+  mimeType          String            @db.VarChar(50)
+  fileSizeBytes     Int
+  uploadedAt        DateTime          @default(now())
+  status            UploadStatus      @default(PENDING)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+
+  // Relations
+  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@index([expedientId])
+  @@index([type])
+  @@index([status])
+  @@index([uploadedAt])
+  @@map("study_uploads")
+}
+
+enum Gender {
+  MASCULINO
+  FEMENINO
+  OTRO
+}
+
+enum PatientStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+enum ExpedientStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  SIGNED
+  DELIVERED
+}
+
+enum StudyType {
+  RADIOGRAPHY
+  LABORATORY
+  CARDIOGRAM
+  ULTRASOUND
+  TOMOGRAPHY
+  RESONANCE
+  ENDOSCOPY
+  OTHER
+}
+
+enum UploadStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
 }
 
 // ============================================================================

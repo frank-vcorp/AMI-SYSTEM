@@ -1,0 +1,20 @@
+{
+  "name": "@ami/mod-expedientes",
+  "version": "0.1.0",
+  "description": "Medical records management module - patient reception, exams, and study uploads",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": ["src"],
+  "scripts": {
+    "build": "echo 'No build needed for package module'",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@ami/core-database": "*",
+    "@ami/core-storage": "*",
+    "@ami/core-types": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

@@ -252,8 +252,8 @@ FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance (Sem
 | ID | Módulo | Descripción | Dependencias | Entregable Incremental |
 |----|--------|-------------|--------------|--------|
 | F1-200 | MOD-CITAS | Agenda, disponibilidad, check-in, recordatorios | MOD-CLINICAS ✅, MOD-EMPRESAS ✅ | [✓] Completado |
-| F1-MVS | **MVS FASE 1** | **1 expediente procesado end-to-end** | Core-Auth, Core-Storage | **🎯 PRIMER MILESTONE (Sem 6-7)** |
-| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios escalado | MOD-CITAS ✅, Core-Auth, Core-Storage, MVS | **2-5 expedientes procesados** |
+| F1-MVS | **MVS FASE 1** | **1 expediente procesado end-to-end** | Core-Auth, Core-Storage | **[~] En Desarrollo (Bases Listas)** |
+| F1-220 | MOD-EXPEDIENTES | Recepción + Examen + Carga estudios escalado | MOD-CITAS ✅, Core-Auth, Core-Storage, MVS | **[~] UI+API Ready (Integración BD)** |
 | F1-250 | MOD-VALIDACION | Extracción IA + semáforos + dictamen + firma | MOD-EXPEDIENTES, Core-Signatures | **5-10 expedientes validados** |
 | F1-270 | MOD-REPORTES | PDF + email + URLs temporales | MOD-VALIDACION, Core-Storage ✅ | **10 expedientes reportes generados** |
 | F1-REV-1 | **REVISIÓN MVS (AMI)** | Sesión de demo y feedback con Staff Médico (1 exp) | MVS Terminada | **✅ Feedback aprobado** |

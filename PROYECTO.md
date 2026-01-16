@@ -95,6 +95,32 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - [ ] **Testing + Validación (Pendiente)**
 - [ ] **Documentación Final (Pendiente)**
 
+### ⏳ FASE 1 Continuación - MOD-VALIDACION (SOFIA - 70%):
+- [✓] **Estructura Base Completa (2026-01-16):**
+    - [✓] Paquete @ami/mod-validacion creado
+    - [✓] Types completos: ValidationTask, SemaphoreStatus, ExtractedDataSet
+    - [✓] Componentes React: ValidationPanel, PDFViewer, SemaphoreIndicators, ExtractionResults, ValidationForm
+    - [✓] Lógica clínica: 40+ reglas de semáforos (laboratorio, presión, FEV1, etc.)
+    - [✓] Validadores: Pre-firma, laboratorio, extracción, paciente
+    - [✓] API routes: GET /validaciones, GET /validaciones/[id], PATCH /validaciones/[id], POST /validaciones/[id]/sign
+    - [✓] Página admin: /admin/validaciones (lista), /admin/validaciones/[id] (panel)
+    - [✓] Prisma Schema: ValidationTask, Expedient, Patient, Study modelos (multi-tenant)
+- [~] **Integración Pendiente:**
+    - [ ] Conexión con MOD-EXPEDIENTES (estudios relacionados)
+    - [ ] Firma digital con core-signatures (canvas → hash)
+    - [ ] Upload/Download de PDFs (core-storage)
+    - [ ] Extracción IA (OpenAI API para FASE 2)
+    - [ ] Tests unitarios
+- [~] **MVP Funcionalidad:**
+    - [✓] Panel visual 2-col (PDF izq, datos der)
+    - [✓] Cálculo de semáforos basado en datos extraídos
+    - [✓] Edición de valores extraídos por médico
+    - [✓] Sugerencia de veredicto por IA (simple rule-based)
+    - [✓] Captura de restricciones/recomendaciones
+    - [✓] Firma digital en canvas
+    - [✓] Validación pre-firma
+- [ ] **Extracción IA (FASE 2):** OpenAI API integration
+
 ---
 
 ## Entregables Clave por Fase (Cronograma)
@@ -129,7 +155,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | Agenda de citas: pacientes agendados, recordatorios automáticos, check-in. | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción del paciente, captura de examen médico, subida de estudios a la nube. | core-auth + core-storage (Sem 7) |
-| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | pending | 0 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
+| mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | in_progress | 70 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |
 | mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado. | todos FASE 1 completados |
 | mod-bitacora | MOD-BITACORA | FASE 2 – Operaciones | 2 | Backend · Data | pending | 0 | Registro completo: quién hizo qué, cuándo lo hizo. Cumple normativas de auditoría. | core-database |

@@ -36,6 +36,7 @@ model Clinic {
   schedules         ClinicSchedule[]
   services          ClinicService[]
   appointments      Appointment[]
+  expedients        Expedient[]
 
   // Indices
   @@unique([tenantId, name])
@@ -324,6 +325,174 @@ enum CompanyStatus {
   INACTIVE
   SUSPENDED
   ARCHIVED
+}
+
+// ============================================================================
+// MOD-EXPEDIENTES: Patient Expedient Models
+// ============================================================================
+
+model Expedient {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  appointmentId     String
+  patientId         String
+  clinicId          String
+  folio             String            @unique // Generated format: EXP-CLINIC-DATE-SEQ
+  status            ExpeientStatus    @default(PENDING)
+  
+  // Vital signs capture
+  vitals            Json?             // {sistolica, diastolica, fc, temp, o2, imc}
+  medicalNotes      String?           @db.Text
+  
+  // Study uploads
+  studies           Study[]
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  appointment       Appointment       @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  patient           Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  clinic            Clinic            @relation(fields: [clinicId], references: [id])
+
+  // Indices
+  @@unique([folio])
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([clinicId])
+  @@index([status])
+  @@map("expedients")
+}
+
+model Patient {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  documentType      String            @default("DNI") // DNI, Pasaporte, etc
+  documentNumber    String
+  dateOfBirth       DateTime
+  gender            String            @default("M") // M, F, O
+  phoneNumber       String?           @db.VarChar(20)
+  email             String?           @db.VarChar(255)
+  address           String?           @db.Text
+  city              String?           @db.VarChar(100)
+  state             String?           @db.VarChar(100)
+  zipCode           String?           @db.VarChar(10)
+  companyId         String?           // Current employer
+  status            PatientStatus     @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  company           Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  expedients        Expedient[]
+
+  // Indices
+  @@unique([tenantId, documentNumber])
+  @@index([tenantId])
+  @@index([companyId])
+  @@map("patients")
+}
+
+model Study {
+  id                String            @id @default(cuid())
+  expedientId       String
+  fileKey           String            // GCS storage key
+  fileName          String
+  studyType         StudyType
+  uploadedAt        DateTime          @default(now())
+  fileSize          Int?              // Bytes
+  mimeType          String?
+  
+  createdAt         DateTime          @default(now())
+
+  // Relations
+  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@index([expedientId])
+  @@index([studyType])
+  @@map("studies")
+}
+
+enum StudyType {
+  RADIOGRAFIA
+  LABORATORIO
+  ECG
+  ESPIROMETRIA
+  AUDIOMETRIA
+  OTROS
+}
+
+enum ExpeientStatus {
+  PENDING           // Citado, no ha llegado
+  IN_PROGRESS       // Chegó, examen en curso
+  STUDIES_PENDING   // Esperando estudios
+  VALIDATED         // Listo para reporte
+  COMPLETED         // Reporte generado
+  ARCHIVED
+}
+
+enum PatientStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+// ============================================================================
+// MOD-VALIDACION: Validation & Dictamen Models
+// ============================================================================
+
+model ValidationTask {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  expedientId       String
+  patientId         String
+  clinicId          String
+  status            ValidationStatus  @default(PENDING)
+  
+  // Studies and extracted data
+  studies           Json              // Array of {id, fileKey, fileName, studyType, uploadedAt, extractionStatus}
+  extractedData     Json              @default("{}")  // {laboratorio?, radiografia?, ecg?, ...}
+  
+  // Medical assessment
+  medicalOpinion    String            @db.Text @default("")
+  verdict           Verdict           @default(APTO)
+  restrictions      String[]          @default([])
+  recommendations   String[]          @default([])
+  
+  // Signature and timeline
+  signedAt          DateTime?
+  signedBy          String?           @db.Uuid // UID of signing physician
+  validatedBy       String?           @db.Uuid // UID of validator
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([expedientId])
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([status])
+  @@index([verdict])
+  @@map("validation_tasks")
+}
+
+enum ValidationStatus {
+  PENDING
+  IN_REVIEW
+  COMPLETED
+  SIGNED
+  REJECTED
+}
+
+enum Verdict {
+  APTO
+  APTO_CON_RESTRICCIONES
+  NO_APTO
 }
 
 // ============================================================================

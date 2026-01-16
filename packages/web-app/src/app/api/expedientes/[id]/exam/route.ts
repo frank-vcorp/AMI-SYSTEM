@@ -1,9 +1,31 @@
 /**
  * POST /api/expedientes/[id]/exam
  * Add medical exam to expedient
+ * 
+ * Request body:
+ * {
+ *   bloodPressure: "120/80" (optional, format: "SYS/DIA"),
+ *   heartRate: 72 (optional, bpm, range: 30-200),
+ *   respiratoryRate: 16 (optional, range: 4-60),
+ *   temperature: 37.5 (optional, Celsius, range: 35-42),
+ *   weight: 75.5 (optional, kg, range: 2-300),
+ *   height: 175 (optional, cm, range: 50-250),
+ *   physicalExam: "string" (optional),
+ *   notes: "string" (optional)
+ * }
+ * 
+ * Side effect: Changes expedient status to IN_PROGRESS if it was DRAFT
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@ami/core-database";
+
+function validateBloodPressure(bp: string): boolean {
+  const match = bp.match(/^(\d{1,3})\/(\d{1,3})$/);
+  if (!match) return false;
+  const [sys, dia] = [parseInt(match[1]), parseInt(match[2])];
+  return sys >= 50 && sys <= 250 && dia >= 30 && dia <= 150 && sys > dia;
+}
 
 export async function POST(
   request: NextRequest,
@@ -23,25 +45,106 @@ export async function POST(
       notes,
     } = body;
 
-    // TODO: In production, validate and save to Prisma
-    // For now, return mock response
+    // Verify expedient exists
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+      select: { id: true, status: true },
+    });
 
-    const mockExamId = `exam_${Date.now()}`;
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    // === VALIDATIONS ===
+    const errors: string[] = [];
+
+    if (bloodPressure) {
+      if (!validateBloodPressure(bloodPressure)) {
+        errors.push("bloodPressure must be in format SYS/DIA (e.g., 120/80) with valid ranges");
+      }
+    }
+
+    if (heartRate !== null && heartRate !== undefined) {
+      if (!Number.isInteger(heartRate) || heartRate < 30 || heartRate > 200) {
+        errors.push("heartRate must be an integer between 30 and 200");
+      }
+    }
+
+    if (respiratoryRate !== null && respiratoryRate !== undefined) {
+      if (!Number.isInteger(respiratoryRate) || respiratoryRate < 4 || respiratoryRate > 60) {
+        errors.push("respiratoryRate must be an integer between 4 and 60");
+      }
+    }
+
+    if (temperature !== null && temperature !== undefined) {
+      if (typeof temperature !== "number" || temperature < 35 || temperature > 42) {
+        errors.push("temperature must be a number between 35 and 42 (Celsius)");
+      }
+    }
+
+    if (weight !== null && weight !== undefined) {
+      if (typeof weight !== "number" || weight < 2 || weight > 300) {
+        errors.push("weight must be a number between 2 and 300 (kg)");
+      }
+    }
+
+    if (height !== null && height !== undefined) {
+      if (!Number.isInteger(height) || height < 50 || height > 250) {
+        errors.push("height must be an integer between 50 and 250 (cm)");
+      }
+    }
+
+    if (errors.length > 0) {
+      return NextResponse.json(
+        { error: errors.join("; ") },
+        { status: 400 }
+      );
+    }
+
+    // === CREATE EXAM & UPDATE EXPEDIENT STATUS ===
+    const result = await prisma.$transaction(async (tx) => {
+      const newExam = await tx.medicalExam.create({
+        data: {
+          expedientId: id,
+          bloodPressure: bloodPressure || null,
+          heartRate: heartRate || null,
+          respiratoryRate: respiratoryRate || null,
+          temperature: temperature || null,
+          weight: weight || null,
+          height: height || null,
+          physicalExam: physicalExam || null,
+          notes: notes || null,
+        },
+      });
+
+      // If expedient is in DRAFT, move to IN_PROGRESS
+      if (expedient.status === "DRAFT") {
+        await tx.expedient.update({
+          where: { id },
+          data: { status: "IN_PROGRESS" },
+        });
+      }
+
+      return newExam;
+    });
 
     return NextResponse.json(
       {
-        id: mockExamId,
-        expedientId: id,
-        bloodPressure,
-        heartRate,
-        respiratoryRate,
-        temperature,
-        weight,
-        height,
-        physicalExam,
-        notes,
-        examinedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
+        id: result.id,
+        expedientId: result.expedientId,
+        bloodPressure: result.bloodPressure,
+        heartRate: result.heartRate,
+        respiratoryRate: result.respiratoryRate,
+        temperature: result.temperature,
+        weight: result.weight,
+        height: result.height,
+        physicalExam: result.physicalExam,
+        notes: result.notes,
+        examinedAt: result.examinedAt.toISOString(),
+        createdAt: result.createdAt.toISOString(),
       },
       { status: 201 }
     );

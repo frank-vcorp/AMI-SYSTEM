@@ -1,15 +1,18 @@
 /**
  * GET /api/expedientes/[id]
- * Get expedient details
+ * Get expedient details with all relations
  *
  * PATCH /api/expedientes/[id]
- * Update expedient
+ * Update expedient status and notes
+ * 
+ * Allowed transitions: DRAFT → IN_PROGRESS → COMPLETED → SIGNED → DELIVERED
  *
  * DELETE /api/expedientes/[id]
- * Delete expedient
+ * Soft delete expedient
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@ami/core-database";
 
 export async function GET(
   request: NextRequest,
@@ -18,57 +21,69 @@ export async function GET(
   try {
     const { id } = await params;
 
-    // TODO: In production, query Prisma by ID
-    // For now, return mock data
-
-    const mockExpedient = {
-      id,
-      patientId: "patient_1",
-      clinicId: "clinic_1",
-      companyId: "company_1",
-      status: "IN_PROGRESS",
-      notes: "Expedient for regular health check",
-      patient: {
-        id: "patient_1",
-        name: "Juan Pérez García",
-        email: "juan@example.com",
-        phone: "+55 11 99999-9999",
-        birthDate: "1980-05-15",
-        gender: "MASCULINO",
-        documentId: "123456789",
-        status: "ACTIVE",
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+      include: {
+        patient: true,
+        clinic: {
+          select: {
+            id: true,
+            name: true,
+            address: true,
+            city: true,
+          },
+        },
+        medicalExams: {
+          orderBy: { examinedAt: "desc" },
+        },
+        studies: {
+          orderBy: { uploadedAt: "desc" },
+        },
       },
-      medicalExams: [
-        {
-          id: "exam_1",
-          expedientId: id,
-          bloodPressure: "120/80",
-          heartRate: 72,
-          temperature: 37.0,
-          weight: 75.5,
-          height: 175,
-          physicalExam: "Normal findings",
-          examinedAt: new Date().toISOString(),
-        },
-      ],
-      studies: [
-        {
-          id: "study_1",
-          expedientId: id,
-          type: "RADIOGRAPHY",
-          fileName: "chest_xray.pdf",
-          fileUrl: "https://storage.example.com/studies/chest_xray.pdf",
-          mimeType: "application/pdf",
-          fileSizeBytes: 2048000,
-          status: "COMPLETED",
-          uploadedAt: new Date().toISOString(),
-        },
-      ],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
+    });
 
-    return NextResponse.json(mockExpedient);
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({
+      id: expedient.id,
+      patientId: expedient.patientId,
+      clinicId: expedient.clinicId,
+      companyId: expedient.companyId,
+      status: expedient.status,
+      notes: expedient.notes,
+      patient: expedient.patient,
+      clinic: expedient.clinic,
+      medicalExams: expedient.medicalExams.map((exam) => ({
+        id: exam.id,
+        bloodPressure: exam.bloodPressure,
+        heartRate: exam.heartRate,
+        respiratoryRate: exam.respiratoryRate,
+        temperature: exam.temperature,
+        weight: exam.weight,
+        height: exam.height,
+        physicalExam: exam.physicalExam,
+        notes: exam.notes,
+        examinedAt: exam.examinedAt.toISOString(),
+        createdAt: exam.createdAt.toISOString(),
+      })),
+      studies: expedient.studies.map((study) => ({
+        id: study.id,
+        type: study.type,
+        fileName: study.fileName,
+        fileUrl: study.fileUrl,
+        mimeType: study.mimeType,
+        fileSizeBytes: study.fileSizeBytes,
+        status: study.status,
+        uploadedAt: study.uploadedAt.toISOString(),
+      })),
+      createdAt: expedient.createdAt.toISOString(),
+      updatedAt: expedient.updatedAt.toISOString(),
+    });
   } catch (error) {
     console.error("Error fetching expedient:", error);
     return NextResponse.json(
@@ -87,14 +102,62 @@ export async function PATCH(
     const body = await request.json();
     const { status, notes } = body;
 
-    // TODO: In production, update Prisma
-    // For now, return mock response
+    // Fetch current expedient
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+    });
+
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    // Validate status transition if provided
+    if (status) {
+      const validStatuses = ["DRAFT", "IN_PROGRESS", "COMPLETED", "SIGNED", "DELIVERED"];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json(
+          { error: `status must be one of: ${validStatuses.join(", ")}` },
+          { status: 400 }
+        );
+      }
+
+      // Validate state machine transition
+      const statusOrder: Record<string, number> = {
+        DRAFT: 0,
+        IN_PROGRESS: 1,
+        COMPLETED: 2,
+        SIGNED: 3,
+        DELIVERED: 4,
+      };
+
+      const currentOrder = statusOrder[expedient.status];
+      const newOrder = statusOrder[status];
+
+      if (newOrder < currentOrder) {
+        return NextResponse.json(
+          { error: `Cannot transition from ${expedient.status} to ${status}` },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Update expedient
+    const updated = await prisma.expedient.update({
+      where: { id },
+      data: {
+        ...(status && { status }),
+        ...(notes !== undefined && { notes }),
+      },
+    });
 
     return NextResponse.json({
-      id,
-      status: status || "IN_PROGRESS",
-      notes: notes || "",
-      updatedAt: new Date().toISOString(),
+      id: updated.id,
+      status: updated.status,
+      notes: updated.notes,
+      updatedAt: updated.updatedAt.toISOString(),
     });
   } catch (error) {
     console.error("Error updating expedient:", error);
@@ -112,8 +175,21 @@ export async function DELETE(
   try {
     const { id } = await params;
 
-    // TODO: In production, soft delete in Prisma
-    // For now, return mock response
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+    });
+
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    // Delete expedient (cascade deletes medical exams and studies)
+    await prisma.expedient.delete({
+      where: { id },
+    });
 
     return NextResponse.json({
       id,

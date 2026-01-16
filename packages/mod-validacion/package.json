@@ -1,0 +1,35 @@
+{
+  "name": "@ami/mod-validacion",
+  "version": "0.1.0",
+  "description": "AMI MOD-VALIDACION: Medical validation, data extraction, semaphores and digital signatures",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "echo 'Build not needed for FASE 1'",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "validation",
+    "medical-review",
+    "data-extraction",
+    "signatures",
+    "semaphores"
+  ],
+  "author": "SOFIA",
+  "license": "MIT",
+  "dependencies": {
+    "@ami/core": "*",
+    "@ami/core-signatures": "*",
+    "@ami/core-storage": "*",
+    "pdfjs-dist": "^3.11.174",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-pdf": "^7.5.0",
+    "zustand": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}

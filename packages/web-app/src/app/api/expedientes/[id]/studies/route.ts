@@ -1,9 +1,35 @@
 /**
  * POST /api/expedientes/[id]/studies
- * Upload medical studies (integrates with core-storage)
+ * Upload medical study file
+ * 
+ * FormData:
+ * - file: File (PDF, JPEG, PNG; max 50MB)
+ * - studyType: StudyType enum (RADIOGRAPHY|LABORATORY|CARDIOGRAM|ULTRASOUND|TOMOGRAPHY|RESONANCE|ENDOSCOPY|OTHER)
+ * 
+ * TODO: Integrate with @ami/core-storage for GCP Storage upload
+ * Currently generates mock URLs for testing
+ * 
+ * Side effect: Changes expedient status to IN_PROGRESS if it was DRAFT
+ *
+ * GET /api/expedientes/[id]/studies
+ * List studies for expedient
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@ami/core-database";
+
+const ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];
+const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
+const VALID_STUDY_TYPES = [
+  "RADIOGRAPHY",
+  "LABORATORY",
+  "CARDIOGRAM",
+  "ULTRASOUND",
+  "TOMOGRAPHY",
+  "RESONANCE",
+  "ENDOSCOPY",
+  "OTHER",
+];
 
 export async function POST(
   request: NextRequest,
@@ -15,58 +41,97 @@ export async function POST(
     const file = formData.get("file") as File;
     const studyType = formData.get("studyType") as string;
 
+    // === VALIDATIONS ===
     if (!file) {
       return NextResponse.json(
-        { error: "File is required" },
+        { error: "file is required" },
         { status: 400 }
       );
     }
 
     if (!studyType) {
       return NextResponse.json(
-        { error: "Study type is required" },
+        { error: "studyType is required" },
         { status: 400 }
       );
     }
 
-    // Validate file
-    const allowedMimeTypes = ["application/pdf", "image/jpeg", "image/png"];
-    if (!allowedMimeTypes.includes(file.type)) {
+    if (!VALID_STUDY_TYPES.includes(studyType)) {
       return NextResponse.json(
-        { error: "Invalid file type. Allowed: PDF, JPEG, PNG" },
+        { error: `studyType must be one of: ${VALID_STUDY_TYPES.join(", ")}` },
         { status: 400 }
       );
     }
 
-    const maxSizeBytes = 50 * 1024 * 1024; // 50MB
-    if (file.size > maxSizeBytes) {
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
       return NextResponse.json(
-        { error: "File size exceeds 50MB limit" },
+        { error: `Invalid file type. Allowed: ${ALLOWED_MIME_TYPES.join(", ")}` },
         { status: 400 }
       );
     }
 
-    // TODO: In production:
-    // 1. Call GCP Storage (via core-storage) to upload file
-    // 2. Get signed URL
-    // 3. Save record to Prisma StudyUpload
-    // For now, return mock response
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      return NextResponse.json(
+        { error: `File size exceeds ${MAX_FILE_SIZE_BYTES / 1024 / 1024}MB limit` },
+        { status: 400 }
+      );
+    }
 
-    const mockStudyId = `study_${Date.now()}`;
-    const mockFileUrl = `https://storage.example.com/studies/${mockStudyId}/${file.name}`;
+    // === VERIFY EXPEDIENT EXISTS ===
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+      select: { id: true, status: true, tenantId: true },
+    });
+
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    // === UPLOAD FILE & CREATE STUDY RECORD ===
+    // TODO: Replace with actual GCP Storage upload
+    // For now, generate mock URL based on file name
+    const fileExtension = file.name.split(".").pop() || "bin";
+    const mockFileUrl = `https://storage.googleapis.com/ami-system-mvp.appspot.com/${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`;
+
+    const result = await prisma.$transaction(async (tx) => {
+      const newStudy = await tx.studyUpload.create({
+        data: {
+          expedientId: id,
+          type: studyType as any,
+          fileName: file.name,
+          fileUrl: mockFileUrl,
+          mimeType: file.type,
+          fileSizeBytes: file.size,
+          status: "COMPLETED", // TODO: Set to PENDING and process asynchronously
+        },
+      });
+
+      // If expedient is in DRAFT, move to IN_PROGRESS
+      if (expedient.status === "DRAFT") {
+        await tx.expedient.update({
+          where: { id },
+          data: { status: "IN_PROGRESS" },
+        });
+      }
+
+      return newStudy;
+    });
 
     return NextResponse.json(
       {
-        id: mockStudyId,
-        expedientId: id,
-        type: studyType,
-        fileName: file.name,
-        fileUrl: mockFileUrl,
-        mimeType: file.type,
-        fileSizeBytes: file.size,
-        status: "COMPLETED",
-        uploadedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
+        id: result.id,
+        expedientId: result.expedientId,
+        type: result.type,
+        fileName: result.fileName,
+        fileUrl: result.fileUrl,
+        mimeType: result.mimeType,
+        fileSizeBytes: result.fileSizeBytes,
+        status: result.status,
+        uploadedAt: result.uploadedAt.toISOString(),
+        createdAt: result.createdAt.toISOString(),
       },
       { status: 201 }
     );
@@ -79,38 +144,59 @@ export async function POST(
   }
 }
 
-/**
- * GET /api/expedientes/[id]/studies
- * List studies for expedient
- */
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
+    const searchParams = request.nextUrl.searchParams;
+    const limit = Math.min(parseInt(searchParams.get("limit") || "50"), 100);
+    const offset = parseInt(searchParams.get("offset") || "0");
 
-    // TODO: In production, query Prisma for studies
-    // For now, return mock data
+    // === VERIFY EXPEDIENT EXISTS ===
+    const expedient = await prisma.expedient.findUnique({
+      where: { id },
+      select: { id: true },
+    });
 
-    const mockStudies = [
-      {
-        id: "study_1",
-        expedientId: id,
-        type: "RADIOGRAPHY",
-        fileName: "chest_xray.pdf",
-        fileUrl: "https://storage.example.com/studies/chest_xray.pdf",
-        mimeType: "application/pdf",
-        fileSizeBytes: 2048000,
-        status: "COMPLETED",
-        uploadedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-      },
-    ];
+    if (!expedient) {
+      return NextResponse.json(
+        { error: "Expedient not found" },
+        { status: 404 }
+      );
+    }
+
+    // === FETCH STUDIES ===
+    const [studies, total] = await Promise.all([
+      prisma.studyUpload.findMany({
+        where: { expedientId: id },
+        orderBy: { uploadedAt: "desc" },
+        take: limit,
+        skip: offset,
+      }),
+      prisma.studyUpload.count({ where: { expedientId: id } }),
+    ]);
 
     return NextResponse.json({
-      data: mockStudies,
-      total: mockStudies.length,
+      data: studies.map((study) => ({
+        id: study.id,
+        expedientId: study.expedientId,
+        type: study.type,
+        fileName: study.fileName,
+        fileUrl: study.fileUrl,
+        mimeType: study.mimeType,
+        fileSizeBytes: study.fileSizeBytes,
+        status: study.status,
+        uploadedAt: study.uploadedAt.toISOString(),
+        createdAt: study.createdAt.toISOString(),
+      })),
+      pagination: {
+        total,
+        limit,
+        offset,
+        hasMore: offset + limit < total,
+      },
     });
   } catch (error) {
     console.error("Error fetching studies:", error);

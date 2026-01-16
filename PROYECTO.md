@@ -240,7 +240,7 @@ FASE 1 usa **cronograma dinámico:** Las semanas se comprimen según avance (Sem
 | F1-030 | Core Storage: GCP + upload + URLs firmadas | 3-5 días | [V] Componentes Listos | MOD-EXPEDIENTES | ✅ Upload funcional |
 | F1-040 | Core UI: Completar shadcn + tema + layout | 5-7 días | [~] En Progreso | UX/Velocidad | 🎯 Interfaz profesional |
 | F1-050 | Core PWA: next-pwa + manifest + service worker | 3-4 días | [ ] Pendiente | FASE 2 | 🎯 Offline mode |
-| F1-060 | Core Signatures: Generador de firma médica | 3-4 días | [ ] Pendiente | MOD-VALIDACION | ✅ Firma digital lista |
+| F1-060 | Core Signatures: Generador de firma médica | 3-4 días | [✓] Completado (Tests OK) | MOD-VALIDACION | ✅ Firma digital lista |
 
 #### Epic: Módulos Flujo Principal (FASE 1)
 **Para personas de negocio:** Estos son los módulos que hacen que el sistema funcione de inicio a fin:

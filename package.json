@@ -13,7 +13,8 @@
   "scripts": {
     "type-check": "tsc --version",
     "build": "turbo run build --filter=@ami/web-app",
-    "dev": "turbo run dev --filter=@ami/web-app"
+    "dev": "turbo run dev --filter=@ami/web-app",
+    "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma"
   },
   "devDependencies": {
     "@prisma/client": "6.19.1",

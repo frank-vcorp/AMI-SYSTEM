@@ -58,11 +58,24 @@ export class ClinicService {
       },
       include: {
         schedules: true,
-        services: true
+        services: {
+          include: {
+            service: true
+          }
+        }
       }
     });
 
-    return clinic as ClinicResponse;
+    // Transform Prisma result to ClinicResponse
+    return {
+      ...clinic,
+      services: clinic.services.map((cs: any) => ({
+        id: cs.id,
+        clinicId: cs.clinicId,
+        name: cs.service.name,
+        description: cs.service.description
+      }))
+    } as ClinicResponse;
   }
 
   /**
@@ -79,7 +92,11 @@ export class ClinicService {
       },
       include: {
         schedules: true,
-        services: true
+        services: {
+          include: {
+            service: true
+          }
+        }
       }
     });
 
@@ -89,6 +106,12 @@ export class ClinicService {
 
     return {
       ...clinic,
+      services: clinic.services.map((cs: any) => ({
+        id: cs.id,
+        clinicId: cs.clinicId,
+        name: cs.service.name,
+        description: cs.service.description
+      })),
       appointmentCount: 0
     } as ClinicResponse;
   }
@@ -129,7 +152,11 @@ export class ClinicService {
         where,
         include: {
           schedules: true,
-          services: true
+          services: {
+            include: {
+              service: true
+            }
+          }
         },
         orderBy: { createdAt: 'desc' },
         skip,
@@ -139,7 +166,15 @@ export class ClinicService {
     ]);
 
     return {
-      data: clinics as ClinicResponse[],
+      data: clinics.map((clinic: any) => ({
+        ...clinic,
+        services: clinic.services.map((cs: any) => ({
+          id: cs.id,
+          clinicId: cs.clinicId,
+          name: cs.service.name,
+          description: cs.service.description
+        }))
+      })) as ClinicResponse[],
       total,
       page,
       pageSize,
@@ -172,11 +207,23 @@ export class ClinicService {
       data,
       include: {
         schedules: true,
-        services: true
+        services: {
+          include: {
+            service: true
+          }
+        }
       }
     });
 
-    return updated as ClinicResponse;
+    return {
+      ...updated,
+      services: updated.services.map((cs: any) => ({
+        id: cs.id,
+        clinicId: cs.clinicId,
+        name: cs.service.name,
+        description: cs.service.description
+      }))
+    } as ClinicResponse;
   }
 
   /**

@@ -14,8 +14,8 @@ export interface ClinicSchedule {
   dayOfWeek: number;
   openingTime: string;
   closingTime: string;
-  lunchStartTime?: string;
-  lunchEndTime?: string;
+  lunchStartTime: string | null;
+  lunchEndTime: string | null;
 }
 
 export interface ClinicService {

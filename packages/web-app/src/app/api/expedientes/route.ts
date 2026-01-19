@@ -22,11 +22,6 @@ function isValidPhone(phone: string): boolean {
   return /^[\d\s+\-()]{7,20}$/.test(phone);
 }
 
-function validateVitalRange(value: number | null | undefined, min: number, max: number): boolean {
-  if (value === null || value === undefined) return true; // optional field
-  return value >= min && value <= max;
-}
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -94,14 +89,14 @@ export async function POST(request: NextRequest) {
     const existingPatient = await prisma.patient.findFirst({
       where: {
         OR: [
-          { tenantId, documentId },
+          { tenantId, documentNumber: documentId },
           { tenantId, email },
         ],
       },
     });
 
     if (existingPatient) {
-      const conflictField = existingPatient.documentId === documentId ? "documentId" : "email";
+      const conflictField = existingPatient.documentNumber === documentId ? "documentNumber" : "email";
       return NextResponse.json(
         { error: `Patient with this ${conflictField} already exists in this tenant` },
         { status: 409 }
@@ -141,10 +136,10 @@ export async function POST(request: NextRequest) {
           tenantId,
           name,
           email,
-          phone,
-          birthDate: new Date(birthDate),
+          phoneNumber: phone,
+          dateOfBirth: new Date(birthDate),
           gender,
-          documentId,
+          documentNumber: documentId,
           status: "ACTIVE",
         },
       });
@@ -154,9 +149,9 @@ export async function POST(request: NextRequest) {
           tenantId,
           patientId: newPatient.id,
           clinicId: expedient.clinicId,
-          companyId: expedient.companyId || null,
-          status: "DRAFT",
-          notes: null,
+          folio: `EXP-${expedient.clinicId}-${Date.now()}`,
+          status: "PENDING",
+          medicalNotes: null,
         },
       });
 
@@ -229,7 +224,7 @@ export async function GET(request: NextRequest) {
               id: true,
               name: true,
               email: true,
-              documentId: true,
+              documentNumber: true,
             },
           },
           medicalExams: {
@@ -238,15 +233,14 @@ export async function GET(request: NextRequest) {
               bloodPressure: true,
               heartRate: true,
               temperature: true,
-              examinedAt: true,
+              createdAt: true,
             },
           },
           studies: {
             select: {
               id: true,
-              type: true,
+              studyType: true,
               fileName: true,
-              status: true,
               uploadedAt: true,
             },
           },
@@ -265,7 +259,6 @@ export async function GET(request: NextRequest) {
         id: exp.id,
         patientId: exp.patientId,
         clinicId: exp.clinicId,
-        companyId: exp.companyId,
         status: exp.status,
         patient: exp.patient,
         medicalExamsCount: exp.medicalExams.length,

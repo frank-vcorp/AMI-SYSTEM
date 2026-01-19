@@ -13,8 +13,8 @@ export async function POST(
   { params }: { params: { id: string } }
 ) {
   try {
-    const tenantId = getTenantIdFromRequest(request);
-    const userId = getUserIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request);
+    const userId = await getUserIdFromRequest(request);
 
     if (!tenantId || !userId) {
       return NextResponse.json(

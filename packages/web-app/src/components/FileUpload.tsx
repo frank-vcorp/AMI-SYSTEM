@@ -21,7 +21,6 @@ interface FileUploadProps {
 
 const ALLOWED_TYPES = ['application/pdf', 'image/jpeg', 'image/png'];
 const ALLOWED_EXTENSIONS = ['.pdf', '.jpg', '.jpeg', '.png'];
-const MAX_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
 const DEFAULT_MAX_FILES = 5;
 
 /**
@@ -36,7 +35,6 @@ export function FileUpload({
   tenantId = 'default-tenant',
 }: FileUploadProps) {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -159,12 +157,6 @@ export function FileUpload({
             // Nota: No incluimos headers, FormData lo maneja automáticamente
           });
 
-          // Trackear progreso simulado
-          setUploadProgress((prev) => ({
-            ...prev,
-            [fileId]: 100,
-          }));
-
           if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.error || `Error uploading ${file.name}`);
@@ -204,7 +196,6 @@ export function FileUpload({
       }
     } finally {
       setLoading(false);
-      setUploadProgress({});
     }
   };
 

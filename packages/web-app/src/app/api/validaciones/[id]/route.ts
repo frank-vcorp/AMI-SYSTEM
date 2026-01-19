@@ -12,7 +12,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const tenantId = getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
         { error: "Tenant ID not found" },

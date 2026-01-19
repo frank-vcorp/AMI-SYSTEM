@@ -19,7 +19,7 @@ export interface AuthUser {
   token: string | null;
 }
 
-interface AuthContextType {
+export interface AuthContextType {
   user: AuthUser | null;
   loading: boolean;
   error: string | null;

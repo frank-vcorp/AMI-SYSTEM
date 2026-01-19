@@ -1,21 +1,36 @@
 // Types for MOD-CLINICAS
-import type { 
-  Clinic, 
-  ClinicSchedule, 
-  ClinicService, 
-  Appointment
-} from '@ami/core';
 
-import { ClinicStatus } from '@ami/core';
+// Basic Clinic types
+export enum ClinicStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE',
+  PENDING = 'PENDING',
+}
 
-// Export Prisma types
-export type {
-  Clinic,
-  ClinicSchedule,
-  ClinicService,
-  Appointment,
-};
-export { ClinicStatus };
+// Schedule types
+export interface ClinicSchedule {
+  id: string;
+  clinicId: string;
+  dayOfWeek: number;
+  openingTime: string;
+  closingTime: string;
+  lunchStartTime?: string;
+  lunchEndTime?: string;
+}
+
+export interface ClinicService {
+  id: string;
+  clinicId: string;
+  name: string;
+  description?: string;
+}
+
+export interface Appointment {
+  id: string;
+  clinicId: string;
+  date: Date;
+  time: string;
+}
 
 // Request/Response DTOs
 export interface CreateClinicRequest {
@@ -36,10 +51,25 @@ export interface UpdateClinicRequest extends Partial<CreateClinicRequest> {
   availableBeds?: number;
 }
 
-export interface ClinicResponse extends Clinic {
+export interface ClinicResponse {
+  id: string;
+  name: string;
+  description?: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phoneNumber?: string;
+  email?: string;
+  totalBeds?: number;
+  availableBeds?: number;
+  isHeadquarters?: boolean;
+  status?: ClinicStatus;
   schedules: ClinicSchedule[];
   services: ClinicService[];
   appointmentCount?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface CreateScheduleRequest {

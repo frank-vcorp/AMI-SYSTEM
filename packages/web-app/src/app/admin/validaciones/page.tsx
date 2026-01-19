@@ -6,7 +6,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface ValidationTaskRow {
@@ -21,7 +20,6 @@ interface ValidationTaskRow {
 }
 
 export default function ValidacionesPage() {
-  const router = useRouter();
   const [tasks, setTasks] = useState<ValidationTaskRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

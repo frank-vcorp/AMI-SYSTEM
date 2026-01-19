@@ -21,7 +21,6 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
 }) => {
   const [scale, setScale] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
 
   const handleZoomIn = useCallback(() => {
     setScale((prev) => Math.min(prev + 0.2, 2));
@@ -32,8 +31,8 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
   }, []);
 
   const handleNextPage = useCallback(() => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-  }, [totalPages]);
+    setCurrentPage((prev) => prev + 1);
+  }, []);
 
   const handlePrevPage = useCallback(() => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -129,12 +128,11 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({
             ← Ant.
           </button>
           <span className="text-sm text-gray-600 px-2">
-            {currentPage} / {totalPages}
+            Pág {currentPage}
           </span>
           <button
             onClick={handleNextPage}
             className="px-3 py-2 border border-gray-300 rounded hover:bg-gray-100 text-sm font-medium"
-            disabled={currentPage >= totalPages}
           >
             Sig. →
           </button>

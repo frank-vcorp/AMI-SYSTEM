@@ -6,7 +6,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ExpeditentDetail } from "@ami/mod-expedientes";
+// TODO: Importar ExpeditentDetail desde componentes locales
+// import { ExpeditentDetail } from "@ami/mod-expedientes";
 import { ExpedientDTO } from "@ami/mod-expedientes";
 import { use } from "react";
 
@@ -105,30 +106,6 @@ export default function ExpedientDetailPage({ params }: PageProps) {
     loadExpedient();
   }, [id]);
 
-  const handleUpdateStatus = async (newStatus: string) => {
-    try {
-      // TODO: In production, call PATCH /api/expedientes/{id}
-      if (expedient) {
-        setExpedient({
-          ...expedient,
-          status: newStatus as any,
-          updatedAt: new Date().toISOString(),
-        });
-      }
-    } catch (err) {
-      setError("Error updating status");
-      console.error(err);
-    }
-  };
-
-  const handleDownloadStudy = (studyId: string) => {
-    // TODO: In production, generate signed URL from storage
-    const study = expedient?.studies?.find((s) => s.id === studyId);
-    if (study) {
-      window.open(study.fileUrl, "_blank");
-    }
-  };
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-48">
@@ -156,11 +133,15 @@ export default function ExpedientDetailPage({ params }: PageProps) {
         </button>
       </div>
 
-      <ExpeditentDetail
+      {/* TODO: ExpeditentDetail component - move from mod-expedientes or create shared UI */}
+      {/* <ExpeditentDetail
         expedient={expedient}
         onUpdateStatus={handleUpdateStatus}
         onDownloadStudy={handleDownloadStudy}
-      />
+      /> */}
+      <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
+        <p className="text-sm text-yellow-800">Componente en desarrollo</p>
+      </div>
     </div>
   );
 }

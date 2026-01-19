@@ -3,7 +3,7 @@
  * Based on LEGACY medical criteria and occupational health standards
  */
 
-import { SemaphoreStatus, LaboratoryData, RadiographyData } from "../types";
+import { SemaphoreStatus, LaboratoryData } from "../types";
 
 /**
  * Clinical reference ranges and thresholds

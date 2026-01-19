@@ -9,7 +9,7 @@ import { getTenantIdFromRequest } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
   try {
-    const tenantId = getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
         { error: "Tenant ID not found" },
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url);
-    const status = searchParams.get("status") || "PENDING";
+    const status = (searchParams.get("status") || "PENDING") as any;
     const limit = parseInt(searchParams.get("limit") || "20");
     const offset = parseInt(searchParams.get("offset") || "0");
 
@@ -71,7 +71,7 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const tenantId = getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
         { error: "Tenant ID not found" },

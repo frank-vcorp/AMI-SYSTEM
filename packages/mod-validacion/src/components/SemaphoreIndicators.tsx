@@ -3,7 +3,7 @@
  */
 
 import React, { useMemo } from "react";
-import { SemaphoreStatus, LaboratoryData } from "../types";
+import { SemaphoreStatus } from "../types";
 import {
   getSemaphoreColor,
   getSemaphoreDescription,

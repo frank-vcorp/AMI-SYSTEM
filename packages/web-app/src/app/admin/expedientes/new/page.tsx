@@ -6,13 +6,10 @@
 "use client";
 
 import React from "react";
-import { ExpeditentManager } from "@ami/mod-expedientes";
+// TODO: Importar ExpeditentManager desde componentes locales
+// import { ExpeditentManager } from "@ami/mod-expedientes";
 
 export default function NewExpedientPage() {
-  const mockClinicId = "clinic_1";
-  const mockCompanyId = "company_1";
-  const mockExpedientId = `exp_${Date.now()}`;
-
   return (
     <div className="space-y-6">
       <div>
@@ -22,21 +19,9 @@ export default function NewExpedientPage() {
         </p>
       </div>
 
-      <ExpeditentManager
-        expedientId={mockExpedientId}
-        clinicId={mockClinicId}
-        companyId={mockCompanyId}
-        isNew={true}
-        onPatientCreated={() => {
-          console.log("Patient created");
-        }}
-        onExamAdded={() => {
-          console.log("Exam added");
-        }}
-        onStudyUploaded={() => {
-          console.log("Study uploaded");
-        }}
-      />
+      <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
+        <p className="text-sm text-yellow-800">Componente en desarrollo</p>
+      </div>
     </div>
   );
 }

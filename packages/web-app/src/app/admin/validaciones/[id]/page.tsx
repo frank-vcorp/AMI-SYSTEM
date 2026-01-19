@@ -49,6 +49,8 @@ export default function ValidacionDetailPage() {
         recommendations: data.recommendations || [],
         signedAt: data.signedAt,
         signedBy: data.signedBy,
+        createdAt: data.createdAt || new Date().toISOString(),
+        updatedAt: data.updatedAt || new Date().toISOString(),
       });
 
       // Map patient data
@@ -112,7 +114,7 @@ export default function ValidacionDetailPage() {
 
       if (!response.ok) throw new Error("Failed to save validation");
 
-      const result = await response.json();
+      await response.json();
       alert("✓ Validación guardada y firmada exitosamente");
 
       // Refresh task

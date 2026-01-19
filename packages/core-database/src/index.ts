@@ -10,6 +10,11 @@
 
 import { PrismaClient } from '@prisma/client';
 
+// Declare global para TypeScript
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
 // Cliente Prisma singleton
 let prisma: PrismaClient;
 

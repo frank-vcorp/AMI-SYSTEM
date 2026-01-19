@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../web-app/src/components/ui/button";
 import {
   CreateMedicalExamDTO,
   ExpedientService,

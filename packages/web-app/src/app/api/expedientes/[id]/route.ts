@@ -15,7 +15,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@ami/core-database";
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -34,7 +34,7 @@ export async function GET(
           },
         },
         medicalExams: {
-          orderBy: { examinedAt: "desc" },
+          orderBy: { createdAt: "desc" },
         },
         studies: {
           orderBy: { uploadedAt: "desc" },
@@ -53,9 +53,8 @@ export async function GET(
       id: expedient.id,
       patientId: expedient.patientId,
       clinicId: expedient.clinicId,
-      companyId: expedient.companyId,
       status: expedient.status,
-      notes: expedient.notes,
+      medicalNotes: expedient.medicalNotes,
       patient: expedient.patient,
       clinic: expedient.clinic,
       medicalExams: expedient.medicalExams.map((exam) => ({
@@ -68,17 +67,16 @@ export async function GET(
         height: exam.height,
         physicalExam: exam.physicalExam,
         notes: exam.notes,
-        examinedAt: exam.examinedAt.toISOString(),
         createdAt: exam.createdAt.toISOString(),
+        updatedAt: exam.updatedAt.toISOString(),
       })),
       studies: expedient.studies.map((study) => ({
         id: study.id,
-        type: study.type,
+        studyType: study.studyType,
         fileName: study.fileName,
-        fileUrl: study.fileUrl,
+        fileKey: study.fileKey,
         mimeType: study.mimeType,
-        fileSizeBytes: study.fileSizeBytes,
-        status: study.status,
+        fileSize: study.fileSize,
         uploadedAt: study.uploadedAt.toISOString(),
       })),
       createdAt: expedient.createdAt.toISOString(),
@@ -149,14 +147,14 @@ export async function PATCH(
       where: { id },
       data: {
         ...(status && { status }),
-        ...(notes !== undefined && { notes }),
+        ...(notes !== undefined && { medicalNotes: notes }),
       },
     });
 
     return NextResponse.json({
       id: updated.id,
       status: updated.status,
-      notes: updated.notes,
+      medicalNotes: updated.medicalNotes,
       updatedAt: updated.updatedAt.toISOString(),
     });
   } catch (error) {
@@ -169,7 +167,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {

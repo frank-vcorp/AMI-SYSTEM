@@ -76,9 +76,9 @@ export interface LaboratoryData {
 
 // Radiology findings
 export interface RadiographyData {
-  location: string; // "Torax", "Columna", etc.
-  findings: string;
-  impression: string;
+  location?: string; // "Torax", "Columna", etc.
+  findings?: string;
+  impression?: string;
   normalFindings?: boolean;
   abnormalityType?: string; // "Infiltrado", "Derrame", etc.
 }

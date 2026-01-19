@@ -2,7 +2,7 @@
  * ValidationForm - Form for medical opinion, verdict, restrictions, and signing
  */
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import {
   ValidationTask,
   SemaphoreStatus,
@@ -20,8 +20,6 @@ export interface ValidationFormProps {
 
 export const ValidationForm: React.FC<ValidationFormProps> = ({
   task,
-  patient,
-  semaphores,
   onSubmit,
   isLoading = false,
   suggestedVerdict,
@@ -209,7 +207,7 @@ export const ValidationForm: React.FC<ValidationFormProps> = ({
         <select
           value={formData.verdict}
           onChange={(e) =>
-            setFormData({ ...formData, verdict: e.target.value })
+            setFormData({ ...formData, verdict: e.target.value as "APTO" | "APTO_CON_RESTRICCIONES" | "NO_APTO" })
           }
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           disabled={isLoading}

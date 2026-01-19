@@ -7,7 +7,6 @@ import React, { useState, useMemo } from "react";
 import {
   ValidationTask,
   PatientSummary,
-  SemaphoreStatus,
   ExtractedDataSet,
 } from "../types";
 import { PDFViewer } from "./PDFViewer";

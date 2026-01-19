@@ -3,8 +3,10 @@
  * Alias para useAuth del AuthContext
  */
 
-import { useAuth } from './auth-context';
+import { useAuth, type AuthContextType } from './auth-context';
 
-export function useAuthContext() {
+export function useAuthContext(): AuthContextType {
   return useAuth();
 }
+
+export type { AuthContextType };

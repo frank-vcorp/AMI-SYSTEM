@@ -120,8 +120,8 @@ export async function POST(
         },
       });
 
-      // If expedient is in DRAFT, move to IN_PROGRESS
-      if (expedient.status === "DRAFT") {
+      // If expedient is in PENDING, move to IN_PROGRESS
+      if (expedient.status === "PENDING") {
         await tx.expedient.update({
           where: { id },
           data: { status: "IN_PROGRESS" },
@@ -143,7 +143,6 @@ export async function POST(
         height: result.height,
         physicalExam: result.physicalExam,
         notes: result.notes,
-        examinedAt: result.examinedAt.toISOString(),
         createdAt: result.createdAt.toISOString(),
       },
       { status: 201 }

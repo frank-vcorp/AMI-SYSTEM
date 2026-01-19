@@ -5,13 +5,8 @@
 
 import {
   CreatePatientDTO,
-  CreateExpedientDTO,
   CreateMedicalExamDTO,
-  ListExpedientsQuery,
-  PatientDTO,
   ExpedientDTO,
-  MedicalExamDTO,
-  StudyUploadDTO,
 } from "../types/index";
 
 import {

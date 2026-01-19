@@ -3,7 +3,7 @@
  */
 
 import React, { useState, useCallback } from "react";
-import { ExtractedDataSet, LaboratoryData } from "../types";
+import { ExtractedDataSet } from "../types";
 
 export interface ExtractionResultsProps {
   extractedData: ExtractedDataSet;

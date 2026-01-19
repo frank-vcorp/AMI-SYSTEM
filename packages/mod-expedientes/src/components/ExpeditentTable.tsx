@@ -8,8 +8,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
+} from "../../../web-app/src/components/ui/table";
+import { Button } from "../../../web-app/src/components/ui/button";
 import { ExpedientDTO } from "@ami/mod-expedientes";
 
 interface ExpeditentTableProps {

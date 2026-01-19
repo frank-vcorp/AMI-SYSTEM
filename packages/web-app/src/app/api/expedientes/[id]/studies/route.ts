@@ -92,28 +92,25 @@ export async function POST(
 
     // === UPLOAD FILE & CREATE STUDY RECORD ===
     // TODO: Replace with actual GCP Storage upload
-    // For now, generate mock URL based on file name
-    const fileExtension = file.name.split(".").pop() || "bin";
-    const mockFileUrl = `https://storage.googleapis.com/ami-system-mvp.appspot.com/${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`;
+    // For now, generate mock file key based on file name
 
     const result = await prisma.$transaction(async (tx) => {
-      const newStudy = await tx.studyUpload.create({
+      const newStudy = await tx.study.create({
         data: {
           expedientId: id,
-          type: studyType as any,
+          studyType: studyType as any,
           fileName: file.name,
-          fileUrl: mockFileUrl,
+          fileKey: `${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`,
           mimeType: file.type,
-          fileSizeBytes: file.size,
-          status: "COMPLETED", // TODO: Set to PENDING and process asynchronously
+          fileSize: file.size,
         },
       });
 
-      // If expedient is in DRAFT, move to IN_PROGRESS
-      if (expedient.status === "DRAFT") {
+      // If expedient is in PENDING, move to STUDIES_PENDING
+      if (expedient.status === "PENDING") {
         await tx.expedient.update({
           where: { id },
-          data: { status: "IN_PROGRESS" },
+          data: { status: "STUDIES_PENDING" },
         });
       }
 
@@ -124,12 +121,11 @@ export async function POST(
       {
         id: result.id,
         expedientId: result.expedientId,
-        type: result.type,
+        studyType: result.studyType,
         fileName: result.fileName,
-        fileUrl: result.fileUrl,
+        fileKey: result.fileKey,
         mimeType: result.mimeType,
-        fileSizeBytes: result.fileSizeBytes,
-        status: result.status,
+        fileSize: result.fileSize,
         uploadedAt: result.uploadedAt.toISOString(),
         createdAt: result.createdAt.toISOString(),
       },
@@ -169,25 +165,24 @@ export async function GET(
 
     // === FETCH STUDIES ===
     const [studies, total] = await Promise.all([
-      prisma.studyUpload.findMany({
+      prisma.study.findMany({
         where: { expedientId: id },
         orderBy: { uploadedAt: "desc" },
         take: limit,
         skip: offset,
       }),
-      prisma.studyUpload.count({ where: { expedientId: id } }),
+      prisma.study.count({ where: { expedientId: id } }),
     ]);
 
     return NextResponse.json({
       data: studies.map((study) => ({
         id: study.id,
         expedientId: study.expedientId,
-        type: study.type,
+        studyType: study.studyType,
         fileName: study.fileName,
-        fileUrl: study.fileUrl,
+        fileKey: study.fileKey,
         mimeType: study.mimeType,
-        fileSizeBytes: study.fileSizeBytes,
-        status: study.status,
+        fileSize: study.fileSize,
         uploadedAt: study.uploadedAt.toISOString(),
         createdAt: study.createdAt.toISOString(),
       })),

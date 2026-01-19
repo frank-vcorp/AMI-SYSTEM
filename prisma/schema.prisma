@@ -342,7 +342,7 @@ model Expedient {
   patientId         String
   clinicId          String
   folio             String            @unique // Generated format: EXP-CLINIC-DATE-SEQ
-  status            ExpeientStatus    @default(PENDING)
+  status            ExpedientStatus   @default(PENDING)
   
   // Vital signs capture
   vitals            Json?             // {sistolica, diastolica, fc, temp, o2, imc}
@@ -452,7 +452,7 @@ enum StudyType {
   OTROS
 }
 
-enum ExpeientStatus {
+enum ExpedientStatus {
   PENDING           // Citado, no ha llegado
   IN_PROGRESS       // Chegó, examen en curso
   STUDIES_PENDING   // Esperando estudios

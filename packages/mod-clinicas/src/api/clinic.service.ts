@@ -204,7 +204,7 @@ export class ClinicService {
 
     const updated = await this.prisma.clinic.update({
       where: { id: clinicId },
-      data,
+      data: data as any,
       include: {
         schedules: true,
         services: {

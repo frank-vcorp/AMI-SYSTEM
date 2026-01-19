@@ -34,11 +34,15 @@ export default function LoginPage() {
 
     try {
       setLoading(true);
+      console.log('🔐 Iniciando login para:', email);
       await login(email, password);
+      console.log('✅ Login exitoso, redirigiendo...');
       // La redirección ocurre automáticamente después del login
       router.push('/admin/clinicas');
     } catch (err) {
-      console.error('Error en login:', err);
+      console.error('❌ Error en login:', err);
+      const errorMsg = err instanceof Error ? err.message : String(err);
+      console.error('📋 Detalles del error:', errorMsg);
       // El error ya está en authError, pero por seguridad mostramos uno genérico
       setError(authError || 'Error al iniciar sesión. Intenta de nuevo.');
     } finally {

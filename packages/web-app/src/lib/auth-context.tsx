@@ -68,19 +68,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setError(null);
       setLoading(true);
+      console.log('🔐 Firebase login iniciado para:', email);
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const token = await userCredential.user.getIdToken();
       
+      console.log('✅ Usuario autenticado:', userCredential.user.uid);
       setUser({
         uid: userCredential.user.uid,
         email: userCredential.user.email,
         displayName: userCredential.user.displayName,
         token,
       });
+      console.log('💾 Usuario guardado en estado');
     } catch (err) {
       let errorMessage = 'Error al iniciar sesión';
       
+      console.error('❌ Error en Firebase login:', err);
+      
       if (err instanceof Error) {
+        console.error('📋 Tipo de error:', err.name);
+        console.error('💬 Mensaje:', err.message);
+        
         if (err.message.includes('user-not-found')) {
           errorMessage = 'Usuario no encontrado';
         } else if (err.message.includes('wrong-password')) {

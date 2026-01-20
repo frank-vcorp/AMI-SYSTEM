@@ -8,11 +8,13 @@ import { z } from "zod";
 /**
  * Schema para crear expediente
  */
-export const createExpedientSchema = z.object({
-  appointmentId: z.string().min(1, "Appointment is required"),
-  patientId: z.string().min(1, "Patient is required"),
-  notes: z.string().optional(),
-});
+export const createExpedientSchema = z
+  .object({
+    appointmentId: z.string().min(1, "Appointment is required"),
+    patientId: z.string().min(1, "Patient is required"),
+    notes: z.string().optional(),
+  })
+  .strict();
 
 export type CreateExpedientInput = z.infer<typeof createExpedientSchema>;
 

@@ -27,7 +27,7 @@ export function ExpedientForm({
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<CreateExpedientInput>({
-    resolver: zodResolver(createExpedientSchema),
+    resolver: zodResolver(createExpedientSchema as any),
     defaultValues: {
       appointmentId: initialAppointmentId || "",
       patientId: initialPatientId || "",

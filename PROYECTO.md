@@ -1,7 +1,8 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-21 00:30 UTC - MOD-CITAS testing phase + MOD-EXPEDIENTES en construcción_
+> _Última actualización: 2026-01-20 06:45 UTC - MOD-EXPEDIENTES 90% (Phase 1.3) + CI/CD Dashboard Automático_
 > **🎉 VERCEL BUILD EXITOSO + RAILWAY POSTGRESQL CONNECTADO:** Sistema completo desplegado en producción con BD real.
+> **⚡ AUTOMATIZACIÓN:** Dashboard se actualiza automáticamente en cada push (GitHub Actions + ADR-005)
 
 ## 1. Visión del Proyecto
 Sistema modular de gestión de salud ocupacional con extracción IA de datos clínicos. Arquitectura multi-tenant, PWA mobile-first. Stack: Next.js 14 + Prisma + PostgreSQL + Firebase Auth + GCP Storage + OpenAI.

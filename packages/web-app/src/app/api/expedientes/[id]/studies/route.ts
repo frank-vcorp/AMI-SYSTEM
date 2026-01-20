@@ -4,10 +4,10 @@
  * 
  * FormData:
  * - file: File (PDF, JPEG, PNG; max 50MB)
- * - studyType: StudyType enum (RADIOGRAPHY|LABORATORY|CARDIOGRAM|ULTRASOUND|TOMOGRAPHY|RESONANCE|ENDOSCOPY|OTHER)
+ * - studyType: StudyType enum (RADIOGRAFIA|LABORATORIO|ECG|ESPIROMETRIA|AUDIOMETRIA|OTROS)
  * 
  * TODO: Integrate with @ami/core-storage for GCP Storage upload
- * Currently generates mock URLs for testing
+ * Currently generates fileKey for storage path
  * 
  * Side effect: Changes expedient status to IN_PROGRESS if it was DRAFT
  *
@@ -16,19 +16,18 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@ami/core-database";
+import { prisma } from "@/lib/prisma";
+import { getTenantIdFromRequest } from "@/lib/auth";
 
 const ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
 const VALID_STUDY_TYPES = [
-  "RADIOGRAPHY",
-  "LABORATORY",
-  "CARDIOGRAM",
-  "ULTRASOUND",
-  "TOMOGRAPHY",
-  "RESONANCE",
-  "ENDOSCOPY",
-  "OTHER",
+  "RADIOGRAFIA",
+  "LABORATORIO",
+  "ECG",
+  "ESPIROMETRIA",
+  "AUDIOMETRIA",
+  "OTROS",
 ];
 
 export async function POST(
@@ -36,6 +35,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const { id } = await params;
     const formData = await request.formData();
     const file = formData.get("file") as File;
@@ -77,9 +77,9 @@ export async function POST(
       );
     }
 
-    // === VERIFY EXPEDIENT EXISTS ===
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
+    // === VERIFY EXPEDIENT EXISTS & BELONGS TO TENANT ===
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
       select: { id: true, status: true, tenantId: true },
     });
 
@@ -91,47 +91,36 @@ export async function POST(
     }
 
     // === UPLOAD FILE & CREATE STUDY RECORD ===
-    // TODO: Replace with actual GCP Storage upload
-    // For now, generate mock file key based on file name
-
-    const result = await prisma.$transaction(async (tx) => {
+    // Generate fileKey for storage path (tenant-isolated)
+    const fileKey = `${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`;
+    
+    // Create study record with Prisma transaction
+    const study = await prisma.$transaction(async (tx: any) => {
+      // Create study
       const newStudy = await tx.study.create({
         data: {
           expedientId: id,
-          studyType: studyType as any,
+          fileKey,
           fileName: file.name,
-          fileKey: `${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`,
-          mimeType: file.type,
+          studyType: studyType,
           fileSize: file.size,
+          mimeType: file.type,
         },
       });
 
-      // If expedient is in PENDING, move to STUDIES_PENDING
+      // Update expedient status to IN_PROGRESS if it's PENDING
       if (expedient.status === "PENDING") {
         await tx.expedient.update({
           where: { id },
-          data: { status: "STUDIES_PENDING" },
+          data: { status: "IN_PROGRESS" },
         });
       }
 
       return newStudy;
     });
 
-    return NextResponse.json(
-      {
-        id: result.id,
-        expedientId: result.expedientId,
-        studyType: result.studyType,
-        fileName: result.fileName,
-        fileKey: result.fileKey,
-        mimeType: result.mimeType,
-        fileSize: result.fileSize,
-        uploadedAt: result.uploadedAt.toISOString(),
-        createdAt: result.createdAt.toISOString(),
-      },
-      { status: 201 }
-    );
-  } catch (error) {
+    return NextResponse.json(study, { status: 201 });
+  } catch (error: any) {
     console.error("Error uploading study:", error);
     return NextResponse.json(
       { error: "Failed to upload study" },
@@ -145,14 +134,15 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const { id } = await params;
     const searchParams = request.nextUrl.searchParams;
     const limit = Math.min(parseInt(searchParams.get("limit") || "50"), 100);
     const offset = parseInt(searchParams.get("offset") || "0");
 
-    // === VERIFY EXPEDIENT EXISTS ===
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
+    // === VERIFY EXPEDIENT EXISTS & BELONGS TO TENANT ===
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
       select: { id: true },
     });
 
@@ -167,7 +157,7 @@ export async function GET(
     const [studies, total] = await Promise.all([
       prisma.study.findMany({
         where: { expedientId: id },
-        orderBy: { uploadedAt: "desc" },
+        orderBy: { createdAt: "desc" },
         take: limit,
         skip: offset,
       }),
@@ -183,7 +173,6 @@ export async function GET(
         fileKey: study.fileKey,
         mimeType: study.mimeType,
         fileSize: study.fileSize,
-        uploadedAt: study.uploadedAt.toISOString(),
         createdAt: study.createdAt.toISOString(),
       })),
       pagination: {

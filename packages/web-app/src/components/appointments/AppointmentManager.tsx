@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { AppointmentForm, AppointmentTable, CalendarView, AppointmentResponse } from '@ami/mod-citas';
 
 /**
@@ -9,11 +10,16 @@ import { AppointmentForm, AppointmentTable, CalendarView, AppointmentResponse } 
  * Combines CalendarView, AppointmentForm, and AppointmentTable
  */
 export function AppointmentManager() {
+  const router = useRouter();
   const [appointments, setAppointments] = useState<AppointmentResponse[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tenantId] = useState('default-tenant'); // In production: Get from auth context
+
+  const handleCreateExpedient = (appointmentId: string, patientId: string) => {
+    router.push(`/admin/expedientes/new?appointmentId=${appointmentId}&patientId=${patientId}`);
+  };
 
   // Fetch appointments
   const fetchAppointments = async () => {
@@ -122,6 +128,7 @@ export function AppointmentManager() {
           <AppointmentTable
             appointments={filteredAppointments}
             onCancel={handleCancelAppointment}
+            onCreateExpedient={handleCreateExpedient}
             isLoading={loading}
           />
         </div>

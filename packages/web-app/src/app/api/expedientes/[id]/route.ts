@@ -2,43 +2,33 @@
  * GET /api/expedientes/[id]
  * Get expedient details with all relations
  *
- * PATCH /api/expedientes/[id]
+ * PUT /api/expedientes/[id]
  * Update expedient status and notes
  * 
- * Allowed transitions: DRAFT → IN_PROGRESS → COMPLETED → SIGNED → DELIVERED
- *
  * DELETE /api/expedientes/[id]
  * Soft delete expedient
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@ami/core-database";
+import { prisma } from "@/lib/prisma";
+import { getTenantIdFromRequest } from "@/lib/auth";
 
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(_request);
     const { id } = await params;
 
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
+    // Fetch expedient with multi-tenant check
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
       include: {
         patient: true,
-        clinic: {
-          select: {
-            id: true,
-            name: true,
-            address: true,
-            city: true,
-          },
-        },
-        medicalExams: {
-          orderBy: { createdAt: "desc" },
-        },
-        studies: {
-          orderBy: { uploadedAt: "desc" },
-        },
+        clinic: true,
+        medicalExams: { orderBy: { createdAt: "desc" } },
+        studies: { orderBy: { createdAt: "desc" } },
       },
     });
 
@@ -49,40 +39,8 @@ export async function GET(
       );
     }
 
-    return NextResponse.json({
-      id: expedient.id,
-      patientId: expedient.patientId,
-      clinicId: expedient.clinicId,
-      status: expedient.status,
-      medicalNotes: expedient.medicalNotes,
-      patient: expedient.patient,
-      clinic: expedient.clinic,
-      medicalExams: expedient.medicalExams.map((exam) => ({
-        id: exam.id,
-        bloodPressure: exam.bloodPressure,
-        heartRate: exam.heartRate,
-        respiratoryRate: exam.respiratoryRate,
-        temperature: exam.temperature,
-        weight: exam.weight,
-        height: exam.height,
-        physicalExam: exam.physicalExam,
-        notes: exam.notes,
-        createdAt: exam.createdAt.toISOString(),
-        updatedAt: exam.updatedAt.toISOString(),
-      })),
-      studies: expedient.studies.map((study) => ({
-        id: study.id,
-        studyType: study.studyType,
-        fileName: study.fileName,
-        fileKey: study.fileKey,
-        mimeType: study.mimeType,
-        fileSize: study.fileSize,
-        uploadedAt: study.uploadedAt.toISOString(),
-      })),
-      createdAt: expedient.createdAt.toISOString(),
-      updatedAt: expedient.updatedAt.toISOString(),
-    });
-  } catch (error) {
+    return NextResponse.json(expedient);
+  } catch (error: any) {
     console.error("Error fetching expedient:", error);
     return NextResponse.json(
       { error: "Failed to fetch expedient" },
@@ -91,18 +49,19 @@ export async function GET(
   }
 }
 
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const { id } = await params;
     const body = await request.json();
     const { status, notes } = body;
 
-    // Fetch current expedient
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
+    // Fetch current expedient with multi-tenant check
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
     });
 
     if (!expedient) {
@@ -114,7 +73,7 @@ export async function PATCH(
 
     // Validate status transition if provided
     if (status) {
-      const validStatuses = ["DRAFT", "IN_PROGRESS", "COMPLETED", "SIGNED", "DELIVERED"];
+      const validStatuses = ["PENDING", "IN_PROGRESS", "STUDIES_PENDING", "VALIDATED", "COMPLETED", "ARCHIVED"];
       if (!validStatuses.includes(status)) {
         return NextResponse.json(
           { error: `status must be one of: ${validStatuses.join(", ")}` },
@@ -124,14 +83,15 @@ export async function PATCH(
 
       // Validate state machine transition
       const statusOrder: Record<string, number> = {
-        DRAFT: 0,
+        PENDING: 0,
         IN_PROGRESS: 1,
-        COMPLETED: 2,
-        SIGNED: 3,
-        DELIVERED: 4,
+        STUDIES_PENDING: 2,
+        VALIDATED: 3,
+        COMPLETED: 4,
+        ARCHIVED: 5,
       };
 
-      const currentOrder = statusOrder[expedient.status];
+      const currentOrder = statusOrder[expedient.status as any];
       const newOrder = statusOrder[status];
 
       if (newOrder < currentOrder) {
@@ -157,7 +117,7 @@ export async function PATCH(
       medicalNotes: updated.medicalNotes,
       updatedAt: updated.updatedAt.toISOString(),
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error updating expedient:", error);
     return NextResponse.json(
       { error: "Failed to update expedient" },
@@ -167,14 +127,16 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const { id } = await params;
 
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
+    // Verify expedient exists and belongs to tenant
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
     });
 
     if (!expedient) {
@@ -184,17 +146,19 @@ export async function DELETE(
       );
     }
 
-    // Delete expedient (cascade deletes medical exams and studies)
-    await prisma.expedient.delete({
+    // Soft delete: update status to ARCHIVED instead of hard delete
+    await prisma.expedient.update({
       where: { id },
+      data: { status: "ARCHIVED" },
     });
 
     return NextResponse.json({
       id,
       deleted: true,
+      status: "ARCHIVED",
       deletedAt: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error deleting expedient:", error);
     return NextResponse.json(
       { error: "Failed to delete expedient" },

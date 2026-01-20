@@ -1,146 +1,126 @@
 /**
  * /admin/expedientes/[id]
- * View expedient details
+ * View and manage expedient details (server component)
  */
 
-"use client";
-
-import React, { useState, useEffect } from "react";
-// TODO: Importar ExpeditentDetail desde componentes locales
-// import { ExpeditentDetail } from "@ami/mod-expedientes";
-import { ExpedientDTO } from "@ami/mod-expedientes";
-import { use } from "react";
+import React from "react";
+import Link from "next/link";
+import { ExpedientDetail, MedicalExamPanel, StudyUploadZone } from "@ami/mod-expedientes";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export default function ExpedientDetailPage({ params }: PageProps) {
-  const { id } = use(params);
-  const [expedient, setExpedient] = useState<ExpedientDTO | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string>("");
+async function getExpedient(id: string) {
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    const response = await fetch(`${apiUrl}/api/expedientes/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
-  useEffect(() => {
-    // TODO: In production, fetch from API
-    const loadExpedient = async () => {
-      try {
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 500));
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
 
-        const mockData: ExpedientDTO = {
-          id,
-          patientId: "patient_1",
-          clinicId: "clinic_1",
-          companyId: "company_1",
-          status: "IN_PROGRESS",
-          notes: "Regular health check",
-          patient: {
-            id: "patient_1",
-            name: "Juan Pérez García",
-            email: "juan@example.com",
-            phone: "+55 11 99999-9999",
-            birthDate: "1980-05-15",
-            gender: "MASCULINO",
-            documentId: "123456789",
-            status: "ACTIVE",
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          },
-          medicalExams: [
-            {
-              id: "exam_1",
-              expedientId: id,
-              bloodPressure: "120/80",
-              heartRate: 72,
-              respiratoryRate: 16,
-              temperature: 37.0,
-              weight: 75.5,
-              height: 175,
-              physicalExam: "Normal findings, no abnormalities detected",
-              notes: "Patient reports good general health",
-              examinedAt: new Date().toISOString(),
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            },
-          ],
-          studies: [
-            {
-              id: "study_1",
-              expedientId: id,
-              type: "RADIOGRAPHY",
-              fileName: "chest_xray.pdf",
-              fileUrl: "https://storage.example.com/studies/chest_xray.pdf",
-              mimeType: "application/pdf",
-              fileSizeBytes: 2048000,
-              status: "COMPLETED",
-              uploadedAt: new Date().toISOString(),
-              createdAt: new Date().toISOString(),
-            },
-            {
-              id: "study_2",
-              expedientId: id,
-              type: "LABORATORY",
-              fileName: "blood_test.pdf",
-              fileUrl: "https://storage.example.com/studies/blood_test.pdf",
-              mimeType: "application/pdf",
-              fileSizeBytes: 1024000,
-              status: "COMPLETED",
-              uploadedAt: new Date().toISOString(),
-              createdAt: new Date().toISOString(),
-            },
-          ],
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
-
-        setExpedient(mockData);
-      } catch (err) {
-        setError("Error loading expedient");
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadExpedient();
-  }, [id]);
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-48">
-        <div className="text-gray-500">Cargando expediente...</div>
-      </div>
-    );
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching expedient:", error);
+    return null;
   }
+}
 
-  if (error || !expedient) {
+export default async function ExpedientDetailPage({ params }: PageProps) {
+  const { id } = await params;
+  const expedient = await getExpedient(id);
+
+  if (!expedient) {
     return (
-      <div className="p-4 bg-red-100 text-red-800 rounded-lg">
-        {error || "Expediente no encontrado"}
+      <div className="space-y-6">
+        <div className="rounded-lg border border-red-300 bg-red-50 p-4">
+          <h3 className="text-sm font-semibold text-red-900">Error</h3>
+          <p className="mt-1 text-sm text-red-700">Could not load expedient details.</p>
+          <Link
+            href="/admin/expedientes"
+            className="mt-4 inline-flex justify-center rounded-md border border-transparent bg-red-600 py-2 px-4 text-sm font-medium text-white hover:bg-red-700"
+          >
+            Back to List
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-6">
-      <div>
-        <button
-          onClick={() => window.history.back()}
-          className="text-blue-600 hover:text-blue-800 mb-4"
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Medical Record Details</h1>
+          <p className="mt-1 text-gray-600">{expedient.folio}</p>
+        </div>
+        <Link
+          href="/admin/expedientes"
+          className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
-          ← Volver
-        </button>
+          Back to List
+        </Link>
       </div>
 
-      {/* TODO: ExpeditentDetail component - move from mod-expedientes or create shared UI */}
-      {/* <ExpeditentDetail
-        expedient={expedient}
-        onUpdateStatus={handleUpdateStatus}
-        onDownloadStudy={handleDownloadStudy}
-      /> */}
-      <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
-        <p className="text-sm text-yellow-800">Componente en desarrollo</p>
+      {/* Detail View */}
+      <div className="rounded-lg border border-gray-300 bg-white p-6">
+        <ExpedientDetail
+          expedient={expedient}
+          onStatusChange={async (newStatus) => {
+            try {
+              const response = await fetch(`/api/expedientes/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: newStatus }),
+              });
+
+              if (!response.ok) throw new Error("Failed to update status");
+              // Reload page to see changes
+              window.location.reload();
+            } catch (error) {
+              console.error("Error updating status:", error);
+              alert("Error updating status");
+            }
+          }}
+        />
+      </div>
+
+      {/* Medical Exams Section */}
+      <div className="rounded-lg border border-gray-300 bg-white p-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Add Medical Exam</h2>
+        <MedicalExamPanel
+          expedientId={id}
+          onSuccess={() => {
+            // Reload page to show new exam
+            window.location.reload();
+          }}
+          onError={(error) => {
+            console.error("Error adding exam:", error);
+            alert(`Error: ${error.message}`);
+          }}
+        />
+      </div>
+
+      {/* Study Upload Section */}
+      <div className="rounded-lg border border-gray-300 bg-white p-6">
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Upload Medical Study</h2>
+        <StudyUploadZone
+          expedientId={id}
+          onSuccess={() => {
+            // Reload page to show new study
+            window.location.reload();
+          }}
+          onError={(error) => {
+            console.error("Error uploading study:", error);
+            alert(`Error: ${error.message}`);
+          }}
+        />
       </div>
     </div>
   );

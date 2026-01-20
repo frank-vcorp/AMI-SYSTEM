@@ -1,173 +1,80 @@
 /**
- * POST /api/expedientes
- * Create a new patient and expedient with transaction
+ * API Routes para MOD-EXPEDIENTES
  * 
- * Request body:
- * {
- *   patient: { name, email, phone, birthDate, gender, documentId },
- *   expedient: { clinicId, companyId },
- *   tenantId
- * }
+ * POST   /api/expedientes          - Crear expediente desde cita
+ * GET    /api/expedientes          - Listar expedientes con filtros
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@ami/core-database";
-
-// Validation helpers
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function isValidPhone(phone: string): boolean {
-  return /^[\d\s+\-()]{7,20}$/.test(phone);
-}
+import { prisma } from "@/lib/prisma";
+import { getTenantIdFromRequest } from "@/lib/auth";
 
 export async function POST(request: NextRequest) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const body = await request.json();
-    const { patient, expedient, tenantId } = body;
+    const { appointmentId, patientId, notes } = body;
 
-    // === VALIDATIONS ===
-    if (!tenantId) {
+    if (!appointmentId || !patientId) {
       return NextResponse.json(
-        { error: "tenantId is required" },
+        { error: "appointmentId and patientId are required" },
         { status: 400 }
       );
     }
 
-    if (!patient) {
-      return NextResponse.json(
-        { error: "patient data is required" },
-        { status: 400 }
-      );
-    }
-
-    const { name, email, phone, birthDate, gender, documentId } = patient;
-
-    // Required fields validation
-    if (!name || !email || !phone || !birthDate || !gender || !documentId) {
-      return NextResponse.json(
-        { error: "patient.name, email, phone, birthDate, gender, documentId are required" },
-        { status: 400 }
-      );
-    }
-
-    // Email validation
-    if (!isValidEmail(email)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 }
-      );
-    }
-
-    // Phone validation
-    if (!isValidPhone(phone)) {
-      return NextResponse.json(
-        { error: "Invalid phone format" },
-        { status: 400 }
-      );
-    }
-
-    // Gender enum validation
-    const validGenders = ["MASCULINO", "FEMENINO", "OTRO"];
-    if (!validGenders.includes(gender)) {
-      return NextResponse.json(
-        { error: `gender must be one of: ${validGenders.join(", ")}` },
-        { status: 400 }
-      );
-    }
-
-    // Expedient data validation
-    if (!expedient || !expedient.clinicId) {
-      return NextResponse.json(
-        { error: "expedient.clinicId is required" },
-        { status: 400 }
-      );
-    }
-
-    // === CHECK EXISTING PATIENT ===
-    const existingPatient = await prisma.patient.findFirst({
-      where: {
-        OR: [
-          { tenantId, documentNumber: documentId },
-          { tenantId, email },
-        ],
-      },
+    // Validate that appointment exists and belongs to tenant
+    const appointment = await prisma.appointment.findFirst({
+      where: { id: appointmentId, tenantId },
     });
 
-    if (existingPatient) {
-      const conflictField = existingPatient.documentNumber === documentId ? "documentNumber" : "email";
+    if (!appointment) {
       return NextResponse.json(
-        { error: `Patient with this ${conflictField} already exists in this tenant` },
-        { status: 409 }
-      );
-    }
-
-    // === CHECK CLINIC EXISTS ===
-    const clinic = await prisma.clinic.findUnique({
-      where: { id: expedient.clinicId },
-    });
-
-    if (!clinic) {
-      return NextResponse.json(
-        { error: "Clinic not found" },
+        { error: "Appointment not found" },
         { status: 404 }
       );
     }
 
-    // === CHECK COMPANY EXISTS (if provided) ===
-    if (expedient.companyId) {
-      const company = await prisma.company.findUnique({
-        where: { id: expedient.companyId },
-      });
-
-      if (!company) {
-        return NextResponse.json(
-          { error: "Company not found" },
-          { status: 404 }
-        );
-      }
-    }
-
-    // === CREATE PATIENT & EXPEDIENT IN TRANSACTION ===
-    const result = await prisma.$transaction(async (tx) => {
-      const newPatient = await tx.patient.create({
-        data: {
-          tenantId,
-          name,
-          email,
-          phoneNumber: phone,
-          dateOfBirth: new Date(birthDate),
-          gender,
-          documentNumber: documentId,
-          status: "ACTIVE",
-        },
-      });
-
-      const newExpedient = await tx.expedient.create({
-        data: {
-          tenantId,
-          patientId: newPatient.id,
-          clinicId: expedient.clinicId,
-          folio: `EXP-${expedient.clinicId}-${Date.now()}`,
-          status: "PENDING",
-          medicalNotes: null,
-        },
-      });
-
-      return { patient: newPatient, expedient: newExpedient };
+    // Validate that patient exists
+    const patient = await prisma.patient.findFirst({
+      where: { id: patientId, tenantId },
     });
 
-    return NextResponse.json(
-      {
-        patientId: result.patient.id,
-        expedientId: result.expedient.id,
-        status: result.expedient.status,
-        createdAt: result.expedient.createdAt.toISOString(),
+    if (!patient) {
+      return NextResponse.json(
+        { error: "Patient not found" },
+        { status: 404 }
+      );
+    }
+
+    // Generate folio
+    const count = await prisma.expedient.count({
+      where: { tenantId, clinicId: appointment.clinicId },
+    });
+
+    // Generate folio: EXP-{CLINIC_ID_SHORT}-{SEQ}
+    const folio = `EXP-${appointment.clinicId.substring(0, 4).toUpperCase()}-${String(count + 1).padStart(6, "0")}`;
+
+    // Create expedient
+    const expedient = await prisma.expedient.create({
+      data: {
+        tenantId,
+        patientId,
+        clinicId: appointment.clinicId,
+        appointmentId,
+        folio,
+        status: "PENDING",
+        medicalNotes: notes || "",
       },
-      { status: 201 }
-    );
-  } catch (error) {
+      include: {
+        patient: true,
+        clinic: true,
+        medicalExams: true,
+        studies: true,
+      },
+    });
+
+    return NextResponse.json(expedient, { status: 201 });
+  } catch (error: any) {
     console.error("Error creating expedient:", error);
     return NextResponse.json(
       { error: "Failed to create expedient" },
@@ -176,107 +83,52 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * GET /api/expedientes
- * List expedients with filtering, pagination, and relations
- * 
- * Query params:
- * - tenantId (required)
- * - limit (optional, default: 10, max: 100)
- * - offset (optional, default: 0)
- * - status (optional, filter by ExpedientStatus)
- */
 export async function GET(request: NextRequest) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const searchParams = request.nextUrl.searchParams;
-    const tenantId = searchParams.get("tenantId");
-    const limit = Math.min(parseInt(searchParams.get("limit") || "10"), 100);
-    const offset = parseInt(searchParams.get("offset") || "0");
+    const clinicId = searchParams.get("clinicId");
+    const patientId = searchParams.get("patientId");
     const status = searchParams.get("status");
-
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: "tenantId is required" },
-        { status: 400 }
-      );
-    }
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const pageSize = Math.min(50, parseInt(searchParams.get("pageSize") || "20"));
 
     // Build where clause
     const where: any = { tenantId };
-    if (status) {
-      const validStatuses = ["DRAFT", "IN_PROGRESS", "COMPLETED", "SIGNED", "DELIVERED"];
-      if (!validStatuses.includes(status)) {
-        return NextResponse.json(
-          { error: `status must be one of: ${validStatuses.join(", ")}` },
-          { status: 400 }
-        );
-      }
-      where.status = status;
-    }
+    if (clinicId) where.clinicId = clinicId;
+    if (patientId) where.patientId = patientId;
+    if (status) where.status = status;
 
-    // Query with pagination and relations
+    // Fetch expedients with pagination
     const [expedients, total] = await Promise.all([
       prisma.expedient.findMany({
         where,
         include: {
-          patient: {
-            select: {
-              id: true,
-              name: true,
-              email: true,
-              documentNumber: true,
-            },
-          },
-          medicalExams: {
-            select: {
-              id: true,
-              bloodPressure: true,
-              heartRate: true,
-              temperature: true,
-              createdAt: true,
-            },
-          },
-          studies: {
-            select: {
-              id: true,
-              studyType: true,
-              fileName: true,
-              uploadedAt: true,
-            },
-          },
+          patient: true,
+          clinic: true,
+          medicalExams: { take: 1, orderBy: { createdAt: "desc" } },
+          studies: { take: 1, orderBy: { createdAt: "desc" } },
         },
-        orderBy: {
-          createdAt: "desc",
-        },
-        take: limit,
-        skip: offset,
+        orderBy: { createdAt: "desc" },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
       }),
       prisma.expedient.count({ where }),
     ]);
 
     return NextResponse.json({
-      data: expedients.map((exp) => ({
-        id: exp.id,
-        patientId: exp.patientId,
-        clinicId: exp.clinicId,
-        status: exp.status,
-        patient: exp.patient,
-        medicalExamsCount: exp.medicalExams.length,
-        studiesCount: exp.studies.length,
-        createdAt: exp.createdAt.toISOString(),
-        updatedAt: exp.updatedAt.toISOString(),
-      })),
+      data: expedients,
       pagination: {
         total,
-        limit,
-        offset,
-        hasMore: offset + limit < total,
+        page,
+        pageSize,
+        totalPages: Math.ceil(total / pageSize),
       },
     });
-  } catch (error) {
-    console.error("Error listing expedients:", error);
+  } catch (error: any) {
+    console.error("Error fetching expedients:", error);
     return NextResponse.json(
-      { error: "Failed to list expedients" },
+      { error: "Failed to fetch expedients" },
       { status: 500 }
     );
   }

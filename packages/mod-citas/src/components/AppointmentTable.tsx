@@ -7,6 +7,7 @@ interface AppointmentTableProps {
   appointments: AppointmentResponse[];
   onCancel?: (id: string) => Promise<void>;
   onEdit?: (appointment: AppointmentResponse) => void;
+  onCreateExpedient?: (appointmentId: string, patientId: string) => void;
   isLoading?: boolean;
 }
 
@@ -14,6 +15,7 @@ export function AppointmentTable({
   appointments,
   onCancel,
   onEdit,
+  onCreateExpedient,
   isLoading = false,
 }: AppointmentTableProps) {
   const [cancelling, setCancelling] = useState<string | null>(null);
@@ -134,6 +136,15 @@ export function AppointmentTable({
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                   {appointment.status !== AppointmentStatus.CANCELLED && (
                     <>
+                      {onCreateExpedient && appointment.status === AppointmentStatus.CHECK_IN && (
+                        <button
+                          onClick={() => onCreateExpedient(appointment.id, appointment.employeeId)}
+                          className="text-green-600 hover:text-green-800 font-medium px-2 py-1 bg-green-50 rounded hover:bg-green-100"
+                          title="Create medical record from this appointment"
+                        >
+                          📋 Expediente
+                        </button>
+                      )}
                       {onEdit && (
                         <button
                           onClick={() => onEdit(appointment)}

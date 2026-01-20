@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { CertificateData, PDFExportOptions } from "../types";
 
 interface CertificateViewerProps {

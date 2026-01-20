@@ -1,33 +1,7 @@
-/**
- * 🔧 FIX REFERENCE: FIX-20260120-01
- * 📄 SEE: context/interconsultas/DICTAMEN_FIX-20260120-01.md
- * 🤖 AUTHOR: DEBY (Opus 4.5)
- * 
- * CRITICAL CONFIGURATION FOR PNPM MONOREPO DEPLOYMENT
- * 
- * Key changes:
- * 1. installCommand: --no-frozen-lockfile (allows pnpm validation flexibility in Vercel)
- * 2. buildCommand: --filter=@ami/web-app (compile only web-app, not entire monorepo)
- * 3. rootDirectory: . (explicit monorepo root for Vercel)
- * 4. ignoreCommand: skip deployments on non-code changes
- */
-
 {
   "installCommand": "pnpm install --no-frozen-lockfile",
   "buildCommand": "pnpm run build --filter=@ami/web-app",
   "framework": "nextjs",
   "outputDirectory": "packages/web-app/.next",
-  "rootDirectory": ".",
-  "ignoreCommand": "git check-ignore -q $VERCEL_GIT_COMMIT_REF",
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "NEXTAUTH_SECRET": "@nextauth_secret",
-    "NEXTAUTH_URL": "@nextauth_url",
-    "NEXT_PUBLIC_FIREBASE_API_KEY": "@firebase_api_key",
-    "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN": "@firebase_auth_domain",
-    "NEXT_PUBLIC_FIREBASE_PROJECT_ID": "@firebase_project_id",
-    "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET": "@firebase_storage_bucket",
-    "NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID": "@firebase_messaging_sender_id",
-    "NEXT_PUBLIC_FIREBASE_APP_ID": "@firebase_app_id"
-  }
+  "rootDirectory": "."
 }

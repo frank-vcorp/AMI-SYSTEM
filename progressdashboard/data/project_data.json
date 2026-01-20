@@ -1,7 +1,7 @@
 {
-  "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-20T22:48:52.867Z",
-  "overallProgress": 54.73684210526316,
+  "projectName": "AMI-SYSTEM Progress",
+  "lastUpdated": "2026-01-20T23:05:12.725Z",
+  "overallProgress": 60.526315789473685,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -11,6 +11,8 @@
         {
           "id": "core-database",
           "name": "Core - Base de Datos",
+          "phase": "FASE 0 – Cimientos",
+          "phaseOrder": 0,
           "owner": "Backend",
           "status": "done",
           "progress": 100,
@@ -20,6 +22,8 @@
         {
           "id": "mod-clinicas",
           "name": "MOD-CLINICAS",
+          "phase": "FASE 0 – Cimientos",
+          "phaseOrder": 0,
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
@@ -29,6 +33,8 @@
         {
           "id": "mod-servicios",
           "name": "MOD-SERVICIOS",
+          "phase": "FASE 0 – Cimientos",
+          "phaseOrder": 0,
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
@@ -38,6 +44,8 @@
         {
           "id": "mod-empresas",
           "name": "MOD-EMPRESAS",
+          "phase": "FASE 0 – Cimientos",
+          "phaseOrder": 0,
           "owner": "Frontend · Backend",
           "status": "done",
           "progress": 100,
@@ -47,6 +55,8 @@
         {
           "id": "arquitectura",
           "name": "Arquitectura y Documentación",
+          "phase": "FASE 0 – Cimientos",
+          "phaseOrder": 0,
           "owner": "Arquitectura",
           "status": "done",
           "progress": 100,
@@ -61,11 +71,13 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 60,
+      "progress": 72.22222222222223,
       "modules": [
         {
           "id": "core-auth",
           "name": "Core - Autenticación",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Backend",
           "status": "pending",
           "progress": 0,
@@ -75,6 +87,8 @@
         {
           "id": "core-storage",
           "name": "Core - Storage",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Backend",
           "status": "done",
           "progress": 100,
@@ -84,6 +98,8 @@
         {
           "id": "core-ui",
           "name": "Core - UI Base",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Frontend",
           "status": "in_progress",
           "progress": 50,
@@ -93,6 +109,8 @@
         {
           "id": "core-pwa",
           "name": "Core - PWA",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Frontend",
           "status": "pending",
           "progress": 0,
@@ -102,6 +120,8 @@
         {
           "id": "core-signatures",
           "name": "Core - Firmas",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Backend",
           "status": "done",
           "progress": 100,
@@ -111,44 +131,52 @@
         {
           "id": "mod-citas",
           "name": "MOD-CITAS",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Frontend · Backend",
           "status": "done",
-          "progress": 90,
-          "summary": "Agenda de citas: 90% código completado. Testing phase en progreso (SOFIA PR remoto).",
+          "progress": 100,
+          "summary": "Agenda de citas: CRUD + check-in + \"Generar Expediente\" button + serviceIds. 100% Completado.",
           "needs": "mod-clinicas + mod-empresas"
         },
         {
           "id": "mod-expedientes",
           "name": "MOD-EXPEDIENTES",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Frontend · Backend",
           "status": "done",
-          "progress": 90,
-          "summary": "Flujo central: paciente → examen → expediente → validación. Fase 1.3 completada (componentes UI + API routes + integración CITAS). Pending: E2E testing.",
+          "progress": 100,
+          "summary": "Flujo central: paciente → examen → expediente → validación. 100% Completado (CRUD + Exámenes + Estudios + 7 API routes + UI componentes).",
           "needs": "MOD-CITAS, Prisma schema"
         },
         {
           "id": "mod-validacion",
           "name": "MOD-VALIDACION",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Backend · Data",
-          "status": "in_progress",
-          "progress": 70,
-          "summary": "IA inteligente lee estudios automáticamente. Médico valida y firma los resultados.",
-          "needs": "mod-expedientes + core-signatures (Sem 9)"
+          "status": "done",
+          "progress": 100,
+          "summary": "IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. 100% Completado (Panel + Semáforos + Firma digital + 4 API routes).",
+          "needs": "mod-expedientes + core-signatures"
         },
         {
           "id": "mod-reportes",
           "name": "MOD-REPORTES",
+          "phase": "FASE 1 – Flujo Principal",
+          "phaseOrder": 1,
           "owner": "Backend · Frontend",
-          "status": "in_progress",
-          "progress": 40,
-          "summary": "Certificados de validación imprimibles. MVP con CertificateViewer + API routes. PDF export pending.",
-          "needs": "mod-validacion + core-storage (Sem 10)"
+          "status": "done",
+          "progress": 100,
+          "summary": "Certificados de validación imprimibles. 100% Completado (CertificateViewer MVP + Print dialog + PDF export API + Delivery flow).",
+          "needs": "mod-validacion + core-storage"
         }
       ],
       "statusCounts": {
         "pending": 2,
-        "done": 4,
-        "in_progress": 3
+        "done": 6,
+        "in_progress": 1
       }
     },
     {
@@ -159,6 +187,8 @@
         {
           "id": "mod-dashboard",
           "name": "MOD-DASHBOARD",
+          "phase": "FASE 2 – Operaciones",
+          "phaseOrder": 2,
           "owner": "Frontend · Data",
           "status": "pending",
           "progress": 0,
@@ -168,6 +198,8 @@
         {
           "id": "mod-bitacora",
           "name": "MOD-BITACORA",
+          "phase": "FASE 2 – Operaciones",
+          "phaseOrder": 2,
           "owner": "Backend · Data",
           "status": "pending",
           "progress": 0,
@@ -177,6 +209,8 @@
         {
           "id": "mod-calidad",
           "name": "MOD-CALIDAD",
+          "phase": "FASE 2 – Operaciones",
+          "phaseOrder": 2,
           "owner": "Data",
           "status": "pending",
           "progress": 0,
@@ -186,6 +220,8 @@
         {
           "id": "mod-admin",
           "name": "MOD-ADMIN",
+          "phase": "FASE 2 – Operaciones",
+          "phaseOrder": 2,
           "owner": "Frontend · Backend",
           "status": "pending",
           "progress": 0,
@@ -205,6 +241,8 @@
         {
           "id": "mod-portal-empresa",
           "name": "MOD-PORTAL-EMPRESA",
+          "phase": "FASE 3 – Expansión",
+          "phaseOrder": 3,
           "owner": "Frontend",
           "status": "pending",
           "progress": 0,
@@ -219,26 +257,6 @@
   ],
   "needsAction": [
     {
-      "module": "Core - Base de Datos",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "-"
-    },
-    {
-      "module": "MOD-CLINICAS",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "-"
-    },
-    {
-      "module": "MOD-SERVICIOS",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "-"
-    },
-    {
-      "module": "MOD-EMPRESAS",
-      "phase": "FASE 0 – Cimientos",
-      "detail": "-"
-    },
-    {
       "module": "Arquitectura y Documentación",
       "phase": "FASE 0 – Cimientos",
       "detail": "N/A"
@@ -249,11 +267,6 @@
       "detail": "Semana 7"
     },
     {
-      "module": "Core - Storage",
-      "phase": "FASE 1 – Flujo Principal",
-      "detail": "-"
-    },
-    {
       "module": "Core - UI Base",
       "phase": "FASE 1 – Flujo Principal",
       "detail": "core-database"
@@ -262,11 +275,6 @@
       "module": "Core - PWA",
       "phase": "FASE 1 – Flujo Principal",
       "detail": "Semana 11+"
-    },
-    {
-      "module": "Core - Firmas",
-      "phase": "FASE 1 – Flujo Principal",
-      "detail": "-"
     },
     {
       "module": "MOD-CITAS",
@@ -281,12 +289,12 @@
     {
       "module": "MOD-VALIDACION",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-expedientes + core-signatures (Sem 9)"
+      "detail": "mod-expedientes + core-signatures"
     },
     {
       "module": "MOD-REPORTES",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-validacion + core-storage (Sem 10)"
+      "detail": "mod-validacion + core-storage"
     },
     {
       "module": "MOD-DASHBOARD",

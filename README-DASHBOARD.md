@@ -1,15 +1,15 @@
 # 📊 AMI-SYSTEM Progress Dashboard
 
-> **Última actualización:** 2026-01-20 06:18:23
+> **Última actualización:** 2026-01-20 23:05:12
 
 ## 📈 Resumen General
 
 | Métrica | Valor | Visualización |
 |---------|-------|---------------|
 | **Módulos totales** | 19 | — |
-| **Completados** | 7 | ✅ 36.8% |
-| **En progreso** | 3 | 🔄 15.8% |
-| **Progreso general** | 48.2% | [██████████░░░░░░░░░░] |
+| **Completados** | 11 | ✅ 57.9% |
+| **En progreso** | 1 | 🔄 5.3% |
+| **Progreso general** | 60.5% | [████████████░░░░░░░░] |
 
 ## 🎯 Progreso por Fase
 
@@ -25,7 +25,7 @@
 | Arquitectura y Documentación | Arquitectura | ✅ | [█████] 100% | Planos y manuales: cómo funciona el sistema, decis... |
 
 ### FASE 1 – Flujo Principal
-**Progreso:** [█████████░░░░░░░░░░░] 46.1%
+**Progreso:** [██████████████░░░░░░] 72.2%
 
 | Módulo | Owner | Estado | Progreso | Descripción |
 |--------|-------|--------|----------|-------------|
@@ -34,10 +34,10 @@
 | Core - UI Base | Frontend | 🔄 | [███░░] 50% | Interfaz visual bonita y fácil de usar. Sistema co... |
 | Core - PWA | Frontend | ⏳ | [░░░░░] 0% | Aplicación móvil: funciona incluso sin internet. M... |
 | Core - Firmas | Backend | ✅ | [█████] 100% | Firma digital: reportes firmados legalmente por el... |
-| MOD-CITAS | Frontend · Backend | ✅ | [█████] 90% | Agenda de citas: 90% código completado. Testing ph... |
-| MOD-EXPEDIENTES | Frontend · Backend | 🔄 | [░░░░░] 5% | Flujo central: paciente → examen → expediente → va... |
-| MOD-VALIDACION | Backend · Data | 🔄 | [████░] 70% | IA inteligente lee estudios automáticamente. Médic... |
-| MOD-REPORTES | Backend · Frontend | ⏳ | [░░░░░] 0% | Genera PDF profesional con resultados. Se envía po... |
+| MOD-CITAS | Frontend · Backend | ✅ | [█████] 100% | Agenda de citas: CRUD + check-in + "Generar Expedi... |
+| MOD-EXPEDIENTES | Frontend · Backend | ✅ | [█████] 100% | Flujo central: paciente → examen → expediente → va... |
+| MOD-VALIDACION | Backend · Data | ✅ | [█████] 100% | IA inteligente lee estudios automáticamente. Médic... |
+| MOD-REPORTES | Backend · Frontend | ✅ | [█████] 100% | Certificados de validación imprimibles. 100% Compl... |
 
 ### FASE 2 – Operaciones
 **Progreso:** [░░░░░░░░░░░░░░░░░░░░] 0.0%
@@ -64,7 +64,7 @@
 - **Core - PWA**: Semana 11+
 - **MOD-CITAS**: mod-clinicas + mod-empresas
 - **MOD-EXPEDIENTES**: MOD-CITAS, Prisma schema
-- **MOD-VALIDACION**: mod-expedientes + core-signatures (Sem 9)
+- **MOD-VALIDACION**: mod-expedientes + core-signatures
 - **MOD-REPORTES**: mod-validacion + core-storage
 - **MOD-DASHBOARD**: todos FASE 1 completados
 - **MOD-BITACORA**: core-database
@@ -79,4 +79,4 @@
 - Este dashboard se genera automáticamente desde `PROYECTO.md`
 - Para regenerarlo: `npm run dashboard:update`
 - Para editar módulos, actualiza la tabla entre `<!-- progress-modules:start -->` y `<!-- progress-modules:end -->` en `PROYECTO.md`
-- Último generado: 2026-01-20T06:18:23.604Z
+- Último generado: 2026-01-20T23:05:12.724Z

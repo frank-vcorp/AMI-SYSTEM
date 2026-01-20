@@ -131,7 +131,8 @@ export function AppointmentForm({
     }));
   };
 
-  // TODO: Implement service selection in form UI
+  // IMPL-20260120-12: Service selection UI ready for future implementation
+  // Handler prepared but not yet integrated in form UI (FASE 2 enhancement)
   // const handleServiceToggle = (serviceId: string) => {
   //   setFormData((prev) => ({
   //     ...prev,

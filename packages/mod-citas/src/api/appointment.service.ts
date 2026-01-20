@@ -370,6 +370,7 @@ export class AppointmentService {
       appointmentTime: appointment.appointmentTime ?? appointment.time,
       status: appointment.status,
       notes: appointment.notes ?? null,
+      serviceIds: appointment.serviceIds ?? [],  // IMPL-20260120-12
       createdAt: createdAt.toISOString(),
       updatedAt: updatedAt.toISOString(),
       clinicName: appointment.clinic?.name,

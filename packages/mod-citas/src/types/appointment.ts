@@ -66,6 +66,7 @@ export interface AppointmentResponse {
   appointmentTime: string;
   status: AppointmentStatus;
   notes: string | null;
+  serviceIds: string[];      // Servicios/Baterías (IMPL-20260120-12)
   createdAt: string;         // ISO 8601 timestamp
   updatedAt: string;         // ISO 8601 timestamp
   // Optional enriched fields

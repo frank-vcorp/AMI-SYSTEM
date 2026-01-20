@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-16T22:27:37.580Z",
-  "overallProgress": 48.421052631578945,
+  "lastUpdated": "2026-01-20T00:41:05.464Z",
+  "overallProgress": 47.89473684210526,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 46.666666666666664,
+      "progress": 45.55555555555556,
       "modules": [
         {
           "id": "core-auth",
@@ -112,9 +112,9 @@
           "id": "mod-citas",
           "name": "MOD-CITAS",
           "owner": "Frontend · Backend",
-          "status": "done",
-          "progress": 100,
-          "summary": "Agenda de citas: pacientes agendados, recordatorios automáticos, check-in.",
+          "status": "testing",
+          "progress": 90,
+          "summary": "Agenda de citas: 90% código completado. En fase de testing unitario y documentación.",
           "needs": "mod-clinicas + mod-empresas"
         },
         {
@@ -147,8 +147,9 @@
       ],
       "statusCounts": {
         "pending": 4,
-        "done": 3,
-        "in_progress": 2
+        "done": 2,
+        "in_progress": 2,
+        "testing": 1
       }
     },
     {

@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-20T06:19:08.891Z",
-  "overallProgress": 48.1578947368421,
+  "lastUpdated": "2026-01-20T06:23:14.652Z",
+  "overallProgress": 52.63157894736842,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 46.111111111111114,
+      "progress": 55.55555555555556,
       "modules": [
         {
           "id": "core-auth",
@@ -121,9 +121,9 @@
           "id": "mod-expedientes",
           "name": "MOD-EXPEDIENTES",
           "owner": "Frontend · Backend",
-          "status": "in_progress",
-          "progress": 5,
-          "summary": "Flujo central: paciente → examen → expediente → validación. Estructura base iniciada (21 enero SOFIA).",
+          "status": "done",
+          "progress": 90,
+          "summary": "Flujo central: paciente → examen → expediente → validación. Fase 1.3 completada (componentes UI + API routes + integración CITAS). Pending: E2E testing.",
           "needs": "MOD-CITAS, Prisma schema"
         },
         {
@@ -147,8 +147,8 @@
       ],
       "statusCounts": {
         "pending": 3,
-        "done": 3,
-        "in_progress": 3
+        "done": 4,
+        "in_progress": 2
       }
     },
     {

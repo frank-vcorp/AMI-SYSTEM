@@ -15,7 +15,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 ## 3. Estado Global
 - **Fase Actual**: FASE 0 [✓] COMPLETADA (4 Soft Gates Passed) | FASE 1 - MOD-CITAS testing phase, MOD-EXPEDIENTES iniciado
 - **Semáforo**: 🟢 Verde (Código en master, Vercel + Railway LIVE, INTEGRA v2.0 Compliant)
-- **Status FASE 1**: MOD-CITAS 90% (SOFIA testing phase), MOD-EXPEDIENTES iniciado (arquitectura en progreso)
+- **Status FASE 1**: MOD-CITAS 90% (SOFIA testing phase), MOD-EXPEDIENTES 90% (Phase 1.3 completada - componentes + API + integración, E2E testing pending)
 - **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado)
 
 ## 4. Actualización 2026-01-13 (Deploy Vercel + Railway LIVE)
@@ -275,7 +275,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 90 | Agenda de citas: 90% código completado. Testing phase en progreso (SOFIA PR remoto). | mod-clinicas + mod-empresas |
-| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | in_progress | 5 | Flujo central: paciente → examen → expediente → validación. Estructura base iniciada (21 enero SOFIA). | MOD-CITAS, Prisma schema |
+| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 90 | Flujo central: paciente → examen → expediente → validación. Fase 1.3 completada (componentes UI + API routes + integración CITAS). Pending: E2E testing. | MOD-CITAS, Prisma schema |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | in_progress | 70 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |
 | mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado. | todos FASE 1 completados |

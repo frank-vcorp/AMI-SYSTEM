@@ -1,5 +1,4 @@
 {
-  "packageManager": "pnpm@7.33.0",
   "installCommand": "pnpm install",
   "buildCommand": "pnpm run build",
   "framework": "nextjs",

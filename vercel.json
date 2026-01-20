@@ -1,6 +1,7 @@
 {
-  "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "cd ../.. && pnpm run build",
+  "packageManager": "pnpm@7.33.0",
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm run build",
   "framework": "nextjs",
   "outputDirectory": "packages/web-app/.next",
   "env": {

@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-20T00:41:05.464Z",
-  "overallProgress": 47.89473684210526,
+  "lastUpdated": "2026-01-20T06:18:28.964Z",
+  "overallProgress": 48.1578947368421,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 45.55555555555556,
+      "progress": 46.111111111111114,
       "modules": [
         {
           "id": "core-auth",
@@ -112,19 +112,19 @@
           "id": "mod-citas",
           "name": "MOD-CITAS",
           "owner": "Frontend · Backend",
-          "status": "testing",
+          "status": "done",
           "progress": 90,
-          "summary": "Agenda de citas: 90% código completado. En fase de testing unitario y documentación.",
+          "summary": "Agenda de citas: 90% código completado. Testing phase en progreso (SOFIA PR remoto).",
           "needs": "mod-clinicas + mod-empresas"
         },
         {
           "id": "mod-expedientes",
           "name": "MOD-EXPEDIENTES",
           "owner": "Frontend · Backend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Recepción del paciente, captura de examen médico, subida de estudios a la nube.",
-          "needs": "core-auth + core-storage (Sem 7)"
+          "status": "in_progress",
+          "progress": 5,
+          "summary": "Flujo central: paciente → examen → expediente → validación. Estructura base iniciada (21 enero SOFIA).",
+          "needs": "MOD-CITAS, Prisma schema"
         },
         {
           "id": "mod-validacion",
@@ -146,10 +146,9 @@
         }
       ],
       "statusCounts": {
-        "pending": 4,
-        "done": 2,
-        "in_progress": 2,
-        "testing": 1
+        "pending": 3,
+        "done": 3,
+        "in_progress": 3
       }
     },
     {
@@ -277,7 +276,7 @@
     {
       "module": "MOD-EXPEDIENTES",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "core-auth + core-storage (Sem 7)"
+      "detail": "MOD-CITAS, Prisma schema"
     },
     {
       "module": "MOD-VALIDACION",

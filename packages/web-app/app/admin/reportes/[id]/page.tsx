@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import { CertificateViewer } from "@ami/mod-reportes";
 import { prisma } from "@ami/core-database";
 import { getTenantIdFromRequest } from "@/lib/auth";
@@ -21,7 +22,8 @@ interface ReportPageProps {
  * Permite impresión y descarga de PDF.
  */
 export default async function ReportPage({ params }: ReportPageProps) {
-  const tenantId = await getTenantIdFromRequest();
+  const headersList = await headers();
+  const tenantId = await getTenantIdFromRequest(headersList as any);
 
   if (!tenantId) {
     return <div>Acceso denegado</div>;
@@ -36,11 +38,7 @@ export default async function ReportPage({ params }: ReportPageProps) {
     include: {
       patient: true,
       clinic: true,
-      validationTasks: {
-        where: { status: "APPROVED" },
-        orderBy: { createdAt: "desc" },
-        take: 1,
-      },
+      validationTask: true,
     },
   });
 
@@ -53,7 +51,7 @@ export default async function ReportPage({ params }: ReportPageProps) {
     );
   }
 
-  const validation = expedient.validationTasks[0];
+  const validation = expedient.validationTask;
   if (!validation) {
     return (
       <div className="p-8 text-center">
@@ -70,9 +68,9 @@ export default async function ReportPage({ params }: ReportPageProps) {
     patientDOB: expedient.patient?.dateOfBirth?.toLocaleDateString("es-ES") || "N/A",
     clinicName: expedient.clinic?.name || "N/A",
     validatorName: validation.validatedBy || "Sistema",
-    validationDate: validation.validatedAt?.toLocaleDateString("es-ES") || new Date().toLocaleDateString("es-ES"),
+    validationDate: validation.updatedAt?.toLocaleDateString("es-ES") || new Date().toLocaleDateString("es-ES"),
     status: validation.status as "APPROVED" | "REJECTED" | "CONDITIONAL",
-    medicalFindings: validation.findings || undefined,
+    medicalFindings: validation.medicalOpinion || undefined,
     stampDate: validation.createdAt.toISOString(),
   };
 

@@ -34,27 +34,16 @@ export default function ReportePage() {
         
         // Datos de ejemplo para MVP
         const mockData: CertificateData = {
-          id: expedientId,
-          expedientFolio: 'EXP-CLI-CDMX-01-1705776000000-0',
+          expedientId: expedientId,
           patientName: 'Juan Carlos García López',
-          patientId: 'EMP-0001',
-          companyName: 'AutoSoluciones Premium S.A.',
+          patientDOB: '1985-06-15',
           clinicName: 'Clínica Centro México DF',
-          examinationDate: new Date('2026-01-23').toISOString(),
-          medicalOpinion: 'Paciente apto para trabajar en puesto actual sin restricciones',
-          verdict: 'APTO', // APTO | APTO_CON_RESTRICCIONES | NO_APTO
-          semaphoreStatus: 'GREEN', // GREEN | YELLOW | RED
-          physicianName: 'Dr. Roberto Pérez García',
-          physicianLicense: 'Cédula: 123456789',
-          signatureCanvas: null, // En caso de tener firma digital
-          extractedData: {
-            bloodPressure: '120/80',
-            heartRate: 72,
-            temperature: 36.5,
-            weight: 75,
-            height: 170,
-          },
-          generatedAt: new Date().toISOString(),
+          validatorName: 'Dr. Roberto Pérez García',
+          validationDate: new Date('2026-01-23').toISOString(),
+          status: 'APPROVED',
+          medicalFindings: 'Paciente apto para trabajar en puesto actual sin restricciones',
+          signature: 'Dr. RPG',
+          stampDate: new Date().toISOString(),
         };
         
         setCertificateData(mockData);
@@ -125,7 +114,7 @@ export default function ReportePage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Certificado de Validación</h1>
-          <p className="text-gray-600">Folio: {certificateData.expedientFolio}</p>
+          <p className="text-gray-600">Expediente: {certificateData.expedientId}</p>
         </div>
 
         {/* Certificate Viewer */}

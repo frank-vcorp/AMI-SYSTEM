@@ -31,7 +31,7 @@ export function StudyUploadZone({ expedientId, onSuccess, onError }: StudyUpload
   const inputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<StudyUploadInput>({
-    resolver: zodResolver(studyUploadSchema),
+    resolver: zodResolver(studyUploadSchema as any),
     defaultValues: {
       studyType: "OTROS",
     },

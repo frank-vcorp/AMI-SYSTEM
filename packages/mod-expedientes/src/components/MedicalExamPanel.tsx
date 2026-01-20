@@ -20,7 +20,7 @@ export function MedicalExamPanel({ expedientId, onSuccess, onError }: MedicalExa
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<MedicalExamInput>({
-    resolver: zodResolver(medicalExamSchema),
+    resolver: zodResolver(medicalExamSchema as any),
     defaultValues: {
       bloodPressure: "",
       heartRate: undefined,

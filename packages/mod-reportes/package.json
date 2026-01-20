@@ -1,0 +1,39 @@
+{
+  "name": "@ami/mod-reportes",
+  "version": "0.1.0",
+  "description": "Módulo de Reportes y Certificados - AMI-SYSTEM",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./types": {
+      "types": "./src/types/index.ts",
+      "default": "./src/types/index.ts"
+    },
+    "./components": {
+      "types": "./src/components/index.ts",
+      "default": "./src/components/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "dev": "tsc --watch --noEmit"
+  },
+  "dependencies": {
+    "@ami/core-database": "workspace:*",
+    "@ami/core-types": "workspace:*",
+    "@ami/core-ui": "workspace:*",
+    "@prisma/client": "^6.19.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-pdf": "^9.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "typescript": "^5.2.2"
+  }
+}

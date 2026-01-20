@@ -1,7 +1,7 @@
 {
   "projectName": "RD-AMI Progress",
-  "lastUpdated": "2026-01-20T06:29:30.043Z",
-  "overallProgress": 52.63157894736842,
+  "lastUpdated": "2026-01-20T06:35:56.292Z",
+  "overallProgress": 54.73684210526316,
   "phases": [
     {
       "name": "FASE 0 – Cimientos",
@@ -61,7 +61,7 @@
     {
       "name": "FASE 1 – Flujo Principal",
       "order": 1,
-      "progress": 55.55555555555556,
+      "progress": 60,
       "modules": [
         {
           "id": "core-auth",
@@ -139,16 +139,16 @@
           "id": "mod-reportes",
           "name": "MOD-REPORTES",
           "owner": "Backend · Frontend",
-          "status": "pending",
-          "progress": 0,
-          "summary": "Genera PDF profesional con resultados. Se envía por email a la empresa cliente.",
-          "needs": "mod-validacion + core-storage"
+          "status": "in_progress",
+          "progress": 40,
+          "summary": "Certificados de validación imprimibles. MVP con CertificateViewer + API routes. PDF export pending.",
+          "needs": "mod-validacion + core-storage (Sem 10)"
         }
       ],
       "statusCounts": {
-        "pending": 3,
+        "pending": 2,
         "done": 4,
-        "in_progress": 2
+        "in_progress": 3
       }
     },
     {
@@ -286,7 +286,7 @@
     {
       "module": "MOD-REPORTES",
       "phase": "FASE 1 – Flujo Principal",
-      "detail": "mod-validacion + core-storage"
+      "detail": "mod-validacion + core-storage (Sem 10)"
     },
     {
       "module": "MOD-DASHBOARD",

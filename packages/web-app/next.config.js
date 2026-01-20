@@ -37,6 +37,7 @@ const nextConfig = {
   },
   // CRÍTICO PARA MONOREPO: Transpilar paquetes locales en build
   transpilePackages: [
+    '@ami/core',
     '@ami/core-ui',
     '@ami/core-types',
     '@ami/mod-clinicas',

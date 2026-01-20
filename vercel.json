@@ -1,6 +1,6 @@
 {
   "installCommand": "npx pnpm@7.33.0 install --no-frozen-lockfile",
-  "buildCommand": "npx pnpm@7.33.0 --filter=@ami/web-app run build",
+  "buildCommand": "npx pnpm@7.33.0 run build",
   "framework": "nextjs",
   "outputDirectory": "packages/web-app/.next"
 }

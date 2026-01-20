@@ -208,15 +208,30 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
   - /admin/expedientes/new - Form para crear nuevo expediente (puede venir desde cita)
   - /admin/expedientes/[id] - Detail view con 3 sections: ExpedientDetail + MedicalExamPanel + StudyUploadZone
 
-**🔄 FASE 1.3 EN PROGRESO (Domingo 23) - 75% → 90%**
-- [ ] **MOD-CITAS Integration** (próximo - domingo 23 mañana)
-  - [ ] Add button "Generar Expediente" in appointment detail view
-  - [ ] Button navigates to: /admin/expedientes/new?appointmentId={id}&patientId={id}
-  - [ ] Form auto-fills from query params
+**🔄 FASE 1.3 EN PROGRESO (Domingo 23 @ 40%) - MOD-CITAS Integration**
+- [~] **MOD-CITAS Integration** (2026-01-23 @ 40% Complete)
+  - [✓] Added `onCreateExpedient` callback to AppointmentTableProps interface
+  - [✓] Implemented "📋 Generar Expediente" button in AppointmentTable Actions column
+  - [✓] Button appears only for CHECK_IN appointments with green styling
+  - [✓] Button navigates to: /admin/expedientes/new?appointmentId={id}&patientId={id}
+  - [✓] AppointmentManager updated with handleCreateExpedient navigation handler
+  - [✓] Data mapping: appointment.id → appointmentId, appointment.employeeId → patientId
+  - [✓] ExpedientForm pre-fills from query params (already supported)
+  - [✓] Build verified: 0 TS errors, all 21 pages generated
+  - **Checkpoint:** SOFIA-MOD-EXPEDIENTES-PHASE3-CITAS-INTEGRATION-20260123.md (pending E2E test)
   
-- [ ] **Testing + Checkpoint Final** (domingo 23 enero)
-  - [ ] Component tests con React Testing Library (si requerido)
+  **Pending for 100% complete:**
+  - [ ] End-to-end testing: Create appointment → Click "Generar Expediente" → Verify form pre-fill → Create expedient
+  - [ ] Verify database linkage: appointment_id stored in expedient record
+  - [ ] Component unit tests (optional)
+  - [ ] Sidebar navigation update (optional UI polish)
+  - [ ] Final Phase 1 checkpoint creation
 
+- [ ] **Testing + Checkpoint Final** (próximo - E2E validation)
+  - [ ] Create test appointment in CHECK_IN status
+  - [ ] Click "Generar Expediente" and verify navigation
+  - [ ] Verify form pre-fills with appointment data
+  - [ ] Create expedient and verify in database
   - [ ] E2E flow: Crear cita → Check-in → Crear expediente → Subir estudios → Validar
   - [ ] Sample data script para demo
   - [ ] Checkpoint Final: CHECKPOINT-MOD-EXPEDIENTES-FASE1-20260123.md

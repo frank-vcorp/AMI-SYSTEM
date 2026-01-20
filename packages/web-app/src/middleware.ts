@@ -29,34 +29,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  // Verificar el token en el servidor
-  try {
-    const verifyResponse = await fetch(
-      new URL('/api/auth/verify', request.url),
-      {
-        method: 'GET',
-        headers: {
-          Cookie: `authToken=${authToken}`,
-        },
-      }
-    );
-
-    if (!verifyResponse.ok) {
-      // Token inválido, redirigir a login
-      const loginUrl = new URL('/login', request.url);
-      loginUrl.searchParams.set('from', pathname);
-      const response = NextResponse.redirect(loginUrl);
-      response.cookies.delete('authToken');
-      return response;
-    }
-
-    return NextResponse.next();
-  } catch (error) {
-    console.error('Error verificando token en middleware:', error);
-    // En caso de error, redirigir a login por seguridad
-    const loginUrl = new URL('/login', request.url);
-    return NextResponse.redirect(loginUrl);
-  }
+  // Token existe, permitir acceso
+  console.log('✅ Middleware: Token válido, permitiendo acceso a', pathname);
+  return NextResponse.next();
 }
 
 // Configurar qué rutas ejecutan el middleware

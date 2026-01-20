@@ -73,6 +73,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const token = await userCredential.user.getIdToken();
       
       console.log('✅ Usuario autenticado:', userCredential.user.uid);
+      
+      // Guardar token en cookie para el middleware
+      document.cookie = `authToken=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7 días
+      console.log('💾 Token guardado en cookie');
+      
       setUser({
         uid: userCredential.user.uid,
         email: userCredential.user.email,
@@ -110,8 +115,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     try {
       setError(null);
+      // Limpiar cookie
+      document.cookie = 'authToken=; path=/; max-age=0';
+      console.log('🗑️ Cookie de autenticación limpiada');
       await signOut(auth);
       setUser(null);
+      console.log('✅ Sesión cerrada');
     } catch (err) {
       const errorMessage = 'Error al cerrar sesión';
       setError(errorMessage);

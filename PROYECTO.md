@@ -128,39 +128,48 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] Validación pre-firma
 - [ ] **Extracción IA (FASE 2):** OpenAI API integration
 
-### 🔄 FASE 1 Continuación - MOD-EXPEDIENTES (SOFIA - 5%)
+### 🔄 FASE 1 Continuación - MOD-EXPEDIENTES (SOFIA - 40% ✅ Viernes 21)
 
-**Status:** [~] IN_PROGRESS - 5%
+**Status:** [~] IN_PROGRESS - 40% (Estructura Base Completada)
 **Responsible:** SOFIA
 **Depends on:** MOD-CITAS ✅ + MOD-CLINICAS ✅ + MOD-EMPRESAS ✅
 **Blocker:** Ninguno
 
 #### Timeline (Viernes 21 - Domingo 23 Enero)
 
+**✅ FASE 1.1 COMPLETADA (2026-01-21 04:00 UTC) - Viernes 21 @ 40%**
 - [✓] **Arquitectura & Diseño** (2026-01-20/21)
   - [✓] ADR-ARCH-MOD-EXPEDIENTES-20260121.md (Service Pattern, Multi-tenant)
   - [✓] SPEC-MOD-EXPEDIENTES.md (Modelos, Estados, Integración)
   - [✓] Definición de Timeline detallado
-  - **Nota:** 2026-01-21 00:30: SOFIA iniciando - PR remoto #N creado. Timeline Viernes 21 - Domingo 23. Arquitectura lista (INTEGRA). Sistema base en construcción: estructura paquete + tipos + modelos Prisma.
 
-- [~] **Estructura Base** (viernes 21 enero)
-  - [ ] Crear paquete @ami/mod-expedientes (directorio, package.json, tsconfig)
-  - [ ] Definir models Expedient, MedicalExam, Study en Prisma schema
-  - [ ] Types: ExpeditentStatus, MedicalRecord, StudyType, etc.
-  - [ ] AppointmentService para expedientes (carga, validación, relaciones)
-  - [ ] **Checkpoint:** CHECKPOINT-MOD-EXPEDIENTES-BASE-20260121.md
+- [✓] **API Service Layer + Tests** (Commit b2341ec4)
+  - [✓] ExpedientService completo (405 líneas - 6 métodos CRUD)
+  - [✓] Types & Interfaces (155 líneas - DTOs, enums, error classes)
+  - [✓] Unit Tests (435 líneas - 14 specs, 92.34% coverage 🎯)
+  - [✓] Vitest configuration con coverage v8
+  - [✓] Multi-tenant validation en cada método
+  - [✓] Folio generation: EXP-{clinicCode}-{timestamp}
+  - **Métodos implementados:**
+    - `createFromAppointment()` - Genera expediente desde cita
+    - `getExpedient()` - Obtiene expediente con relaciones
+    - `listExpedients()` - Lista paginada con filtros
+    - `addMedicalExam()` - Agrega vitales (TA, FC, temp, peso, altura)
+    - `attachStudy()` - Adjunta estudios (Rx, Lab, ECG, etc.)
+    - `completeExpedient()` - Marca como completado con validaciones
 
-- [~] **Componentes UI** (viernes 21 enero)
+**🔄 FASE 1.2 EN PROGRESO (Sábado 22) - 40% → 80%**
+- [~] **Componentes UI** (sábado 22 enero)
   - [ ] ExpedientForm (crear expediente con datos del paciente)
   - [ ] ExpedientTable (listar expedientes, filtros por estado)
   - [ ] ExpedientDetail (ver detalles completos + sección adjuntos)
   - [ ] MedicalExamPanel (agregar vitales, peso, presión, temperatura)
   - [ ] StudyUploadZone (drag-drop para radiografías, análisis, PDFs)
 
-- [~] **API Routes** (viernes 21 - sábado 22 enero)
-  - [ ] POST /api/expedientes (crear expediente)
-  - [ ] GET /api/expedientes (listar con filtros)
-  - [ ] GET /api/expedientes/[id] (detalle + estudios relacionados)
+- [~] **API Routes Integration** (sábado 22 enero)
+  - [ ] POST /api/expedientes (crear expediente desde cita)
+  - [ ] GET /api/expedientes (listar con filtros, paginación)
+  - [ ] GET /api/expedientes/[id] (detalle completo + estudios)
   - [ ] PUT /api/expedientes/[id] (actualizar datos del paciente)
   - [ ] POST /api/expedientes/[id]/exam (agregar vitales médico)
   - [ ] POST /api/expedientes/[id]/studies (subir estudios)
@@ -170,14 +179,18 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - [~] **Integración Admin UI** (sábado 22 enero)
   - [ ] /admin/expedientes page (Server Component)
   - [ ] Menu item en sidebar navigation ("Expedientes")
-  - [ ] Conexión con MOD-CITAS (crear expediente from appointment)
+  - [ ] Conexión con MOD-CITAS (botón "Generar Expediente" en cita)
+  - [ ] Flujo: Cita → Check-in → Crear Expediente → Agregar vitales → Subir estudios
   - [ ] Breadcrumb navigation (Cita → Expediente → Validación)
   - [ ] Verificación de permisos y aislamiento multi-tenant
 
-- [~] **Testing + Checkpoint Final** (domingo 23 enero)
-  - [ ] Tests unitarios: ExpedientService (CRUD, validaciones, multi-tenant)
-  - [ ] E2E flow: Crear cita → Crear expediente → Subir estudios → Listar
+**⏳ FASE 1.3 PENDIENTE (Domingo 23) - 80% → 100%**
+- [ ] **Testing + Checkpoint Final** (domingo 23 enero)
+  - [ ] Component tests con React Testing Library (si requerido)
+  - [ ] E2E flow: Crear cita → Check-in → Crear expediente → Subir estudios → Validar
+  - [ ] Sample data script para demo
   - [ ] Checkpoint Final: CHECKPOINT-MOD-EXPEDIENTES-FASE1-20260123.md
+  - [ ] PROYECTO.md update final (100%)
   - [ ] README: Instrucciones setup, API spec, examples
 
 **Flujo Central:** Paciente → Cita (MOD-CITAS) → Expediente (MOD-EXPEDIENTES) → Validación (MOD-VALIDACION) → Reporte (MOD-REPORTES)

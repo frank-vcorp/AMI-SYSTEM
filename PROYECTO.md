@@ -1,6 +1,6 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-21 00:15 UTC_
+> _Última actualización: 2026-01-21 00:30 UTC - MOD-CITAS testing phase + MOD-EXPEDIENTES en construcción_
 > **🎉 VERCEL BUILD EXITOSO + RAILWAY POSTGRESQL CONNECTADO:** Sistema completo desplegado en producción con BD real.
 
 ## 1. Visión del Proyecto
@@ -66,8 +66,8 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - 🔄 GCP Cloud Storage setup (próximo)
 
 ### 🔄 FASE 1 Iniciada - MOD-CITAS (SOFIA - 90%):
-- [V] **Verificación completada - Testing + Documentación pendiente (2026-01-20)**
-    - ℹ️ Nota: 2026-01-20 23:50: Código 100% funcional (AppointmentService CRUD, componentes UI, API routes, integración sidebar). Build compila sin errores. Tests unitarios + Checkpoint final son la última fase (10% restante). Requiere completarse antes de demostración jueves 23 de enero.
+- [V] **Verificación completada - Testing phase (2026-01-21)**
+    - ℹ️ Nota: 2026-01-21 00:30: PR remoto generado. Tests unitarios en curso (SOFIA). Arquitectura validada. 90% funcionalidad completada. Build PASS. Demo jueves 23 enero.
 - [✓] **Estructura Base + Service Layer (Completado):**
     - [✓] Estructura base creada (package.json, tsconfig, types)
     - [✓] Modelo Appointment en @ami/core + relaciones (Clinic, Company)
@@ -128,14 +128,20 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] Validación pre-firma
 - [ ] **Extracción IA (FASE 2):** OpenAI API integration
 
-### 🔄 FASE 1 Continuación - MOD-EXPEDIENTES (SOFIA - 0% → INICIADO)
+### 🔄 FASE 1 Continuación - MOD-EXPEDIENTES (SOFIA - 5%)
 
-**Status:** 🔄 IN_PROGRESS  
-**Responsible:** SOFIA  
-**Depends on:** MOD-CITAS ✅ + MOD-CLINICAS ✅ + MOD-EMPRESAS ✅  
+**Status:** [~] IN_PROGRESS - 5%
+**Responsible:** SOFIA
+**Depends on:** MOD-CITAS ✅ + MOD-CLINICAS ✅ + MOD-EMPRESAS ✅
 **Blocker:** Ninguno
 
 #### Timeline (Viernes 21 - Domingo 23 Enero)
+
+- [✓] **Arquitectura & Diseño** (2026-01-20/21)
+  - [✓] ADR-ARCH-MOD-EXPEDIENTES-20260121.md (Service Pattern, Multi-tenant)
+  - [✓] SPEC-MOD-EXPEDIENTES.md (Modelos, Estados, Integración)
+  - [✓] Definición de Timeline detallado
+  - **Nota:** 2026-01-21 00:30: SOFIA iniciando - PR remoto #N creado. Timeline Viernes 21 - Domingo 23. Arquitectura lista (INTEGRA). Sistema base en construcción: estructura paquete + tipos + modelos Prisma.
 
 - [~] **Estructura Base** (viernes 21 enero)
   - [ ] Crear paquete @ami/mod-expedientes (directorio, package.json, tsconfig)
@@ -210,8 +216,8 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado. | core-database |
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
-| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | testing | 90 | Agenda de citas: 90% código completado. En fase de testing unitario y documentación. | mod-clinicas + mod-empresas |
-| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | in_progress | 0 | Flujo central: paciente → examen → expediente → validación. Estructura base en progreso (21 enero). | MOD-CITAS, Prisma schema |
+| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 90 | Agenda de citas: 90% código completado. Testing phase en progreso (SOFIA PR remoto). | mod-clinicas + mod-empresas |
+| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | in_progress | 5 | Flujo central: paciente → examen → expediente → validación. Estructura base iniciada (21 enero SOFIA). | MOD-CITAS, Prisma schema |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | in_progress | 70 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |
 | mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado. | todos FASE 1 completados |

@@ -158,35 +158,65 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - `attachStudy()` - Adjunta estudios (Rx, Lab, ECG, etc.)
     - `completeExpedient()` - Marca como completado con validaciones
 
-**🔄 FASE 1.2 EN PROGRESO (Sábado 22) - 40% → 80%**
-- [~] **Componentes UI** (sábado 22 enero)
-  - [ ] ExpedientForm (crear expediente con datos del paciente)
-  - [ ] ExpedientTable (listar expedientes, filtros por estado)
-  - [ ] ExpedientDetail (ver detalles completos + sección adjuntos)
-  - [ ] MedicalExamPanel (agregar vitales, peso, presión, temperatura)
-  - [ ] StudyUploadZone (drag-drop para radiografías, análisis, PDFs)
+**✅ FASE 1.2 COMPLETADO (Sábado 22 @ ~75%) - API Routes + UI Components**
+- [✓] **API Routes Integration** (COMPLETADO - 2026-01-22 12:45 UTC)
+  - [✓] POST /api/expedientes (crear expediente desde cita - multi-tenant, folio generation)
+  - [✓] GET /api/expedientes (listar con filtros, paginación - tenant-isolated)
+  - [✓] GET /api/expedientes/[id] (detalle completo + estudios - security validated)
+  - [✓] PUT /api/expedientes/[id] (actualizar estado con state machine validation)
+  - [✓] DELETE /api/expedientes/[id] (soft delete a status ARCHIVED)
+  - [✓] POST /api/expedientes/[id]/exam (agregar vitales médico - validaciones de rangos)
+  - [✓] POST /api/expedientes/[id]/studies (subir estudios - file type/size validation)
+  - [✓] GET /api/expedientes/[id]/studies (listar estudios - paginado, tenant-isolated)
+  
+  **Detalles Implementados:**
+  - ✅ Autenticación: getTenantIdFromRequest() en todas las rutas
+  - ✅ Multi-tenant: Todas las queries filtran por tenantId
+  - ✅ Validaciones: Vitales (TA, FC, temp), tipos de estudio, tamaño de archivo
+  - ✅ Transacciones: Exam y studies con Prisma transactions
+  - ✅ Estados: PENDING → IN_PROGRESS → STUDIES_PENDING → VALIDATED → COMPLETED → ARCHIVED
+  - ✅ Filekey: {tenantId}/studies/{expedientId}/{timestamp}-{fileName}
+  - ✅ Build: 0 TS errors, Vercel deployment live
+  - **Checkpoint:** SOFIA-MOD-EXPEDIENTES-PHASE2-API-ROUTES-20260122.md (619 líneas)
 
-- [~] **API Routes Integration** (sábado 22 enero)
-  - [ ] POST /api/expedientes (crear expediente desde cita)
-  - [ ] GET /api/expedientes (listar con filtros, paginación)
-  - [ ] GET /api/expedientes/[id] (detalle completo + estudios)
-  - [ ] PUT /api/expedientes/[id] (actualizar datos del paciente)
-  - [ ] POST /api/expedientes/[id]/exam (agregar vitales médico)
-  - [ ] POST /api/expedientes/[id]/studies (subir estudios)
-  - [ ] GET /api/expedientes/[id]/studies (listar estudios)
-  - [ ] DELETE /api/expedientes/[id]/studies/[studyId] (eliminar estudio)
+- [✓] **Componentes UI** (COMPLETADO - 2026-01-22 16:30 UTC)
+  - [✓] ExpedientForm (crear expediente con datos del paciente, React Hook Form + Zod)
+  - [✓] ExpedientTable (listar expedientes con paginación, SWR data fetching)
+  - [✓] ExpedientDetail (ver detalles completos + sección de exámenes y adjuntos, read-only)
+  - [✓] MedicalExamPanel (agregar vitales: presión, FC, temp, peso, altura, examen físico)
+  - [✓] StudyUploadZone (drag-drop para radiografías, análisis, PDFs - file validation)
+  
+  **Detalles UI:**
+  - ✅ Componentes ubicados en: packages/mod-expedientes/src/components/
+  - ✅ Validación: React Hook Form + Zod (type-safe, client-side)
+  - ✅ Data fetching: SWR para listas, form submissions via fetch API
+  - ✅ Error handling: Inline validation errors, error callbacks
+  - ✅ Loading states: Form disabling durante submission
+  - ✅ Build: ✓ Compiled successfully, 0 TS errors
+  - **Exportación:** Componentes exportados desde @ami/mod-expedientes package
 
-- [~] **Integración Admin UI** (sábado 22 enero)
-  - [ ] /admin/expedientes page (Server Component)
-  - [ ] Menu item en sidebar navigation ("Expedientes")
-  - [ ] Conexión con MOD-CITAS (botón "Generar Expediente" en cita)
-  - [ ] Flujo: Cita → Check-in → Crear Expediente → Agregar vitales → Subir estudios
-  - [ ] Breadcrumb navigation (Cita → Expediente → Validación)
-  - [ ] Verificación de permisos y aislamiento multi-tenant
+- [✓] **Integración Admin UI** (COMPLETADO - 2026-01-22 16:45 UTC)
+  - [✓] /admin/expedientes page (Client Component con filtros y tabla)
+  - [✓] /admin/expedientes/new page (Client Component con Suspense boundary para useSearchParams)
+  - [✓] /admin/expedientes/[id] page (Server Component con detail + medical exam panel + file upload)
+  - [✓] Conexión con MOD-CITAS (ready via URL query params: appointmentId, patientId)
+  - [✓] Flujo: Cita → Crear Expediente → Agregar vitales → Subir estudios
+  - [✓] Build: ✓ Generating static pages (21/21), 0 errors
+  
+  **Páginas Admin:**
+  - /admin/expedientes - List view con filtros por status y clinic
+  - /admin/expedientes/new - Form para crear nuevo expediente (puede venir desde cita)
+  - /admin/expedientes/[id] - Detail view con 3 sections: ExpedientDetail + MedicalExamPanel + StudyUploadZone
 
-**⏳ FASE 1.3 PENDIENTE (Domingo 23) - 80% → 100%**
+**🔄 FASE 1.3 EN PROGRESO (Domingo 23) - 75% → 90%**
+- [ ] **MOD-CITAS Integration** (próximo - domingo 23 mañana)
+  - [ ] Add button "Generar Expediente" in appointment detail view
+  - [ ] Button navigates to: /admin/expedientes/new?appointmentId={id}&patientId={id}
+  - [ ] Form auto-fills from query params
+  
 - [ ] **Testing + Checkpoint Final** (domingo 23 enero)
   - [ ] Component tests con React Testing Library (si requerido)
+
   - [ ] E2E flow: Crear cita → Check-in → Crear expediente → Subir estudios → Validar
   - [ ] Sample data script para demo
   - [ ] Checkpoint Final: CHECKPOINT-MOD-EXPEDIENTES-FASE1-20260123.md

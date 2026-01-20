@@ -5,7 +5,7 @@
  * Request body:
  * {
  *   bloodPressure: "120/80" (optional, format: "SYS/DIA"),
- *   heartRate: 72 (optional, bpm, range: 30-200),
+ *   heartRate: 72 (optional, bpm, range: 40-200),
  *   respiratoryRate: 16 (optional, range: 4-60),
  *   temperature: 37.5 (optional, Celsius, range: 35-42),
  *   weight: 75.5 (optional, kg, range: 2-300),
@@ -18,7 +18,8 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@ami/core-database";
+import { prisma } from "@/lib/prisma";
+import { getTenantIdFromRequest } from "@/lib/auth";
 
 function validateBloodPressure(bp: string): boolean {
   const match = bp.match(/^(\d{1,3})\/(\d{1,3})$/);
@@ -32,6 +33,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const tenantId = await getTenantIdFromRequest(request);
     const { id } = await params;
     const body = await request.json();
     const {
@@ -45,10 +47,9 @@ export async function POST(
       notes,
     } = body;
 
-    // Verify expedient exists
-    const expedient = await prisma.expedient.findUnique({
-      where: { id },
-      select: { id: true, status: true },
+    // === VERIFY EXPEDIENT EXISTS ===
+    const expedient = await prisma.expedient.findFirst({
+      where: { id, tenantId },
     });
 
     if (!expedient) {
@@ -68,8 +69,8 @@ export async function POST(
     }
 
     if (heartRate !== null && heartRate !== undefined) {
-      if (!Number.isInteger(heartRate) || heartRate < 30 || heartRate > 200) {
-        errors.push("heartRate must be an integer between 30 and 200");
+      if (!Number.isInteger(heartRate) || heartRate < 40 || heartRate > 200) {
+        errors.push("heartRate must be an integer between 40 and 200");
       }
     }
 
@@ -104,9 +105,10 @@ export async function POST(
       );
     }
 
-    // === CREATE EXAM & UPDATE EXPEDIENT STATUS ===
-    const result = await prisma.$transaction(async (tx) => {
-      const newExam = await tx.medicalExam.create({
+    // Create medical exam with Prisma transaction
+    const exam = await prisma.$transaction(async (tx: any) => {
+      // Create exam
+      const medicalExam = await tx.medicalExam.create({
         data: {
           expedientId: id,
           bloodPressure: bloodPressure || null,
@@ -120,7 +122,7 @@ export async function POST(
         },
       });
 
-      // If expedient is in PENDING, move to IN_PROGRESS
+      // Update expedient status to IN_PROGRESS if it's PENDING
       if (expedient.status === "PENDING") {
         await tx.expedient.update({
           where: { id },
@@ -128,26 +130,11 @@ export async function POST(
         });
       }
 
-      return newExam;
+      return medicalExam;
     });
 
-    return NextResponse.json(
-      {
-        id: result.id,
-        expedientId: result.expedientId,
-        bloodPressure: result.bloodPressure,
-        heartRate: result.heartRate,
-        respiratoryRate: result.respiratoryRate,
-        temperature: result.temperature,
-        weight: result.weight,
-        height: result.height,
-        physicalExam: result.physicalExam,
-        notes: result.notes,
-        createdAt: result.createdAt.toISOString(),
-      },
-      { status: 201 }
-    );
-  } catch (error) {
+    return NextResponse.json(exam, { status: 201 });
+  } catch (error: any) {
     console.error("Error adding medical exam:", error);
     return NextResponse.json(
       { error: "Failed to add medical exam" },

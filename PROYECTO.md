@@ -1,6 +1,6 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-13 00:15 UTC_
+> _Última actualización: 2026-01-20 23:50 UTC_
 > **🎉 VERCEL BUILD EXITOSO + RAILWAY POSTGRESQL CONNECTADO:** Sistema completo desplegado en producción con BD real.
 
 ## 1. Visión del Proyecto
@@ -64,7 +64,9 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - 🔄 Firebase Auth (próximo - requiere keys)
     - 🔄 GCP Cloud Storage setup (próximo)
 
-### ✅ FASE 1 Iniciada - MOD-CITAS (SOFIA - 50%):
+### 🔄 FASE 1 Iniciada - MOD-CITAS (SOFIA - 90%):
+- [V] **Verificación completada - Testing + Documentación pendiente (2026-01-20)**
+    - ℹ️ Nota: 2026-01-20 23:50: Código 100% funcional (AppointmentService CRUD, componentes UI, API routes, integración sidebar). Build compila sin errores. Tests unitarios + Checkpoint final son la última fase (10% restante). Requiere completarse antes de demostración jueves 23 de enero.
 - [✓] **Estructura Base + Service Layer (Completado):**
     - [✓] Estructura base creada (package.json, tsconfig, types)
     - [✓] Modelo Appointment en @ami/core + relaciones (Clinic, Company)
@@ -92,8 +94,12 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] Type-check sin errores (npx tsc --noEmit)
     - [✓] Checkpoint: SOFIA-VERCEL-BUILD-FIX-ITER2-20260112.md
     - Checkpoint anterior: SOFIA-VERCEL-BUILD-FIX-20260112.md
-- [ ] **Testing + Validación (Pendiente)**
-- [ ] **Documentación Final (Pendiente)**
+- [V] **Testing + Validación (Verificado 2026-01-20):**
+    - [~] Tests unitarios: 5-8 specs para AppointmentService (vitest configurado, specs pendientes)
+    - [~] Cobertura esperada: 80%+ en métodos críticos (CRUD, disponibilidad, validaciones)
+- [V] **Documentación Final (Verificado 2026-01-20):**
+    - [~] Checkpoint: SOFIA-MOD-CITAS-COMPLETADO-20260120.md (pendiente redacción)
+    - [~] README: Instrucciones setup + API spec + ejemplos (pendiente)
 
 ### ⏳ FASE 1 Continuación - MOD-VALIDACION (SOFIA - 70%):
 - [✓] **Estructura Base Completa (2026-01-16):**
@@ -153,7 +159,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-ui | Core - UI Base | FASE 1 – Flujo Principal | 1 | Frontend | in_progress | 50 | Interfaz visual bonita y fácil de usar. Sistema con tema AMI personalizado. | core-database |
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
-| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | done | 100 | Agenda de citas: pacientes agendados, recordatorios automáticos, check-in. | mod-clinicas + mod-empresas |
+| mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | testing | 90 | Agenda de citas: 90% código completado. En fase de testing unitario y documentación. | mod-clinicas + mod-empresas |
 | mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción del paciente, captura de examen médico, subida de estudios a la nube. | core-auth + core-storage (Sem 7) |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | in_progress | 70 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |

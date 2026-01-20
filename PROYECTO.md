@@ -1,6 +1,6 @@
 # PROYECTO: AMI-SYSTEM (Cliente: AMI - Atención Médica Integrada)
 
-> _Última actualización: 2026-01-20 23:50 UTC_
+> _Última actualización: 2026-01-21 00:15 UTC_
 > **🎉 VERCEL BUILD EXITOSO + RAILWAY POSTGRESQL CONNECTADO:** Sistema completo desplegado en producción con BD real.
 
 ## 1. Visión del Proyecto
@@ -13,8 +13,9 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
-- **Fase Actual**: FASE 0 [✓] COMPLETADA (4 Soft Gates Passed) | FASE 1 - MOD-EXPEDIENTES INICIADA
+- **Fase Actual**: FASE 0 [✓] COMPLETADA (4 Soft Gates Passed) | FASE 1 - MOD-CITAS testing phase, MOD-EXPEDIENTES iniciado
 - **Semáforo**: 🟢 Verde (Código en master, Vercel + Railway LIVE, INTEGRA v2.0 Compliant)
+- **Status FASE 1**: MOD-CITAS 90% (SOFIA testing phase), MOD-EXPEDIENTES iniciado (arquitectura en progreso)
 - **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado)
 
 ## 4. Actualización 2026-01-13 (Deploy Vercel + Railway LIVE)
@@ -127,6 +128,56 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
     - [✓] Validación pre-firma
 - [ ] **Extracción IA (FASE 2):** OpenAI API integration
 
+### 🔄 FASE 1 Continuación - MOD-EXPEDIENTES (SOFIA - 0% → INICIADO)
+
+**Status:** 🔄 IN_PROGRESS  
+**Responsible:** SOFIA  
+**Depends on:** MOD-CITAS ✅ + MOD-CLINICAS ✅ + MOD-EMPRESAS ✅  
+**Blocker:** Ninguno
+
+#### Timeline (Viernes 21 - Domingo 23 Enero)
+
+- [~] **Estructura Base** (viernes 21 enero)
+  - [ ] Crear paquete @ami/mod-expedientes (directorio, package.json, tsconfig)
+  - [ ] Definir models Expedient, MedicalExam, Study en Prisma schema
+  - [ ] Types: ExpeditentStatus, MedicalRecord, StudyType, etc.
+  - [ ] AppointmentService para expedientes (carga, validación, relaciones)
+  - [ ] **Checkpoint:** CHECKPOINT-MOD-EXPEDIENTES-BASE-20260121.md
+
+- [~] **Componentes UI** (viernes 21 enero)
+  - [ ] ExpedientForm (crear expediente con datos del paciente)
+  - [ ] ExpedientTable (listar expedientes, filtros por estado)
+  - [ ] ExpedientDetail (ver detalles completos + sección adjuntos)
+  - [ ] MedicalExamPanel (agregar vitales, peso, presión, temperatura)
+  - [ ] StudyUploadZone (drag-drop para radiografías, análisis, PDFs)
+
+- [~] **API Routes** (viernes 21 - sábado 22 enero)
+  - [ ] POST /api/expedientes (crear expediente)
+  - [ ] GET /api/expedientes (listar con filtros)
+  - [ ] GET /api/expedientes/[id] (detalle + estudios relacionados)
+  - [ ] PUT /api/expedientes/[id] (actualizar datos del paciente)
+  - [ ] POST /api/expedientes/[id]/exam (agregar vitales médico)
+  - [ ] POST /api/expedientes/[id]/studies (subir estudios)
+  - [ ] GET /api/expedientes/[id]/studies (listar estudios)
+  - [ ] DELETE /api/expedientes/[id]/studies/[studyId] (eliminar estudio)
+
+- [~] **Integración Admin UI** (sábado 22 enero)
+  - [ ] /admin/expedientes page (Server Component)
+  - [ ] Menu item en sidebar navigation ("Expedientes")
+  - [ ] Conexión con MOD-CITAS (crear expediente from appointment)
+  - [ ] Breadcrumb navigation (Cita → Expediente → Validación)
+  - [ ] Verificación de permisos y aislamiento multi-tenant
+
+- [~] **Testing + Checkpoint Final** (domingo 23 enero)
+  - [ ] Tests unitarios: ExpedientService (CRUD, validaciones, multi-tenant)
+  - [ ] E2E flow: Crear cita → Crear expediente → Subir estudios → Listar
+  - [ ] Checkpoint Final: CHECKPOINT-MOD-EXPEDIENTES-FASE1-20260123.md
+  - [ ] README: Instrucciones setup, API spec, examples
+
+**Flujo Central:** Paciente → Cita (MOD-CITAS) → Expediente (MOD-EXPEDIENTES) → Validación (MOD-VALIDACION) → Reporte (MOD-REPORTES)
+
+**Nota Técnica:** MOD-EXPEDIENTES es el "corazón" de FASE 1. Todos los módulos posteriores (MOD-VALIDACION, MOD-REPORTES) dependen de él. Estructura limpia, multi-tenant y escalable desde el inicio.
+
 ---
 
 ## Entregables Clave por Fase (Cronograma)
@@ -160,7 +211,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 | core-pwa | Core - PWA | FASE 1 – Flujo Principal | 1 | Frontend | pending | 0 | Aplicación móvil: funciona incluso sin internet. Médicos pueden trabajar offline. | Semana 11+ |
 | core-signatures | Core - Firmas | FASE 1 – Flujo Principal | 1 | Backend | done | 100 | Firma digital: reportes firmados legalmente por el médico. Cumple normativas. | - |
 | mod-citas | MOD-CITAS | FASE 1 – Flujo Principal | 1 | Frontend · Backend | testing | 90 | Agenda de citas: 90% código completado. En fase de testing unitario y documentación. | mod-clinicas + mod-empresas |
-| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | pending | 0 | Recepción del paciente, captura de examen médico, subida de estudios a la nube. | core-auth + core-storage (Sem 7) |
+| mod-expedientes | MOD-EXPEDIENTES | FASE 1 – Flujo Principal | 1 | Frontend · Backend | in_progress | 0 | Flujo central: paciente → examen → expediente → validación. Estructura base en progreso (21 enero). | MOD-CITAS, Prisma schema |
 | mod-validacion | MOD-VALIDACION | FASE 1 – Flujo Principal | 1 | Backend · Data | in_progress | 70 | IA inteligente lee estudios automáticamente. Médico valida y firma los resultados. | mod-expedientes + core-signatures (Sem 9) |
 | mod-reportes | MOD-REPORTES | FASE 1 – Flujo Principal | 1 | Backend · Frontend | pending | 0 | Genera PDF profesional con resultados. Se envía por email a la empresa cliente. | mod-validacion + core-storage |
 | mod-dashboard | MOD-DASHBOARD | FASE 2 – Operaciones | 2 | Frontend · Data | pending | 0 | Panel de control: gráficas de cuántos exámenes, alertas si algo está atrasado. | todos FASE 1 completados |

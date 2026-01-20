@@ -1,5 +1,5 @@
 
-> @ami/core-auth@0.1.0 build
+> @ami/core-auth@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-auth
 > echo 'No build needed for auth stubs'
 
 No build needed for auth stubs

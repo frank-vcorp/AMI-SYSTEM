@@ -1,5 +1,5 @@
 
-> @ami/core-storage@0.1.0 build
+> @ami/core-storage@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-storage
 > echo 'No build needed for storage stubs'
 
 No build needed for storage stubs

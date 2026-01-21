@@ -1,5 +1,5 @@
 /**
- * @impl IMPL-20260121-PROD
+ * @impl IMPL-20260121-PROD-FIX
  * @route POST /api/papeletas
  * @description Crear papeleta de admisión y guardar en BD
  */
@@ -9,12 +9,24 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
   try {
-    const { studies, tenantId, clinicId, patientName } = await req.json();
+    const { studies, tenantId, clinicId, patientId } = await req.json();
 
-    if (!tenantId || !clinicId) {
+    if (!tenantId || !clinicId || !patientId) {
       return NextResponse.json(
-        { error: 'tenantId y clinicId requeridos' },
+        { error: 'tenantId, clinicId, y patientId requeridos' },
         { status: 400 }
+      );
+    }
+
+    // Verificar que el paciente existe
+    const patient = await prisma.patient.findUnique({
+      where: { id: patientId },
+    });
+
+    if (!patient) {
+      return NextResponse.json(
+        { error: 'Paciente no encontrado' },
+        { status: 404 }
       );
     }
 
@@ -29,11 +41,10 @@ export async function POST(req: NextRequest) {
       data: {
         tenantId,
         clinicId,
+        patientId,
         folio,
-        patientName: patientName || 'PACIENTE DEMO',
-        description: `Papeleta generada con estudios: ${studies.join(', ')}`,
-        status: 'RECEPTION',
-        createdAt: new Date(),
+        status: 'PENDING',
+        medicalNotes: `Papeleta generada con ${studies?.length || 0} estudios`,
       },
     });
 

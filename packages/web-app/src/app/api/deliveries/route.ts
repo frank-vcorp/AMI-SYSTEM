@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     // Por ahora simplemente actualizamos el estado del expediente
     await prisma.expedient.update({
       where: { id: expedientId },
-      data: { status: 'DELIVERED' },
+      data: { status: 'COMPLETED' },
     });
 
     return NextResponse.json({

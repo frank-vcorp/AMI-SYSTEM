@@ -9,11 +9,11 @@ import { prisma } from '@/lib/prisma';
 
 export async function POST(req: NextRequest) {
   try {
-    const { expedientId, tenantId, examData } = await req.json();
+    const { expedientId, examData } = await req.json();
 
-    if (!expedientId || !tenantId || !examData) {
+    if (!expedientId || !examData) {
       return NextResponse.json(
-        { error: 'expedientId, tenantId, y examData requeridos' },
+        { error: 'expedientId y examData requeridos' },
         { status: 400 }
       );
     }
@@ -30,25 +30,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Crear examen médico en BD
+    // Crear examen médico en BD (usar campos reales del schema)
     const exam = await prisma.medicalExam.create({
       data: {
-        tenantId,
         expedientId,
-        vitals: examData.vitals || {},
-        demographics: examData.demographics || {},
-        physicalExam: examData.physicalExam || {},
-        vision: examData.vision || {},
-        background: examData.background || {},
-        aptitude: examData.aptitude || {},
-        status: examData.aptitude?.approved ? 'APPROVED' : 'PENDING',
+        bloodPressure: examData.vitals?.bloodPressure || '',
+        heartRate: examData.vitals?.heartRate || null,
+        respiratoryRate: examData.vitals?.respiratoryRate || null,
+        temperature: examData.vitals?.temperature || null,
+        weight: examData.vitals?.weight || null,
+        height: examData.vitals?.height || null,
+        physicalExam: examData.physicalExam || '',
+        notes: examData.aptitude?.recommendations || '',
       },
     });
 
     // Actualizar estado del expediente
     await prisma.expedient.update({
       where: { id: expedientId },
-      data: { status: 'MEDICAL_EXAM' },
+      data: { status: 'VALIDATED' },
     });
 
     return NextResponse.json({

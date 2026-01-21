@@ -99,8 +99,9 @@ export async function POST(request: NextRequest) {
         cedula,
         specialty,
         clinicId,
-        signatureUrl: signatureCanvas
-          ? `data:image/png;base64,${signatureCanvas}`
+        tenantId,
+        signature: signatureCanvas
+          ? { data: signatureCanvas, timestamp: new Date().toISOString() }
           : undefined,
       },
       include: {

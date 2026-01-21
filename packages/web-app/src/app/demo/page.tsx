@@ -1,11 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import Link from 'next/link';
 
 export default function DemoPage() {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-
   const demos = [
     {
       id: 'papeleta',
@@ -86,8 +83,6 @@ export default function DemoPage() {
             <Link key={demo.id} href={demo.path}>
               <div
                 className="group relative h-full"
-                onMouseEnter={() => setHoveredCard(demo.id)}
-                onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Card Background */}
                 <div

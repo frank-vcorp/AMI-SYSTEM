@@ -59,7 +59,7 @@ const defaultSchedules: Schedule[] = DAYS.map((_, i) => ({
 
 export function ClinicsClientPage({
   clinics: initialClinics,
-  total: initialTotal,
+  total: _initialTotal,
 }: ClinicsClientPageProps) {
   const [clinics, setClinics] = useState<Clinic[]>(initialClinics);
   const [selectedClinic, setSelectedClinic] = useState<Clinic | null>(null);

@@ -5,7 +5,6 @@
  */
 
 import { prisma } from '../index';
-import { DoctorStatus } from '@prisma/client';
 
 export interface CreateDoctorInput {
   tenantId: string;
@@ -58,7 +57,6 @@ export async function createDoctor(input: CreateDoctorInput) {
       specialty,
       clinicId,
       signature: signature as any || null,
-      status: DoctorStatus.ACTIVE,
     },
   });
 }
@@ -71,15 +69,6 @@ export async function getDoctor(id: string) {
     where: { id },
     include: {
       clinic: true,
-      medicalExams: {
-        select: {
-          id: true,
-          expedientId: true,
-          examinedAt: true,
-        },
-        take: 10,
-        orderBy: { examinedAt: 'desc' },
-      },
     },
   });
 }
@@ -89,14 +78,12 @@ export async function getDoctor(id: string) {
  */
 export async function listDoctors(
   tenantId: string,
-  clinicId?: string,
-  status: DoctorStatus = DoctorStatus.ACTIVE
+  clinicId?: string
 ) {
   return prisma.doctor.findMany({
     where: {
       tenantId,
       ...(clinicId && { clinicId }),
-      status,
     },
     include: {
       clinic: {
@@ -120,12 +107,11 @@ export async function updateDoctor(input: UpdateDoctorInput) {
 }
 
 /**
- * Delete doctor (soft delete via status)
+ * Delete doctor
  */
 export async function deleteDoctor(id: string) {
-  return prisma.doctor.update({
+  return prisma.doctor.delete({
     where: { id },
-    data: { status: DoctorStatus.INACTIVE },
   });
 }
 

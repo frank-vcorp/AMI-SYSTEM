@@ -30,6 +30,7 @@
       "@core/types": ["packages/core-types/src/index.ts"],
       "@core/auth": ["packages/core-auth/src/index.ts"],
       "@core/database": ["packages/core-database/src/index.ts"],
+      "@ami/core-database": ["packages/core-database/src/index.ts"],
       "@core/storage": ["packages/core-storage/src/index.ts"],
       "@core/ui": ["packages/core-ui/src/index.ts"],
       "@ami/mod-expedientes": ["packages/mod-expedientes/src/index.ts"],

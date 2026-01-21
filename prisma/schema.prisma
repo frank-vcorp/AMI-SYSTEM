@@ -37,6 +37,7 @@ model Clinic {
   services          ClinicService[]
   appointments      Appointment[]
   expedients        Expedient[]
+  doctors           Doctor[]
 
   // Indices
   @@unique([tenantId, name])
@@ -113,6 +114,27 @@ model Appointment {
   @@index([appointmentDate])
   @@index([employeeId])
   @@map("appointments")
+}
+
+model Doctor {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  clinicId          String
+  name              String            @db.VarChar(255)
+  cedula            String            @db.VarChar(20)
+  specialty         String            @db.VarChar(100)
+  signature         Json?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@unique([tenantId, cedula])
+  @@index([tenantId])
+  @@index([clinicId])
+  @@map("doctors")
 }
 
 enum ClinicStatus {

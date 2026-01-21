@@ -8,21 +8,19 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from '@ami/core-ui';
 import { Card } from '@ami/core-ui';
 import { Input } from '@ami/core-ui';
 import { Badge } from '@ami/core-ui';
 
 interface DeliverySectionProps {
-  expedientId: string;
   folio: string;
   patientEmail?: string;
   onDownload?: () => void;
 }
 
 export function DeliverySection({
-  expedientId,
   folio,
   patientEmail = '',
   onDownload,

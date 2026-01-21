@@ -83,36 +83,12 @@ export function ClinicModal({
     return Object.keys(newErrors).length === 0;
   };
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === 'totalBeds' ? parseInt(value, 10) : value
-    }));
-  };
-
   const handleScheduleChange = (dayOfWeek: number, field: string, value: any) => {
     setSchedules(prev =>
       prev.map(s =>
         s.dayOfWeek === dayOfWeek ? { ...s, [field]: value } : s
       )
     );
-  };
-
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) newErrors.name = 'Nombre requerido';
-    if (!formData.address.trim()) newErrors.address = 'Dirección requerida';
-    if (!formData.city.trim()) newErrors.city = 'Ciudad requerida';
-    if (!formData.state.trim()) newErrors.state = 'Estado requerido';
-    if (!formData.zipCode.trim()) newErrors.zipCode = 'Código postal requerido';
-    if (formData.totalBeds < 1) newErrors.totalBeds = 'Mínimo 1 cama';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

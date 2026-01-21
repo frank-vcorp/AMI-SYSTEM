@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getDoctor, updateDoctor, deleteDoctor } from '@ami/core-database';
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
@@ -59,7 +59,7 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {

@@ -11,7 +11,7 @@ interface GenerateFolioInput {
   clinicId: string;
 }
 
-interface GenerateFolioOutput {
+export interface GenerateFolioOutput {
   folio: string;
   qr: string; // data:image/png;base64,...
 }

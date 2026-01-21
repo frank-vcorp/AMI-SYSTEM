@@ -10,7 +10,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Card } from '@ami/core-ui';
 import { Button } from '@ami/core-ui';
 import { Badge } from '@ami/core-ui';
 
@@ -42,7 +41,7 @@ interface DashboardMetrics {
 }
 
 export default function AdminDashboard() {
-  const [metrics, setMetrics] = useState<DashboardMetrics>({
+  const [metrics] = useState<DashboardMetrics>({
     patientsInProcess: 47,
     dictamesHoy: 12,
     averageTAT: '5.8 hrs',

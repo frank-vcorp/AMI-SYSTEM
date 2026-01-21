@@ -147,7 +147,24 @@ export function DoctorModal({
     if (!validate()) return;
 
     try {
-      const signatureDataUrl = signatureCanvas?.toDataURL();
+      const signatureDataUrl = signatureCanvas?.toDataURL().split(',')[1]; // Base64 sin prefijo
+      
+      // Conexión a API
+      const res = await fetch('/api/doctors', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          tenantId: 'default-tenant',
+          signatureCanvas: signatureDataUrl,
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Error al guardar médico');
+      }
+
       await onSave({
         ...formData,
         signature: signatureDataUrl,
@@ -155,6 +172,7 @@ export function DoctorModal({
       onClose();
     } catch (error) {
       console.error('Error saving doctor:', error);
+      alert(`Error: ${error instanceof Error ? error.message : 'Unknown'}`);
     }
   };
 

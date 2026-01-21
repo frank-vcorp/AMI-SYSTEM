@@ -44,12 +44,33 @@ export function PapeletaForm({
   const handleGeneratePapeleta = async () => {
     setLoading(true);
     try {
-      // Generar folio único
-      const generatedFolio = `EXP-${clinic.substring(0, 4).toUpperCase()}-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-001`;
+      const selectedStudies = studies.filter(s => s.selected).map(s => s.id);
+      
+      // Conexión a API
+      const res = await fetch('/api/papeletas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientName,
+          clinicName: clinic,
+          company,
+          studies: selectedStudies,
+          tenantId: 'default-tenant', // En prod, obtener del contexto de auth
+          clinicId: 'default-clinic',
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Error al generar papeleta');
+      }
+
+      const data = await res.json();
+      const generatedFolio = data.folio;
+      
       setFolio(generatedFolio);
       
       // Llamar a onSubmit si existe
-      const selectedStudies = studies.filter(s => s.selected).map(s => s.id);
       await onSubmit?.({ folio: generatedFolio, studies: selectedStudies });
       
       alert(`✅ Papeleta generada: ${generatedFolio}`);

@@ -110,6 +110,26 @@ export function MedicalExamFullForm({
   const handleSubmit = async () => {
     setLoading(true);
     try {
+      // Obtener expedientId de la URL (en página dinámica [id])
+      const urlParts = window.location.pathname.split('/');
+      const expedientId = urlParts[urlParts.length - 1];
+
+      // Conexión a API
+      const res = await fetch('/api/exams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          expedientId,
+          examData: data,
+          tenantId: 'default-tenant',
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Error al guardar examen');
+      }
+
       await onSubmit?.(data);
       setCompleted(true);
     } catch (err) {

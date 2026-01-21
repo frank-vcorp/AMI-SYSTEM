@@ -31,6 +31,27 @@ export function DeliverySection({
     }
     setLoading(true);
     try {
+      // Obtener expedientId de la URL
+      const urlParts = window.location.pathname.split('/');
+      const expedientId = urlParts[urlParts.length - 1];
+
+      // Conexión a API
+      const res = await fetch('/api/deliveries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          expedientId,
+          method: 'EMAIL',
+          email,
+          tenantId: 'default-tenant',
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Error al enviar email');
+      }
+
       await onEmailSend?.(email);
       setEmail('');
       alert(`✅ Email enviado a ${email}`);
@@ -44,8 +65,37 @@ export function DeliverySection({
   const handleGenerateLink = async () => {
     setLoading(true);
     try {
+      // Obtener expedientId de la URL
+      const urlParts = window.location.pathname.split('/');
+      const expedientId = urlParts[urlParts.length - 1];
+
+      // Conexión a API
+      const res = await fetch('/api/deliveries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          expedientId,
+          method: 'TEMPORAL_LINK',
+          expiresIn: 168, // 7 días
+          tenantId: 'default-tenant',
+        }),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.error || 'Error al generar enlace');
+      }
+
+      const data = await res.json();
+      setGeneratedLink({
+        url: data.delivery.temporalLink,
+        expiresIn: `${168} horas (7 días)`,
+      });
+
       const result = await onLinkGenerate?.();
-      setGeneratedLink(result || null);
+      if (result) {
+        setGeneratedLink(result);
+      }
     } catch (err) {
       alert(`Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {

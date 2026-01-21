@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { ValidationPanel } from "@ami/mod-validacion";
+import { ValidatorSideBySide } from "@ami/mod-validacion";
 import type { ValidationTask, PatientSummary } from "@ami/mod-validacion";
 
 export default function ValidacionDetailPage() {
@@ -149,11 +149,11 @@ export default function ValidacionDetailPage() {
   }
 
   return (
-    <ValidationPanel
+    <ValidatorSideBySide
       task={task}
       patient={patient || undefined}
       pdfUrls={pdfUrls}
-      onSave={handleSaveValidation}
+      onSave={(updatedTask) => handleSaveValidation(updatedTask, "MOCK-SIGNATURE-DEMO")}
       isLoading={isSaving}
     />
   );

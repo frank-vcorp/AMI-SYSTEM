@@ -48,3 +48,4 @@ export {
 } from "./utils/validators";
 
 export type { ValidationCheckResult } from "./utils/validators";
+export { ValidatorSideBySide } from "./components/ValidatorSideBySide";

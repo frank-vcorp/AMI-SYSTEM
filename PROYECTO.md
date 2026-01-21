@@ -19,7 +19,7 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 - **Status FASE 1**: 
   - MOD-CITAS: ✅ 90% (Completo + integrado)
   - MOD-EXPEDIENTES: ✅ 95% (CRUD + API routes + UI componentes completos)
-  - MOD-VALIDACION: ✅ 70% (Panel visual + semáforos + firma digital)
+  - MOD-VALIDACION: ✅ 95% (UI "Manus" Split-Screen implementado + semáforos + firma digital)
   - MOD-REPORTES: ✅ 75% (CertificateViewer MVP + API placeholder para PDF)
 - **Demo Status**: ✅ **READY FOR THURSDAY JAN 23** (Seed data script + E2E flow doc + 15-min walkthrough)
 - **Dashboard LIVE**: [README-DASHBOARD.md](./README-DASHBOARD.md) (actualizado automático con cada push)

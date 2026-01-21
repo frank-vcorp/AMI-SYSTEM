@@ -13,7 +13,7 @@
   ],
   "scripts": {
     "type-check": "tsc --version",
-    "build": "npx prisma generate --schema=./prisma/schema.prisma && turbo run build --filter=@ami/web-app",
+    "build": "rm -rf node_modules/.prisma && npx prisma generate --schema=./prisma/schema.prisma && turbo run build --filter=@ami/web-app",
     "dev": "turbo run dev --filter=@ami/web-app",
     "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
     "dashboard:update": "node progressdashboard/parser.js",

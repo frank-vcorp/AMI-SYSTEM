@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ValidationTask, PatientSummary, ExtractedDataSet, LaboratoryData, SpirometryData, RadiographyData } from "../types";
+import { ValidationTask, PatientSummary, LaboratoryData, SpirometryData, RadiographyData } from "../types";
 import { PDFViewer } from "./PDFViewer";
 import { Button, Card, CardHeader, CardTitle, CardContent, Input, Badge } from "@ami/core-ui";
 import { calculateSemaphoresFromLab } from "../utils/clinical-rules";
@@ -14,8 +14,8 @@ export interface ValidatorSideBySideProps {
 
 const LabCard: React.FC<{ data?: LaboratoryData }> = ({ data }) => {
   const semaphores = useMemo(() => data ? calculateSemaphoresFromLab(data) : [], [data]);
-  const isRed = semaphores.some(s => s.priority === 'HIGH');
-  const isYellow = semaphores.some(s => s.priority === 'MEDIUM');
+  const isRed = semaphores.some(s => s.status === 'CRITICAL');
+  const isYellow = semaphores.some(s => s.status === 'WARNING');
 
   return (
     <Card>
@@ -78,7 +78,7 @@ export const ValidatorSideBySide: React.FC<ValidatorSideBySideProps> = ({
 }) => {
   // --- State for PDF Selector (if multiple PDFs) ---
   const firstPdfKey = pdfUrls ? Object.keys(pdfUrls)[0] : null;
-  const [activePdfUrl, setActivePdfUrl] = React.useState<string | null>(
+  const [activePdfUrl] = React.useState<string | null>(
     firstPdfKey && pdfUrls ? pdfUrls[firstPdfKey] : null
   );
 
@@ -160,7 +160,7 @@ export const ValidatorSideBySide: React.FC<ValidatorSideBySideProps> = ({
                 <CardTitle className="text-base">Identidad</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Input label="Paciente" defaultValue={patient?.fullName} />
+                <Input label="Paciente" defaultValue={patient?.name} />
                 <Input label="Empresa" defaultValue="EMP-MOCK" /> 
                 <Input label="Fecha Estudio" type="date" defaultValue={task.createdAt.split('T')[0]} />
               </CardContent>

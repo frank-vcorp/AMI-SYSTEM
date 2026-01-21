@@ -10,6 +10,10 @@
 
 import { PrismaClient } from '@prisma/client';
 
+// Services
+export * from './services/doctorService';
+export * from './services/folioService';
+
 // Declare global para TypeScript
 declare global {
   var prisma: PrismaClient | undefined;

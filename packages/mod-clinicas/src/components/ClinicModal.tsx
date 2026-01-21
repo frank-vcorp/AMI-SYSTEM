@@ -1,4 +1,8 @@
-// Modal para crear/editar clínicas
+/**
+ * @impl IMPL-20260121-B5
+ * @ref context/Plan-Demo-RD-20260121.md
+ * Modal para crear/editar clínicas con horarios
+ */
 'use client';
 
 import { useState } from 'react';
@@ -12,6 +16,18 @@ interface ClinicModalProps {
   isLoading?: boolean;
 }
 
+interface Schedule {
+  dayOfWeek: number; // 0-6: Lun-Dom
+  openingTime: string;
+  closingTime: string;
+  lunchStart?: string;
+  lunchEnd?: string;
+  isOpen: boolean;
+  maxAppointmentsDay: number;
+}
+
+const DAYS = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
 export function ClinicModal({
   clinic,
   isOpen,
@@ -19,6 +35,8 @@ export function ClinicModal({
   onSave,
   isLoading = false
 }: ClinicModalProps) {
+  const [activeTab, setActiveTab] = useState<'general' | 'schedule'>('general');
+
   const [formData, setFormData] = useState({
     name: clinic?.name || '',
     description: clinic?.description || '',
@@ -30,6 +48,16 @@ export function ClinicModal({
     email: clinic?.email || '',
     totalBeds: clinic?.totalBeds || 1
   });
+
+  const [schedules, setSchedules] = useState<Schedule[]>([
+    { dayOfWeek: 0, openingTime: '08:00', closingTime: '17:00', lunchStart: '12:00', lunchEnd: '13:00', isOpen: true, maxAppointmentsDay: 50 },
+    { dayOfWeek: 1, openingTime: '08:00', closingTime: '17:00', lunchStart: '12:00', lunchEnd: '13:00', isOpen: true, maxAppointmentsDay: 50 },
+    { dayOfWeek: 2, openingTime: '08:00', closingTime: '17:00', lunchStart: '12:00', lunchEnd: '13:00', isOpen: true, maxAppointmentsDay: 50 },
+    { dayOfWeek: 3, openingTime: '08:00', closingTime: '17:00', lunchStart: '12:00', lunchEnd: '13:00', isOpen: true, maxAppointmentsDay: 50 },
+    { dayOfWeek: 4, openingTime: '08:00', closingTime: '17:00', lunchStart: '12:00', lunchEnd: '13:00', isOpen: true, maxAppointmentsDay: 50 },
+    { dayOfWeek: 5, openingTime: '09:00', closingTime: '14:00', lunchStart: undefined, lunchEnd: undefined, isOpen: true, maxAppointmentsDay: 30 },
+    { dayOfWeek: 6, openingTime: '00:00', closingTime: '00:00', isOpen: false, maxAppointmentsDay: 0 },
+  ]);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -55,13 +83,48 @@ export function ClinicModal({
     return Object.keys(newErrors).length === 0;
   };
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'totalBeds' ? parseInt(value, 10) : value
+    }));
+  };
+
+  const handleScheduleChange = (dayOfWeek: number, field: string, value: any) => {
+    setSchedules(prev =>
+      prev.map(s =>
+        s.dayOfWeek === dayOfWeek ? { ...s, [field]: value } : s
+      )
+    );
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) newErrors.name = 'Nombre requerido';
+    if (!formData.address.trim()) newErrors.address = 'Dirección requerida';
+    if (!formData.city.trim()) newErrors.city = 'Ciudad requerida';
+    if (!formData.state.trim()) newErrors.state = 'Estado requerido';
+    if (!formData.zipCode.trim()) newErrors.zipCode = 'Código postal requerido';
+    if (formData.totalBeds < 1) newErrors.totalBeds = 'Mínimo 1 cama';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validate()) return;
 
     try {
-      await onSave(formData);
+      await onSave({
+        ...formData,
+        schedules
+      });
       onClose();
     } catch (error) {
       console.error('Error saving clinic:', error);
@@ -80,8 +143,34 @@ export function ClinicModal({
           </h2>
         </div>
 
+        {/* Tabs */}
+        <div className="flex border-b bg-gray-50">
+          <button
+            onClick={() => setActiveTab('general')}
+            className={`flex-1 py-3 text-sm font-medium transition ${
+              activeTab === 'general'
+                ? 'border-b-2 border-ami-turquoise text-ami-turquoise'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Información General
+          </button>
+          <button
+            onClick={() => setActiveTab('schedule')}
+            className={`flex-1 py-3 text-sm font-medium transition ${
+              activeTab === 'schedule'
+                ? 'border-b-2 border-ami-turquoise text-ami-turquoise'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Horarios
+          </button>
+        </div>
+
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          {activeTab === 'general' && (
+            <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Nombre *
@@ -227,6 +316,73 @@ export function ClinicModal({
             />
             {errors.totalBeds && <p className="text-red-500 text-sm mt-1">{errors.totalBeds}</p>}
           </div>
+            </div>
+          )}
+
+          {/* SCHEDULE TAB */}
+          {activeTab === 'schedule' && (
+            <div className="space-y-4">
+              <h3 className="font-semibold text-slate-900 mb-4">Horarios de Atención</h3>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-2 font-medium">Día</th>
+                    <th className="text-center py-2 font-medium">Abierto</th>
+                    <th className="text-center py-2 font-medium">Apertura</th>
+                    <th className="text-center py-2 font-medium">Cierre</th>
+                    <th className="text-center py-2 font-medium">Receso</th>
+                    <th className="text-center py-2 font-medium">Max Citas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {schedules.map((schedule) => (
+                    <tr key={schedule.dayOfWeek} className="border-b hover:bg-gray-50">
+                      <td className="py-3 font-medium">{DAYS[schedule.dayOfWeek]}</td>
+                      <td className="text-center">
+                        <input
+                          type="checkbox"
+                          checked={schedule.isOpen}
+                          onChange={(e) => handleScheduleChange(schedule.dayOfWeek, 'isOpen', e.target.checked)}
+                          className="w-4 h-4"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="time"
+                          value={schedule.openingTime}
+                          onChange={(e) => handleScheduleChange(schedule.dayOfWeek, 'openingTime', e.target.value)}
+                          disabled={!schedule.isOpen}
+                          className="w-20 px-2 py-1 border rounded text-xs"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="time"
+                          value={schedule.closingTime}
+                          onChange={(e) => handleScheduleChange(schedule.dayOfWeek, 'closingTime', e.target.value)}
+                          disabled={!schedule.isOpen}
+                          className="w-20 px-2 py-1 border rounded text-xs"
+                        />
+                      </td>
+                      <td className="text-center text-xs text-gray-600">
+                        {schedule.lunchStart && schedule.lunchEnd ? `${schedule.lunchStart}-${schedule.lunchEnd}` : '-'}
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          value={schedule.maxAppointmentsDay}
+                          onChange={(e) => handleScheduleChange(schedule.dayOfWeek, 'maxAppointmentsDay', parseInt(e.target.value))}
+                          disabled={!schedule.isOpen}
+                          className="w-16 px-2 py-1 border rounded text-xs text-center"
+                          min="0"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
           {/* Footer */}
           <div className="flex justify-end gap-3 mt-6 pt-4 border-t">

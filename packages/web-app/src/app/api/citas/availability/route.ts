@@ -11,7 +11,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { buildTenantFilter, isUuid } from '@/lib/utils';
+import { isUuid } from '@/lib/utils';
 
 interface TimeSlot {
   startTime: string;

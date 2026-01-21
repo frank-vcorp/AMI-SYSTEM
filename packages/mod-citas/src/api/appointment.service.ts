@@ -37,7 +37,7 @@ export class AppointmentService {
     }
     // Validate clinic exists and belongs to tenant
     const clinic = await this.prisma.clinic.findFirst({
-      where: { id: data.clinicId, tenantId }
+      where: { id: data.clinicId, tenantId } as any
     });
 
     if (!clinic) {
@@ -87,7 +87,7 @@ export class AppointmentService {
         },
         time: appointmentTime,
         status: { not: 'CANCELLED' }
-      }
+      } as any
     });
 
     if (existingAppointment) {
@@ -204,7 +204,7 @@ export class AppointmentService {
       throw new InvalidAppointmentError('tenantId must be a UUID');
     }
     const appointment = await this.prisma.appointment.findFirst({
-      where: { id: appointmentId, tenantId }
+      where: { id: appointmentId, tenantId } as any
     });
 
     if (!appointment) {
@@ -291,7 +291,7 @@ export class AppointmentService {
 
     // Get clinic schedule
     const clinic = await this.prisma.clinic.findFirst({
-      where: { id: clinicId, tenantId },
+      where: { id: clinicId, tenantId } as any,
       include: { schedules: true } as any
     });
 
@@ -330,7 +330,7 @@ export class AppointmentService {
               lt: new Date(currentDate.getTime() + 24 * 60 * 60 * 1000)
             },
             status: { not: 'CANCELLED' }
-          }
+          } as any
         });
 
         const availableSlots = daySlots.filter(slot => {

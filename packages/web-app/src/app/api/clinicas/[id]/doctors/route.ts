@@ -105,7 +105,7 @@ export async function POST(
         name,
         cedula,
         specialty,
-        signature: signature ? { dataUrl: signature, timestamp: new Date().toISOString() } : null,
+        signature: signature ? { dataUrl: signature, timestamp: new Date().toISOString() } : undefined,
       },
     });
 

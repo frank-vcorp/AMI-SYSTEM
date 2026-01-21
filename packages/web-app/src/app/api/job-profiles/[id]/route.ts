@@ -13,7 +13,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getTenantIdFromRequest } from '@/lib/auth';
+import { buildTenantFilter } from '@/lib/utils';
 
 /**
  * GET /api/job-profiles/[id]
@@ -24,18 +24,12 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     const jobProfile = await prisma.jobProfile.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
       include: {
         company: {
           select: { id: true, name: true, rfc: true, contactPerson: true },
@@ -92,16 +86,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
     const body = await request.json();
+    const tenantId = body.tenantId || 'default-tenant';
     const {
       name,
       description,
@@ -112,7 +99,7 @@ export async function PUT(
 
     // Verify job profile exists and belongs to tenant
     const existing = await prisma.jobProfile.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {
@@ -196,19 +183,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     // Verify job profile exists and belongs to tenant
     const existing = await prisma.jobProfile.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {

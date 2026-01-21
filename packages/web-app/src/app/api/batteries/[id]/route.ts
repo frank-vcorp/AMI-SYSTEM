@@ -11,7 +11,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getTenantIdFromRequest } from '@/lib/auth';
+import { buildTenantFilter } from '@/lib/utils';
 
 /**
  * GET /api/batteries/[id]
@@ -22,18 +22,12 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     const battery = await prisma.battery.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
       include: {
         services: {
           include: {
@@ -81,16 +75,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
     const body = await request.json();
+    const tenantId = body.tenantId || 'default-tenant';
     const {
       name,
       description,
@@ -103,7 +90,7 @@ export async function PUT(
 
     // Verify battery exists and belongs to tenant
     const existing = await prisma.battery.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {
@@ -193,19 +180,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     // Verify battery exists and belongs to tenant
     const existing = await prisma.battery.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {

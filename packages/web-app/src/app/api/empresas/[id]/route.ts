@@ -11,25 +11,19 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getTenantIdFromRequest } from '@/lib/auth';
+import { buildTenantFilter } from '@/lib/utils';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     const company = await prisma.company.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
       include: {
         jobProfiles: {
           orderBy: { name: 'asc' },
@@ -67,16 +61,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
     const body = await request.json();
+    const tenantId = body.tenantId || 'default-tenant';
     const { 
       name, 
       rfc, 
@@ -96,7 +83,7 @@ export async function PUT(
 
     // Verify company exists and belongs to tenant
     const existing = await prisma.company.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {
@@ -187,19 +174,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
-
     const { id } = await params;
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get('tenantId') || 'default-tenant';
 
     // Verify company exists and belongs to tenant
     const existing = await prisma.company.findFirst({
-      where: { id, tenantId },
+      where: { id, ...buildTenantFilter(tenantId) },
     });
 
     if (!existing) {

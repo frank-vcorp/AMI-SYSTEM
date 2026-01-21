@@ -1,17 +1,6 @@
-/**
- * @impl IMPL-20260121-B4
- * @ref context/Plan-Demo-RD-20260121.md
- * 
- * Doctor Modal - CRUD para gestión de médicos
- * Campos: nombre, cedula, especialidad, clínica, firma digital (canvas)
- */
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Button } from '@ami/core-ui';
-import { Input } from '@ami/core-ui';
-import { Card } from '@ami/core-ui';
 
 interface Doctor {
   id: string;
@@ -172,70 +161,84 @@ export function DoctorModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+    <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
+      <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1)', maxWidth: '640px', width: '100%', margin: '16px', maxHeight: '600px', overflowY: 'auto' }}>
         {/* Header */}
-        <div className="bg-gradient-to-r from-ami-turquoise to-ami-purple p-6 text-white sticky top-0">
-          <h2 className="text-xl font-bold">
+        <div style={{ backgroundImage: 'linear-gradient(to right, rgb(16, 185, 129), rgb(139, 92, 246))', padding: '24px', color: 'white', position: 'sticky', top: 0 }}>
+          <h2 style={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '4px' }}>
             {doctor ? 'Editar Médico' : 'Nuevo Médico'}
           </h2>
-          <p className="text-sm opacity-90">Gestión de personal médico</p>
+          <p style={{ fontSize: '14px', opacity: 0.9 }}>Gestión de personal médico</p>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit} style={{ padding: '24px', display: 'grid', gap: '24px' }}>
           {/* Datos Personales */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-slate-900">Datos Personales</h3>
+          <div style={{ display: 'grid', gap: '16px' }}>
+            <h3 style={{ fontWeight: '600', color: '#1e293b' }}>Datos Personales</h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
                   Nombre Completo *
                 </label>
-                <Input
+                <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Dr. Juan Pérez García"
-                  className={errors.name ? 'border-red-500' : ''}
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: errors.name ? '1px solid #ef4444' : '1px solid #d1d5db', 
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.name}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
                   Cédula Profesional *
                 </label>
-                <Input
+                <input
                   type="text"
                   name="cedula"
                   value={formData.cedula}
                   onChange={handleChange}
                   placeholder="12345678"
-                  className={errors.cedula ? 'border-red-500' : ''}
+                  style={{ 
+                    width: '100%', 
+                    padding: '8px 12px', 
+                    border: errors.cedula ? '1px solid #ef4444' : '1px solid #d1d5db', 
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }}
                 />
                 {errors.cedula && (
-                  <p className="text-red-500 text-sm mt-1">{errors.cedula}</p>
+                  <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.cedula}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
                   Especialidad *
                 </label>
                 <select
                   name="specialty"
                   value={formData.specialty}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-ami-turquoise ${
-                    errors.specialty
-                      ? 'border-red-500'
-                      : 'border-gray-300'
-                  }`}
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    border: errors.specialty ? '1px solid #ef4444' : '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }}
                 >
                   <option value="">Seleccionar especialidad</option>
                   {SPECIALTIES.map((spec) => (
@@ -245,21 +248,25 @@ export function DoctorModal({
                   ))}
                 </select>
                 {errors.specialty && (
-                  <p className="text-red-500 text-sm mt-1">{errors.specialty}</p>
+                  <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.specialty}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '4px' }}>
                   Clínica *
                 </label>
                 <select
                   name="clinicId"
                   value={formData.clinicId}
                   onChange={handleChange}
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-ami-turquoise ${
-                    errors.clinicId ? 'border-red-500' : 'border-gray-300'
-                  }`}
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    border: errors.clinicId ? '1px solid #ef4444' : '1px solid #d1d5db',
+                    borderRadius: '6px',
+                    fontSize: '14px'
+                  }}
                 >
                   <option value="">Seleccionar clínica</option>
                   {clinics.map((clinic) => (
@@ -269,20 +276,20 @@ export function DoctorModal({
                   ))}
                 </select>
                 {errors.clinicId && (
-                  <p className="text-red-500 text-sm mt-1">{errors.clinicId}</p>
+                  <p style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.clinicId}</p>
                 )}
               </div>
             </div>
           </div>
 
           {/* Firma Digital */}
-          <div className="space-y-4 border-t pt-6">
-            <h3 className="font-semibold text-slate-900">Firma Digital</h3>
-            <p className="text-sm text-gray-600">
+          <div style={{ display: 'grid', gap: '16px', borderTop: '1px solid #e5e7eb', paddingTop: '24px' }}>
+            <h3 style={{ fontWeight: '600', color: '#1e293b' }}>Firma Digital</h3>
+            <p style={{ fontSize: '14px', color: '#4b5563' }}>
               Dibuje su firma en el recuadro inferior
             </p>
 
-            <div className="border-2 border-dashed border-gray-300 rounded-lg overflow-hidden">
+            <div style={{ border: '2px dashed #d1d5db', borderRadius: '8px', overflow: 'hidden' }}>
               <canvas
                 ref={canvasRef}
                 width={400}
@@ -291,41 +298,65 @@ export function DoctorModal({
                 onMouseMove={handleSignatureMove}
                 onMouseUp={handleSignatureEnd}
                 onMouseLeave={handleSignatureEnd}
-                className="w-full bg-white cursor-crosshair"
+                style={{ width: '100%', backgroundColor: 'white', cursor: 'crosshair', display: 'block' }}
               />
             </div>
 
             {errors.signature && (
-              <p className="text-red-500 text-sm">{errors.signature}</p>
+              <p style={{ color: '#ef4444', fontSize: '12px' }}>{errors.signature}</p>
             )}
 
-            <Button
+            <button
               type="button"
               onClick={clearSignature}
-              variant="outline"
-              className="w-full"
+              style={{
+                width: '100%',
+                padding: '8px 12px',
+                backgroundColor: '#f3f4f6',
+                border: '1px solid #d1d5db',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
             >
               Limpiar Firma
-            </Button>
+            </button>
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3 border-t pt-6">
-            <Button
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', borderTop: '1px solid #e5e7eb', paddingTop: '24px' }}>
+            <button
               type="button"
               onClick={onClose}
-              variant="outline"
-              className="flex-1"
+              style={{
+                padding: '10px 16px',
+                backgroundColor: '#f3f4f6',
+                border: '1px solid #d1d5db',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
             >
               Cancelar
-            </Button>
-            <Button
+            </button>
+            <button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-ami-turquoise hover:bg-ami-turquoise/90"
+              style={{
+                padding: '10px 16px',
+                backgroundColor: isLoading ? '#ccc' : '#10b981',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: isLoading ? 'wait' : 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
             >
               {isLoading ? 'Guardando...' : doctor ? 'Actualizar' : 'Crear Médico'}
-            </Button>
+            </button>
           </div>
         </form>
       </div>

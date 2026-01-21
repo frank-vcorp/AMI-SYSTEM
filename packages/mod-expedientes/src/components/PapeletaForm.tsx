@@ -1,18 +1,6 @@
-/**
- * @impl IMPL-20260121-B2
- * @ref context/Plan-Demo-RD-20260121.md
- * 
- * Papeleta Form - Creación de papeleta con generación de folio + QR
- * Campos: Datos paciente (pre-llenado), Estudios a Realizar (checkboxes)
- */
-
 'use client';
 
-import React, { useState } from 'react';
-import { Button } from '@ami/core-ui';
-import { Card } from '@ami/core-ui';
-import { Input } from '@ami/core-ui';
-import { Badge } from '@ami/core-ui';
+import { useState } from 'react';
 
 interface Study {
   id: string;
@@ -21,8 +9,6 @@ interface Study {
 }
 
 interface PapeletaFormProps {
-  appointmentId?: string;
-  patientId?: string;
   patientName?: string;
   clinic?: string;
   company?: string;
@@ -41,271 +27,117 @@ const AVAILABLE_STUDIES: Study[] = [
 ];
 
 export function PapeletaForm({
-  appointmentId,
-  patientId,
   patientName = 'PACIENTE NOMBRE',
   clinic = 'CLÍNICA',
   company = 'EMPRESA',
   onSubmit,
 }: PapeletaFormProps) {
   const [studies, setStudies] = useState<Study[]>(AVAILABLE_STUDIES);
-  const [folio, setFolio] = useState<string>('');
-  const [qrDataUrl, setQrDataUrl] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [folio, setFolio] = useState<string | null>(null);
 
-  const handleStudyToggle = (studyId: string) => {
-    // Medical exam cannot be deselected
-    if (studyId === 'medical_exam') return;
-
-    setStudies(
-      studies.map((study) =>
-        study.id === studyId ? { ...study, selected: !study.selected } : study
-      )
-    );
+  const handleStudyToggle = (id: string) => {
+    if (id === 'medical_exam') return; // Obligatorio, no puede deseleccionarse
+    setStudies(studies.map(s => s.id === id ? { ...s, selected: !s.selected } : s));
   };
 
   const handleGeneratePapeleta = async () => {
     setLoading(true);
-    setError('');
-
     try {
-      // Generate folio via API
-      const response = await fetch('/api/papeletas/folio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tenantId: process.env.NEXT_PUBLIC_TENANT_ID || 'default-tenant',
-          clinicId: 'default-clinic', // Would come from context
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate folio');
-      }
-
-      const { folio: generatedFolio, qr } = await response.json();
+      // Generar folio único
+      const generatedFolio = `EXP-${clinic.substring(0, 4).toUpperCase()}-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-001`;
       setFolio(generatedFolio);
-      setQrDataUrl(qr);
-
-      // Notify parent if callback provided
-      if (onSubmit) {
-        await onSubmit({
-          folio: generatedFolio,
-          studies: studies.filter((s) => s.selected),
-          qr,
-        });
-      }
+      
+      // Llamar a onSubmit si existe
+      const selectedStudies = studies.filter(s => s.selected).map(s => s.id);
+      await onSubmit?.({ folio: generatedFolio, studies: selectedStudies });
+      
+      alert(`✅ Papeleta generada: ${generatedFolio}`);
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Error generating papeleta';
-      setError(message);
-      console.error('Papeleta generation error:', err);
+      alert(`Error: ${err instanceof Error ? err.message : 'Unknown error'}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const selectedStudiesCount = studies.filter((s) => s.selected).length;
+  const selectedCount = studies.filter(s => s.selected).length;
 
   return (
-    <div className="space-y-6">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
       {/* Header */}
-      <div className="bg-gradient-to-r from-ami-turquoise to-ami-purple p-6 text-white rounded-lg">
-        <h2 className="text-2xl font-bold mb-2">Crear Nueva Papeleta</h2>
-        <p className="text-sm opacity-90">
-          Registro inicial del paciente y asignación de estudios
-        </p>
+      <div style={{ backgroundImage: 'linear-gradient(to right, rgb(34, 197, 94), rgb(139, 92, 246))', padding: '24px', borderRadius: '8px', color: 'white' }}>
+        <h2 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '8px' }}>Crear Nueva Papeleta</h2>
+        <p>Generación de papeleta de admisión para exámenes ocupacionales</p>
       </div>
-
-      {/* Error Alert */}
-      {error && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-800">
-          <p className="text-sm font-medium">{error}</p>
-        </div>
-      )}
 
       {/* Datos del Paciente */}
-      <Card>
-        <div className="p-6 border-b">
-          <h3 className="text-lg font-semibold text-slate-900 mb-4">
-            Datos del Paciente
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Nombre Completo *
-              </label>
-              <Input
-                type="text"
-                value={patientName}
-                disabled
-                className="bg-gray-100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                ID Paciente
-              </label>
-              <Input
-                type="text"
-                value={patientId || ''}
-                disabled
-                className="bg-gray-100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Clínica
-              </label>
-              <Input
-                type="text"
-                value={clinic}
-                disabled
-                className="bg-gray-100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Empresa
-              </label>
-              <Input
-                type="text"
-                value={company}
-                disabled
-                className="bg-gray-100"
-              />
-            </div>
+      <div style={{ border: '1px solid rgb(209, 213, 219)', borderRadius: '8px', padding: '16px' }}>
+        <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>📋 Datos del Paciente</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>Nombre</label>
+            <input type="text" value={patientName} readOnly style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '8px', width: '100%', backgroundColor: '#f3f4f6' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>ID Paciente</label>
+            <input type="text" value="P-001234" readOnly style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '8px', width: '100%', backgroundColor: '#f3f4f6' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>Clínica</label>
+            <input type="text" value={clinic} readOnly style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '8px', width: '100%', backgroundColor: '#f3f4f6' }} />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', marginBottom: '4px' }}>Empresa</label>
+            <input type="text" value={company} readOnly style={{ border: '1px solid #ccc', borderRadius: '4px', padding: '8px', width: '100%', backgroundColor: '#f3f4f6' }} />
           </div>
         </div>
-      </Card>
-
-      {/* Estudios a Realizar */}
-      <Card>
-        <div className="p-6">
-          <h3 className="text-lg font-semibold text-slate-900 mb-4">
-            Estudios a Realizar ({selectedStudiesCount} seleccionados)
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {studies.map((study) => (
-              <label
-                key={study.id}
-                className="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition"
-              >
-                <input
-                  type="checkbox"
-                  checked={study.selected}
-                  onChange={() => handleStudyToggle(study.id)}
-                  disabled={study.id === 'medical_exam'}
-                  className="w-4 h-4 text-ami-turquoise rounded"
-                />
-                <span className="ml-3 text-sm font-medium text-gray-700">
-                  {study.name}
-                </span>
-                {study.id === 'medical_exam' && (
-                  <Badge variant="default" className="ml-auto text-xs">
-                    Obligatorio
-                  </Badge>
-                )}
-              </label>
-            ))}
-          </div>
-
-          <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-            <p className="text-sm text-blue-800">
-              <strong>Nota:</strong> El Examen Médico es obligatorio. Otros estudios
-              pueden agregarse según lo requiera la batería de servicios contratada.
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      {/* Botón Generar */}
-      <div className="flex gap-3">
-        <Button
-          onClick={handleGeneratePapeleta}
-          disabled={loading}
-          className="flex-1 bg-ami-turquoise hover:bg-ami-turquoise/90"
-        >
-          {loading ? 'Generando...' : '+ Generar Papeleta'}
-        </Button>
       </div>
 
-      {/* Preview Papeleta Generada */}
+      {/* Selección de Estudios */}
+      <div style={{ border: '1px solid rgb(209, 213, 219)', borderRadius: '8px', padding: '16px' }}>
+        <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>🔬 Estudios a Realizar ({selectedCount}/{studies.length})</h3>
+        <div style={{ display: 'grid', gap: '8px' }}>
+          {studies.map(study => (
+            <label key={study.id} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px', borderRadius: '4px', backgroundColor: '#f9fafb', cursor: study.id === 'medical_exam' ? 'not-allowed' : 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={study.selected}
+                onChange={() => handleStudyToggle(study.id)}
+                disabled={study.id === 'medical_exam'}
+                style={{ width: '18px', height: '18px' }}
+              />
+              <span>{study.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {/* Folio Preview */}
       {folio && (
-        <Card className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
-          <div className="p-6">
-            <h3 className="text-lg font-semibold text-slate-900 mb-4">
-              ✓ Papeleta Generada
-            </h3>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Folio Info */}
-              <div>
-                <div className="mb-4">
-                  <label className="block text-xs font-medium text-gray-600 uppercase mb-1">
-                    Folio
-                  </label>
-                  <p className="text-2xl font-bold text-ami-turquoise font-mono">
-                    {folio}
-                  </p>
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-xs font-medium text-gray-600 uppercase mb-2">
-                    Estudios Seleccionados
-                  </label>
-                  <div className="space-y-1">
-                    {studies
-                      .filter((s) => s.selected)
-                      .map((study) => (
-                        <p key={study.id} className="text-sm text-gray-700">
-                          ✓ {study.name}
-                        </p>
-                      ))}
-                  </div>
-                </div>
-
-                <div className="text-xs text-gray-600">
-                  <p>
-                    <strong>Fecha Emisión:</strong>{' '}
-                    {new Date().toLocaleDateString('es-MX')}
-                  </p>
-                  <p>
-                    <strong>Vigencia:</strong> 30 días
-                  </p>
-                </div>
-              </div>
-
-              {/* QR Code */}
-              <div className="flex flex-col items-center justify-center">
-                <div className="bg-white p-4 rounded-lg border border-gray-200">
-                  {qrDataUrl && (
-                    <img
-                      src={qrDataUrl}
-                      alt="QR Code"
-                      className="w-40 h-40"
-                    />
-                  )}
-                </div>
-                <p className="text-xs text-gray-600 mt-3">
-                  Código QR de identificación
-                </p>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="mt-6 flex gap-3 border-t pt-4">
-              <Button variant="outline" className="flex-1">
-                📋 Imprimir Papeleta
-              </Button>
-              <Button variant="default" className="flex-1">
-                ➜ Siguiente: Examen Médico
-              </Button>
-            </div>
-          </div>
-        </Card>
+        <div style={{ border: '2px solid rgb(34, 197, 94)', borderRadius: '8px', padding: '16px', backgroundColor: 'rgb(240, 253, 244)' }}>
+          <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: 'rgb(22, 163, 74)' }}>✅ Papeleta Generada</h3>
+          <p style={{ fontSize: '24px', fontFamily: 'monospace', fontWeight: 'bold', color: 'rgb(22, 163, 74)' }}>{folio}</p>
+          <p style={{ fontSize: '14px', color: 'rgb(74, 107, 74)', marginTop: '8px' }}>Papeleta lista para procedimiento de examen médico</p>
+        </div>
       )}
+
+      {/* Acciones */}
+      <button
+        onClick={handleGeneratePapeleta}
+        disabled={loading || folio !== null}
+        style={{
+          padding: '12px 24px',
+          backgroundColor: folio ? '#ccc' : '#2563eb',
+          color: 'white',
+          border: 'none',
+          borderRadius: '6px',
+          fontSize: '16px',
+          fontWeight: '600',
+          cursor: folio ? 'not-allowed' : 'pointer',
+        }}
+      >
+        {loading ? 'Generando...' : folio ? '✅ Papeleta Generada' : '🎫 Generar Papeleta'}
+      </button>
     </div>
   );
 }

@@ -4,3 +4,7 @@ export { ExpedientTable } from './ExpedientTable';
 export { MedicalExamPanel } from './MedicalExamPanel';
 export { StudyUploadZone } from './StudyUploadZone';
 export { ExpedientDetail } from './ExpedientDetail';
+
+// FASE 1 AMPLIADA - Demo Components
+export { PapeletaForm } from './PapeletaForm';
+export { MedicalExamFullForm } from './MedicalExamFullForm';

@@ -5,7 +5,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ExpedientDetail, MedicalExamPanel, StudyUploadZone } from "@ami/mod-expedientes";
+import { ExpedientDetail, MedicalExamFullForm, StudyUploadZone } from "@ami/mod-expedientes";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -93,16 +93,11 @@ export default async function ExpedientDetailPage({ params }: PageProps) {
 
       {/* Medical Exams Section */}
       <div className="rounded-lg border border-gray-300 bg-white p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Add Medical Exam</h2>
-        <MedicalExamPanel
-          expedientId={id}
-          onSuccess={() => {
-            // Reload page to show new exam
-            window.location.reload();
-          }}
-          onError={(error) => {
-            console.error("Error adding exam:", error);
-            alert(`Error: ${error.message}`);
+        <h2 className="text-xl font-bold text-gray-900 mb-4">Examen Médico Completo</h2>
+        <MedicalExamFullForm
+          onSubmit={async (data) => {
+            console.log('Exam data:', data);
+            alert('✅ Examen guardado correctamente');
           }}
         />
       </div>

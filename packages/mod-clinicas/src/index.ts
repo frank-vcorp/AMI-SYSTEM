@@ -9,3 +9,6 @@ export { ClinicService } from './api/clinic.service';
 // Components
 export { ClinicsTable } from './components/ClinicsTable';
 export { ClinicModal } from './components/ClinicModal';
+
+// FASE 1 AMPLIADA - Demo Components
+export { DoctorModal } from './components/DoctorModal';

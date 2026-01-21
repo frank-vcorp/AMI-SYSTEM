@@ -52,8 +52,7 @@ export class AppointmentService {
       where: {
         clinicId: data.clinicId,
         dayOfWeek,
-        // Compatible with current schema (uses isOpen) and future schema (uses isActive)
-        OR: [{ isOpen: true } as any, { isActive: true } as any]
+        isOpen: true,
       }
     });
 
@@ -86,8 +85,7 @@ export class AppointmentService {
           gte: appointmentDate,
           lt: new Date(appointmentDate.getTime() + 24 * 60 * 60 * 1000)
         },
-        // Current schema uses `time`, core schema uses `appointmentTime`
-        OR: [{ time: appointmentTime } as any, { appointmentTime } as any],
+        time: appointmentTime,
         status: { not: 'CANCELLED' }
       }
     });
@@ -227,7 +225,7 @@ export class AppointmentService {
         where: {
           clinicId: appointment.clinicId,
           dayOfWeek: newDate.getDay(),
-          OR: [{ isOpen: true } as any, { isActive: true } as any]
+          isOpen: true,
         }
       });
 
@@ -309,7 +307,7 @@ export class AppointmentService {
     while (currentDate <= endDate) {
       const dayOfWeek = currentDate.getDay();
       const schedule: any = clinic.schedules?.find(
-        (s: any) => s.dayOfWeek === dayOfWeek && ((s.isActive ?? s.isOpen) === true)
+        (s: any) => s.dayOfWeek === dayOfWeek && s.isOpen === true
       );
 
       if (schedule) {

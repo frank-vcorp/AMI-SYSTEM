@@ -16,17 +16,36 @@ export async function GET(request: NextRequest) {
     const clinicId = searchParams.get('clinicId');
     const employeeId = searchParams.get('employeeId');
     const status = searchParams.get('status');
+    const date = searchParams.get('date'); // Single date filter (YYYY-MM-DD)
+    const dateFrom = searchParams.get('dateFrom');
+    const dateTo = searchParams.get('dateTo');
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '10');
 
-    const result = await appointmentService.listAppointments({
+    // Build filter params
+    const filterParams: any = {
       tenantId,
       clinicId: clinicId ?? undefined,
       employeeId: employeeId ?? undefined,
       status: status as any,
       page,
       pageSize,
-    });
+    };
+
+    // Handle single date filter (for daily view)
+    if (date) {
+      const startOfDay = new Date(date);
+      startOfDay.setHours(0, 0, 0, 0);
+      const endOfDay = new Date(date);
+      endOfDay.setHours(23, 59, 59, 999);
+      filterParams.dateFrom = startOfDay;
+      filterParams.dateTo = endOfDay;
+    } else {
+      if (dateFrom) filterParams.dateFrom = new Date(dateFrom);
+      if (dateTo) filterParams.dateTo = new Date(dateTo);
+    }
+
+    const result = await appointmentService.listAppointments(filterParams);
 
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
@@ -49,7 +68,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { tenantId, ...appointmentData } = body;
+    const { tenantId, ...rest } = body;
 
     if (!tenantId) {
       return NextResponse.json(
@@ -57,6 +76,19 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Map UI fields to service interface
+    // UI sends: patientId, clinicId, appointmentDate, time
+    // Service expects: employeeId, clinicId, companyId, appointmentDate, appointmentTime, serviceIds
+    const appointmentData = {
+      clinicId: rest.clinicId,
+      employeeId: rest.patientId || rest.employeeId,  // Support both field names
+      companyId: rest.companyId || '',  // Optional company
+      appointmentDate: rest.appointmentDate,
+      appointmentTime: rest.time || rest.appointmentTime,  // Support both field names
+      serviceIds: rest.serviceIds || [],  // Optional services
+      notes: rest.notes || '',
+    };
 
     const result = await appointmentService.createAppointment(tenantId, appointmentData);
 

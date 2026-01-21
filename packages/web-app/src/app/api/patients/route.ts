@@ -22,6 +22,7 @@ export async function GET(request: NextRequest) {
     const pageSize = Math.min(50, parseInt(searchParams.get('pageSize') || '20'));
     const search = searchParams.get('search') || '';
     const status = searchParams.get('status');
+    const companyId = searchParams.get('companyId');
 
     // Build where clause - omit tenantId filter if not a valid UUID
     const where: any = { ...buildTenantFilter(tenantId) };
@@ -39,6 +40,10 @@ export async function GET(request: NextRequest) {
       where.status = status;
     }
 
+    if (companyId) {
+      where.companyId = companyId;
+    }
+
     // Fetch patients with pagination
     const [patients, total] = await Promise.all([
       prisma.patient.findMany({
@@ -46,6 +51,9 @@ export async function GET(request: NextRequest) {
         include: {
           company: {
             select: { id: true, name: true },
+          },
+          _count: {
+            select: { expedients: true },
           },
         },
         orderBy: { createdAt: 'desc' },

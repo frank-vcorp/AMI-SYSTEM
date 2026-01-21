@@ -1,10 +1,11 @@
 /**
- * ⚙️ IMPL REFERENCE: IMPL-20260121-01
+ * ⚙️ IMPL REFERENCE: IMPL-20260122-01
  * 📄 SEE: context/SPEC-MVP-DEMO-APIS.md
  * 🤖 AUTHOR: SOFIA (Claude Opus 4.5)
  * 
  * Página de Gestión de Pacientes
  * CRUD completo con API real
+ * Incluye vinculación con Empresa y Perfil de Puesto
  */
 
 'use client';
@@ -21,10 +22,25 @@ interface Patient {
   gender?: string;
   documentId?: string;
   status: string;
+  companyId?: string;
+  company?: { id: string; name: string };
+  jobProfileId?: string;
+  jobProfile?: { id: string; name: string };
   _count?: {
     expedients: number;
     appointments: number;
   };
+}
+
+interface Company {
+  id: string;
+  name: string;
+}
+
+interface JobProfile {
+  id: string;
+  name: string;
+  companyId: string;
 }
 
 interface FormData {
@@ -34,6 +50,8 @@ interface FormData {
   birthDate: string;
   gender: string;
   documentId: string;
+  companyId: string;
+  jobProfileId: string;
 }
 
 const initialFormData: FormData = {
@@ -43,10 +61,15 @@ const initialFormData: FormData = {
   birthDate: '',
   gender: 'MASCULINO',
   documentId: '',
+  companyId: '',
+  jobProfileId: '',
 };
 
 export default function PacientesPage() {
   const [patients, setPatients] = useState<Patient[]>([]);
+  const [companies, setCompanies] = useState<Company[]>([]);
+  const [jobProfiles, setJobProfiles] = useState<JobProfile[]>([]);
+  const [filteredJobProfiles, setFilteredJobProfiles] = useState<JobProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -54,12 +77,46 @@ export default function PacientesPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [search, setSearch] = useState('');
+  const [filterCompany, setFilterCompany] = useState('');
+
+  // Load companies and job profiles on mount
+  useEffect(() => {
+    const loadCatalogs = async () => {
+      try {
+        const [companiesRes, jobProfilesRes] = await Promise.all([
+          fetch('/api/empresas?pageSize=100'),
+          fetch('/api/job-profiles?pageSize=100'),
+        ]);
+        if (companiesRes.ok) {
+          const data = await companiesRes.json();
+          setCompanies(data.data || []);
+        }
+        if (jobProfilesRes.ok) {
+          const data = await jobProfilesRes.json();
+          setJobProfiles(data.data || []);
+        }
+      } catch (err) {
+        console.error('Error loading catalogs:', err);
+      }
+    };
+    loadCatalogs();
+  }, []);
+
+  // Filter job profiles when company changes in form
+  useEffect(() => {
+    if (formData.companyId) {
+      setFilteredJobProfiles(jobProfiles.filter(jp => jp.companyId === formData.companyId));
+    } else {
+      setFilteredJobProfiles([]);
+    }
+  }, [formData.companyId, jobProfiles]);
 
   const fetchPatients = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({ pageSize: '100' });
       if (search) params.append('search', search);
+      if (filterCompany) params.append('companyId', filterCompany);
       
       const response = await fetch(`/api/patients?${params}`);
       if (response.ok) {
@@ -73,7 +130,7 @@ export default function PacientesPage() {
     } finally {
       setLoading(false);
     }
-  }, [search]);
+  }, [search, filterCompany]);
 
   useEffect(() => {
     fetchPatients();
@@ -121,6 +178,8 @@ export default function PacientesPage() {
       birthDate: patient.birthDate ? patient.birthDate.split('T')[0] : '',
       gender: patient.gender || 'MASCULINO',
       documentId: patient.documentId || '',
+      companyId: patient.companyId || '',
+      jobProfileId: patient.jobProfileId || '',
     });
     setShowForm(true);
     setError(null);
@@ -275,6 +334,46 @@ export default function PacientesPage() {
                   maxLength={18}
                 />
               </div>
+              {/* Company and Job Profile Selectors */}
+              <div className="md:col-span-2 lg:col-span-3 border-t pt-4 mt-2">
+                <h3 className="text-sm font-semibold text-gray-600 mb-3">🏢 Vinculación Laboral</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
+                    <select
+                      value={formData.companyId}
+                      onChange={(e) => setFormData({ ...formData, companyId: e.target.value, jobProfileId: '' })}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                    >
+                      <option value="">Sin empresa asignada</option>
+                      {companies.map(company => (
+                        <option key={company.id} value={company.id}>{company.name}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Perfil de Puesto</label>
+                    <select
+                      value={formData.jobProfileId}
+                      onChange={(e) => setFormData({ ...formData, jobProfileId: e.target.value })}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      disabled={!formData.companyId}
+                    >
+                      <option value="">
+                        {formData.companyId ? 'Seleccionar perfil...' : 'Primero seleccione empresa'}
+                      </option>
+                      {filteredJobProfiles.map(profile => (
+                        <option key={profile.id} value={profile.id}>{profile.name}</option>
+                      ))}
+                    </select>
+                    {formData.companyId && filteredJobProfiles.length === 0 && (
+                      <p className="text-xs text-amber-600 mt-1">
+                        Esta empresa no tiene perfiles de puesto configurados
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
               <div className="md:col-span-2 lg:col-span-3 flex gap-4">
                 <Button type="submit" className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-2">
                   {editingId ? 'Actualizar' : 'Crear'} Paciente
@@ -287,15 +386,25 @@ export default function PacientesPage() {
           </div>
         )}
 
-        {/* Search */}
-        <div className="mb-6">
+        {/* Search and Filter */}
+        <div className="mb-6 flex flex-wrap gap-4">
           <input
             type="text"
             placeholder="Buscar por nombre, email o documento..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-96 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+            className="w-full md:w-80 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
           />
+          <select
+            value={filterCompany}
+            onChange={(e) => setFilterCompany(e.target.value)}
+            className="w-full md:w-64 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+          >
+            <option value="">Todas las empresas</option>
+            {companies.map(company => (
+              <option key={company.id} value={company.id}>{company.name}</option>
+            ))}
+          </select>
         </div>
 
         {/* Table */}
@@ -314,9 +423,9 @@ export default function PacientesPage() {
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold">Paciente</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">Documento</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold">Empresa / Puesto</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold">Contacto</th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">Edad</th>
-                    <th className="px-4 py-3 text-center text-sm font-semibold">Género</th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">Expedientes</th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">Estado</th>
                     <th className="px-4 py-3 text-center text-sm font-semibold">Acciones</th>
@@ -328,11 +437,21 @@ export default function PacientesPage() {
                       <td className="px-4 py-3">
                         <div className="font-medium text-gray-900">{patient.name}</div>
                         <div className="text-sm text-gray-500">
-                          {formatDate(patient.birthDate)}
+                          {formatDate(patient.birthDate)} • {patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm font-mono text-gray-600">
                         {patient.documentId || '-'}
+                      </td>
+                      <td className="px-4 py-3">
+                        {patient.company ? (
+                          <>
+                            <div className="text-sm font-medium text-gray-900">{patient.company.name}</div>
+                            <div className="text-xs text-gray-500">{patient.jobProfile?.name || 'Sin puesto'}</div>
+                          </>
+                        ) : (
+                          <span className="text-sm text-gray-400 italic">Sin empresa</span>
+                        )}
                       </td>
                       <td className="px-4 py-3">
                         {patient.email && <div className="text-sm text-gray-900">{patient.email}</div>}
@@ -340,11 +459,6 @@ export default function PacientesPage() {
                       </td>
                       <td className="px-4 py-3 text-center text-sm text-gray-600">
                         {calculateAge(patient.birthDate)}
-                      </td>
-                      <td className="px-4 py-3 text-center">
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${patient.gender === 'MASCULINO' ? 'bg-blue-100 text-blue-800' : patient.gender === 'FEMENINO' ? 'bg-pink-100 text-pink-800' : 'bg-gray-100 text-gray-800'}`}>
-                          {patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
-                        </span>
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className="text-sm font-medium text-gray-900">

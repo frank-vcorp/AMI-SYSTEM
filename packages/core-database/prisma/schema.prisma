@@ -37,6 +37,7 @@ model Clinic {
   services          ClinicService[]
   appointments      Appointment[]
   expedients        Expedient[]
+  doctors           Doctor[]
 
   // Indices
   @@unique([tenantId, name])
@@ -86,6 +87,32 @@ model ClinicService {
   @@index([clinicId])
   @@index([serviceId])
   @@map("clinic_services")
+}
+
+model Doctor {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  name              String            @db.VarChar(255)
+  cedula            String            @db.VarChar(50) // Professional license number
+  specialty         String            @db.VarChar(100)
+  clinicId          String
+  signature         Json?             // JSON object: { dataUrl: "data:image/png...", timestamp: "2026-01-21T..." }
+  status            DoctorStatus      @default(ACTIVE)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  medicalExams      MedicalExam[]     @relation("examinedBy")
+
+  // Indices
+  @@unique([tenantId, cedula])
+  @@index([tenantId])
+  @@index([clinicId])
+  @@index([status])
+  @@map("doctors")
 }
 
 model Appointment {
@@ -363,6 +390,7 @@ model Expedient {
   patientId         String
   clinicId          String
   companyId         String?
+  folio             String?           @db.VarChar(50) @unique // Format: EXP-CDMX-20260121-001
   status            ExpedientStatus   @default(DRAFT)
   notes             String?           @db.Text
   createdAt         DateTime          @default(now())
@@ -383,12 +411,14 @@ model Expedient {
   @@index([clinicId])
   @@index([companyId])
   @@index([status])
+  @@index([folio])
   @@map("expedients")
 }
 
 model MedicalExam {
   id                String            @id @default(cuid())
   expedientId       String
+  examinedByDoctorId String?
   bloodPressure     String?           @db.VarChar(20) // e.g., "120/80"
   heartRate         Int?              // bpm
   respiratoryRate   Int?              // breaths per minute
@@ -396,6 +426,12 @@ model MedicalExam {
   weight            Float?            // kg
   height            Float?            // cm
   physicalExam      String?           @db.Text
+  explorationNotes  Json?             // Exploration fields with defaults from catalog
+  demographics      Json?             // Demographic data: gender, maritalStatus, education, rhType
+  vision            Json?             // Visual data: farVisionOD/OI, nearVision, ishihara, campimetry
+  gynecology        Json?             // Gynecology data (conditional if patient is female)
+  background        Json?             // Heredo-familiar, habits, diet
+  aptitudeRecommendations String?     @db.Text // Final recommendations
   notes             String?           @db.Text
   examinedAt        DateTime          @default(now())
   createdAt         DateTime          @default(now())
@@ -404,9 +440,11 @@ model MedicalExam {
 
   // Relations
   expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  examinedByDoctor  Doctor?           @relation("examinedBy", fields: [examinedByDoctorId], references: [id], onDelete: SetNull)
 
   // Indices
   @@index([expedientId])
+  @@index([examinedByDoctorId])
   @@index([examinedAt])
   @@map("medical_exams")
 }
@@ -440,6 +478,12 @@ enum Gender {
   MASCULINO
   FEMENINO
   OTRO
+}
+
+enum DoctorStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
 }
 
 enum PatientStatus {

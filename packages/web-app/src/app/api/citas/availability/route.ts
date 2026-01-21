@@ -1,46 +1,144 @@
+/**
+ * ⚙️ IMPL REFERENCE: IMPL-20260121-01
+ * 📄 SEE: context/SPEC-MVP-DEMO-APIS.md
+ * 🤖 AUTHOR: SOFIA (Claude Opus 4.5)
+ * 
+ * API Routes para Disponibilidad de Citas
+ * POST /api/citas/availability - Buscar slots disponibles
+ * 
+ * FIXED: Removed mockPrisma, now using real Prisma client
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
-import { AppointmentService, AvailabilityRequest } from '@ami/mod-citas';
+import { prisma } from '@/lib/prisma';
+import { getTenantIdFromRequest } from '@/lib/auth';
 
-const mockPrisma = {
-  appointment: {
-    findMany: async () => [],
-  },
-  clinicSchedule: {
-    findFirst: async () => null,
-  }
-};
+interface TimeSlot {
+  startTime: string;
+  endTime: string;
+  date: string;
+}
 
-const appointmentService = new AppointmentService(mockPrisma as any);
-
+/**
+ * POST /api/citas/availability
+ * Find available appointment slots
+ */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { clinicId, dateFrom, dateTo, serviceIds, durationMin } = body as AvailabilityRequest;
-    
-    // Get tenantId from headers (from auth context in production)
-    const tenantId = request.headers.get('x-tenant-id') || 'default-tenant';
-
-    if (!clinicId || !dateFrom || !dateTo || !serviceIds || durationMin === undefined) {
+    const tenantId = await getTenantIdFromRequest(request);
+    if (!tenantId) {
       return NextResponse.json(
-        { error: 'clinicId, dateFrom, dateTo, serviceIds, and durationMin are required' },
+        { error: 'Tenant ID not found' },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { clinicId, dateFrom, dateTo, durationMin = 30 } = body;
+
+    if (!clinicId || !dateFrom || !dateTo) {
+      return NextResponse.json(
+        { error: 'clinicId, dateFrom, and dateTo are required' },
         { status: 400 }
       );
     }
 
-    const slots = await appointmentService.findAvailableSlots(tenantId, {
-      clinicId,
-      dateFrom,
-      dateTo,
-      serviceIds,
-      durationMin,
+    const startDate = new Date(dateFrom);
+    const endDate = new Date(dateTo);
+
+    // Get clinic schedules
+    const schedules = await prisma.clinicSchedule.findMany({
+      where: {
+        clinicId,
+        isOpen: true,
+      },
+      orderBy: { dayOfWeek: 'asc' },
     });
 
-    return NextResponse.json({ slots }, { status: 200 });
+    if (schedules.length === 0) {
+      return NextResponse.json({
+        slots: [],
+        message: 'No schedules configured for this clinic',
+      });
+    }
+
+    // Get existing appointments in the date range
+    const existingAppointments = await prisma.appointment.findMany({
+      where: {
+        clinicId,
+        tenantId,
+        status: { in: ['PENDING', 'CONFIRMED', 'IN_PROGRESS'] },
+        appointmentDate: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+      select: {
+        appointmentDate: true,
+        time: true,
+      },
+    });
+
+    // Generate available slots
+    const slots: TimeSlot[] = [];
+    const currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+      const schedule = schedules.find(s => s.dayOfWeek === dayOfWeek);
+
+      if (schedule && schedule.openingTime && schedule.closingTime) {
+        // Parse schedule times (format: "HH:MM")
+        const [openHour, openMin] = schedule.openingTime.split(':').map(Number);
+        const [closeHour, closeMin] = schedule.closingTime.split(':').map(Number);
+
+        // Generate slots for this day
+        let slotStart = new Date(currentDate);
+        slotStart.setHours(openHour, openMin, 0, 0);
+
+        const dayEnd = new Date(currentDate);
+        dayEnd.setHours(closeHour, closeMin, 0, 0);
+
+        while (slotStart < dayEnd) {
+          const slotEnd = new Date(slotStart.getTime() + durationMin * 60000);
+
+          if (slotEnd <= dayEnd) {
+            // Check if this slot conflicts with existing appointments
+            const hasConflict = existingAppointments.some(apt => {
+              // Combine appointmentDate with time to create actual appointment datetime
+              const aptDate = new Date(apt.appointmentDate);
+              const [aptHour, aptMin] = apt.time.split(':').map(Number);
+              aptDate.setHours(aptHour, aptMin, 0, 0);
+              const aptEnd = new Date(aptDate.getTime() + 30 * 60000); // Default 30 min duration
+              return slotStart < aptEnd && slotEnd > aptDate;
+            });
+
+            if (!hasConflict) {
+              slots.push({
+                date: currentDate.toISOString().split('T')[0],
+                startTime: slotStart.toTimeString().slice(0, 5),
+                endTime: slotEnd.toTimeString().slice(0, 5),
+              });
+            }
+          }
+
+          slotStart = slotEnd;
+        }
+      }
+
+      // Move to next day
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return NextResponse.json({
+      slots,
+      totalSlots: slots.length,
+      durationMin,
+    });
   } catch (error) {
     console.error('[POST /api/citas/availability]', error);
-    const message = error instanceof Error ? error.message : 'Failed to find available slots';
     return NextResponse.json(
-      { error: message },
+      { error: 'Failed to find available slots' },
       { status: 500 }
     );
   }

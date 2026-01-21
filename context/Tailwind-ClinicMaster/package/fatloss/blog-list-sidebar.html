@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-7">
+<head>
+
+		<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Fat Loss & Wellness Tailwind CSS Template | DexignZone</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="ClinicMaster is a Fat Loss & Wellness Tailwind CSS template designed for fitness centers, nutrition experts, and wellness coaches. It offers a clean, modern design, responsive layout, and easy customization to build professional health websites.">
+	<meta name="keywords" content="ClinicMaster, Fat Loss Template, Wellness Template, Fitness Tailwind CSS Template, Health Coach Website, Nutrition HTML Template, Weight Loss Template, Responsive Fitness Template, Wellness Center Template, DexignZone">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/fatloss/blog-list-sidebar.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../fatloss/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Fat Loss & Wellness Tailwind CSS Template | DexignZone">
+	<meta property="og:description" content="ClinicMaster is a Fat Loss & Wellness Tailwind CSS template designed for fitness centers, nutrition experts, and wellness coaches. It offers a clean, modern design, responsive layout, and easy customization to build professional health websites.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/fatloss">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Fat Loss & Wellness Tailwind CSS Template | DexignZone">
+	<meta name="twitter:description" content="ClinicMaster is a Fat Loss & Wellness Tailwind CSS template designed for fitness centers, nutrition experts, and wellness coaches. It offers a clean, modern design, responsive layout, and easy customization to build professional health websites.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+	
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-white" id="dzPreloader">
+	<div>
+		<span class="size-12 rounded-full border-2 border-secondary border-b-transparent box-border animate-rotation mx-auto block mb-5 absolute right-7.5 top-10 after:box-border after:absolute after:inset-0 after:m-auto after:border-2 after:border-primary after:border-t-transparent after:size-6 after:rounded-full after:animate-rotationBack after:origin-center"></span>
+		<img src="images/logo.gif" alt="/" class="w-100 block mx-auto">
+		<span class="loader"></span>
+	</div>
+</div> 
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper !absolute top-0 left-0 w-full z-999 border-b border-white/10">
+	<div class="main-bar relative xl:pl-20 lg:text-white lg:[.sticky-header-wrapper.is-fixed_&]:text-heading text-secondary w-full">
+		<div class="container flex">
+
+			<!-- Website Logo -->
+			<div class="flex items-center align-middle xl:w-41.25 w-33.75 sm:h-20 h-15.25 xl:me-7.5 me-2 logo-dark">
+				<img src="../fatloss/images/logo-white.svg" alt="logo" class="object-contain duration-500 block [.sticky-header-wrapper.is-fixed_&]:hidden">
+				<img src="../fatloss/images/logo.svg" alt="" class="object-contain duration-500 [.sticky-header-wrapper.is-fixed_&]:block hidden">
+			</div>
+
+			<button class="xmenu-toggler lg:hidden float-right sm:mt-4.5 sm:mb-4 sm:ml-7 my-2.5 ml-5 size-11 bg-white rounded-md relative cursor-pointer max-lg:order-1 max-md:ms-auto" type="button">
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-3.25 w-5.5"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-0 top-5.5 w-6.25"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-8 w-4"></span>
+			</button>
+			<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+			<div class="flex lg:basis-auto lg:grow max-lg:flex-col lg:justify-end font-title max-lg:fixed max-lg:h-screen max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 header-nav custom-scroll">
+				<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+					<a href="index.html" class="table-cell align-middle">
+					<img src="../fatloss/images/logo.svg" alt="" class="object-contain">
+					</a>
+				</div>
+				<ul class="lg:flex flex-wrap navbar-nav">
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Home</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynocology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../physiotherapy/index.html" class="max-lg:py-2.5 block">
+										<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Pages</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="testimonial.html"><span>Testimonial</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Services</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="faqs.html"><span>Faqs</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Blogs</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid-sidebar.html"><span>Blog Grid Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Post Layout </span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="header-image.html"><span>Header Image</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Elements</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">			
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+												<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+													<i class="fa-solid fa-fire-flame-curved"></i>
+												</span>
+											</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="contact-us.html">
+							<span class="inline-block leading-7.5">Contact Us</span>
+						</a>
+					</li>
+				</ul>
+				<div class="lg:hidden block max-lg:p-5 text-center mt-auto">
+					<ul>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="extra-nav flex items-center h-20 3xl:pl-7.5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 [.extra-nav.bottom-end]:-bottom-20">
+				<div class="flex items-center w-full">						
+					<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+						<li class="inline-block max-xl:hidden max-sm:!block">
+							<a href="appointment.html" class="btn btn-gradient max-md:!py-2.5 max-md:!px-4.5">
+								Appointment
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed -top-full left-0 size-full bg-black/80 z-999 flex items-center justify-center p-8 duration-500 xmenu-search" id="searchOverlay4">
+				<form class="w-full" action="#">
+					<div class="relative max-w-3xl w-3xl mx-auto">
+						<input name="search" value="" type="text" class="h-14 py-4 px-5 border border-white/20 text-white w-full outline-none duration-300 focus:border-primary" placeholder="Type to search">
+						<button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 h-full w-10 flex items-center"><i class="fa fa-search text-base text-white"></i></button>
+					</div>
+					<button type="button" class="absolute right-8 top-8 text-white text-xl opacity-80 size-8 cursor-pointer search-remove"><i class="fa fa-close"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</header>
+	<!-- Header End -->
+	
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+			<main class="page-content">
+			
+				<div class="2xxl:min-h-125 lg:min-h-112.5 md:min-h-100 sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden pb-7.5 before:absolute before:left-0 before:top-0 before:size-full before:bg-[#07121E] before:opacity-70  after:w-[75%] after:h-full after:absolute after:bottom-0 after:left-0 after:z-0 after:bg-[url(../../fatloss/images/banner/bg.webp)] after:bg-no-repeat max-lg:after:hidden" style="background-image:url(images/banner/bnr1.webp);">
+			<div class="container relative z-1 h-full table">
+				<div class="table-cell 2xxl:h-125 lg:h-112.5 md:h-100 sm:h-87.5 h-75 align-middle pt-22.5 pb-5 text-center">
+					<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-[32px] font-semibold mb-3.75 break-word text-white wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Blog List Sidebar</h1>
+					<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+						<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-white shadow-breadcrumb">
+							<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading"><a href="index.html" class="text-primary">Home</a></li>
+							<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading pl-2 relative before:content-['\f101'] before:float-left before:text-heading before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">Blog List Sidebar</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="h-[calc(100%_-_80px)] w-20 min-w-20 absolute bottom-0 flex justify-between items-center flex-col py-18.75 px-3.75 right-0 border-r border-white/10 z-1 max-xl:hidden">
+				<ul class="flex gap-7.5 [writing-mode:tb-rl]">
+					<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.instagram.com/">Instagram</a></li>
+					<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.facebook.com/">Facebook</a></li>
+					<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://x.com/">twitter</a></li>
+				</ul>
+			</div>
+			<div class="absolute -bottom-62.5 -right-62.5 bg-linear-(--primary-1-gradient) size-112.5 rounded-full blur-[340px] max-xl:hidden"></div>
+			<div class="absolute top-0 left-0 bg-linear-(--primary-1-gradient) size-112.5 rounded-full blur-[350px] max-xl:hidden"></div>
+
+			<div class="absolute z-0 top-[38%] right-[36%] max-md:hidden">	
+				<svg width="34" height="35" viewBox="0 0 34 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M5.43556 19.8942H3.96171C2.43328 19.8942 1.23236 18.6933 1.23236 17.1648C1.23236 15.6364 2.43328 14.4355 3.96171 14.4355H13.7874C14.1149 14.4355 14.3332 14.2171 14.3332 13.8896C14.3332 13.5621 14.1149 13.3438 13.7874 13.3438H3.96171C1.83282 13.3438 0.140625 15.0359 0.140625 17.1648C0.140625 19.2937 1.83282 20.9859 3.96171 20.9859H5.43556C5.76308 20.9859 5.98143 20.7676 5.98143 20.4401C5.98143 20.1125 5.76308 19.8942 5.43556 19.8942Z" fill="var(--primary)"/>
+					<path d="M9.20782 19.8906H8.06149C7.73397 19.8906 7.51562 20.109 7.51562 20.4365C7.51562 20.764 7.73397 20.9824 8.06149 20.9824H9.20782C9.53534 20.9824 9.75369 20.764 9.75369 20.4365C9.75369 20.109 9.48076 19.8906 9.20782 19.8906Z" fill="var(--primary)"/>
+					<path d="M20.3342 29.0106C20.0066 29.0106 19.7883 29.2289 19.7883 29.5564V30.2661C19.7883 31.7945 18.5874 32.9954 17.059 32.9954C15.5305 32.9954 14.3296 31.7945 14.3296 30.2661V20.4404C14.3296 20.1129 14.1113 19.8945 13.7837 19.8945H11.4365C11.109 19.8945 10.8906 20.1129 10.8906 20.4404C10.8906 20.7679 11.109 20.9863 11.4365 20.9863H13.2379V30.2661C13.2379 32.3949 14.9301 34.0871 17.059 34.0871C19.1878 34.0871 20.88 32.3949 20.88 30.2661V29.5564C20.88 29.2289 20.6617 29.0106 20.3342 29.0106Z" fill="var(--primary)"/>
+					<path d="M30.1641 13.3431H20.8844V4.06327C20.8844 1.93438 19.1922 0.242188 17.0633 0.242188C14.9344 0.242188 13.2422 1.93438 13.2422 4.06327V11.76C13.2422 12.0876 13.4605 12.3059 13.7881 12.3059C14.1156 12.3059 14.3339 12.0876 14.3339 11.76V4.06327C14.3339 2.53484 15.5348 1.33393 17.0633 1.33393C18.5917 1.33393 19.7926 2.53484 19.7926 4.06327V13.8889C19.7926 14.2164 20.011 14.4348 20.3385 14.4348H30.1641C31.6926 14.4348 32.8935 15.6357 32.8935 17.1641C32.8935 18.6926 31.6926 19.8935 30.1641 19.8935H20.3385C20.011 19.8935 19.7926 20.1118 19.7926 20.4394V26.7714C19.7926 27.099 20.011 27.3173 20.3385 27.3173C20.666 27.3173 20.8844 27.099 20.8844 26.7714V20.9852H30.1641C32.293 20.9852 33.9852 19.293 33.9852 17.1641C33.9852 15.0353 32.293 13.3431 30.1641 13.3431Z" fill="var(--primary)"/>
+				</svg>	
+			</div>
+			<div class="absolute bottom-[18%] right-[16%] max-md:hidden">
+				<svg width="52" height="51" viewBox="0 0 52 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M8.68377 29.4328H6.48845C4.21182 29.4328 2.42304 27.644 2.42304 25.3674C2.42304 23.0907 4.21182 21.3019 6.48845 21.3019H21.1239C21.6118 21.3019 21.937 20.9767 21.937 20.4889C21.937 20.001 21.6118 19.6758 21.1239 19.6758H6.48845C3.31743 19.6758 0.796875 22.1963 0.796875 25.3674C0.796875 28.5384 3.31743 31.0589 6.48845 31.0589H8.68377C9.17162 31.0589 9.49685 30.7337 9.49685 30.2459C9.49685 29.758 9.17162 29.4328 8.68377 29.4328Z" fill="var(--primary)"/>
+					<path d="M14.294 29.4297H12.5865C12.0987 29.4297 11.7734 29.7549 11.7734 30.2428C11.7734 30.7306 12.0987 31.0559 12.5865 31.0559H14.294C14.7818 31.0559 15.1071 30.7306 15.1071 30.2428C15.1071 29.7549 14.7005 29.4297 14.294 29.4297Z" fill="var(--primary)"/>
+					<path d="M30.8788 43.0082C30.391 43.0082 30.0657 43.3334 30.0657 43.8212V44.8783C30.0657 47.1549 28.277 48.9437 26.0003 48.9437C23.7237 48.9437 21.9349 47.1549 21.9349 44.8783V30.2428C21.9349 29.7549 21.6097 29.4297 21.1218 29.4297H17.6256C17.1377 29.4297 16.8125 29.7549 16.8125 30.2428C16.8125 30.7306 17.1377 31.0559 17.6256 31.0559H20.3088V44.8783C20.3088 48.0493 22.8293 50.5698 26.0003 50.5698C29.1714 50.5698 31.6919 48.0493 31.6919 44.8783V43.8212C31.6919 43.3334 31.3667 43.0082 30.8788 43.0082Z" fill="var(--primary)"/>
+					<path d="M45.5181 19.6741H31.6957V5.85173C31.6957 2.68071 29.1751 0.160156 26.0041 0.160156C22.8331 0.160156 20.3125 2.68071 20.3125 5.85173V17.3162C20.3125 17.804 20.6377 18.1293 21.1256 18.1293C21.6134 18.1293 21.9387 17.804 21.9387 17.3162V5.85173C21.9387 3.5751 23.7274 1.78632 26.0041 1.78632C28.2807 1.78632 30.0695 3.5751 30.0695 5.85173V20.4872C30.0695 20.9751 30.3947 21.3003 30.8826 21.3003H45.5181C47.7947 21.3003 49.5835 23.0891 49.5835 25.3657C49.5835 27.6423 47.7947 29.4311 45.5181 29.4311H30.8826C30.3947 29.4311 30.0695 29.7564 30.0695 30.2442V39.676C30.0695 40.1638 30.3947 40.489 30.8826 40.489C31.3704 40.489 31.6957 40.1638 31.6957 39.676V31.0573H45.5181C48.6891 31.0573 51.2096 28.5367 51.2096 25.3657C51.2096 22.1947 48.6891 19.6741 45.5181 19.6741Z" fill="var(--primary)"/>
+				</svg>		
+			</div>
+		</div>
+		
+				<section class="2xl:pt-25 2xl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 sm:pb-5 pt-10 pb-5 bg-light">
+					<div class="container">
+						<div class="row">
+							<div class="xl:w-2/3 lg:w-full mb-7.5">
+								<div class="row loadmore-content">
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img1.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">The Science of Eating Right A Guide to Balanced Nutrition.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img2.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">Eat Smart Live Strong: Nutrition Guide.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img3.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">Healthy Eating Habits for Balanced Living.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img4.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">Fuel Your Body with Right Nutrition.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img5.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">Balanced Meals Build a Healthier You.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="xl:w-full md:w-full mb-7.5 wow fadeInUp" data-wow-delay="1.2s" data-wow-duration="0.8s">
+										<div class="relative z-1 lg:p-7.5 p-5 h-full duration-200 bg-white rounded-3xl md:flex group">
+											<div class="rounded-xxl xl:w-80 md:w-62.5 w-full xl:min-w-80 md:min-w-62.5 min-w-full md:h-full sm:h-62.5 h-50 relative overflow-hidden before:absolute before:top-0 before:-left-[75%] before:z-0 before:block before:w-1/2 before:h-full before:skew-x-[-25deg] before:bg-linear-(--img-hover-gradient) group-hover:before:animate-dzShine">
+												<img src="images/blog/middle/img6.webp" alt="" class="size-full object-cover">
+											</div>
+											<div class="md:p-5 md:ps-7.5 pt-6.25 self-center relative">
+												<div class="mb-2.5">
+													<ul class="flex flex-wrap items-center gap-1.25">
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">17 May 2025</li>
+														<li class="bg-[rgba(var(--primary-rgb),0.1)] text-primary rounded-xxl font-medium text-2xs py-1.25 pr-3.75 pl-5.75 leading-[1.4] relative inline-flex mr-1.25 items-center gap-1 flex-wrap after:absolute after:size-1.5 after:rounded-full after:bg-primary after:left-2.5">By <a href="javascript:void(0);">Nashid Martines</a></li>
+													</ul>
+												</div>
+												<h3 class="xl:text-3xl text-xl mb-2.5"><a href="blog-details.html">Science-Backed Guide to Healthy Eating.</a></h3>
+												<p class="text-2sm">It is a long established fact that a reader will be distracted by the readable content.</p>
+												<a href="blog-details.html" class="text-2sm font-medium capitalize text-primary">
+													Read more <i class="feather icon-arrow-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="text-center mt-7.5 lg:mt-0 wow fadeInUp" data-wow-delay="1.4s" data-wow-duration="0.8s">
+									<a href="javascript:void(0);" class="btn btn-lg btn-gradient group dz-load-more" rel="ajax/blog-list-sidebar.html">
+										Load More <span class="size-11 min-w-11 rounded-full inline-flex items-center justify-center -my-2.75 -mr-4.5 ml-3 duration-500 bg-white text-secondary"><i class="feather icon-refresh-ccw"></i></span>
+									</a>
+								</div>
+							</div>
+							<div class="xl:w-1/3 lg:w-full mb-7.5">
+								<aside class="my-sticky mb-7.5 space-top-0 right">
+							<div class="p-7.5 sm:rounded-xxl rounded-lg bg-white sm:mb-11.25 mb-5">
+								<div class="mb-6.25">
+									<h4 class="text-xl">Search</h4>
+								</div>
+								<div class="search-bx">
+									<form role="search" method="post">
+										<div class="relative flex flex-wrap items-stretch w-full">
+											<input name="text" class="w-full h-15 py-2.5 pl-5 pr-12.5 text-2sm sm:rounded-2lg rounded-md bg-primary-30 border-2 border-primary g-prim placeholder:text-bodycolor" placeholder="Search" type="text">
+											<div class="-ms-px">
+												<button type="submit" class="absolute right-1.25 top-1/2 -translate-y-1/2 text-3xl z-99 size-12 bg-transparent">
+													<i class="feather icon-search text-primary text-2xl cursor-pointer"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<div class="p-7.5 sm:rounded-xxl rounded-lg bg-white sm:mb-11.25 mb-5 widget_categories style-1">
+								<div class="mb-6.25">
+									<h4 class="text-xl">Category</h4>
+								</div>
+								<ul>
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Acupressure</a> (10)</li>
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Allgemein</a> (5)</li>
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Blood</a> (17)</li>
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Food</a> (13)</li>
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Health</a> (06)</li> 
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Mental Health</a> (17)</li> 
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Therapy</a> (13)</li> 
+									<li class="relative py-2.5 pl-6.25 text-2xs text-primary text-right font-medium before:content-['\e829'] before:text-primary before:absolute before:left-0 before:font-['feather'] before:font-light before:text-lg before:top-2.25"><a class="float-left text-2sm text-bodycolor" href="blog-grid.html">Walking</a> (06)</li>
+								</ul>
+							</div>
+							<div class="p-7.5 sm:rounded-xxl rounded-lg bg-white sm:mb-11.25 mb-5 recent-posts-entry">
+								<div class="mb-6.25">
+									<h4 class="text-xl">Latest Post</h4>
+								</div>
+								<div class="widget-post-bx">
+									<div class="flex items-center mb-6.25">
+										<div class="w-22.5 min-w-22.5 h-25 rounded-2xl relative overflow-hidden"> 
+											<img loading="lazy" src="images/blog/small/img1.webp" alt="img1" width="150" height="150" class="size-full object-cover">
+										</div>
+										<div class="relative ml-4">
+											<div class="mb-1">
+												<ul>
+													<li class="text-2xs text-primary font-medium uppercase"><a href="blog-grid.html">03 August 2025</a></li>
+												</ul>
+											</div>
+											<h6 class="font-medium text-base"><a href="blog-details.html">The Art of Managing Business and Patient Care</a></h6>
+										</div>
+									</div>
+									<div class="flex items-center mb-6.25">
+										<div class="w-22.5 min-w-22.5 h-25 rounded-2xl relative overflow-hidden"> 
+											<img loading="lazy" src="images/blog/small/img2.webp" alt="img2" width="150" height="150" class="size-full object-cover">
+										</div>
+										<div class="relative ml-4">
+											<div class="mb-1">
+												<ul>
+													<li class="text-2xs text-primary font-medium uppercase"><a href="blog-grid.html">03 August 2025</a></li>
+												</ul>
+											</div>
+											<h6 class="font-medium text-base"><a href="blog-details.html">The Art of Managing Business and Patient Care</a></h6>
+										</div>
+									</div>
+									<div class="flex items-center mb-6.25">
+										<div class="w-22.5 min-w-22.5 h-25 rounded-2xl relative overflow-hidden"> 
+											<img loading="lazy" src="images/blog/small/img3.webp" alt="img3" width="150" height="150" class="size-full object-cover">
+										</div>
+										<div class="relative ml-4">
+											<div class="mb-1">
+												<ul>
+													<li class="text-2xs text-primary font-medium uppercase"><a href="blog-grid.html">03 August 2025</a></li>
+												</ul>
+											</div>
+											<h6 class="font-medium text-base"><a href="blog-details.html">The Art of Managing Business and Patient Care</a></h6>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p-7.5 sm:rounded-xxl rounded-lg bg-white sm:mb-11.25 mb-5">
+								<div class="mb-6.25">
+									<h4 class="text-xl">Tags</h4>
+								</div>
+								<div class="tagcloud"> 
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Acupressure</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Allgemein</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Blood</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Food</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Health</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Mental Health</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Therapy</a>
+									<a class="relative py-2.5 px-3.75 inline-block text-sm text-secondary leading-[1.4] sm:rounded-2lg rounded-md bg-light mr-2 mb-2.5 hover:bg-primary hover:text-white" href="blog-grid.html">Walking</a>
+								</div>
+							</div>
+						</aside>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</main>
+
+			<!-- Footer -->
+				<!-- Footer -->
+<footer class="sm:pt-12.5 pt-5 relative z-1 overflow-hidden bg-light after:absolute after:top-0 after:left-0 after:size-full after:-z-1 after:bg-footer-img-6">
+	<!-- Footer Top -->
+	<div class="container">
+		<div class="md:py-12.5 md:px-15 p-7.5 bg-secondary rounded-3xl">
+			<div class="row g-3 items-center justify-center">
+				<div class="lg:w-5/12 w-full wow fadeInUp" data-wow-delay="0.2s">
+					<h2 class="md:text-6xxl sm:text-4xl text-3xl font-bold !text-white leading-[1.1]">Meet The Doctor</h3>
+				</div>
+				<div class="lg:w-1/3 md:w-7/12 sm:w-2/3 w-full wow fadeInUp" data-wow-delay="0.2s">
+					<h3 class="md:text-2xxl sm:text-2xl text-lg font-bold text-white">Best In The Best</h3>
+					<p class="font-medium sm:text-lg text-2sm text-white/80">Providing the Best Plans and Support for Your Weight Loss Journey.</p>
+				</div>
+				<div class="lg:w-1/4 md:w-5/12 sm:w-1/3 w-full wow fadeInUp " data-wow-delay="0.2s">
+					<a class="md:size-35 size-25 rounded-2xl flex items-center justify-center bg-linear-(--primary-2-gradient) relative z-1 ml-auto after:absolute after:top-1/2 after:left-1/2 after:size-[95%] after:bg-secondary after:-z-1 after:-translate-1/2 after:rounded-2xl" href="xhtml/about-us.html" target="_blank">
+						<i class="feather icon-arrow-up-right text-6xxl text-white"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="sm:pt-20 pt-12.5 sm:pb-7.5">
+			<div class="row flex justify-between">
+				<div class="xl:w-1/4 w-full wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+					<div class="mb-7.5">
+						<div class="mb-6">
+							<a href="index.html"><img src="images/logo.svg" alt="" class="max-w-62.5"></a> 
+						</div>
+						<p class="text-2sm mb-5 leading-[1.7]">Lorem ipsum dolor sit amet consectetur adipiscing elit aliquam</p>
+						<ul class="flex gap-2.5">
+							<li>
+								<a class="size-11.25 leading-11.25 text-center text-sm block rounded-full bg-white text-primary hover:text-white hover:bg-primary" href="https://www.facebook.com" target="_blank">
+									<i class="fa-brands fa-facebook-f"></i>
+								</a>
+							</li>
+							<li>
+								<a class="size-11.25 leading-11.25 text-center text-sm block rounded-full bg-white text-primary hover:text-white hover:bg-primary" href="https://www.instagram.com" target="_blank">
+									<i class="fa-brands fa-instagram"></i>
+								</a>
+							</li>
+							<li>
+								<a class="size-11.25 leading-11.25 text-center text-sm block rounded-full bg-white text-primary hover:text-white hover:bg-primary" href="https://www.linkedin.com" target="_blank">
+									<i class="fa-brands fa-linkedin"></i>
+								</a>
+							</li>
+							<li>
+								<a class="size-11.25 leading-11.25 text-center text-sm block rounded-full bg-white text-primary hover:text-white hover:bg-primary" href="https://www.youtube.com" target="_blank">
+									<i class="fa-brands fa-youtube"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="xl:w-7/12 w-full wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+					<div class="row">
+						<div class="xl:w-1/4 md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+							<div class="mb-7.5">
+								<h2 class="text-xl leading-[1.2] mb-4.25">Support </h2>
+								<ul class="list-hover1">
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Getting started</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Help center</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Server status</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Report a bug</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Chat support</span></a></li>
+								</ul>   
+							</div>
+						</div>
+						<div class="xl:w-5/12 md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+							<div class="mb-7.5">
+								<h2 class="text-xl leading-[1.2] mb-4.25">Contacts us</h2>
+								<ul>
+									<li class="relative py-2 text-2sm leading-5 font-medium mb-2.5"><a class="flex gap-2 break-words capitalize" href="tel:+11234567890"><i class="feather icon-phone-call text-primary text-xl"></i> +1 123 456 7890</a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium mb-2.5"><a class="flex gap-2 break-words capitalize" href="mailto:info@example.com"><i class="feather icon-mail text-primary text-xl"></i> info@example.com</a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium mb-2.5"><a class="flex gap-2 break-words capitalize" href="javascript:void(0);"><i class="feather icon-map-pin text-primary text-xl"></i> 794 Mcallister St San Francisco, 94102</a></li>
+								</ul>
+							</div>	
+						</div>
+						<div class="md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+							<div class="mb-7.5">
+								<h2 class="text-xl leading-[1.2] mb-4.25">Company</h2>
+								<ul class="list-hover1">
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="about-us.html"><span class="relative link-hover">About</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="contact-us.html"><span class="relative link-hover">Contact us</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="services.html"><span class="relative link-hover">Careers</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="relative link-hover">Culture</span></a></li>
+									<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="blog-grid-sidebar.html"><span class="relative link-hover">Blog</span></a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!-- Footer Top End -->
+	<div class="footer-bottom">
+		<div class="py-7.5 bg-white text-base">
+			<div class="container">
+				<div class="row">
+					<div class="lg:w-1/2 w-full lg:text-start text-center"> 
+						<p class="text-sm font-medium mb-0">© <span class="current-year">2025</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-primary">DexignZone</a> Theme. All Rights Reserved.</p>
+					</div>
+					<div class="lg:w-1/2 w-full lg:text-end text-center"> 
+						<div class="flex items-center justify-center md:justify-center xl:justify-end max-lg:mt-3.75">
+							<div class="text-sm font-medium">
+								<p class="mb-0">All Rights Reserved | <a href="javascript:void(0);"> Terms and Conditions</a> | <a href="javascript:void(0);">Privacy Policy</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<!-- Footer End -->
+			<!-- Footer End -->
+
+		</div>
+	</div>
+	
+	<button id="scrollProgress" title="Scroll to top"
+    class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

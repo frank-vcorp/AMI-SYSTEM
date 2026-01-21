@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-8">
+<head>
+
+	<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta name="keywords" content="ClinicMaster, ophthalmology Tailwind CSS template, eye care website, vision clinic template, eye specialist website, retina care center, optometrist template, medical website template, healthcare Tailwind CSS, responsive medical template, eye doctor website design, DexignZone">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/ophthalmology/about-us.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../ophthalmology/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone">
+	<meta property="og:description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/ophthalmology">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone">
+	<meta name="twitter:description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+	
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/swiper/swiper-bundle.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-light" id="dzPreloader">
+	<div class="block w-32.5 h-1 rounded-3xl bg-white relative before:absolute before:bg-primary before:top-0 before:left-0 before:w-0 before:h-full before:rounded-3xl before:animate-dzMoving"></div>
+</div>
+	
+	<div id="offcanvas-right-2" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-bodybg sm:w-100 w-90 custom-scroll">
+	<div class="flex items-center justify-between px-4 pt-2">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right-2">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="sidebar-cart-wrapper">
+			<h2 class="flex items-center gap-2.5 text-base border-b border-black/10 pb-2.5 mb-3.75">
+				Shopping Cart
+				<span class="py-1 font-semibold bg-primary text-white rounded-full text-[11px] size-5.75 min-w-5.75 min-h-5.75 uppercase text-center">3</span>
+			</h2>
+			<div class="flex flex-col min-h-[calc(100vh-147.5px)]">
+				<ul class="sidebar-cart-list">
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img1.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Herbal beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img2.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Green beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img4.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Sun beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+				<div class="flex items-center justify-between py-4.5 mb-2.5">
+					<h5 class="font-semibold text-lg mb-0">Subtotal:</h5>
+					<h5 class="font-semibold text-lg mb-0">300.00$</h5>
+				</div>
+				<div class="mt-auto text-center">
+					<a href="shop-checkout.html" class="btn btn-primary btn-hover1 mx-0.25">Checkout</a>
+					<a href="shop-cart.html" class="btn btn-secondary btn-hover1 mx-0.25">View Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper relative w-full z-999 border-b border-black/10">
+	<div class="main-bar relative lg:text-heading text-secondary bg-white w-full">
+		<div class="container-fluid flex 3xl:px-20! xl:px-12.5! md:px-7.5! px-3.75!">
+
+			<!-- Website Logo -->
+			<div class="flex items-center align-middle xl:w-41.25 w-33.75 sm:h-20 h-15.25 xl:me-7.5 me-2 logo-dark">
+				<a href="index.html" class="table-cell align-middle"><img src="../ophthalmology/images/logo.svg" alt="logo" class="object-contain"></a>
+			</div>
+
+			<button class="xmenu-toggler lg:hidden float-right sm:mt-4.5 sm:mb-4 sm:ml-7 my-2.5 ml-5 size-11 bg-secondary rounded-md relative cursor-pointer max-lg:order-1 max-md:ms-auto" type="button">
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-3.25 w-5.5"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-0 top-5.5 w-6.25"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-8 w-4"></span>
+			</button>
+			<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+			<div class="flex lg:basis-auto lg:grow max-lg:flex-col justify-start max-lg:fixed max-lg:h-screen max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 header-nav custom-scroll">
+				<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+					<a href="index.html" class="table-cell align-middle">
+						<img src="../ophthalmology/images/logo.svg" alt="" class="object-contain duration-500">
+					</a>
+				</div>
+				<ul class="lg:flex flex-wrap navbar-nav">
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Home</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynocology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../physiotherapy/index.html" class="max-lg:py-2.5 block">
+										<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Pages</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Team</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team-detail.html"><span>Team Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Services</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Blogs</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Post Layout </span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="header-image.html"><span>Header Image</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Elements</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">			
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+												<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+													<i class="fa-solid fa-fire-flame-curved"></i>
+												</span>
+											</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="contact-us.html">
+							<span class="inline-block leading-7.5">Contact Us</span>
+						</a>
+					</li>
+				</ul>
+				<div class="lg:hidden block max-lg:p-5 text-center mt-auto">
+					<ul>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="extra-nav flex items-center h-20 3xl:pl-7.5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 [.extra-nav.bottom-end]:-bottom-20">
+				<div class="flex items-center w-full">						
+					<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+						<li class="2xxl:inline-flex items-center gap-3.75 hidden">
+							<div class="widget-media">
+								<i class="feather icon-phone-call dz-ring-effect text-3xxl inline-flex animate-dzRing text-primary"></i>
+							</div>
+							<div class="widget-content">
+								<h6 class="text-primary text-sm font-normal mb-0 font-base!">Contact us</h6>
+								<a href="tel:+11234567890" class="sm:text-lg text-base font-semibold text-secondary font-title!">+1 123 456 7890</a>
+							</div>
+						</li>
+						<li class="inline-block">
+							<a href="javascript:void(0);" class="min-w-10 flex align-center justify-center align-middle relative" data-drawer="#offcanvas-right-2" data-drawer-placement="right">
+								<i class="feather icon-shopping-cart text-[32px]"></i>
+								<span class="absolute -top-1 right-0.5 text-xs flex items-center justify-center min-h-4.5 min-w-4.5 font-semibold bg-primary text-white rounded-full">5</span>
+							</a>
+						</li>
+						<li class="inline-block max-xl:hidden max-sm:!block">
+							<a href="appointment.html" class="btn btn-primary btn-hover1 max-md:!text-sm max-md:!py-2.5 max-md:!px-4.5 max-md:!rounded-2lg">
+								Appointment
+								<i class="feather icon-arrow-right ms-1.25 text-xl text-white"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed -top-full left-0 size-full bg-black/80 z-999 flex items-center justify-center p-8 duration-500 xmenu-search" id="searchOverlay4">
+				<form class="w-full" action="#">
+					<div class="relative max-w-3xl w-3xl mx-auto">
+						<input name="search" value="" type="text" class="h-14 py-4 px-5 border border-white/20 text-white w-full outline-none duration-300 focus:border-primary" placeholder="Type to search">
+						<button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 h-full w-10 flex items-center"><i class="fa fa-search text-base text-white"></i></button>
+					</div>
+					<button type="button" class="absolute right-8 top-8 text-white text-xl opacity-80 size-8 cursor-pointer search-remove"><i class="fa fa-close"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+	<!-- Header End -->
+
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+			
+			<main class="page-content">
+
+				<div class="2xxl:min-h-125 lg:min-h-112.5 md:min-h-full sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden pb-7.5 before:absolute before:left-0 before:top-0 before:size-full before:bg-primary before:opacity-70" style="background-image:url(images/banner/bnr1.webp);">
+						<div class="container relative z-1 h-full table">
+							<div class="table-cell 2xxl:h-125 lg:h-112.5 md:h-95 sm:h-87.5 h-75 align-middle pt-22.5 pb-5 text-center">
+								<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-[32px] font-semibold mb-3.75 break-word text-white wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">About Us</h1>
+								<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-white shadow-breadcrumb">
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading"><a href="index.html" class="text-primary">Home</a></li>
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading pl-2 relative before:content-['\f101'] before:float-left before:text-heading before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">About Us</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 pt-10 pb-5 overflow-hidden bg-light" style="background-image: url(images/background/bg7.webp);">
+				<div class="container">
+					<div class="row content-wrapper style-42 mb-7.5 justify-center">
+						<div class="lg:w-1/2 w-full">
+							<div class="relative z-1 xl:pr-27.5 sm:pr-12.5 mb-7.5">
+								<div class="relative flex items-center">
+									<img src="images/about/img5.webp" alt="" class="xl:size-42.5 w-37.5 h-45 border-[10px] border-white absolute bottom-0 -right-15 shadow-22 rounded-3xl max-sm:left-0 object-cover">
+									<img src="images/about/img4.webp" alt="" class="size-full rounded-t-[400px] object-cover">
+								</div>
+								<div class="absolute -top-10 sm:right-25 right-0" data-bottom-top="transform: translateY(-30px)" data-top-bottom="transform: translateY(30px)">
+									<a href="javascript:void(0)">
+										<div class="flex items-center justify-center">
+											<span class="word-rotate-box light flex justify-center items-center xl:size-45 lg:size-37.5 size-30 bg-transparent rounded-full animate-identifier text-center p-3.75 relative after:absolute after:top-0 after:left-0 after:size-full after:-z-1 after:rounded-full after:border-[25px] after:border-transparent after:backdrop-blur-[17px] after:bg-primary after:drop-shadow-[0px_0px_100px_rgba(0,0,0,0.15)]">
+												<span class="word-rotate block animate-identifier [animation-direction:reverse] duration-300 text-white text-2xl">#1 AWARD WINNING EYE CARE CENTER</span>
+											</span>
+											<i class="icon feather icon-arrow-up-right block animate-rotate [animation-direction:reverse] text-white xl:text-2xl absolute z-1"></i>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="lg:w-1/2 w-full">
+							<div class="sm:mb-7.5 mb-5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<span class="text-primary font-medium sm:text-xl text-base leading-[1.2] font-sub-title rounded-3xl italic mb-2.5 block">About us</span>
+								<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3]">We care more than just your eyes</h2>
+								<p class="text-lg font-normal text-secondary">Eye care center treatments are specialized services aimed at improving and maintaining eye health.</p>
+							</div>
+							<div class="row mb-2.5">
+								<div class="sm:w-1/3 w-1/2 wow fadeInRight" data-wow-delay="0.6s" data-wow-duration="0.8s">
+									<div class="mb-7.5">
+										<span class="lg:text-6xl sm:text-3xxl text-3xl font-bold leading-[1.2] text-primary font-title"><span class="counter">20</span>+</span>
+										<h3 class="lg:text-base sm:text-2sm text-sm font-normal font-base mb-0">Years of service</h3>
+									</div>
+								</div>
+								<div class="sm:w-1/3 w-1/2 wow fadeInRight" data-wow-delay="0.8s" data-wow-duration="0.8s">
+									<div class="mb-7.5">
+										<span class="lg:text-6xl sm:text-3xxl text-3xl font-bold leading-[1.2] text-primary font-title"><span class="counter">14</span>+</span>
+										<h3 class="lg:text-base sm:text-2sm text-sm font-normal font-base mb-0 ">Winning award</h3>
+									</div>
+								</div>
+								<div class="sm:w-1/3 w-1/2 wow fadeInRight" data-wow-delay="1.0s" data-wow-duration="0.8s">
+									<div class="mb-7.5">
+										<span class="lg:text-6xl sm:text-3xxl text-3xl font-bold leading-[1.2] text-primary font-title"><span class="counter">28</span>+</span>
+										<h3 class="lg:text-base sm:text-2sm text-sm font-normal font-base mb-0">Health sections	</h3>
+									</div>
+								</div>
+							</div>
+							<a href="about-us.html" class="btn btn-primary mr-7.5 mb-4 sm:mb-0">
+								Read More
+								<i class="feather icon-arrow-right"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+				
+				
+				<section class="2xxl:pt-25 md:pt-17.5 sm:pt-12.5 pt-10 relative z-1 bg-white" style="background-image: url(images/background/bg7.webp);">
+					<div class="container">
+						<div class="row content-wrapper style-43 items-end justify-center">
+							<div class="xl:w-1/2 w-full mb-7.5">
+								<div class="2xxl:mb-17.5 sm:mb-10">
+									<div class="sm:mb-7.5 mb-5">
+										<span class="text-primary font-medium sm:text-xl text-base leading-[1.2] font-sub-title rounded-3xl italic mb-2.5 block wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Best Ophthalmology</span>
+										<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">Dr. Williams Florence</h2>
+										<p class="text-lg font-normal text-secondary wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s"><strong class="text-secondary fw-semibold">Dr. Williams Florence</strong> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>
+									</div>						
+									<h3 class="text-xl font-semibold pb-2.5 relative mb-3 !text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-size-[10px_1px] after:bg-repeat-x after:bg-linear-(--title-gradient) wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">About Skills</h3>
+									<ul class="flex flex-wrap text-secondary font-medium mb-8.75 wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Root Canal Therapy</li>
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Dental Examinations</li>
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Endodontic Surgery</li>
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">X-Rays and Imaging</li>
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Cracked Tooth Treatment</li>
+										<li class="sm:w-1/2 w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Oral Cancer Screenings</li>
+									</ul>
+									<div class="row items-center g-4 wow fadeInUp" data-wow-delay="1.2s" data-wow-duration="0.8s">
+										<div class="sm:w-1/2 flex">
+											<div class="text-center">
+												<img src="images/sign.webp" alt="">
+												<span class="text-sm block text-primary">Dr. Williams Florence</span>							
+											</div>
+										</div>
+										<div class="sm:w-1/2">
+											<a href="appointment.html" class="btn btn-lg btn-icon btn-primary">
+												Appointment
+												<i class="feather icon-arrow-right ms-1"></i>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="xl:w-1/2 lg:w-2/3 w-full">
+								<div class="relative z-1 after:absolute after:top-0 after:left-0 after:size-full after:bg-no-repeat after:bg-bottom after:bg-content-media">
+									<div class="relative z-1 md:ps-12.5 md:pe-25 px-7.5">
+										<img src="images/about/img6.webp" alt="" class="w-full">
+									</div>
+									<div class="absolute sm:bottom-37.5 bottom-15 lg:-left-15 left-0 z-99 max-sm:hidden">
+										<div class="inline-flex items-center gap-3.75 bg-white/90 sm:rounded-xxl rounded-lg py-3 px-5 backdrop-blur-xs shadow-info-widget-10 animate-move3">
+											<span class="xl:text-5xxl text-3xxl font-bold text-primary"><span class="value counted" data-value="20">20</span>+</span>
+											<span class="sm:text-lg text-base text-justify text-secondary font-semibold block font-title">Years <br> Experienced</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="2xxl:pt-25 md:pt-17.5 sm:pt-12.5 pt-10 bg-primary bg-blend-luminosity bg-fixed bg-no-repeat bg-position-[right_center] bg-cover relative z-1 after:absolute after:bg-white after:w-full after:-z-1 after:bottom-0 after:h-50" style="background-image: url(images/background/bg8.webp);">
+					<div class="container">
+						<div class="row items-center">
+							<div class="lg:w-7/12 w-full">
+								<div class="sm:mb-7.5 mb-5 text-white xl:me-6 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] text-white">We Care About Your Ophthalmology Health</h2>
+									<div class="flex gap-1.5 items-center text-secondary text-sm font-medium mb-7.5">
+										<ul class="flex gap-0.75">
+											<li class="text-yellow-400 text-2sm leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-2sm leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-2sm leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-2sm leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-2sm leading-[1.2]"><i class="fa fa-star"></i></li>
+										</ul>
+										<span class="font-bold text-white me-2">(4.8)</span>
+										<span class="text-sm font-medium text-white">12k+ ratings on google</span>
+									</div>
+									<p class="text-lg font-medium leading-[1.6] text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.</p>
+									<p class="text-lg font-light leading-[1.6] text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search.</p>
+								</div>
+							</div>
+							<div class="lg:w-5/12 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+								<div class="relative overflow-hidden xl:h-125 sm:h-50 h-62.5 sm:rounded-3xl rounded-xxl">
+									<img src="images/about/img10.webp" alt="" class="size-full object-cover">
+								</div>
+							</div>	
+						</div>
+						<div class="row items-center content-inner-3">
+							<div class="xl:w-1/3 w-full">
+								<div class="sm:mb-7.5 mb-5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] mb-0 text-white">Our Accepted insurance</h2>
+								</div>
+							</div>
+							<div class="xl:w-2/3 w-full">
+								<div class="swiper client-swiper2 mb-7.5">
+									<div class="swiper-wrapper">
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.1s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo1.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.2s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo2.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.3s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo3.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.4s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo4.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.5s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo1.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.6s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo2.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.7s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo3.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+										<div class="swiper-slide wow bounceIn" data-wow-delay="0.8s" data-wow-duration="0.8s">
+											<div class="rounded-2xl text-center p-7.5 duration-200 flex items-center justify-center min-h-27.5">
+												<img src="images/logo/middle/logo4.png" alt="" class="invert brightness-0 opacity-60">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row box-hover-wrapper">
+							<div class="lg:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<div class="2xxl:p-15 md:p-10 sm:p-7.5 p-6.25 rounded-2xl bg-white duration-200 shadow-7 box-hover [.box-hover.active]:bg-primary">
+									<h3 class="2xxl:text-4xxl md:text-3xxl sm:text-3xl text-2xl font-bold duration-200 [.box-hover.active_&]:text-white">Mission</h3>
+									<p class="mb-0 duration-200 [.box-hover.active_&]:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search.</p>
+								</div>
+							</div>
+							<div class="lg:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+								<div class="2xxl:p-15 md:p-10 sm:p-7.5 p-6.25 rounded-2xl bg-white duration-200 shadow-7 box-hover [.box-hover.active]:bg-primary active">
+									<h3 class="2xxl:text-4xxl md:text-3xxl sm:text-3xl text-2xl font-bold duration-200 [.box-hover.active_&]:text-white">Vision</h3>
+									<p class="mb-0 duration-200 [.box-hover.active_&]:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search.</p>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</section>
+
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 pt-10 pb-5">
+			<div class="container">
+				<div class="row g-lg-5 items-center box-hover-wrapper">
+					<div class="lg:w-7/12 w-full mb-2.5">
+						<div class="mb-7.5">
+							<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3]">Inspirational Health <br> Our Vision and Mission</h2>
+							<p class="text-lg leading-[1.6] font-normal">To enhance the health and well-being of our community by providing compassionate, high-quality healthcare services through dedicated professionals and advanced medical practices.</p>
+						</div>
+						<div class="relative py-5 px-6.25 bg-white sm:rounded-xxl rounded-lg flex items-center gap-6.25 duration-200 box-hover [.box-hover.active]:bg-secondary active mb-5">
+							<div class="xl:size-17.5 xl:min-w-17.5 size-15 min-w-15 flex items-center justify-center xl:text-6xxl text-5xl">
+								<svg class="[.box-hover.active_&]:[--secondary:white]" viewBox="0 0 70 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M53.1582 44.3429C52.4675 43.8822 51.5334 44.0684 51.0726 44.7594C46.2668 51.9633 38.387 56.095 29.454 56.095C14.9557 56.095 3.1605 44.2996 3.1605 29.8013C3.1605 15.303 14.9559 3.5078 29.4541 3.5078C38.387 3.5078 46.2668 7.63956 51.0727 14.8437C51.5337 15.5346 52.4674 15.7208 53.1583 15.2601C53.8493 14.7991 54.0358 13.8653 53.5748 13.1745C48.2013 5.11971 39.4097 0.5 29.4541 0.5C21.6273 0.5 14.2691 3.54786 8.73491 9.08208C3.20069 14.6163 0.152832 21.9746 0.152832 29.8013C0.152832 37.628 3.20069 44.9862 8.73491 50.5205C11.4146 53.2002 14.5227 55.295 17.9038 56.7452L11.8936 67.4919H7.2161C6.38554 67.4919 5.7122 68.1653 5.7122 68.9958C5.7122 69.8264 6.38554 70.4997 7.2161 70.4997H12.77C12.7714 70.4997 12.7729 70.5 12.7742 70.5C12.7756 70.5 12.777 70.4997 12.7783 70.4997H46.1298C46.1312 70.4997 46.1325 70.5 46.1339 70.5C46.1353 70.5 46.1368 70.4997 46.1381 70.4997H51.6919C52.5225 70.4997 53.1958 69.8264 53.1958 68.9958C53.1958 68.1653 52.5225 67.4919 51.6919 67.4919H47.0145L41.0439 56.8157C46.0933 54.694 50.4226 51.1533 53.5745 46.4286C54.0357 45.7376 53.8492 44.8038 53.1582 44.3429ZM43.5685 67.4919H15.3398L20.7617 57.7971C23.5404 58.6561 26.4627 59.1028 29.4541 59.1028C32.4905 59.1028 35.4177 58.6707 38.1736 57.845L43.5685 67.4919Z" fill="var(--secondary)"/>
+									<path d="M54.6564 43.1189C54.4315 43.1189 54.1913 43.4669 53.9761 43.3598C53.2325 42.99 52.9294 42.0873 53.2992 41.3436C54.947 38.0307 55.7479 34.2551 55.7479 29.8013C55.7479 25.5221 55.0054 22.2034 53.2651 18.704C52.8952 17.9602 53.1983 17.0576 53.942 16.6878C54.6858 16.3177 55.5885 16.6211 55.9583 17.3647C57.8929 21.255 58.7557 25.0905 58.7557 29.8013C58.7557 34.7306 57.8518 38.9442 55.9925 42.6831C55.7296 43.2116 55.2093 43.1189 54.6564 43.1189Z" fill="var(--secondary)"/>
+									<path d="M29.4542 50.7636C17.8957 50.7636 8.49219 41.36 8.49219 29.8014C8.49219 18.2428 17.8957 8.83936 29.4542 8.83936C41.0128 8.83936 50.4163 18.2428 50.4163 29.8014C50.4163 41.36 41.0127 50.7636 29.4542 50.7636ZM29.4542 11.8472C19.5542 11.8472 11.5 19.9014 11.5 29.8014C11.5 39.7014 19.5542 47.7558 29.4542 47.7558C39.3543 47.7558 47.4085 39.7014 47.4085 29.8014C47.4085 19.9014 39.3543 11.8472 29.4542 11.8472Z" fill="var(--primary)"/>
+									<path d="M29.454 42.4244C22.4937 42.4244 16.8311 36.7618 16.8311 29.8014C16.8311 22.8411 22.4937 17.1785 29.454 17.1785C36.4144 17.1785 42.077 22.8411 42.077 29.8014C42.077 36.7618 36.4144 42.4244 29.454 42.4244ZM29.454 20.1864C24.1522 20.1864 19.8389 24.4998 19.8389 29.8016C19.8389 35.1034 24.1522 39.4167 29.454 39.4167C34.7558 39.4167 39.0692 35.1034 39.0692 29.8016C39.0692 24.4998 34.7558 20.1864 29.454 20.1864Z" fill="var(--primary)"/>
+									<path d="M53.0759 41.7029L32.4621 29.8014L53.0759 17.9C53.7952 17.4847 54.0415 16.5649 53.6263 15.8457C53.211 15.1265 52.2915 14.8799 51.572 15.2952L28.7024 28.4991C27.7096 29.0338 27.7174 30.5872 28.7158 31.1117L51.572 44.3079C51.8088 44.4446 52.0673 44.5096 52.3224 44.5096C52.8422 44.5096 53.3478 44.2398 53.6263 43.7574C54.0415 43.0379 53.7953 42.1182 53.0759 41.7029Z" fill="var(--secondary)"/>
+									<path d="M62.7843 56.9681C62.5249 56.9681 62.2654 56.9012 62.0323 56.7665L52.4031 51.207C51.9932 50.9703 51.7185 50.5544 51.6619 50.0845L50.8307 43.1852C50.7507 42.5215 51.1183 41.8848 51.733 41.6222L58.1238 38.8923C58.5594 38.7065 59.0565 38.7362 59.4665 38.9729L69.0958 44.5323C69.589 44.8172 69.879 45.3561 69.845 45.9249C69.8108 46.4935 69.4583 46.994 68.9346 47.2178L63.5811 49.5046L64.2774 55.2844C64.3455 55.8498 64.0883 56.4055 63.6129 56.7192C63.3621 56.8848 63.0734 56.9681 62.7843 56.9681ZM54.5582 48.9784L60.9313 52.6579L60.4599 48.7447C60.3799 48.0811 60.7476 47.4444 61.3623 47.1817L64.9871 45.6334L58.6139 41.9539L53.952 43.9452L54.5582 48.9784Z" fill="var(--primary)"/>
+									<path d="M53.9518 15.6577L58.6138 17.649L64.987 13.9695L61.3623 12.4211C60.7477 12.1586 60.3799 11.5218 60.4599 10.8583L60.9313 6.94487L54.5581 10.6245L53.9518 15.6577ZM58.7146 20.8314C58.514 20.8314 58.3132 20.7913 58.1238 20.7105L51.733 17.9807C51.1183 17.7182 50.7507 17.0813 50.8307 16.4177L51.6619 9.51819C51.7185 9.04815 51.9932 8.63239 52.4031 8.39573L62.0323 2.83634C62.5257 2.55128 63.1376 2.56987 63.6129 2.88378C64.0883 3.19769 64.3455 3.75317 64.2774 4.31878L63.5811 10.0983L68.9346 12.3852C69.4583 12.609 69.8108 13.1095 69.845 13.6781C69.879 14.2467 69.589 14.7858 69.0958 15.0706L59.4665 20.63C59.2348 20.7636 58.975 20.8314 58.7146 20.8314Z" fill="var(--primary)"/>
+								</svg>
+							</div>
+							<div class="overflow-hidden">
+								<h3 class="xl:text-xl text-lg mb-1.25 duration-200 [.box-hover.active_&]:text-white">Mission </h3>
+								<p class="max-xl:text-sm mb-0 duration-200 [.box-hover.active_&]:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+							</div>
+						</div>
+						<div class="relative py-5 px-6.25 bg-white sm:rounded-xxl rounded-lg flex items-center gap-6.25 duration-200 box-hover [.box-hover.active]:bg-secondary mb-5">
+							<div class="xl:size-17.5 xl:min-w-17.5 size-15 min-w-15 flex items-center justify-center xl:text-6xxl text-5xl">
+								<svg class="[.box-hover.active_&]:[--secondary:white]" viewBox="0 0 70 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M18.3334 70.5C17.4897 70.5 16.8057 69.816 16.8057 68.9723V64.6667C16.8057 64.2614 16.9666 63.873 17.2532 63.5864L20.9723 59.8673V53.9528C20.9723 53.1091 21.6564 52.425 22.5001 52.425C23.3439 52.425 24.0279 53.1091 24.0279 53.9528V60.5001C24.0279 60.9052 23.8669 61.2938 23.5804 61.5803L19.8612 65.2995V68.9723C19.8612 69.816 19.1772 70.5 18.3334 70.5Z" fill="var(--secondary)"/>
+									<path d="M47.4999 18.5297C46.6562 18.5297 45.9722 17.8457 45.9722 17.0019V10.5C45.9722 10.0949 46.1331 9.70625 46.4197 9.41972L50.1388 5.70056V2.02778C50.1388 1.18403 50.8229 0.5 51.6666 0.5C52.5104 0.5 53.1944 1.18403 53.1944 2.02778V6.33333C53.1944 6.73847 53.0334 7.12708 52.7469 7.41361L49.0277 11.1328V17.0019C49.0277 17.8457 48.3437 18.5297 47.4999 18.5297Z" fill="var(--secondary)"/>
+									<path d="M34.9999 21.4722C27.2651 21.4722 20.9722 27.7649 20.9722 35.4999C20.9722 43.2349 27.2651 49.5277 34.9999 49.5277C42.7348 49.5277 49.0277 43.2349 49.0277 35.4999C49.0277 27.7649 42.7349 21.4722 34.9999 21.4722ZM36.5277 46.3634V39.6666H33.4722V46.3634C28.6426 45.6873 24.8124 41.8572 24.1365 37.0277H30.8333V33.9722H24.1365C24.8126 29.1426 28.6427 25.3124 33.4722 24.6365V31.3333H36.5277V24.6365C41.3573 25.3126 45.1874 29.1427 45.8634 33.9722H39.1666V37.0277H45.8634C45.1874 41.8573 41.3573 45.6874 36.5277 46.3634Z" fill="var(--secondary)"/>
+									<path d="M34.9999 70.5C34.1562 70.5 33.4722 69.8159 33.4722 68.9722V56.9887C33.4722 56.145 34.1562 55.4609 34.9999 55.4609C35.8437 55.4609 36.5277 56.145 36.5277 56.9887V68.9722C36.5277 69.8159 35.8437 70.5 34.9999 70.5Z" fill="var(--secondary)"/>
+									<path d="M34.9999 15.6892C34.1562 15.6892 33.4722 15.0051 33.4722 14.1614V2.02778C33.4722 1.18403 34.1562 0.5 34.9999 0.5C35.8437 0.5 36.5277 1.18403 36.5277 2.02778V14.1614C36.5277 15.0051 35.8437 15.6892 34.9999 15.6892Z" fill="var(--secondary)"/>
+									<path d="M22.5001 18.5297C21.6564 18.5297 20.9723 17.8457 20.9723 17.0019V11.1328L17.2532 7.41361C16.9666 7.12708 16.8057 6.73847 16.8057 6.33333V2.02778C16.8057 1.18403 17.4897 0.5 18.3334 0.5C19.1772 0.5 19.8612 1.18403 19.8612 2.02778V5.70056L23.5804 9.41972C23.8669 9.70625 24.0279 10.0949 24.0279 10.5V17.0019C24.0279 17.8457 23.3439 18.5297 22.5001 18.5297Z" fill="var(--secondary)"/>
+									<path d="M51.6666 70.5001C50.8229 70.5001 50.1388 69.8161 50.1388 68.9723V65.2995L46.4197 61.5804C46.1331 61.2938 45.9722 60.9054 45.9722 60.5001V54.0917C45.9722 53.248 46.6562 52.564 47.4999 52.564C48.3437 52.564 49.0277 53.248 49.0277 54.0917V59.8673L52.7469 63.5865C53.0333 63.873 53.1944 64.2616 53.1944 64.6667V68.9723C53.1944 69.8161 52.5104 70.5001 51.6666 70.5001Z" fill="var(--secondary)"/>
+									<path d="M10 8.97217C9.15625 8.97217 8.47222 9.6562 8.47222 10.4999V17.3055H1.52778C0.684028 17.3055 0 17.9895 0 18.8333C0 19.677 0.684028 20.3611 1.52778 20.3611H8.47222V25.8936C8.47222 26.7373 9.15625 27.4213 10 27.4213C10.8437 27.4213 11.5278 26.7373 11.5278 25.8936V18.8333V10.4999C11.5278 9.6562 10.8437 8.97217 10 8.97217Z" fill="var(--secondary)"/>
+									<path d="M68.4722 17.3055H61.5277V10.4999C61.5277 9.6562 60.8437 8.97217 59.9999 8.97217C59.1562 8.97217 58.4722 9.6562 58.4722 10.4999V18.8333V25.5516C58.4722 26.3954 59.1562 27.0794 59.9999 27.0794C60.8437 27.0794 61.5277 26.3954 61.5277 25.5516V20.3611H68.4722C69.3159 20.3611 69.9999 19.677 69.9999 18.8333C69.9999 17.9895 69.3159 17.3055 68.4722 17.3055Z" fill="var(--secondary)"/>
+									<path d="M10 44.0449C9.15625 44.0449 8.47222 44.7289 8.47222 45.5727V50.6389H1.52778C0.684028 50.6389 0 51.323 0 52.1667C0 53.0105 0.684028 53.6945 1.52778 53.6945H8.47222V60.5001C8.47222 61.3438 9.15625 62.0278 10 62.0278C10.8437 62.0278 11.5278 61.3438 11.5278 60.5001V52.1667V45.5727C11.5278 44.7289 10.8437 44.0449 10 44.0449Z" fill="var(--secondary)"/>
+									<path d="M68.4722 50.6389H61.5277V45.5351C61.5277 44.6914 60.8437 44.0073 59.9999 44.0073C59.1562 44.0073 58.4722 44.6914 58.4722 45.5351V52.1666V60.5C58.4722 61.3437 59.1562 62.0277 59.9999 62.0277C60.8437 62.0277 61.5277 61.3437 61.5277 60.5V53.6944H68.4722C69.3159 53.6944 69.9999 53.0104 69.9999 52.1666C69.9999 51.3229 69.3159 50.6389 68.4722 50.6389Z" fill="var(--secondary)"/>
+									<path d="M35 57.8611C30.5667 57.8611 25.9685 56.7138 21.3333 54.451C17.6765 52.666 13.9864 50.1846 10.3651 47.0759C4.23181 41.8104 0.447784 36.6138 0.289729 36.3952C-0.0984659 35.8582 -0.0963826 35.1324 0.294867 34.5978C0.571256 34.22 7.17848 25.2738 16.9715 19.0217C23.0865 15.1182 29.1521 13.1389 35 13.1389C39.4333 13.1389 44.0315 14.2863 48.6667 16.5489C52.3235 18.3339 56.0136 20.8153 59.6349 23.9241C65.7682 29.1896 69.5522 34.3861 69.7103 34.6047C70.0951 35.137 70.0967 35.8557 69.7142 36.3896C62.6189 46.2946 49.2699 57.8611 35 57.8611ZM3.45598 35.5047C4.79251 37.1967 7.99487 41.0221 12.407 44.8017C17.7347 49.3654 25.9792 54.8056 35 54.8056C47.6864 54.8056 59.7495 44.6199 66.5636 35.5202C65.2392 33.8411 62.0272 29.9966 57.5931 26.1984C52.2654 21.6346 44.0208 16.1945 35 16.1945C29.744 16.1945 24.2317 18.0122 18.6157 21.5972C11.0553 26.4235 5.36598 33.1096 3.45598 35.5047Z" fill="var(--primary)"/>
+									<path d="M35.0001 41.1946C31.8602 41.1946 29.3057 38.64 29.3057 35.5001C29.3057 32.3602 31.8602 29.8057 35.0001 29.8057C38.14 29.8057 40.6946 32.3602 40.6946 35.5001C40.6946 38.64 38.1401 41.1946 35.0001 41.1946ZM35.0001 32.8612C33.545 32.8612 32.3612 34.045 32.3612 35.5001C32.3612 36.9552 33.545 38.139 35.0001 38.139C36.4552 38.139 37.639 36.9552 37.639 35.5001C37.639 34.045 36.4552 32.8612 35.0001 32.8612Z" fill="var(--primary)"/>
+								</svg>
+							</div>
+							<div class="overflow-hidden">
+								<h3 class="xl:text-xl text-lg mb-1.25 duration-200 [.box-hover.active_&]:text-white">Vision</h3>
+								<p class="max-xl:text-sm mb-0 duration-200 [.box-hover.active_&]:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+							</div>
+						</div>
+						<div class="relative py-5 px-6.25 bg-white sm:rounded-xxl rounded-lg flex items-center gap-6.25 duration-200 box-hover [.box-hover.active]:bg-secondary mb-5">
+							<div class="xl:size-17.5 xl:min-w-17.5 size-15 min-w-15 flex items-center justify-center xl:text-6xxl text-5xl">
+								<svg class="[.box-hover.active_&]:[--secondary:white]" viewBox="0 0 70 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M63.0256 32.1804C63.3391 31.644 63.2672 30.9275 62.8604 30.4596L48.9202 14.1963C48.6345 13.863 48.2174 13.6711 47.7784 13.6711H22.2218C21.7828 13.6711 21.3657 13.863 21.0799 14.1963L7.13994 30.4596C6.69397 30.9689 6.6591 31.7676 7.05886 32.3138L33.7769 69.6318C34.3359 70.4595 35.6637 70.4595 36.2229 69.6322L62.9411 32.3138C62.9704 32.2702 62.9997 32.2259 63.0256 32.1804ZM22.2765 32.9423L30.7907 60.2941L11.2081 32.9423H22.2765ZM39.7487 16.6789L44.4829 29.9345H25.5175L30.2517 16.6789H39.7487ZM44.5737 32.9423L35.0002 63.697L25.4267 32.9423H44.5737ZM47.7238 32.9423H58.7923L39.2096 60.2941L47.7238 32.9423ZM58.4488 29.9345H47.6766L42.9425 16.6789H47.0866L58.4488 29.9345ZM22.9136 16.6789H27.0578L22.3236 29.9345H11.5515L22.9136 16.6789Z" fill="var(--primary)"/>
+									<path d="M58.7783 13.473C58.3935 13.473 58.0086 13.3262 57.7149 13.0325C57.1276 12.4452 57.1276 11.4929 57.7149 10.9056L61.8221 6.79842C62.4096 6.21107 63.3615 6.21107 63.949 6.79842C64.5364 7.38576 64.5364 8.33801 63.949 8.92535L59.8419 13.0325C59.548 13.3263 59.1633 13.473 58.7783 13.473Z" fill="var(--secondary)"/>
+									<path d="M52.6185 9.36634C52.4897 9.36634 52.3587 9.34966 52.2283 9.31466C51.426 9.09974 50.95 8.27505 51.1649 7.47278L52.6681 1.86226C52.883 1.05999 53.7083 0.58339 54.51 0.798859C55.3122 1.01378 55.7884 1.83847 55.5734 2.64073L54.0702 8.25126C53.8901 8.92323 53.2824 9.36634 52.6185 9.36634Z" fill="var(--secondary)"/>
+									<path d="M62.8846 19.634C62.2206 19.634 61.6129 19.1909 61.4329 18.5189C61.218 17.7166 61.6941 16.8919 62.4963 16.677L68.1067 15.1737C68.9085 14.9581 69.7336 15.4348 69.9486 16.2371C70.1635 17.0393 69.6875 17.864 68.8852 18.0789L63.2748 19.5823C63.1444 19.6173 63.0134 19.634 62.8846 19.634Z" fill="var(--secondary)"/>
+									<path d="M11.2216 13.4731C10.8367 13.4731 10.4518 13.3263 10.1582 13.0326L6.05086 8.9256C5.46352 8.33825 5.46352 7.38601 6.05086 6.79866C6.63834 6.21132 7.59031 6.21132 8.17779 6.79866L12.285 10.9058C12.8723 11.4932 12.8723 12.4454 12.285 13.0328C11.9913 13.3264 11.6064 13.4731 11.2216 13.4731Z" fill="var(--secondary)"/>
+									<path d="M17.3815 9.36635C16.7175 9.36635 16.1097 8.92324 15.9298 8.25127L14.4266 2.64074C14.2117 1.83848 14.6877 1.01393 15.49 0.798868C16.2916 0.583399 17.1168 1.05986 17.3319 1.86227L18.8351 7.47279C19.05 8.27506 18.574 9.09961 17.7717 9.31467C17.6414 9.34967 17.5104 9.36635 17.3815 9.36635Z" fill="var(--secondary)"/>
+									<path d="M7.11563 19.6341C6.98684 19.6341 6.85587 19.6174 6.72557 19.5824L1.11505 18.0792C0.312781 17.8643 -0.163411 17.0396 0.0516481 16.2374C0.266433 15.4352 1.0918 14.9589 1.89352 15.174L7.50391 16.6773C8.30618 16.8922 8.78237 17.7169 8.56731 18.5192C8.38725 19.191 7.77954 19.6341 7.11563 19.6341Z" fill="var(--secondary)"/>
+								</svg>
+							</div>
+							<div class="overflow-hidden">
+								<h3 class="xl:text-xl text-lg mb-1.25 duration-200 [.box-hover.active_&]:text-white">Values</h3>
+								<p class="max-xl:text-sm mb-0 duration-200 [.box-hover.active_&]:text-white">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal.</p>
+							</div>
+						</div>
+					</div>
+					<div class="lg:w-5/12 w-full mb-7.5" data-bottom-top="transform: translateY(100px)" data-top-bottom="transform: translateY(-100px)">
+						<div class="relative overflow-hidden sm:rounded-xxl rounded-lg xl:h-175 sm:h-150 h-112.5">
+							<img loading="lazy" src="images/about/img11.webp" alt="img8" width="840" height="1080" class="size-full object-cover">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+				
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 pt-10 pb-5 bg-light image-tooltip-section">
+			<div class="container">
+				<div class="sm:mb-7.5 mb-5 text-center">
+					<span class="text-primary font-medium sm:text-xl text-base leading-[1.2] font-sub-title rounded-3xl italic mb-2.5 block" data-wow-delay="0.2s" data-wow-duration="0.7s">Team</span>
+					<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] mb-0 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.7s">Our Expert Team</h2>
+				</div>
+				<div class="row box-hover-wrapper">
+					<div class="xl:w-1/4 sm:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+						<div class="bg-light rounded-2xl overflow-hidden box-hover active">
+							<div class="relative overflow-hidden">
+								<img src="images/team/img1.webp" alt="" class="w-full">
+							</div>
+							<div class="bg-white py-3.75 px-5 rounded-b-2xl border-2 border-primary/10 border-b-0">
+								<div class="relative group">
+									<a class="inline-block size-11.5 leading-11.5 text-center rounded-lg text-[22px] bg-primary text-white float-right -mt-10" href="javascript:void(0);"><i class="icon feather icon-plus"></i></a>									
+									<ul class="absolute bottom-0 right-0 auto z-1 w-12.5 opacity-0 duration-500 group-hover:opacity-100 group-hover:bottom-12.5">
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-t-2lg" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-b-2lg" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+									</ul>
+								</div>
+								<h3 class="text-2xl mb-0 font-poppins"><a href="team-detail.html">Dr. Raiyan Kovin</a></h3>
+								<span class="text-sm text-primary font-poppins block">Ophthalmologist</span>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/4 sm:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+						<div class="bg-light rounded-2xl overflow-hidden box-hover">
+							<div class="relative overflow-hidden">
+								<img src="images/team/img2.webp" alt="" class="w-full">
+							</div>
+							<div class="bg-white py-3.75 px-5 rounded-b-2xl border-2 border-primary/10 border-b-0">
+								<div class="relative group">
+									<a class="inline-block size-11.5 leading-11.5 text-center rounded-lg text-[22px] bg-primary text-white float-right -mt-10" href="javascript:void(0);"><i class="icon feather icon-plus"></i></a>									
+									<ul class="absolute bottom-0 right-0 auto z-1 w-12.5 opacity-0 duration-500 group-hover:opacity-100 group-hover:bottom-12.5">
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-t-2lg" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-b-2lg" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+									</ul>
+								</div>
+								<h3 class="text-2xl mb-0 font-poppins"><a href="team-detail.html">Dr. Jon doe</a></h3>
+								<span class="text-sm text-primary font-poppins block">Ophthalmologist</span>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/4 sm:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+						<div class="bg-light rounded-2xl overflow-hidden box-hover">
+							<div class="relative overflow-hidden">
+								<img src="images/team/img3.webp" alt="" class="w-full">
+							</div>
+							<div class="bg-white py-3.75 px-5 rounded-b-2xl border-2 border-primary/10 border-b-0">
+								<div class="relative group">
+									<a class="inline-block size-11.5 leading-11.5 text-center rounded-lg text-[22px] bg-primary text-white float-right -mt-10" href="javascript:void(0);"><i class="icon feather icon-plus"></i></a>									
+									<ul class="absolute bottom-0 right-0 auto z-1 w-12.5 opacity-0 duration-500 group-hover:opacity-100 group-hover:bottom-12.5">
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-t-2lg" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-b-2lg" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+									</ul>
+								</div>
+								<h3 class="text-2xl mb-0 font-poppins"><a href="team-detail.html">Dr. Damion Kovin</a></h3>
+								<span class="text-sm text-primary font-poppins block">Ophthalmologist</span>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/4 sm:w-1/2 w-full mb-7.5 wow fadeInUp" data-wow-delay="0.2s"  data-wow-duration="0.8s">
+						<div class="bg-light rounded-2xl overflow-hidden box-hover">
+							<div class="relative overflow-hidden">
+								<img src="images/team/img4.webp" alt="" class="w-full">
+							</div>
+							<div class="bg-white py-3.75 px-5 rounded-b-2xl border-2 border-primary/10 border-b-0">
+								<div class="relative group">
+									<a class="inline-block size-11.5 leading-11.5 text-center rounded-lg text-[22px] bg-primary text-white float-right -mt-10" href="javascript:void(0);"><i class="icon feather icon-plus"></i></a>									
+									<ul class="absolute bottom-0 right-0 auto z-1 w-12.5 opacity-0 duration-500 group-hover:opacity-100 group-hover:bottom-12.5">
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-t-2lg" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-x-twitter"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12" href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+										<li class="mb-2"><a class="text-white bg-primary inline-block text-center -mb-5 h-12.5 w-12.5 text-lg leading-12 rounded-b-2lg" href="https://www.linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a></li>
+									</ul>
+								</div>
+								<h3 class="text-2xl mb-0 font-poppins"><a href="team-detail.html">Dr. Jolian Acenj</a></h3>
+								<span class="text-sm text-primary font-poppins block">Ophthalmologist</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 pt-10 pb-5 relative z-1 overflow-hidden">
+			<div class="container">
+				<div class="section-head style-14 text-center mb-7.5">
+					<span class="text-primary font-medium sm:text-xl text-base leading-[1.2] font-sub-title rounded-3xl italic mb-2.5 block" data-wow-delay="0.2s" data-wow-duration="0.7s">Testimonial</span>
+					<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] mb-0 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.7s">Patient Success Stories</h2>
+				</div>
+				<div class="swiper testimonial-swiper3  wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide !p-2.5">
+							<div class="flex relative z-1 h-full flex-col justify-center items-center">
+								<div class="min-w-20 size-20 lg:rounded-full rounded-xxl sm:rounded-ee-[100px] overflow-hidden">
+									<img src="images/testimonial/large/img1.webp" alt="" class="size-full object-cover">
+								</div>	
+								<div class="lg:p-7.5 lg:pt-5.5 lg:pr-12.5 md:pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl">
+									<div class="lg:mb-8.75 mb-5">
+										<div class="relative z-1">
+											<p class="leading-[1.7] xl:text-[22px] lg:text-lg md:text-base text-2sm text-secondary text-center w-4/5 m-auto max-lg:mt-5 max-md:mt-2.5!">Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the </p>
+										</div>
+									</div>
+									<div class="m-auto">
+										<div class="flex items-center sm:gap-3 gap-1.25 justify-center mb-5">
+											<h5 class="text-xl">Robert Clarkson,</h5>
+											<span class="text-lg">Teacher</span>
+										</div>		
+									</div>		
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide !p-2.5">
+							<div class="flex relative z-1 h-full flex-col justify-center items-center">
+								<div class="min-w-20 size-20 lg:rounded-full rounded-xxl sm:rounded-ee-[100px] overflow-hidden">
+									<img src="images/testimonial/large/img2.webp" alt="" class="size-full object-cover">
+								</div>	
+								<div class="lg:p-7.5 lg:pt-5.5 lg:pr-12.5 md:pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl">
+									<div class="lg:mb-8.75 mb-5">
+										<div class="relative z-1">
+											<p class="leading-[1.7] xl:text-[22px] lg:text-lg md:text-base text-2sm text-secondary text-center w-4/5 m-auto max-lg:mt-5 max-md:mt-2.5!">Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the </p>
+										</div>
+									</div>
+									<div class="m-auto">
+										<div class="flex items-center sm:gap-3 gap-1.25 justify-center mb-5">
+											<h5 class="text-xl">Nashid Martines,</h5>
+											<span class="text-lg">Firefighter</span>
+										</div>		
+									</div>		
+								</div>
+								
+							</div>
+						</div>
+						<div class="swiper-slide !p-2.5">
+							<div class="flex relative z-1 h-full flex-col justify-center items-center">
+								<div class="min-w-20 size-20 lg:rounded-full rounded-xxl sm:rounded-ee-[100px] overflow-hidden">
+									<img src="images/testimonial/large/img3.webp" alt="" class="size-full object-cover">
+								</div>	
+								<div class="lg:p-7.5 lg:pt-5.5 lg:pr-12.5 md:pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl">
+									<div class="lg:mb-8.75 mb-5">
+										<div class="relative z-1">
+											<p class="leading-[1.7] xl:text-[22px] lg:text-lg md:text-base text-2sm text-secondary text-center w-4/5 m-auto max-lg:mt-5 max-md:mt-2.5!">Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the Symptoms of dry eye syndrome may affect one or both eyes and often include: burning or gritty feeling in the eyes, mucus in the </p>
+										</div>
+									</div>
+									<div class="m-auto">
+										<div class="flex items-center sm:gap-3 gap-1.25 justify-center mb-5">
+											<h5 class="text-xl">Sarah Thompson,</h5>
+											<span class="text-lg">Photographer</span>
+										</div>		
+									</div>		
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="testimonial-pagination-swiper3 swiper-pagination style-3"></div>
+				</div>
+			</div>
+			<div class="absolute animate-move7 top-[9%] left-[26%] max-lg:hidden"><img src="images/avatar/small/avatar1.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 top-[25%] left-[15%] blur-xs max-lg:hidden"><img src="images/avatar/small/avatar2.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 bottom-[25%] left-[6%] max-lg:hidden"><img src="images/avatar/small/avatar3.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 bottom-[10%] left-[15%] max-lg:hidden"><img src="images/avatar/small/avatar4.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 top-[9%] right-[26%] max-lg:hidden"><img src="images/avatar/small/avatar1.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 top-[25%] right-[15%] blur-xs max-lg:hidden"><img src="images/avatar/small/avatar2.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 bottom-[25%] right-[6%] max-lg:hidden"><img src="images/avatar/small/avatar3.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			<div class="absolute animate-move7 bottom-[10%] right-[15%] max-lg:hidden"><img src="images/avatar/small/avatar4.webp" alt="" class="overflow-hidden rounded-full border-4 border-white shadow-[0px_10px_40px_0px_rgba(74,34,11,0.1)] size-13.75"></div>
+			
+			<div class="absolute bottom-0 left-1/2 -translate-x-1/2 -z-1"><img src="images/background/bg5.webp" alt=""></div>		
+		</section>
+
+						<div>
+			<div class="container-fluid !p-0">
+				<div class="swiper portfolio-slider">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img1.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img2.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img3.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img4.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img5.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img6.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img7.webp" alt="" class="size-full">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+			</main>
+
+			<!-- Footer -->
+			<footer class="text-bodycolor bg-[#006562] bg-blend-luminosity bg-cover bg-no-repeat bg-center" style="background-image: url(images/background/bg3.webp)">
+		
+		<!-- Footer Top -->
+		<div class="md:pt-17.5 md:pb-7.5 sm:pt-12.5 sm:pb-5 pt-11.25">
+			<div class="container">
+				<div class="row">
+					<div class="xl:w-1/3 w-full wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<div class="mb-6">
+								<a href="index.html"><img src="images/logo-white.svg" alt="" class="max-w-45"></a> 
+							</div>
+							<p class="text-lg font-light leading-[1.2] text-white/80 mb-5">ClinicMaster Ipsum Dolor Sit Amet, Consectetuer Adipiscing Elit, Sed Diam </p>
+							
+							<div class="inline-flex items-center gap-3.75 bg-white py-3 px-5 rounded-xxl text-secondary text-sm font-medium">
+								<img src="images/google.svg" alt="">
+								<div class="clearfix">
+									<div class="flex">
+										<ul class="flex gap-1">
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+										</ul>
+										<span class="font-bold ms-1">(4.8)</span>
+									</div>									
+									<span class="text">12k+ ratings on google</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/6 lg:w-1/4 md:w-1/2 w-full wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+						<div class="mb-7.5">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Quick Links </h2>
+							<ul class="list-hover1">
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="about-us.html"><span class="link-hover">About Us</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="services.html"><span class="link-hover">Our Services</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="team.html"><span class="link-hover">Our Team</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="appointment.html"><span class="link-hover">Appointments</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="contact-us.html"><span class="link-hover">Contact Us</span></a>
+								</li>
+							</ul>   
+						</div>
+					</div>
+					<div class="xl:w-1/4 lg:w-1/4 md:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Contacts us</h2>
+							<ul>	
+								<li class="py-3.75 font-light text-white/80 border-b border-white/20"><a href="mailto:info@example.com"><i class="feather icon-mail text-[#57EEE9] mr-1.25"></i> contact@company.com</a></li>
+								<li class="py-3.75 font-light text-white/80 border-b border-white/20"><a href="tel:+11234567890"><i class="feather icon-phone-call text-[#57EEE9] mr-1.25"></i> (414) 687 - 5892</a></li>
+								<li class="py-3.75 font-light text-white/80"><a href="javascript:void(0);"><i class="feather icon-map-pin text-[#57EEE9] mr-1.25"></i> 794 Mcallister St San Francisco, 94102</a></li>
+							</ul>
+						</div>	
+					</div>
+					<div class="xl:w-1/4 lg:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Newsletter</h2>
+							<p class="text-sm font-light text-white/80">Subscribe our newsletter to get the latest news and updates</p>
+							<form class="dzSubscribe style-1 mb-3.75" action="../assets/script/mailchimp.php" method="post">
+								<div class="dzSubscribeMsg"></div>
+								<div class="form-group">
+									<div class="relative flex flex-wrap items-stretch w-full">
+									<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] py-3.75 pl-6.25 pr-15 text-base text-left text-bodycolor border border-white bg-white placeholder:text-bodycolor rounded-[18px]" placeholder="Your Email Address">
+										<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+											<button name="submit" value="Submit" type="submit" class="size-12 min-w-12 text-lg leading-12 text-center text-primary">
+												<i class="flaticon-message"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="dz-social-icon">
+								<ul class="flex gap-2.5">
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.linkedin.com" target="_blank">
+											<i class="fa-brands fa-linkedin"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.instagram.com" target="_blank">
+											<i class="fa-brands fa-instagram"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.facebook.com" target="_blank">
+											<i class="fa-brands fa-facebook-f"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://twitter.com" target="_blank">
+											<i class="fa-brands fa-x-twitter"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Footer Top End -->
+		 	
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="py-7.5 border-t border-white/30 text-base">
+					<div class="row">
+						<div class="lg:w-1/2 w-full lg:text-start text-center">
+							<p class="text-sm font-light text-white/80 mb-0">© <span class="current-year">2025</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-white">DexignZone</a> Theme. All Rights Reserved.</p>
+						</div>
+						<div class="lg:w-1/2 w-full lg:text-end text-center max-lg:!mt-3.75">
+							<ul class="footer-link style-1">
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white">All Rights Reserved</li>
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white before:h-3.25 before:w-px before:bg-white before:absolute before:top-1/2 before:-left-0.5 before:rounded-lg before:-translate-1/2"><a href="javascript:void(0);">Terms and Conditions</a></li>
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white before:h-3.25 before:w-px before:bg-white before:absolute before:top-1/2 before:-left-0.5 before:rounded-lg before:-translate-1/2"><a href="javascript:void(0);">Privacy Policy</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom End -->
+		
+	</footer>
+			<!-- Footer End -->
+
+		</div>
+	</div>
+
+	<button id="scrollProgress" title="Scroll to top"
+    class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+
+	<div id="videoDialog" class="dialog hidden fixed z-9999 left-0 top-0 size-full overflow-auto bg-black/80 items-center justify-center h-screen">
+		<div class="dialog-content m-auto md:p-12.5 rounded-lg md:w-[80%] max-w-300 relative max-md:h-100 overflow-hidden">
+			<span id="closeBtn" class="close absolute top-0 right-0 text-white/80 text-2xxl font-bold cursor-pointer size-10 flex items-center justify-center">
+				<i class="fa-solid fa-xmark"></i>
+			</span>
+			<div id="videoContainer"></div>
+		</div>
+	</div>
+	
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

@@ -1,18 +1,19 @@
+/**
+ * ⚙️ IMPL REFERENCE: IMPL-20260121-01
+ * 📄 SEE: context/SPEC-MVP-DEMO-APIS.md
+ * 🤖 AUTHOR: SOFIA (Claude Opus 4.5)
+ * 
+ * API Routes para Cita Individual
+ * GET    /api/citas/[id] - Obtener cita por ID
+ * PUT    /api/citas/[id] - Actualizar cita
+ * DELETE /api/citas/[id] - Cancelar cita (soft delete)
+ * 
+ * Schema-aligned: Uses Appointment model with clinic, expedients relations
+ */
+
 import { NextRequest, NextResponse } from 'next/server';
-import { AppointmentService } from '@ami/mod-citas';
-
-const mockPrisma = {
-  appointment: {
-    findFirst: async () => null,
-    update: async (data: any) => ({ ...data.data.data }),
-    delete: async () => ({})
-  },
-  appointmentService: {
-    deleteMany: async () => ({})
-  }
-};
-
-const appointmentService = new AppointmentService(mockPrisma as any);
+import { prisma } from '@/lib/prisma';
+import { getTenantIdFromRequest } from '@/lib/auth';
 
 /**
  * GET /api/citas/[id]
@@ -20,21 +21,44 @@ const appointmentService = new AppointmentService(mockPrisma as any);
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = request.nextUrl.searchParams.get('tenantId') || 'default-tenant';
-    const { id } = params;
+    const tenantId = await getTenantIdFromRequest(request);
+    if (!tenantId) {
+      return NextResponse.json(
+        { error: 'Tenant ID not found' },
+        { status: 401 }
+      );
+    }
 
-    const result = await appointmentService.getAppointment(tenantId, id);
+    const { id } = await params;
 
-    return NextResponse.json(result, { status: 200 });
+    const appointment = await prisma.appointment.findFirst({
+      where: { id, tenantId },
+      include: {
+        clinic: {
+          select: { id: true, name: true, address: true, phoneNumber: true },
+        },
+        expedients: {
+          select: { id: true, folio: true, status: true },
+        },
+      },
+    });
+
+    if (!appointment) {
+      return NextResponse.json(
+        { error: 'Appointment not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(appointment);
   } catch (error) {
     console.error('[GET /api/citas/[id]]', error);
-    const message = error instanceof Error ? error.message : 'Failed to get appointment';
     return NextResponse.json(
-      { error: message },
-      { status: error instanceof Error && error.message.includes('Not found') ? 404 : 500 }
+      { error: 'Failed to get appointment' },
+      { status: 500 }
     );
   }
 }
@@ -45,29 +69,76 @@ export async function GET(
  */
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const body = await request.json();
-    const { tenantId, ...updateData } = body;
-    const { id } = params;
-
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
-        { error: 'tenantId is required' },
-        { status: 400 }
+        { error: 'Tenant ID not found' },
+        { status: 401 }
       );
     }
 
-    const result = await appointmentService.updateAppointment(tenantId, id, updateData);
+    const { id } = await params;
+    const body = await request.json();
+    const {
+      appointmentDate,
+      time,
+      status,
+      clinicId,
+      companyId,
+      employeeId,
+      notes,
+    } = body;
 
-    return NextResponse.json(result, { status: 200 });
+    // Verify appointment exists and belongs to tenant
+    const existing = await prisma.appointment.findFirst({
+      where: { id, tenantId },
+    });
+
+    if (!existing) {
+      return NextResponse.json(
+        { error: 'Appointment not found' },
+        { status: 404 }
+      );
+    }
+
+    // Validate status if provided
+    if (status) {
+      const validStatuses = ['PENDING', 'CONFIRMED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'NO_SHOW'];
+      if (!validStatuses.includes(status)) {
+        return NextResponse.json(
+          { error: `status must be one of: ${validStatuses.join(', ')}` },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Update appointment
+    const appointment = await prisma.appointment.update({
+      where: { id },
+      data: {
+        ...(appointmentDate && { appointmentDate: new Date(appointmentDate) }),
+        ...(time && { time }),
+        ...(status && { status }),
+        ...(clinicId && { clinicId }),
+        ...(companyId !== undefined && { companyId }),
+        ...(employeeId !== undefined && { employeeId }),
+        ...(notes !== undefined && { notes }),
+      },
+      include: {
+        clinic: { select: { id: true, name: true } },
+        expedients: { select: { id: true, folio: true, status: true } },
+      },
+    });
+
+    return NextResponse.json(appointment);
   } catch (error) {
     console.error('[PUT /api/citas/[id]]', error);
-    const message = error instanceof Error ? error.message : 'Failed to update appointment';
     return NextResponse.json(
-      { error: message },
-      { status: error instanceof Error && error.message.includes('Not found') ? 404 : 500 }
+      { error: 'Failed to update appointment' },
+      { status: 500 }
     );
   }
 }
@@ -78,28 +149,43 @@ export async function PUT(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = request.nextUrl.searchParams.get('tenantId') || 'default-tenant';
-    const { id } = params;
-
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
-        { error: 'tenantId is required' },
-        { status: 400 }
+        { error: 'Tenant ID not found' },
+        { status: 401 }
       );
     }
 
-    await appointmentService.cancelAppointment(tenantId, id);
+    const { id } = await params;
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    // Verify appointment exists and belongs to tenant
+    const existing = await prisma.appointment.findFirst({
+      where: { id, tenantId },
+    });
+
+    if (!existing) {
+      return NextResponse.json(
+        { error: 'Appointment not found' },
+        { status: 404 }
+      );
+    }
+
+    // Soft delete: update status to CANCELLED
+    await prisma.appointment.update({
+      where: { id },
+      data: { status: 'CANCELLED' },
+    });
+
+    return NextResponse.json({ success: true, message: 'Appointment cancelled successfully' });
   } catch (error) {
     console.error('[DELETE /api/citas/[id]]', error);
-    const message = error instanceof Error ? error.message : 'Failed to cancel appointment';
     return NextResponse.json(
-      { error: message },
-      { status: error instanceof Error && error.message.includes('Not found') ? 404 : 500 }
+      { error: 'Failed to cancel appointment' },
+      { status: 500 }
     );
   }
 }

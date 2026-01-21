@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-3">
+<head>
+
+		<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta name="keywords" content="ClinicMaster, Skincare Template, Dermatology Website, Tailwind CSS, Skin Clinic Template, Cosmetic Care, Aesthetic Clinic, Beauty & Wellness Template, Responsive Skincare Template, Dermatologist Portfolio, Skin Treatment Website, Healthcare UI Kit">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/skincare/services.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../skincare/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone">
+	<meta property="og:description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/skincare">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone">
+	<meta name="twitter:description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+	
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/swiper/swiper-bundle.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-light" id="dzPreloader">
+	<div class="block w-32.5 h-1 rounded-3xl bg-white relative before:absolute before:bg-primary before:top-0 before:left-0 before:w-0 before:h-full before:rounded-3xl before:animate-dzMoving"></div>
+</div>
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper !absolute top-0 left-0 w-full z-999 border-b border-white/10">
+
+	<div class="main-bar relative xl:pl-20 lg:text-heading text-secondary w-full">
+		<div class="container-fluid flex pl-[calc(80px_/_2)]">
+
+			<div class="border-r border-white/10 h-full w-20 min-w-20 flex justify-center items-center absolute left-0 top-0 max-xl:hidden">
+				<button type="button" class="py-2.4 px-4 rounded-lg toggle-nav-btn" data-drawer="#offcanvas-right" data-drawer-placement="right">
+					<span class="w-5 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+					<span class="w-4 my-1.25 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+					<span class="w-5 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+				</button>
+			</div>
+
+			<!-- Website Logo -->
+			<div class="flex items-center align-middle xl:w-41.25 w-33.75 sm:h-20 h-15.25 xl:me-7.5 me-2 logo-dark">
+				<a href="index.html" class="table-cell align-middle">
+					<img src="../skincare/images/logo-white.svg" alt="logo" class="object-contain duration-500 block [.sticky-header-wrapper.is-fixed_&]:hidden">
+					<img src="../skincare/images/logo.svg" alt="" class="object-contain duration-500 [.sticky-header-wrapper.is-fixed_&]:block hidden">
+				</a>
+			</div>
+
+			<button class="xmenu-toggler lg:hidden float-right sm:mt-4.5 sm:mb-4 sm:ml-7 my-2.5 ml-5 size-11 bg-white rounded-md relative cursor-pointer max-lg:order-1 max-md:ms-auto" type="button">
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-3.25 w-5.5"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-0 top-5.5 w-6.25"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-8 w-4"></span>
+			</button>
+			<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+			<div class="flex lg:basis-auto lg:grow max-lg:flex-col justify-start font-title max-lg:fixed max-lg:h-screen max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 [.sticky-header-wrapper.is-fixed_&]:text-secondary lg:text-white header-nav custom-scroll">
+				<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+					<a href="index.html" class="table-cell align-middle">
+						<img src="../skincare/images/logo.svg" alt="" class="object-contain duration-500">
+					</a>
+				</div>
+				<ul class="lg:flex flex-wrap navbar-nav">
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Home</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynocology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../physiotherapy/index.html" class="max-lg:py-2.5 block">
+										<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Pages</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us-2.html"><span>About Us 2</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="testimonial.html"><span>Testimonial</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Team</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team-detail.html"><span>Team Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Services</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail-2.html"><span>Services Detail 2</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="faqs.html"><span>Faqs</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Shop</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="shop.html"><span>Shop</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="shop-details.html"><span>Shop Details</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Blogs</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Post Layout </span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="header-image.html"><span>Header Image</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Elements</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">			
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+												<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+													<i class="fa-solid fa-fire-flame-curved"></i>
+												</span>
+											</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Contact Us</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="contact-us.html"><span>Contact Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="contact-us-2.html"><span>Contact Us 2</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<div class="lg:hidden block max-lg:p-5 text-center mt-auto">
+					<ul>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="extra-nav flex items-center h-20 3xl:pl-7.5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 [.extra-nav.bottom-end]:-bottom-20">
+				<div class="flex items-center w-full">						
+					<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+						<li class="inline-block">
+							<a href="javascript:void(0);" class="min-w-10 flex align-center justify-center align-middle relative" data-drawer="#offcanvas-right-2" data-drawer-placement="right">
+								<i class="feather icon-shopping-cart text-[32px] [.sticky-header-wrapper.is-fixed_&]:text-secondary sm:text-white"></i>
+								<span class="absolute -top-1 right-0.5 text-xs flex items-center justify-center min-h-4.5 min-w-4.5 font-semibold bg-white text-secondary rounded-full">5</span>
+							</a>
+						</li>
+						<li class="2xxl:inline-flex items-center gap-3.75 hidden">
+							<div class="widget-media">
+								<i class="feather icon-phone-call dz-ring-effect text-3xxl inline-flex animate-dzRing [.sticky-header-wrapper.is-fixed_&]:text-secondary text-white"></i>
+							</div>
+							<div class="widget-content">
+								<h6 class="text-primary text-sm font-normal mb-0">Contact us?</h6>
+								<a href="tel:+11234567890" class="sm:text-lg text-base font-semibold [.sticky-header-wrapper.is-fixed_&]:text-secondary text-white">+1 123 456 7890</a>
+							</div>
+						</li>
+						<li class="inline-block max-xl:hidden max-sm:!block">
+							<a href="appointment.html" class="btn btn-primary btn-hover1 max-md:!text-sm max-md:!py-2.5 max-md:!px-4.5 max-md:!rounded-2lg">
+								Appointment
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed -top-full left-0 size-full bg-white/80 z-999 flex items-center justify-center p-8 duration-500 xmenu-search" id="searchOverlay4">
+				<form class="w-full" action="#">
+					<div class="relative max-w-3xl w-3xl mx-auto">
+						<input name="search" value="" type="text" class="h-14 py-4 px-5 border border-white/20 text-white w-full outline-none duration-300 focus:border-primary" placeholder="Type to search">
+						<button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 h-full w-10 flex items-center"><i class="fa fa-search text-base text-white"></i></button>
+					</div>
+					<button type="button" class="absolute right-8 top-8 text-white text-xl opacity-80 size-8 cursor-pointer search-remove"><i class="fa fa-close"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</header>
+
+
+<div id="offcanvas-right" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-white w-88 custom-scroll">
+	<div class="flex items-center justify-between p-4">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="mb-8.75">
+			<div class="w-40 mb-5">
+				<a href="index.html"><img src="../skincare/images/logo.svg" alt="/"></a>
+			</div>
+			<p>ClinicMaster is a modern and responsive Tailwind HTML template designed for health and medical websites. Ideal for clinics, hospitals, and healthcare professionals seeking a professional online presence with an elegant and user-friendly design.</p>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Contact Us</h4>
+			</div>
+			<ul class="list-check">
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">785 15h Street, Office 478 Berlin, De 81566</li>
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2"><a href="mailto:email@domain.com" class="text-body">email@domain.com</a></li>
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2"><a href="tel:+11234567890" class="text-body">+1 123 456 7890</a></li>
+			</ul>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Newsletter</h4>
+			</div>
+			<form class="dzSubscribe style-2" action="../assets/script/mailchimp.php" method="post">
+				<div class="dzSubscribeMsg"></div>
+				<div class="form-group">
+					<div class="relative flex flex-wrap items-stretch w-full">
+						<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] h-15 text-bodycolor border-b-2 border-[#DAE2F2] text-base pr-15 py-3.75 z-0 placeholder:text-bodycolor" placeholder="Your Email Address">
+						<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+							<button name="submit" value="Submit" type="submit" class="text-primary p-2 cursor-pointer">
+								<i class="fa-solid fa-paper-plane"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Follow Us</h4>
+			</div>
+			<div class="flex">
+				<ul class="flex">
+					<li class="inline-block mr-1.25">
+						<a href="https://www.linkedin.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-linkedin"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.instagram.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-instagram"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.facebook.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-facebook-f"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://twitter.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-x-twitter"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.youtube.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-youtube"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="offcanvas-right-2" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-bodybg sm:w-100 w-90 custom-scroll">
+	<div class="flex items-center justify-between px-4 pt-2">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right-2">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="sidebar-cart-wrapper">
+			<h2 class="flex items-center gap-2.5 text-base border-b border-black/10 pb-2.5 mb-3.75">
+				Shopping Cart
+				<span class="py-1 font-semibold bg-primary text-white rounded-full text-[11px] size-5.75 min-w-5.75 min-h-5.75 uppercase text-center">3</span>
+			</h2>
+			<div class="flex flex-col min-h-[calc(100vh-147.5px)]">
+				<ul class="sidebar-cart-list">
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img1.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Herbal beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img2.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Green beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img4.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Sun beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+				<div class="flex items-center justify-between py-4.5 mb-2.5">
+					<h5 class="font-semibold text-lg mb-0">Subtotal:</h5>
+					<h5 class="font-semibold text-lg mb-0">300.00$</h5>
+				</div>
+				<div class="mt-auto text-center">
+					<a href="shop-checkout.html" class="btn btn-primary btn-hover1 mx-0.25">Checkout</a>
+					<a href="shop-cart.html" class="btn btn-secondary btn-hover1 mx-0.25">View Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- Header End -->
+	
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+
+			<main class="page-content">
+			
+				<div class="2xxl:min-h-125 lg:min-h-112.5 md:min-h-100 sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden pb-7.5 before:absolute before:left-0 before:top-0 before:size-full before:bg-[#07121E] before:opacity-70 after:w-full after:h-[calc(100%_-_80px)] after:absolute after:bottom-0 after:right-0 after:z-0 after:bg-[url(../../skincare/images/banner/bg.webp)] after:bg-no-repeat after:bg-position-[right_-13px_top] max-lg:after:hidden" style="background-image:url(images/banner/bnr1.webp);">
+						<div class="container relative z-1 h-full table">
+							<div class="table-cell 2xxl:h-125 lg:h-112.5 md:h-100 sm:h-87.5 h-75 align-middle pt-22.5 pb-5 text-center">
+								<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-[32px] font-semibold mb-3.75 break-word text-white wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Services</h1>
+								<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-white shadow-breadcrumb">
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading"><a href="index.html" class="text-primary">Home</a></li>
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading pl-2 relative before:content-['\f101'] before:float-left before:text-heading before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">Services</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="h-[calc(100%_-_80px)] w-20 min-w-20 absolute bottom-0 flex justify-between items-center flex-col py-18.75 px-3.75 left-0 border-r border-white/10 z-1 max-xl:hidden">
+							<ul class="flex gap-7.5 [writing-mode:tb-rl]">
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.instagram.com/">Instagram</a></li>
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.facebook.com/">Facebook</a></li>
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://x.com/">twitter</a></li>
+							</ul>
+						</div>
+						<div class="absolute bottom-0 right-0 bg-primary size-71.25 rounded-full blur-[120px] opacity-50 max-xl:hidden"></div>
+						<div class="absolute top-[25%] left-0 bg-yellow-400 size-71.25 rounded-full blur-[120px] opacity-40 max-xl:hidden"></div>
+						<div class="absolute top-1/4 left-25 rounded-full size-16.25 object-cover z-2 border border-white overflow-hidden max-xl:hidden">
+							<img src="images/hero-banner/img2.jpg" alt="">
+						</div>
+						<div class="absolute z-0 top-[35%] right-[32%] max-md:hidden">
+							<svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M30.5 0L34.4251 26.5749L61 30.5L34.4251 34.4251L30.5 61L26.5749 34.4251L0 30.5L26.5749 26.5749L30.5 0Z" fill="#F46700"/>
+							</svg>
+						</div>
+						<div class="absolute z-0 bottom-0 right-[38%] max-md:hidden">
+							<svg width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<g filter="url(#filter0_d_102_123)">
+									<path d="M51 40L52.4156 49.5844L62 51L52.4156 52.4156L51 62L49.5844 52.4156L40 51L49.5844 49.5844L51 40Z" fill="#F46700"/>
+								</g>
+								<defs>
+									<filter id="filter0_d_102_123" x="0" y="0" width="102" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+										<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+										<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+										<feOffset/>
+										<feGaussianBlur stdDeviation="20"/>
+										<feComposite in2="hardAlpha" operator="out"/>
+										<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+										<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_102_123"/>
+										<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_102_123" result="shape"/>
+									</filter>
+								</defs>
+							</svg>					
+						</div>
+						<div class="absolute z-0 bottom-[20%] right-[10%] max-md:hidden">
+							<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M15 0L16.9304 13.0696L30 15L16.9304 16.9304L15 30L13.0696 16.9304L0 15L13.0696 13.0696L15 0Z" fill="#F46700"/>
+							</svg>					
+						</div>
+					</div>
+
+
+				<section class="2xl:pt-25 md:pt-17.5 sm:pt-12.5 pt-10 bg-light">
+			<div class="container">
+				<div class="sm:mb-7.5 mb-5 lg:max-w-275 mx-auto text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+					<h2 class="2xxl:text-5xxl xl:text-4xxl lg:text-4xl sm:text-3xxl text-[22px] font-bold capitalize">Transform Your Skin with Our Advanced Dermatology Treatments</h2>
+					<p class="mx-auto xl:text-lg sm:text-base text-sm font-light max-w-full">Experience a transformative journey that sculpts your physique and unlocks your full potential.</p>
+				</div>
+				<div class="flex [counter-reset:counter-item] xl:[--service-count:5] [--service-count:4] mb-7.5 swiper dz-flex-swiper dz-flex-wrapper wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+					<div class="swiper-wrapper">
+						<div class="!flex relative 2xl:flex-[0_0_120px] xl:flex-[0_0_100px] lg:flex-[0_0_80px] flex-[0_0_100%] !duration-500 bg-center mr-4.5 overflow-hidden 2xl:!w-30 xl:!w-25 lg:!w-20 !w-full gap-0 swiper-slide [.dz-flex-item.active]:bg-none 2xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_140px)] 2xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_140px)] xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_120px)] xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_120px)] lg:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_100px)] lg:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_100px)] dz-flex-item active">
+							<div class="2xl:pt-6.25 pt-3.75 2xl:pb-22.5 pb-20 text-center 2xl:min-h-125 min-h-110 flex flex-col justify-between items-center duration-200 opacity-100 visible w-full z-2 cursor-pointer rounded-xxl bg-blend-color-burn overflow-hidden relative 2xl:max-w-30 xl:max-w-25 max-w-20 bg-position-[center_top] [.swiper-slide.active_&]:invisible [.swiper-slide.active_&]:w-0 before:absolute 2xxl:before:text-7xl 2xl:before:text-5xxl before:text-4xxl before:leading-[1.2] before:font-bold before:text-white before:opacity-10 before:left-1/2 before:bottom-0 before:z-2 before:duration-500 before:-translate-x-1/2 before:![content:'0'_counter(counter-item)] before:[counter-increment:counter-item] after:absolute after:top-0 after:left-0 after:size-full after:bg-secondary after:opacity-70 after:rounded-xxl max-lg:after:hidden max-lg:before:hidden max-lg:hidden bg-[url(../../skincare/images/services/middle/img1.webp)]">
+								<a href="service-detail.html" class="btn btn-square btn-white shadow-btn [writing-mode:tb-rl] !rounded-5xl relative z-1 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+									<i class="feather icon-arrow-up-right"></i>
+								</a>
+								<h3 class="text-white font-normal 2xl:text-2xl text-xl [writing-mode:vertical-rl] rotate-180 relative z-1">Cosmetic Dermatology</h3>
+							</div>
+							<div class="rounded-2xl opacity-100 duration-500 h-full overflow-hidden z-1 flex bg-white w-[inherit] flex-1 [.swiper-slide.active_&]:w-full before:text-[150px] before:leading-normal before:font-semibold before:text-secondary before:opacity-5 before:absolute before:right-3.75 before:top-3.75 before:z-1 before:duration-500 before:[content:'0'_counter(counter-item)]">
+								<div class="flex 2xl:gap-7.5 md:gap-5 gap-2.5 2xl:p-7.5 p-5 2xl:min-w-187.5 lg:min-w-150 min-w-full max-md:flex-col">
+									<div class="flex xl:w-75 xl:h-110 xl:min-w-75 md:w-62.5 md:min-w-62.5 md:h-100 sm:h-87.5 h-70 w-full min-w-full relative overflow-hidden">
+										<img src="images/services/middle/img1.webp" alt="/" class="size-full object-cover rounded-xxl">
+										<a href="appointment.html" class="btn btn-white !absolute 2xl:bottom-5 bottom-2.5 2xl:left-5 left-2.5 2xl:right-5 right-2.5 rounded-lg font-medium justify-center">
+											<i class="feather icon-calendar mr-1.25 text-primary"></i>
+											Book An appointment
+										</a>
+									</div>
+									<div class="relative flex flex-col py-3.75 max-md:!pb-0">
+										<div class="">
+											<h3 class="xl:text-2xl text-xl">Cosmetic Dermatology</h3>
+											<p class="lg:mb-7.5 mb-3.75 lg:text-lg text-base">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+											<ul class="font-medium mb-7.5">
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Excellent Laporatery</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">World Class Infrastructure</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Health Checkups</li>
+											</ul>
+										</div>
+										<div class="mt-auto">
+											<div class="flex justify-between items-center">
+												<div class="flex items-center gap-3">
+													<div class="size-15 min-w-15">
+														<img src="images/avatar/middle/avatar1.webp" alt="" class="size-full object-cover rounded-full">
+													</div>
+													<div class="">
+														<h6 class="text-lg mb-0">Nashid Martines</h6>
+														<p class="text-sm font-medium text-primary mb-0">Cardiac Surgery</p>
+													</div>
+												</div>
+												<a href="service-detail.html" class="btn btn-square btn-primary !rounded-full 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+													<i class="feather icon-arrow-up-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="!flex relative 2xl:flex-[0_0_120px] xl:flex-[0_0_100px] lg:flex-[0_0_80px] flex-[0_0_100%] !duration-500 bg-center mr-4.5 overflow-hidden 2xl:!w-30 xl:!w-25 lg:!w-20 !w-full gap-0 swiper-slide [.dz-flex-item.active]:bg-none 2xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_140px)] 2xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_140px)] xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_120px)] xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_120px)] lg:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_100px)] lg:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_100px)] dz-flex-item">
+							<div class="2xl:pt-6.25 pt-3.75 2xl:pb-22.5 pb-20 text-center 2xl:min-h-125 min-h-110 flex flex-col justify-between items-center duration-200 opacity-100 visible w-full z-2 cursor-pointer rounded-xxl bg-blend-color-burn overflow-hidden relative 2xl:max-w-30 xl:max-w-25 max-w-20 bg-position-[center_top] [.swiper-slide.active_&]:invisible [.swiper-slide.active_&]:w-0 before:absolute 2xxl:before:text-7xl 2xl:before:text-5xxl before:text-4xxl before:leading-[1.2] before:font-bold before:text-white before:opacity-10 before:left-1/2 before:bottom-0 before:z-2 before:duration-500 before:-translate-x-1/2 before:![content:'0'_counter(counter-item)] before:[counter-increment:counter-item] after:absolute after:top-0 after:left-0 after:size-full after:bg-secondary after:opacity-70 after:rounded-xxl max-lg:after:hidden max-lg:before:hidden max-lg:hidden bg-[url(../../skincare/images/services/middle/img2.webp)]">
+								<a href="service-detail.html" class="btn btn-square btn-white shadow-btn [writing-mode:tb-rl] !rounded-5xl relative z-1 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+									<i class="feather icon-arrow-up-right"></i>
+								</a>
+								<h3 class="text-white font-normal 2xl:text-2xl text-xl [writing-mode:vertical-rl] rotate-180 relative z-1">Dermatologic Surgery</h3>
+							</div>
+							<div class="rounded-2xl opacity-100 duration-500 h-full overflow-hidden z-1 flex bg-white w-[inherit] flex-1 [.swiper-slide.active_&]:w-full before:text-[150px] before:leading-normal before:font-semibold before:text-secondary before:opacity-5 before:absolute before:right-3.75 before:top-3.75 before:z-1 before:duration-500 before:[content:'0'_counter(counter-item)]">
+								<div class="flex 2xl:gap-7.5 md:gap-5 gap-2.5 2xl:p-7.5 p-5 2xl:min-w-187.5 lg:min-w-150 min-w-full max-md:flex-col">
+									<div class="flex xl:w-75 xl:h-110 xl:min-w-75 md:w-62.5 md:min-w-62.5 md:h-100 sm:h-87.5 h-70 w-full min-w-full relative overflow-hidden">
+										<img src="images/services/middle/img2.webp" alt="/" class="size-full object-cover rounded-xxl">
+										<a href="appointment.html" class="btn btn-white !absolute 2xl:bottom-5 bottom-2.5 2xl:left-5 left-2.5 2xl:right-5 right-2.5 rounded-lg font-medium justify-center">
+											<i class="feather icon-calendar mr-1.25 text-primary"></i>
+											Book An appointment
+										</a>
+									</div>
+									<div class="relative flex flex-col py-3.75 max-md:!pb-0">
+										<div class="">
+											<h3 class="xl:text-2xl text-xl">Dermatologic Surgery</h3>
+											<p class="lg:mb-7.5 mb-3.75 lg:text-lg text-base">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+											<ul class="font-medium mb-7.5">
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Excellent Laporatery</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">World Class Infrastructure</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Health Checkups</li>
+											</ul>
+										</div>
+										<div class="mt-auto">
+											<div class="flex justify-between items-center">
+												<div class="flex items-center gap-3">
+													<div class="size-15 min-w-15">
+														<img src="images/avatar/middle/avatar1.webp" alt="" class="size-full object-cover rounded-full">
+													</div>
+													<div class="">
+														<h6 class="text-lg mb-0">Nashid Martines</h6>
+														<p class="text-sm font-medium text-primary mb-0">Cardiac Surgery</p>
+													</div>
+												</div>
+												<a href="service-detail.html" class="btn btn-square btn-primary !rounded-full 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+													<i class="feather icon-arrow-up-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="!flex relative 2xl:flex-[0_0_120px] xl:flex-[0_0_100px] lg:flex-[0_0_80px] flex-[0_0_100%] !duration-500 bg-center mr-4.5 overflow-hidden 2xl:!w-30 xl:!w-25 lg:!w-20 !w-full gap-0 swiper-slide [.dz-flex-item.active]:bg-none 2xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_140px)] 2xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_140px)] xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_120px)] xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_120px)] lg:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_100px)] lg:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_100px)] dz-flex-item">
+							<div class="2xl:pt-6.25 pt-3.75 2xl:pb-22.5 pb-20 text-center 2xl:min-h-125 min-h-110 flex flex-col justify-between items-center duration-200 opacity-100 visible w-full z-2 cursor-pointer rounded-xxl bg-blend-color-burn overflow-hidden relative 2xl:max-w-30 xl:max-w-25 max-w-20 bg-position-[center_top] [.swiper-slide.active_&]:invisible [.swiper-slide.active_&]:w-0 before:absolute 2xxl:before:text-7xl 2xl:before:text-5xxl before:text-4xxl before:leading-[1.2] before:font-bold before:text-white before:opacity-10 before:left-1/2 before:bottom-0 before:z-2 before:duration-500 before:-translate-x-1/2 before:![content:'0'_counter(counter-item)] before:[counter-increment:counter-item] after:absolute after:top-0 after:left-0 after:size-full after:bg-secondary after:opacity-70 after:rounded-xxl max-lg:after:hidden max-lg:before:hidden max-lg:hidden bg-[url(../../skincare/images/services/middle/img3.webp)]">
+								<a href="service-detail.html" class="btn btn-square btn-white shadow-btn [writing-mode:tb-rl] !rounded-5xl relative z-1 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+									<i class="feather icon-arrow-up-right"></i>
+								</a>
+								<h3 class="text-white font-normal 2xl:text-2xl text-xl [writing-mode:vertical-rl] rotate-180 relative z-1">Earlobe Repair</h3>
+							</div>
+							<div class="rounded-2xl opacity-100 duration-500 h-full overflow-hidden z-1 flex bg-white w-[inherit] flex-1 [.swiper-slide.active_&]:w-full before:text-[150px] before:leading-normal before:font-semibold before:text-secondary before:opacity-5 before:absolute before:right-3.75 before:top-3.75 before:z-1 before:duration-500 before:[content:'0'_counter(counter-item)]">
+								<div class="flex 2xl:gap-7.5 md:gap-5 gap-2.5 2xl:p-7.5 p-5 2xl:min-w-187.5 lg:min-w-150 min-w-full max-md:flex-col">
+									<div class="flex xl:w-75 xl:h-110 xl:min-w-75 md:w-62.5 md:min-w-62.5 md:h-100 sm:h-87.5 h-70 w-full min-w-full relative overflow-hidden">
+										<img src="images/services/middle/img3.webp" alt="/" class="size-full object-cover rounded-xxl">
+										<a href="appointment.html" class="btn btn-white !absolute 2xl:bottom-5 bottom-2.5 2xl:left-5 left-2.5 2xl:right-5 right-2.5 rounded-lg font-medium justify-center">
+											<i class="feather icon-calendar mr-1.25 text-primary"></i>
+											Book An appointment
+										</a>
+									</div>
+									<div class="relative flex flex-col py-3.75 max-md:!pb-0">
+										<div class="">
+											<h3 class="xl:text-2xl text-xl">Earlobe Repair</h3>
+											<p class="lg:mb-7.5 mb-3.75 lg:text-lg text-base">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+											<ul class="font-medium mb-7.5">
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Excellent Laporatery</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">World Class Infrastructure</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Health Checkups</li>
+											</ul>
+										</div>
+										<div class="mt-auto">
+											<div class="flex justify-between items-center">
+												<div class="flex items-center gap-3">
+													<div class="size-15 min-w-15">
+														<img src="images/avatar/middle/avatar1.webp" alt="" class="size-full object-cover rounded-full">
+													</div>
+													<div class="">
+														<h6 class="text-lg mb-0">Nashid Martines</h6>
+														<p class="text-sm font-medium text-primary mb-0">Cardiac Surgery</p>
+													</div>
+												</div>
+												<a href="service-detail.html" class="btn btn-square btn-primary !rounded-full 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+													<i class="feather icon-arrow-up-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="!flex relative 2xl:flex-[0_0_120px] xl:flex-[0_0_100px] lg:flex-[0_0_80px] flex-[0_0_100%] !duration-500 bg-center mr-4.5 overflow-hidden 2xl:!w-30 xl:!w-25 lg:!w-20 !w-full gap-0 swiper-slide [.dz-flex-item.active]:bg-none 2xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_140px)] 2xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_140px)] xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_120px)] xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_120px)] lg:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_100px)] lg:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_100px)] dz-flex-item">
+							<div class="2xl:pt-6.25 pt-3.75 2xl:pb-22.5 pb-20 text-center 2xl:min-h-125 min-h-110 flex flex-col justify-between items-center duration-200 opacity-100 visible w-full z-2 cursor-pointer rounded-xxl bg-blend-color-burn overflow-hidden relative 2xl:max-w-30 xl:max-w-25 max-w-20 bg-position-[center_top] [.swiper-slide.active_&]:invisible [.swiper-slide.active_&]:w-0 before:absolute 2xxl:before:text-7xl 2xl:before:text-5xxl before:text-4xxl before:leading-[1.2] before:font-bold before:text-white before:opacity-10 before:left-1/2 before:bottom-0 before:z-2 before:duration-500 before:-translate-x-1/2 before:![content:'0'_counter(counter-item)] before:[counter-increment:counter-item] after:absolute after:top-0 after:left-0 after:size-full after:bg-secondary after:opacity-70 after:rounded-xxl max-lg:after:hidden max-lg:before:hidden max-lg:hidden bg-[url(../../skincare/images/services/middle/img4.webp)]">
+								<a href="service-detail.html" class="btn btn-square btn-white shadow-btn [writing-mode:tb-rl] !rounded-5xl relative z-1 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+									<i class="feather icon-arrow-up-right"></i>
+								</a>
+								<h3 class="text-white font-normal 2xl:text-2xl text-xl [writing-mode:vertical-rl] rotate-180 relative z-1">Laser Resurfacing</h3>
+							</div>
+							<div class="rounded-2xl opacity-100 duration-500 h-full overflow-hidden z-1 flex bg-white w-[inherit] flex-1 [.swiper-slide.active_&]:w-full before:text-[150px] before:leading-normal before:font-semibold before:text-secondary before:opacity-5 before:absolute before:right-3.75 before:top-3.75 before:z-1 before:duration-500 before:[content:'0'_counter(counter-item)]">
+								<div class="flex 2xl:gap-7.5 md:gap-5 gap-2.5 2xl:p-7.5 p-5 2xl:min-w-187.5 lg:min-w-150 min-w-full max-md:flex-col">
+									<div class="flex xl:w-75 xl:h-110 xl:min-w-75 md:w-62.5 md:min-w-62.5 md:h-100 sm:h-87.5 h-70 w-full min-w-full relative overflow-hidden">
+										<img src="images/services/middle/img4.webp" alt="/" class="size-full object-cover rounded-xxl">
+										<a href="appointment.html" class="btn btn-white !absolute 2xl:bottom-5 bottom-2.5 2xl:left-5 left-2.5 2xl:right-5 right-2.5 rounded-lg font-medium justify-center">
+											<i class="feather icon-calendar mr-1.25 text-primary"></i>
+											Book An appointment
+										</a>
+									</div>
+									<div class="relative flex flex-col py-3.75 max-md:!pb-0">
+										<div class="">
+											<h3 class="xl:text-2xl text-xl">Laser Resurfacing</h3>
+											<p class="lg:mb-7.5 mb-3.75 lg:text-lg text-base">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+											<ul class="font-medium mb-7.5">
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Excellent Laporatery</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">World Class Infrastructure</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Health Checkups</li>
+											</ul>
+										</div>
+										<div class="mt-auto">
+											<div class="flex justify-between items-center">
+												<div class="flex items-center gap-3">
+													<div class="size-15 min-w-15">
+														<img src="images/avatar/middle/avatar1.webp" alt="" class="size-full object-cover rounded-full">
+													</div>
+													<div class="">
+														<h6 class="text-lg mb-0">Nashid Martines</h6>
+														<p class="text-sm font-medium text-primary mb-0">Cardiac Surgery</p>
+													</div>
+												</div>
+												<a href="service-detail.html" class="btn btn-square btn-primary !rounded-full 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+													<i class="feather icon-arrow-up-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="!flex relative 2xl:flex-[0_0_120px] xl:flex-[0_0_100px] lg:flex-[0_0_80px] flex-[0_0_100%] !duration-500 bg-center mr-4.5 overflow-hidden 2xl:!w-30 xl:!w-25 lg:!w-20 !w-full gap-0 swiper-slide [.dz-flex-item.active]:bg-none 2xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_140px)] 2xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_140px)] xl:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_120px)] xl:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_120px)] lg:[.dz-flex-item.active]:!w-[calc(100%_-_(var(--service-count)_-_1)_*_100px)] lg:[.dz-flex-item.active]:flex-[0_0_calc(100%_-_(var(--service-count)_-_1)_*_100px)] dz-flex-item">
+							<div class="2xl:pt-6.25 pt-3.75 2xl:pb-22.5 pb-20 text-center 2xl:min-h-125 min-h-110 flex flex-col justify-between items-center duration-200 opacity-100 visible w-full z-2 cursor-pointer rounded-xxl bg-blend-color-burn overflow-hidden relative 2xl:max-w-30 xl:max-w-25 max-w-20 bg-position-[center_top] [.swiper-slide.active_&]:invisible [.swiper-slide.active_&]:w-0 before:absolute 2xxl:before:text-7xl 2xl:before:text-5xxl before:text-4xxl before:leading-[1.2] before:font-bold before:text-white before:opacity-10 before:left-1/2 before:bottom-0 before:z-2 before:duration-500 before:-translate-x-1/2 before:![content:'0'_counter(counter-item)] before:[counter-increment:counter-item] after:absolute after:top-0 after:left-0 after:size-full after:bg-secondary after:opacity-70 after:rounded-xxl max-lg:after:hidden max-lg:before:hidden max-lg:hidden bg-[url(../../skincare/images/services/middle/img5.webp)]">
+								<a href="service-detail.html" class="btn btn-square btn-white shadow-btn [writing-mode:tb-rl] !rounded-5xl relative z-1 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+									<i class="feather icon-arrow-up-right"></i>
+								</a>
+								<h3 class="text-white font-normal 2xl:text-2xl text-xl [writing-mode:vertical-rl] rotate-180 relative z-1">Anti Aging</h3>
+							</div>
+							<div class="rounded-2xl opacity-100 duration-500 h-full overflow-hidden z-1 flex bg-white w-[inherit] flex-1 [.swiper-slide.active_&]:w-full before:text-[150px] before:leading-normal before:font-semibold before:text-secondary before:opacity-5 before:absolute before:right-3.75 before:top-3.75 before:z-1 before:duration-500 before:[content:'0'_counter(counter-item)]">
+								<div class="flex 2xl:gap-7.5 md:gap-5 gap-2.5 2xl:p-7.5 p-5 2xl:min-w-187.5 lg:min-w-150 min-w-full max-md:flex-col">
+									<div class="flex xl:w-75 xl:h-110 xl:min-w-75 md:w-62.5 md:min-w-62.5 md:h-100 sm:h-87.5 h-70 w-full min-w-full relative overflow-hidden">
+										<img src="images/services/middle/img5.webp" alt="/" class="size-full object-cover rounded-xxl">
+										<a href="appointment.html" class="btn btn-white !absolute 2xl:bottom-5 bottom-2.5 2xl:left-5 left-2.5 2xl:right-5 right-2.5 rounded-lg font-medium justify-center">
+											<i class="feather icon-calendar mr-1.25 text-primary"></i>
+											Book An appointment
+										</a>
+									</div>
+									<div class="relative flex flex-col py-3.75 max-md:!pb-0">
+										<div class="">
+											<h3 class="xl:text-2xl text-xl">Anti Aging</h3>
+											<p class="lg:mb-7.5 mb-3.75 lg:text-lg text-base">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+											<ul class="font-medium mb-7.5">
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Excellent Laporatery</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">World Class Infrastructure</li>
+												<li class="w-full relative lg:p-1.25 p-1 lg:ps-7.5 ps-6.25 xl:text-base text-2sm before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:size-4.5 before:leading-4.5 before:text-center before:text-xs before:text-white before:bg-primary before:rounded-full before:rounded-ee-none before:top-2">Health Checkups</li>
+											</ul>
+										</div>
+										<div class="mt-auto">
+											<div class="flex justify-between items-center">
+												<div class="flex items-center gap-3">
+													<div class="size-15 min-w-15">
+														<img src="images/avatar/middle/avatar1.webp" alt="" class="size-full object-cover rounded-full">
+													</div>
+													<div class="">
+														<h6 class="text-lg mb-0">Nashid Martines</h6>
+														<p class="text-sm font-medium text-primary mb-0">Cardiac Surgery</p>
+													</div>
+												</div>
+												<a href="service-detail.html" class="btn btn-square btn-primary !rounded-full 2xl:!size-15 2xl:!min-w-15 !size-11.25 !min-w-11.25 text-2xl">
+													<i class="feather icon-arrow-up-right"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>						
+						
+					</div>
+				</div>
+				<div class="inline-block mb-2.5 mt-2 relative w-full text-center after:border-b after:border-black/10 after:w-full after:absolute after:left-0 after:top-1/2 after:right-0 after:-translate-y-1/2">
+					<a href="services.html" class="btn font-medium text-base border !border-black/10 !rounded-5xl py-3 px-7.5 text-secondary bg-light z-1 relative hover:bg-primary hover:text-white">View All Services</a>
+				</div>
+			</div>
+		</section>
+				
+						<section class="2xl:pt-25 2xl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 sm:pb-5 pt-10 pb-5 bg-light relative after:bg-bodybg xl:after:h-75 after:h-37.5 after:w-full after:absolute after:bottom-0 after:z-0">
+			<div class="container relative z-1">
+				<div class="text-center mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+					<h2 class="2xxl:text-5xxl xl:text-4xxl lg:text-4xl sm:text-3xxl text-2xxl font-bold capitalize mb-0">After Treatment</h2>
+				</div>
+				<div class="row mb-7.5">
+					<div class="md:w-1/2 w-full mb-3.75 before-after-slider wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" style="--position: 50%;">
+						<div class="image-container relative overflow-hidden !h-125 object-cover rounded-2xxl box-content before:content-['BEFORE'] before:absolute before:top-1/2 before:left-7.5 before:z-99 before:px-8.5 before:py-2 before:bg-white/20 before:text-white before:rounded-lg before:[writing-mode:tb-rl] before:-translate-y-1/2 before:rotate-180 before:text-center before:flex before:items-center before:justify-center before:tracking-[1px] before:text-lg before:h-26.25 before:w-11.25 after:content-['AFTER'] after:absolute after:top-1/2 after:right-7.5 after:z-99 after:px-8.5 after:py-2 after:bg-white/20 after:text-white after:rounded-lg after:[writing-mode:tb-rl] after:-translate-y-1/2 after:rotate-180 after:text-center after:flex after:items-center after:justify-center after:tracking-[1px] after:text-lg after:h-26.25 after:w-11.25">
+							<div class="[clip-path:polygon(0_0,var(--position)_0,var(--position)_100%,0%_100%)] absolute inset-0">
+							<img class="image-before size-full object-cover object-center" src="images/compare/before1.webp" alt="before1">
+							</div>
+							<img class="image-after size-full object-cover object-center" src="images/compare/after1.webp" alt="after1">
+							<input type="range" min="0" max="100" value="50" aria-label="Percentage of before photo shown" class="slider absolute inset-0 cursor-pointer opacity-0 size-full ">
+							<div class="absolute inset-0 w-1 h-full bg-white left-[var(--position)]  -translate-x-1/2 pointer-events-none slider-line" aria-hidden="true">	
+							</div>
+							<div class="absolute p-2 top-1/2 left-[var(--position)] -translate-1/2 pointer-events-none flex gap-4 text-4xxl text-white slider-button" aria-hidden="true">
+								<i class="fa-solid fa-caret-left"></i>
+								<i class="fa-solid fa-caret-right"></i>
+							</div>
+						</div>
+					</div>
+					<div class="md:w-1/2 w-full mb-3.75 before-after-slider wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" style="--position: 50%;">
+						<div class="image-container relative overflow-hidden !h-125 object-cover rounded-2xxl box-content before:content-['BEFORE'] before:absolute before:top-1/2 before:left-7.5 before:z-99 before:px-8.5 before:py-2 before:bg-white/20 before:text-white before:rounded-lg before:[writing-mode:tb-rl] before:-translate-y-1/2 before:rotate-180 before:text-center before:flex before:items-center before:justify-center before:tracking-[1px] before:text-lg before:h-26.25 before:w-11.25 after:content-['AFTER'] after:absolute after:top-1/2 after:right-7.5 after:z-99 after:px-8.5 after:py-2 after:bg-white/20 after:text-white after:rounded-lg after:[writing-mode:tb-rl] after:-translate-y-1/2 after:rotate-180 after:text-center after:flex after:items-center after:justify-center after:tracking-[1px] after:text-lg after:h-26.25 after:w-11.25">
+							<div class="[clip-path:polygon(0_0,var(--position)_0,var(--position)_100%,0%_100%)] absolute inset-0">
+							<img class="image-before size-full object-cover object-center" src="images/compare/before2.webp" alt="before2">
+							</div>
+							<img class="image-after size-full object-cover object-center" src="images/compare/after2.webp" alt="after1">
+							<input type="range" min="0" max="100" value="50" aria-label="Percentage of before photo shown" class="slider absolute inset-0 cursor-pointer opacity-0 size-full ">
+							<div class="absolute inset-0 w-1 h-full bg-white left-[var(--position)]  -translate-x-1/2 pointer-events-none slider-line" aria-hidden="true">	
+							</div>
+							<div class="absolute p-2 top-1/2 left-[var(--position)] -translate-1/2 pointer-events-none flex gap-4 text-4xxl text-white slider-button" aria-hidden="true">
+								<i class="fa-solid fa-caret-left"></i>
+								<i class="fa-solid fa-caret-right"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+				
+				<div class="relative 2xxl:p-7.5 sm:p-5 p-3.75 bg-secondary overflow-hidden">
+			<ul class="flex items-center flex-nowrap animate-ticker [animation-duration:15s]">
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.1s" data-wow-duration="0.8s">Accessories</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.2s" data-wow-duration="0.8s">Haircare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.3s" data-wow-duration="0.8s">Nailcare</li>
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.4s" data-wow-duration="0.8s">Beautycare</li>
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.5s" data-wow-duration="0.8s">Bodycare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.6s" data-wow-duration="0.8s">Skincare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.7s" data-wow-duration="0.8s">Accessories</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.8s" data-wow-duration="0.8s">Haircare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="0.9s" data-wow-duration="0.8s">nailcare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.0s" data-wow-duration="0.8s">Beautycare</li>
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.1s" data-wow-duration="0.8s">Accessories</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.2s" data-wow-duration="0.8s">Haircare</li>	
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.3s" data-wow-duration="0.8s">Nailcare</li>
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.4s" data-wow-duration="0.8s">Beautycare</li>
+				<li class="text-white 2xxl:text-3xl md:text-2xl sm:text-xl text-base font-normal flex justify-center relative capitalize 2xxl:after:size-7.5 md:after:size-5 sm:after:size-4.5 after:size-3.5 after:bg-center after:bg-no-repeat 2xxl:after:mx-12.5 md:after:mx-6.25 sm:after:mx-5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-white wow bounceIn" data-wow-delay="1.5s" data-wow-duration="0.8s">Bodycare</li>
+			</ul>
+		</div>
+				
+				<section class="2xl:pt-25 2xl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 sm:pb-5 pt-10 pb-5">
+			<div class="container">
+				<div class="row content-wrapper style-14 items-center">
+					<div class="xl:w-1/2 lg:w-5/12 w-full mb-7.5">
+						<div class="content-info">
+							<div class="sm:mb-7.5 mb-5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize mb-3.75">why choose us</h2>
+								<p class="xl:text-lg text-base font-light">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+							</div>
+							<ul class="flex flex-wrap text-secondary mb-8.75 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Comprehensive Specialties</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Research and Development</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Emergency Services</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Advanced Imaging Services</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Intensive Care Units (ICUs)</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Rehabilitation Services</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Telemedicine Facilities</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Patient-Centric Approach</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Multidisciplinary Team</li>
+								<li class="sm:w-1/2 w-full p-1.5 pl-7.5 text-base font-medium relative before:absolute before:left-0 before:font-black before:content-['\e83f'] before:font-['feather'] before:text-tiny/[18px] before:size-4.5 before:text-white before:bg-primary before:rounded-full before:top-2 before:text-center">Health Information Technology</li>
+							</ul>
+							<div class="flex flex-wrap items-center wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+								<a href="appointment.html" class="btn btn-lg btn-icon btn-secondary shadow-btn mr-10 mb-4 xl:mb-0">
+									Appointment
+									<span class="size-11 min-w-11 bg-white rounded-2lg text-heading inline-flex items-center justify-center -my-2.75 -mr-4.5 ml-3"><i class="feather icon-arrow-right"></i></span>
+								</a>
+								<div class="inline-flex items-center gap-3.75">
+									<div class="widget-media text-primary">
+										<i class="feather icon-phone-call dz-ring-effect text-3xxl inline-flex animate-dzRing"></i>
+									</div>
+									<div class="widget-content">
+										<h6 class="text-bodycolor text-sm font-normal mb-0">Contact us?</h6>
+										<a href="tel:+11234567890" class="sm:text-lg text-base font-semibold text-secondary">+1 123 456 7890</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/2 lg:w-7/12 w-full mb-7.5">
+						<div class="row justify-center">
+							<div class="sm:w-1/2 w-full" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)">
+								<div class="relative">
+									<img src="images/about/img6.webp" alt="" class="w-full md:h-112.5 h-63.75 object-cover rounded-2xl">
+									<div class="flex items-center gap-3 bg-white shadow-[0_0_30px_rgba(var(--secondary-rgb),0.1)] absolute top-[61%] -left-[12%] rounded-xxl rounded-ee-none py-3 px-5 max-xl:hidden">
+										<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M37.6232 13.8804L27.0337 21.4443L37.6232 29.0083V13.8804Z" stroke="#F46700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M24.0081 10.855H7.36738C5.6964 10.855 4.3418 12.2096 4.3418 13.8806V29.0085C4.3418 30.6795 5.6964 32.0341 7.36738 32.0341H24.0081C25.6791 32.0341 27.0337 30.6795 27.0337 29.0085V13.8806C27.0337 12.2096 25.6791 10.855 24.0081 10.855Z" stroke="#F46700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+										<span class="text-sm font-medium text-secondary">Video Call <br> Support</span>
+									</div>
+									<div class="absolute bottom-6.25 bg-white/50 backdrop-blur-[60px] h-13 rounded-3xl left-5 right-5 flex items-center justify-between py-1.25 px-5">
+										<a href="javascript:void(0);">
+											<img src="images/svg/camra.svg" alt="" class="size-6">
+										</a>
+										<a href="javascript:void(0);">
+											<img src="images/svg/message.svg" alt="" class="size-6">
+										</a>
+										<a href="javascript:void(0);" class="bg-red size-7.5 p-1.5 flex items-center justify-center rounded-full">
+											<img src="images/svg/call.svg" alt="" class="size-6">
+										</a>
+										<a href="javascript:void(0);">
+											<img src="images/svg/mike.svg" alt="" class="size-6">
+										</a>
+										<a href="javascript:void(0);">
+											<img src="images/svg/video.svg" alt="" class="size-6">
+										</a>
+									</div>
+								</div>	
+							</div>
+							<div class="sm:w-1/2 w-full" data-bottom-top="transform: translateY(50px)" data-top-bottom="transform: translateY(-50px)">
+								<div class="inline-flex items-center gap-3.75 bg-white rounded-xxl text-secondary text-sm font-medium md:mt-12.5 mt-5 w-full xl:p-6.25 xl:pb-13.5 p-5 pb-12.5 -mb-7.5">
+									<img src="images/google.svg" alt="" class="w-15 min-w-15">
+									<div class="">
+										<div class="flex">
+											<ul class="flex gap-1">
+												<li class="text-base leading-[1.2] text-yellow-400"><i class="fa fa-star"></i></li>
+												<li class="text-base leading-[1.2] text-yellow-400"><i class="fa fa-star"></i></li>
+												<li class="text-base leading-[1.2] text-yellow-400"><i class="fa fa-star"></i></li>
+												<li class="text-base leading-[1.2] text-yellow-400"><i class="fa fa-star"></i></li>
+												<li class="text-base leading-[1.2] text-yellow-400"><i class="fa fa-star"></i></li>
+											</ul>
+											<span class="font-bold ms-1">(4.8)</span>
+										</div>
+										<span class="text-sm">12k+ ratings on google</span>
+									</div>
+								</div>
+								<div class="img2">
+									<img src="images/about/img7.webp" alt="" class="w-full md:h-112.5 h-63.75 object-cover rounded-2xl">
+								</div>	
+							</div>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</section>
+				
+				<section class="2xl:py-25 md:py-17.5 sm:py-12.5 py-10 overflow-hidden ">
+						<div class="container">
+							<div class="row items-center mb-0">
+								<div class="sm:w-7/12 mb-7.5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize">Patient Skin Success Stories Before and After Results</h2>
+								</div>
+								<div class="sm:w-5/12 mb-7.5 hidden sm:block wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<div class="flex md:gap-7.5 gap-3.75 justify-center sm:justify-end">
+										<div class="compare-swiper-prev max-md:w-8.75">
+											<img src="images/arrow-left.svg" alt="">
+										</div>
+										<div class="compare-swiper-next max-md:w-8.75">
+											<img src="images/arrow-right.svg" alt="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper compare-swiper overflow-visible mb-3.75">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.1s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img1.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img2.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img3.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img4.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img5.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img1.webp" alt="" class="w-full">
+									</div>
+								</div>
+								<div class="swiper-slide wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+									<div class="relative overflow-hidden rounded-xxl">
+										<img src="images/compare/img2.webp" alt="" class="w-full">
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+				<img src="images/gallery.png" alt="" class="w-full">
+				
+				<section class="2xl:pb-17.5 md:pb-10 sm:pb-5 pb-5 pt-0">
+			<div class="container">
+				<div class="text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+					<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize mb-2.5">What our patient say</h2>
+					<p class="xl:text-lg text-base font-light max-w-162.5 mx-auto">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+				</div>
+				<div class="swiper testimonial-swiper3 -mr-5 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="flex relative z-1 gap-5 h-full max-md:flex-col-reverse">
+								<div class="lg:py-7.5 lg:pe-12.5 pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl after:content-['\f106'] after:font-['flaticon'] after:absolute after:left-0 after:top-0 after:font-medium lg:after:text-6xxl lg:after:leading-[65px] md:after:text-5xl md:after:leading-12.5 after:text-4xl after:leading-10 after:text-primary">
+									<div class="lg:mb-8.75 md:mb-5 mb-3.75">
+										<div class="relative z-1">
+											<p class="xl:text-2xl lg:text-lg md:text-base text-2sm leading-[1.7] lg:mt-12.5 md:mt-5 mt-2.5 mb-0 text-secondary">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a making it look like readable English.</p>
+										</div>
+									</div>
+									<div class="flex items-center gap-3">
+										<div class="">
+											<h5 class="xl:text-2xl md:text-lg text-2sm mb-0.75">Kenneth Fong</h5>
+											<span class="xl:text-base text-2sm">Postgraduate Student</span>
+										</div>		
+									</div>		
+								</div>
+								<div class="xl:min-w-105 xl:size-103.75 xl:h-112.5 lg:min-w-80 lg:size-80 lg:h-78.75 md:min-w-62.5 md:size-62.5 md:h-63.75 min-w-full size-full h-75 rounded-xxl relative">
+									<img src="images/testimonial/large/img1.webp" alt="" class="size-full object-cover lg:rounded-2xl lg:rounded-ee-[150px] rounded-xxl md:rounded-ee-[100px]">
+									<div class="absolute md:bottom-[10%] md:left-[-13%] bottom-2.5 left-2.5 max-md:right-2.5">
+										<div class="md:w-57.5 w-full bg-white rounded-xxl md:py-4.5 md:px-6.25 px-3.75 pt-2.5 pb-3 md:shadow-[0_20px_50px_rgba(var(--secondary-rgb),0.1)]">
+											<ul class="flex gap-0.75 mb-0.75">
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+											</ul>									
+											<h3 class="lg:text-lg md:text-sm text-2xs mb-0">Best Treatment </h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="flex relative z-1 gap-5 h-full max-md:flex-col-reverse">
+								<div class="lg:py-7.5 lg:pe-12.5 pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl after:content-['\f106'] after:font-['flaticon'] after:absolute after:left-0 after:top-0 after:font-medium lg:after:text-6xxl lg:after:leading-[65px] md:after:text-5xl md:after:leading-12.5 after:text-4xl after:leading-10 after:text-primary">
+									<div class="lg:mb-8.75 md:mb-5 mb-3.75">
+										<div class="relative z-1">
+											<p class="xl:text-2xl lg:text-lg md:text-base text-2sm leading-[1.7] lg:mt-12.5 md:mt-5 mt-2.5 mb-0 text-secondary">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a making it look like readable English.</p>
+										</div>
+									</div>
+									<div class="flex items-center gap-3">
+										<div class="">
+											<h5 class="xl:text-2xl md:text-lg text-2sm mb-0.75">Kenneth Fong</h5>
+											<span class="xl:text-base text-2sm">Postgraduate Student</span>
+										</div>		
+									</div>		
+								</div>
+								<div class="xl:min-w-105 xl:size-103.75 xl:h-112.5 lg:min-w-80 lg:size-80 lg:h-78.75 md:min-w-62.5 md:size-62.5 md:h-63.75 min-w-full size-full h-75 rounded-xxl relative">
+									<img src="images/testimonial/large/img1.webp" alt="" class="size-full object-cover lg:rounded-2xl lg:rounded-ee-[150px] rounded-xxl md:rounded-ee-[100px]">
+									<div class="absolute md:bottom-[10%] md:left-[-13%] bottom-2.5 left-2.5 max-md:right-2.5">
+										<div class="md:w-57.5 w-full bg-white rounded-xxl md:py-4.5 md:px-6.25 px-3.75 pt-2.5 pb-3 md:shadow-[0_20px_50px_rgba(var(--secondary-rgb),0.1)]">
+											<ul class="flex gap-0.75 mb-0.75">
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+											</ul>									
+											<h3 class="lg:text-lg md:text-sm text-2xs mb-0">Best Treatment </h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="flex relative z-1 gap-5 h-full max-md:flex-col-reverse">
+								<div class="lg:py-7.5 lg:pe-12.5 pt-10 md:pr-7.5 md:pb-5 pb-3.75 flex flex-col items-start justify-start relative z-1 w-full rounded-xxl after:content-['\f106'] after:font-['flaticon'] after:absolute after:left-0 after:top-0 after:font-medium lg:after:text-6xxl lg:after:leading-[65px] md:after:text-5xl md:after:leading-12.5 after:text-4xl after:leading-10 after:text-primary">
+									<div class="lg:mb-8.75 md:mb-5 mb-3.75">
+										<div class="relative z-1">
+											<p class="xl:text-2xl lg:text-lg md:text-base text-2sm leading-[1.7] lg:mt-12.5 md:mt-5 mt-2.5 mb-0 text-secondary">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a making it look like readable English.</p>
+										</div>
+									</div>
+									<div class="flex items-center gap-3">
+										<div class="">
+											<h5 class="xl:text-2xl md:text-lg text-2sm mb-0.75">Kenneth Fong</h5>
+											<span class="xl:text-base text-2sm">Postgraduate Student</span>
+										</div>		
+									</div>		
+								</div>
+								<div class="xl:min-w-105 xl:size-103.75 xl:h-112.5 lg:min-w-80 lg:size-80 lg:h-78.75 md:min-w-62.5 md:size-62.5 md:h-63.75 min-w-full size-full h-75 rounded-xxl relative">
+									<img src="images/testimonial/large/img1.webp" alt="" class="size-full object-cover lg:rounded-2xl lg:rounded-ee-[150px] rounded-xxl md:rounded-ee-[100px]">
+									<div class="absolute md:bottom-[10%] md:left-[-13%] bottom-2.5 left-2.5 max-md:right-2.5">
+										<div class="md:w-57.5 w-full bg-white rounded-xxl md:py-4.5 md:px-6.25 px-3.75 pt-2.5 pb-3 md:shadow-[0_20px_50px_rgba(var(--secondary-rgb),0.1)]">
+											<ul class="flex gap-0.75 mb-0.75">
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+												<li class="2xxl:text-base text-sm text-yellow-600"><i class="fa fa-star"></i></li>
+											</ul>									
+											<h3 class="lg:text-lg md:text-sm text-2xs mb-0">Best Treatment </h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="testimonial-pagination-swiper3 swiper-pagination style-2 lg:!absolute !static lg:!left-2.5 !w-auto lg:!bottom-2.5"></div>
+				</div>
+			</div>
+		</section>
+				
+				<div class="relative z-1 py-3.75 overflow-hidden bg-light">
+			<ul class="flex items-center flex-nowrap animate-ticker [animation-duration:32.9528s]">
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.1s" data-wow-duration="0.8s">Bodycare</li>
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.2s" data-wow-duration="0.8s">Accessories</li>
+				<li class="font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-primary 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.3s" data-wow-duration="0.8s">Skincare</li>
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.4s" data-wow-duration="0.8s">Haircare</li>
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.5s" data-wow-duration="0.8s">Bodycare</li>
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.6s" data-wow-duration="0.8s">Accessories</li>
+				<li class="font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-primary 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.7s" data-wow-duration="0.8s">Skincare</li>
+				<li class="md:[-webkit-text-stroke:_2px_var(--color-secondary)] [-webkit-text-stroke:_1px_var(--color-secondary)] text-transparent md:font-extrabold font-bold flex items-center 2xxl:text-8xl lg:text-6xl md:text-4xl text-2xl leading-[1.2] justify-center text-outline 2xxl:after:size-15 lg:after:size-10 md:after:size-7.5 after:size-4.5 after:bg-center after:bg-no-repeat md:after:mx-7.5 after:mx-3.75 after:bg-size-[100%] after:bg-starsvg-dark max-md:tracking-[2px] wow bounceIn" data-wow-delay="0.8s" data-wow-duration="0.8s">Haircare</li>
+			</ul>
+		</div>
+				
+				<section class="2xl:pt-25 2xl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 sm:pb-5 pt-10 pb-5">
+			<div class="container">
+				<div class="row content-wrapper style-5 items-center">
+					<div class="2xl:w-7/12 lg:w-1/2 w-full mb-7.5 self-center">
+						<div class="xl:pr-7.5">
+							<div class="sm:mb-7.5 mb-5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize mb-3.75">Frequently Asked Questions</h2>
+								<p class="xl:text-lg sm:text-base text-sm font-light">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+							</div>
+							<div class="myAccordion style-3 mb-8.75 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" id="accordionExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header open">
+										<button class="accordion-button" type="button">
+											How much do you charge for pedicure ?
+										</button>
+										<span class="arrow active">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+                                            <i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content show">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											What types of treatments do you offer?
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+                                            <i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											How do i book my appointment ?
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+                                            <i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											Can i cancel my appointment
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+                                            <i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="flex items-center mb-3.75 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+								<div class="rounded-6xl inline-flex items-center justify-center bg-white sm:py-2.5 py-2 xl:pr-12.5 sm:pr-7.5 pr-3.75 sm:pl-3.75 pl-2.5 xl:min-h-17.5 sm:min-h-15.5 min-h-13.75 xl:mr-10 mr-5 shadow-7">
+									<div class="flex pr-6.25 mr-6.25 border-r border-black/10">
+										<img class="xl:w-12 sm:w-10.5 w-8 aspect-square rounded-full border-white border-2 first:ml-0 -ml-3" src="images/avatar/small/avatar1.webp" alt="">
+										<img class="xl:w-12 sm:w-10.5 w-8 aspect-square rounded-full border-white border-2 first:ml-0 -ml-3" src="images/avatar/small/avatar2.webp" alt="">
+										<img class="xl:w-12 sm:w-10.5 w-8 aspect-square rounded-full border-white border-2 first:ml-0 -ml-3" src="images/avatar/small/avatar3.webp" alt="">
+										<img class="xl:w-12 sm:w-10.5 w-8 aspect-square rounded-full border-white border-2 first:ml-0 -ml-3" src="images/avatar/small/avatar4.webp" alt="">
+									</div>
+									<div class="">
+										<span class="xl:text-base sm:text-sm text-xs">Talk to over 215 doctor</span>
+									</div>
+								</div>
+								<a href="about-us-2.html" class="btn btn-square btn-white lg:!size-17.5 lg:!min-w-17.5 md:!size-15 md:!min-w-15 !size-13.75 !min-w-13.75 !rounded-5xl shadow-7 group">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path class="group-hover:stroke-white" d="M7 17L17 7" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+										<path class="group-hover:stroke-white" d="M7 7H17V17" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+									</svg>
+								</a>
+							</div>
+							<div class="flex gap-1.5 text-sm font-medium wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+								<ul class="flex gap-0.75">
+									<li class="text-yellow-400 text-2sm"><i class="fa fa-star"></i></li>
+									<li class="text-yellow-400 text-2sm"><i class="fa fa-star"></i></li>
+									<li class="text-yellow-400 text-2sm"><i class="fa fa-star"></i></li>
+									<li class="text-yellow-400 text-2sm"><i class="fa fa-star"></i></li>
+									<li class="text-yellow-400 text-2sm"><i class="fa fa-star"></i></li>
+								</ul>
+								<span class="font-bold me-2">(4.8)</span>
+								<span class="text-sm font-medium">12k+ ratings on google</span>
+							</div>
+						</div>
+					</div>
+					<div class="2xl:w-5/12 lg:w-1/2 w-full mb-7.5">
+						<div class="relative wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+							<div class="rounded-2xl relative overflow-hidden">
+								<img src="images/about/img4.webp" alt="" class="w-full">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+				
+			</main>
+
+			<!-- Footer -->
+			<footer style="--color-bodycolor: #BED2E7;" class="text-bodycolor bg-[#07121E] bg-blend-luminosity bg-cover bg-no-repeat bg-center bg-[url(../../skincare/images/background/bg1.webp)]">
+		
+		<!-- Footer Head -->
+		<div class="footer-head">
+			<div class="container">
+				<div class="pt-10 pb-2.5 border-b border-white/15">
+					<div class="row items-center">
+						<div class="lg:w-1/3 md:w-5/12 text-center md:text-start wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+							<div class="mb-6">
+								<a href="index.html"><img src="images/logo-white.svg" alt="" class="max-w-45"></a> 
+							</div>
+						</div>
+						<div class="lg:w-2/3 md:w-7/12 text-center md:text-end wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+							<div class="mb-6.25">
+								<a href="contact-us.html" class="btn btn-lg btn-outline-white text-white btn-hover1">
+									Contact Us
+								</a>
+								<a href="appointment.html" class="btn btn-lg btn-white text-primary btn-hover1 ml-5">
+									Appointment
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer Top -->
+		<div class="md:pt-17.5 md:pb-7.5 sm:pt-12.5 sm:pb-5 pt-11.25">
+			<div class="container">
+				<div class="row">
+					<div class="xl:w-1/4 lg:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<h2 class="relative text-xl sm:mb-5 mb-3.75 font-medium text-white">Important Updates <br>Waiting for you</h2>
+							<p class="text-2sm leading-[1.7] mb-5">Get our latest and best contents right into your inbox</p>
+							<form class="dzSubscribe style-1" action="../assets/script/mailchimp.php" method="post">
+								<div class="dzSubscribeMsg"></div>
+								<div class="relative flex flex-wrap items-stretch w-full">
+									<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] py-3.75 pl-6.25 pr-15 text-base text-left text-bodycolor border border-[#07121E] bg-[#07121E] placeholder:text-bodycolor rounded-[18px]" placeholder="Your Email Address">
+									<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+										<button name="submit" value="Submit" type="submit" class="size-12 min-w-12 text-lg leading-12 text-center">
+											<i class="flaticon-message"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="xl:w-9/12 w-full wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+						<div class="row">
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Our Services </h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Emergency Care</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Operation Theater</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Medical Checkup</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Diagnostic Center</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Outdoor Checkup</span></a></li>
+									</ul>   
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Useful Links</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Privacy Policy</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Terms & Conditions</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="contact-us.html"><span class="link-hover">Contact Us</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="blog-grid.html"><span class="link-hover">Latest News</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Our Sitemap</span></a></li>
+									</ul>   
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Our Stores</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">New York</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">London SF</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Edinburgh</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Los Angeles</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Las Vegas</span></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Quick Links</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="about-us.html"><span class="link-hover">About Us</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="services.html"><span class="link-hover">Our Services</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="team.html"><span class="link-hover">Our Team</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="appointment.html"><span class="link-hover">Appointments</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="contact-us.html"><span class="link-hover">Contact Us</span></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Top End -->
+		
+		<!-- Footer Top -->
+		<div class="footer-middle">
+			<div class="container">
+				<div class="bg-[#07121E] rounded-3xl md:py-6.25 md:px-10 p-6.25">
+					<div class="row g-3 items-center">
+						<div class="xl:w-1/4 md:w-full sm:w-1/2 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+							<h3 class="md:text-2xl text-[19px] mb-0.75 text-white">Get in Touch with us</h3>
+							<p class="mb-0">Lorem Ipsum is simply dummy</p>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-phone flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Call Us</h5>
+									<p class="text-2sm font-light mb-0"><a href="tel:+11234567890" class="text-body">+1 123 456 7890</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-mail flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Send us a Mail</h5>
+									<p class="text-2sm font-light mb-0"><a href="mailto:info@example.com" class="text-body">info@example.com</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-clock flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Opening Time</h5>
+									<p class="text-2sm font-light mb-0">Mon -Sat: 7:00 - 17:00</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="py-5 text-base">
+					<div class="row">
+						<div class="lg:w-1/2 w-full lg:text-start text-center"> 
+							<p class="copyright-text">© <span class="current-year">2024</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-primary">DexignZone</a> Theme. All Rights Reserved.</p>
+						</div>
+						<div class="lg:w-1/2 w-full lg:text-end text-center"> 
+							<img src="images/card.webp" alt="" class="inline-block">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom End -->
+		
+	</footer>
+			<!-- Footer End -->
+
+		</div>
+	</div>
+	
+	<button id="scrollProgress" title="Scroll to top"
+    class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

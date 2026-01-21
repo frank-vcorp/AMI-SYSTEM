@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-5">
+<head>
+
+		<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Gynecology & Women's Health Tailwind CSS Template</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="title" content="ClinicMaster - Gynecology & Women's Health Tailwind CSS Template | DexignZone">
+	<meta name="description" content="ClinicMaster is a Gynecology & Women's Health Tailwind CSS template designed for maternity clinics, gynecologists, and women's wellness centers. It features a responsive design, modern UI, and easy customization.">
+	<meta name="keywords" content="ClinicMaster, Gynecology Template, Women's Health Template, Maternity Clinic HTML Template, Gynecology Tailwind CSS Template, Women's Wellness Website, Responsive Medical Template, Healthcare Template, DexignZone">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/gynecology/service-detail.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../gynecology/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Gynecology & Women's Health Tailwind CSS Template">
+	<meta property="og:description" content="ClinicMaster is a Gynecology & Women's Health Tailwind CSS template designed for maternity clinics, gynecologists, and women's wellness centers. It features a responsive design, modern UI, and easy customization.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/gynecology">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Gynecology & Women's Health Tailwind CSS Template">
+	<meta name="twitter:description" content="ClinicMaster is a Gynecology & Women's Health Tailwind CSS template designed for maternity clinics, gynecologists, and women's wellness centers. It features a responsive design, modern UI, and easy customization.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+	
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/swiper/swiper-bundle.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg" data-typography="typography_1">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-white" id="dzPreloader">
+		<div class="preloader-inner">
+			<svg class="size-22.5" width="240" height="240" viewBox="0 0 240 240">
+				<circle class="stroke-primary animate-dzRing1" cx="120" cy="120" r="105" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 660" stroke-dashoffset="-330" stroke-linecap="round"></circle>
+				<circle class="stroke-secondary animate-dzRing2" cx="120" cy="120" r="35" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 220" stroke-dashoffset="-110" stroke-linecap="round"></circle>
+				<circle class="stroke-[#255ff4] animate-dzRing3" cx="85" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+				<circle class="stroke-[#f42582] animate-dzRing4" cx="155" cy="120" r="70" fill="none" stroke="#000" stroke-width="20" stroke-dasharray="0 440" stroke-linecap="round"></circle>
+			</svg>
+		</div>
+	</div>
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper absolute top-0 left-0 z-999 w-full mb-7.5 pt-5">
+	<div class="sticky-header main-bar-wraper w-full">
+		<div class="main-bar w-full max-sm:!px-2.5">
+			<div class="container flex items-center relative z-1">
+				<div class="relative bg-transparent flex-1 flex items-center before:rounded-5xl before:bg-white before:absolute lg:before:w-[calc(100%_+_30px)] sm:before:w-[calc(100%_+_20px)] before:w-[calc(100%_+_10px)] before:h-full lg:before:-mx-2.5 before:-mx-5 before:shadow-16 before:-z-1 max-sm:before:left-3.75 [.site-header.is-fixed_&]:before:shadow-none">
+					<!-- Website Logo -->
+					<div class="flex items-center align-middle xl:w-36.25 sm:h-17.5 max-xl:me-2 logo-dark border-r border-secondary/10 w-33.75 pr-3.75 h-17.5">
+						<a href="index.html" class="table-cell align-middle"><img loading="lazy" src="images/logo.svg" alt="logo" class="object-contain"></a>
+					</div>
+
+					<button class="xmenu-toggler lg:hidden float-right mt-3 mb-3 lg:mr-7 mr-5 size-11 bg-secondary rounded-2lg relative cursor-pointer max-lg:order-1 max-sm:ms-auto" aria-label="Toggle navigation menu" type="button">
+						<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-3.25 w-5.5"></span>
+						<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-0 top-5.5 w-6.25"></span>
+						<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-8 w-4"></span>
+					</button>
+					<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+					<div class="flex lg:basis-auto lg:grow max-lg:flex-col lg:justify-start font-title max-lg:fixed max-lg:h-full max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 header-nav custom-scroll">
+						<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+							<a href="index.html" class="table-cell align-middle">
+								<img loading="lazy" src="images/logo.svg" alt="logo" width="400" height="120" class="object-contain duration-500">
+							</a>
+						</div>
+						<ul class="lg:flex flex-wrap navbar-nav lg:ps-5">
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="javascript:void(0);">
+									<span class="inline-block leading-7.5">Home</span>
+									<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+								</a>
+								<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+									<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynecology</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_33%] flex-[0_0_100%] px-3.75">
+											<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+											<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+											<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+											<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+												<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+											</a>
+										</li>
+										<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+											<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 block">
+												<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+												<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="about-us.html">
+									<span class="inline-block leading-7.5">Pages</span>
+									<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+								</a>
+								<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden lg:shadow-submenu sub-menu">
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+									</li>
+									<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Team </span></a>
+										<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+											<li class="relative">
+												<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+											</li>
+											<li class="relative">
+												<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team-detail.html"><span>Team Detail</span></a>
+											</li>
+										</ul>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="services.html">
+									<span class="inline-block leading-7.5">Services</span>
+									<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+								</a>
+								<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden lg:shadow-submenu mega-menu">
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="blog-grid.html">
+									<span class="inline-block leading-7.5">Blogs</span>
+									<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+								</a>
+								<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden lg:shadow-submenu sub-menu">
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+									</li>
+									<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="standard-post.html"><span>Post Layout </span></a>
+										<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+											<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="javascript:void(0);">
+									<span class="inline-block leading-7.5">Elements</span>
+									<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+								</a>
+								<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+									<ul class="lg:flex flex-wrap -mx-3.75">
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+											<ul class="lg:mb-4">			
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+														<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+															<i class="fa-solid fa-fire-flame-curved"></i>
+														</span>
+													</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+									<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+									<ul class="lg:flex flex-wrap -mx-3.75">
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+												<span class="ms-2 animate-badgeZoom inline-block">
+													<img src="../assets/images/tailwind.svg" alt="">
+												</span>
+											</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+												<span class="ms-2 animate-badgeZoom inline-block">
+													<img src="../assets/images/tailwind.svg" alt="">
+												</span>
+											</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+												<span class="ms-2 animate-badgeZoom inline-block">
+													<img src="../assets/images/tailwind.svg" alt="">
+												</span>
+											</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+												</li>
+											</ul>
+										</li>
+										<li class="lg:min-w-80 px-4 flex-1 relative">
+											<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+												<span class="ms-2 animate-badgeZoom inline-block">
+													<img src="../assets/images/tailwind.svg" alt="">
+												</span>
+											</span>
+											<ul class="lg:mb-4">
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+												</li>
+												<li class="relative group/second">
+													<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+								<a class="lg:py-5 py-2 xl:px-3.75 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium text-secondary hover:text-primary" href="contact-us.html">
+									<span class="inline-block leading-7.5">Contact Us</span>
+								</a>
+							</li>
+						</ul>
+						<div class="lg:hidden block max-lg:p-5 text-center">
+							<ul>
+								<li class="inline-block mx-0.5">
+									<a class="size-10 !leading-10 border border-black/10 text-center text-secondary rounded fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+								</li>
+								<li class="inline-block mx-0.5">
+									<a class="size-10 !leading-10 border border-black/10 text-center text-secondary rounded fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+								</li>
+								<li class="inline-block mx-0.5">
+									<a class="size-10 !leading-10 border border-black/10 text-center text-secondary rounded fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+								</li>
+								<li class="inline-block mx-0.5">
+									<a class="size-10 !leading-10 border border-black/10 text-center text-secondary rounded fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="extra-nav flex items-center h-17.5 3xl:pl-7.5 pr-5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0">
+						<div class="flex items-center w-full">						
+							<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+								<li class="inline-block">
+									<a href="javascript:void(0);" class="min-w-10 flex align-center justify-center align-middle relative">
+										<i class="feather icon-shopping-cart text-[32px] text-heading"></i>
+										<span class="absolute -top-1 right-0.5 text-xs flex items-center justify-center min-h-4.5 min-w-4.5 font-semibold bg-primary text-white rounded-full">5</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="extra-nav flex items-center h-17.5 pl-8 -mr-3 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 max-xl:hidden">
+					<div class="flex items-center w-full">						
+						<ul class="flex items-center gap-2.5 w-full justify-between">
+							<li class="inline-block">
+								<a href="appointment.html" class="btn btn-lg btn-primary btn-hover1 max-md:!text-sm max-md:!py-2.5 max-md:!px-4.5 max-md:!rounded-2lg uppercase">
+									<i class="icon feather icon-calendar me-1"></i>
+									Appointment
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+	<!-- Header End -->
+	
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+
+			<main class="page-content">
+			
+								<div class="lg:min-h-125 md:min-h-100 sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden flex" style="background-image:url(images/banner/bnr1.webp);">
+					<div class="container relative z-1 h-auto table">
+						<div class="table-cell lg:h-125 md:h-100 sm:h-87.5 h-75 align-middle pt-12.5 pb-5">
+							<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-3xl font-bold mb-3.75 break-word wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Services Details</h1>
+							<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+								<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-primary shadow-breadcrumb">
+									<li class="inline-block lg:text-base text-sm font-normal capitalize text-white"><a href="index.html">Home</a></li>
+									<li class="inline-block lg:text-base text-sm font-normal capitalize text-white pl-2 relative before:content-['\f101'] before:float-left before:text-white before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">Services Details</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+		
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 sm:pt-12.5 pt-10 pb-10 service-single bg-light">
+					<div class="container">
+						<div class="row">
+							<div class="w-full">
+								<div class="flex max-lg:flex-col">
+									<div class="xl:w-116.25 xl:min-w-116.25 lg:w-97.5 lg:min-w-97.5 w-full sm:h-105 h-75 lg:rounded-s-xxl max-lg:rounded-t-xxl overflow-hidden">
+										<img src="images/services/img.webp" alt="/" class="size-full object-cover">
+									</div>
+									<div class="sm:p-8.75 p-5 bg-white lg:rounded-e-xxl rounded-b-xxl">
+										<h4 class="lg:text-[38px] sm:text-3xxl text-2xxl capitalize">
+											<a href="shop-standard.html">Gynecology</a>
+										</h4>
+										<p class="2xxl:text-lg xl:text-base sm:text-2sm text-sm font-normal leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled book.</p>
+										<p class="2xxl:text-lg xl:text-base sm:text-2sm text-sm font-normal leading-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has nged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing softwa.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="2xxl:pt-25 md:pt-17.5 sm:pt-12.5 pt-10">
+								<div class="w-full">
+									<div class="row justify-between">
+										<div class="w-full lg:w-1/2 mb-7.5">
+											<div class="left-content">
+												<div class="title-box">
+													<h2 class="text-2xxl mb-5 text-secondary wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">Steps in Angioplasty</h2>
+												</div>
+												<ul class="flex flex-wrap text-secondary font-medium wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Fertility medication</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Fertility medication</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">24/7 customer support</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">24/7 customer support</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Video Call Support</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Video Call Support</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Endometriosis treatment</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Endometriosis treatment</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Prenatal ultrasound</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Prenatal ultrasound</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Gynecology</li>
+													<li class="sm:w-1/2 w-full relative p-1.25 ps-7.5 lg:text-lg text-[17px] font-semibold leading-8.75 before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">Gynecology</li>
+												</ul>
+											</div>
+										</div>
+										<div class="w-full lg:w-5/12">
+											<div class="right-content">
+												<div class="row">
+													<div class="title-box">
+														<h2 class="text-2xxl mb-5 text-secondary wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">What to Expect</h2>
+													</div>
+													<div class="w-full mb-5">
+														<div class="flex items-center gap-5 text-left">
+															<div class="size-17.5 min-w-17.5 rounded-full flex items-center justify-center bg-primary">
+																<span class="icon-cell">
+																	<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M34.2 15.2673C35.3376 14.1531 36 12.6312 36 11C36 7.69172 33.3086 5 30 5C28.9069 5 27.8314 5.30047 26.8887 5.86914C26.5736 6.05961 26.472 6.46906 26.6621 6.78453C26.8522 7.1 27.2623 7.20055 27.5775 7.01109C28.3125 6.56773 29.1498 6.33336 30 6.33336C32.5729 6.33336 34.6666 8.4268 34.6666 11C34.6666 12.5846 33.873 14.0452 32.541 14.9091C31.4225 15.6429 30.0045 15.8545 28.7096 15.4856C28.3594 15.3847 27.987 15.5891 27.8854 15.9433C27.7845 16.2974 27.9895 16.6662 28.3437 16.7675C28.8828 16.9218 29.4401 16.9999 30 16.9999C31.0483 16.9999 32.0616 16.714 32.9612 16.1976C36.3835 17.4377 38.6666 20.6688 38.6666 24.3333V27.6666H32.5876C32.1154 23.2138 29.314 19.3173 25.2278 17.467C26.5281 16.1431 27.3333 14.3313 27.3333 12.3334C27.3334 8.28969 24.0436 5 20 5C15.9564 5 12.6666 8.28969 12.6666 12.3334C12.6666 14.3319 13.4723 16.1443 14.7733 17.4684C13.3981 18.0931 12.1227 18.9672 11.041 20.0427C8.96734 22.1223 7.70547 24.7915 7.40594 27.6668H1.33336V24.3334C1.33336 22.0248 2.23508 19.8481 3.86984 18.2065C4.76977 17.3123 5.86539 16.6301 7.04508 16.2013C7.94484 16.7156 8.95508 17 10 17C10.5599 17 11.1172 16.9219 11.6562 16.7676C12.0104 16.6663 12.2155 16.2975 12.1146 15.9434C12.013 15.5892 11.6406 15.3851 11.2904 15.4857C9.99609 15.8552 8.57883 15.6439 7.45578 14.9076C6.12703 14.0452 5.33336 12.5847 5.33336 11C5.33336 8.4268 7.42711 6.33336 10 6.33336C10.8502 6.33336 11.6875 6.56773 12.4225 7.01109C12.7389 7.20055 13.1471 7.09898 13.3379 6.78453C13.528 6.46914 13.4264 6.05961 13.1113 5.86914C12.1686 5.30047 11.0931 5 10 5C6.69141 5 4 7.69172 4 11C4 12.6299 4.66133 14.1507 5.79562 15.2638C4.73836 15.7553 3.76187 16.4338 2.92711 17.263C1.03969 19.1588 0 21.6696 0 24.3334V28.3334C0 28.7016 0.298203 29 0.666641 29H7.33328V34.3334C7.33328 34.7016 7.63148 35 7.99992 35H31.9999C32.3684 35 32.6666 34.7015 32.6666 34.3334V29H39.3332C39.7017 29 39.9998 28.7015 39.9998 28.3334V24.3334C40 20.3916 37.7092 16.885 34.2 15.2673ZM14 12.3334C14 9.02508 16.6914 6.33336 20 6.33336C23.3086 6.33336 26 9.02508 26 12.3334C26 15.6416 23.3086 18.3334 20 18.3334C16.6914 18.3334 14 15.6416 14 12.3334ZM31.3334 33.6666H8.66664V29C8.66664 25.9772 9.845 23.1305 11.983 20.986C13.1094 19.8657 14.4748 18.9967 15.9388 18.4345C17.1025 19.2116 18.4987 19.6666 20 19.6666C21.5037 19.6666 22.9024 19.2103 24.0672 18.4309C28.4248 20.1052 31.3334 24.3063 31.3334 29V33.6666Z" fill="white"/>
+																	</svg>
+																</span>
+															</div>
+															<div class="icon-content">
+																<h5 class="text-[22px] mb-0">Initial Assessment</h5>
+																<p class="lg:text-lg text-base font-light leading-[1.2] mb-0"><a href="#" class="text-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </a></p>
+															</div>
+														</div>
+													</div>
+													<div class="w-full mb-5">
+														<div class="flex items-center gap-5 text-left">
+															<div class="size-17.5 min-w-17.5 rounded-full flex items-center justify-center bg-primary">
+																<span class="icon-cell">
+																	<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M3.3333 20C3.33285 16.8702 4.21382 13.8035 5.87534 11.1512C7.53686 8.49882 9.91175 6.36799 12.7281 5.00268C15.5444 3.63738 18.6883 3.09281 21.7997 3.43132C24.9111 3.76983 27.8644 4.97774 30.3212 6.91674H27.786C27.5663 6.91887 27.3564 7.0076 27.2019 7.16365C27.0474 7.31969 26.9607 7.53044 26.9607 7.75006C26.9607 7.96968 27.0474 8.18043 27.2019 8.33648C27.3564 8.49252 27.5663 8.58125 27.786 8.58338H32.4999C32.721 8.58338 32.9329 8.49558 33.0892 8.3393C33.2455 8.18301 33.3333 7.97104 33.3333 7.75002V3.03588C33.3344 2.92577 33.3136 2.81654 33.2722 2.7145C33.2308 2.61246 33.1696 2.51964 33.0921 2.4414C33.0146 2.36316 32.9224 2.30105 32.8208 2.25866C32.7191 2.21628 32.6101 2.19445 32.5 2.19445C32.3899 2.19445 32.2808 2.21628 32.1792 2.25866C32.0776 2.30105 31.9853 2.36316 31.9079 2.4414C31.8304 2.51964 31.7692 2.61246 31.7278 2.7145C31.6864 2.81654 31.6656 2.92577 31.6667 3.03588V5.85776C28.0329 2.8602 23.3848 1.37634 18.6864 1.71392C13.988 2.05151 9.59976 4.18464 6.43191 7.67089C3.26406 11.1571 1.55967 15.729 1.67223 20.4382C1.7848 25.1474 3.70569 29.6326 7.0365 32.9635C7.11355 33.0423 7.20547 33.1051 7.30695 33.1481C7.40842 33.1912 7.51744 33.2137 7.62767 33.2143C7.7379 33.215 7.84717 33.1937 7.94914 33.1518C8.0511 33.1099 8.14374 33.0482 8.22169 32.9703C8.29964 32.8923 8.36135 32.7997 8.40324 32.6977C8.44513 32.5958 8.46637 32.4865 8.46574 32.3763C8.4651 32.266 8.4426 32.157 8.39954 32.0555C8.35647 31.9541 8.2937 31.8621 8.21486 31.7851C6.66237 30.2411 5.43155 28.4044 4.59363 26.3815C3.75571 24.3586 3.32733 22.1896 3.3333 20Z" fill="white"/>
+																		<path d="M12.7167 34.9963C12.2439 34.7664 11.7759 34.5105 11.3261 34.2362C11.1374 34.1211 10.9108 34.0856 10.696 34.1376C10.4812 34.1895 10.2958 34.3247 10.1806 34.5133C10.0655 34.702 10.03 34.9286 10.082 35.1434C10.1339 35.3582 10.2691 35.5436 10.4577 35.6587C10.953 35.9611 11.468 36.2423 11.9885 36.4953C12.0869 36.5431 12.1938 36.5711 12.303 36.5776C12.4123 36.5841 12.5217 36.5691 12.6251 36.5333C12.7285 36.4975 12.8239 36.4417 12.9058 36.3691C12.9876 36.2965 13.0543 36.2084 13.1022 36.11C13.15 36.0116 13.178 35.9047 13.1845 35.7955C13.191 35.6862 13.1759 35.5768 13.1402 35.4734C13.1044 35.3699 13.0486 35.2746 12.976 35.1927C12.9033 35.1109 12.8153 35.0442 12.7169 34.9963H12.7167Z" fill="white"/>
+																		<path d="M35.0037 12.732C35.0514 12.8305 35.1181 12.9186 35.1998 12.9913C35.2816 13.0641 35.3769 13.12 35.4803 13.1559C35.5836 13.1918 35.6931 13.207 35.8023 13.2006C35.9116 13.1942 36.0185 13.1664 36.117 13.1187C36.2155 13.071 36.3036 13.0043 36.3763 12.9226C36.4491 12.8408 36.505 12.7455 36.5409 12.6421C36.5768 12.5388 36.592 12.4293 36.5856 12.3201C36.5793 12.2108 36.5514 12.1039 36.5037 12.0054C36.2526 11.4866 35.9719 10.9715 35.6696 10.4742C35.6127 10.3807 35.5379 10.2993 35.4496 10.2346C35.3613 10.17 35.2611 10.1234 35.1547 10.0975C34.9399 10.0452 34.7132 10.0804 34.5243 10.1953C34.3355 10.3101 34.2 10.4953 34.1477 10.7101C34.0954 10.9249 34.1305 11.1516 34.2454 11.3405C34.5203 11.7926 34.7754 12.2608 35.0037 12.732Z" fill="white"/>
+																		<path d="M21.9776 36.5499C21.4515 36.6124 20.9192 36.6496 20.3952 36.6622C20.1782 36.6705 19.973 36.7632 19.8233 36.9206C19.6736 37.0779 19.5913 37.2875 19.5938 37.5046C19.5963 37.7217 19.6835 37.9293 19.8368 38.0831C19.9901 38.2369 20.1974 38.3248 20.4145 38.3281C20.421 38.3281 20.428 38.3281 20.4345 38.3277C21.0106 38.3143 21.5953 38.273 22.1731 38.2048C22.3924 38.1787 22.5924 38.0666 22.7291 37.8931C22.8658 37.7196 22.928 37.499 22.9022 37.2797C22.8763 37.0603 22.7644 36.8602 22.5911 36.7233C22.4178 36.5864 22.1972 36.5239 21.9778 36.5496L21.9776 36.5499Z" fill="white"/>
+																		<path d="M17.2346 36.4368C16.7162 36.3501 16.1949 36.2374 15.6855 36.1008C15.4719 36.0438 15.2444 36.0739 15.053 36.1845C14.8617 36.2952 14.7221 36.4773 14.665 36.6909C14.6079 36.9045 14.638 37.132 14.7487 37.3233C14.8593 37.5147 15.0415 37.6543 15.255 37.7114C15.8157 37.8612 16.3895 37.9852 16.9603 38.0804C17.0683 38.0985 17.1787 38.095 17.2853 38.0704C17.3919 38.0457 17.4927 38.0003 17.5817 37.9367C17.6708 37.8731 17.7464 37.7925 17.8044 37.6997C17.8623 37.6069 17.9014 37.5035 17.9194 37.3956C17.9374 37.2877 17.934 37.1772 17.9093 37.0706C17.8846 36.964 17.8392 36.8633 17.7756 36.7742C17.712 36.6852 17.6315 36.6095 17.5387 36.5516C17.4458 36.4936 17.3425 36.4545 17.2346 36.4365V36.4368Z" fill="white"/>
+																		<path d="M37.5149 19.5982C37.294 19.5928 37.08 19.6754 36.9199 19.8278C36.7598 19.9801 36.6668 20.1898 36.6612 20.4107C36.6478 20.9377 36.6096 21.4698 36.5469 21.9931C36.5207 22.2126 36.5828 22.4335 36.7195 22.6072C36.8561 22.7809 37.0562 22.8933 37.2756 22.9196C37.3088 22.9233 37.3422 22.9252 37.3757 22.9253C37.5794 22.925 37.7759 22.8501 37.9281 22.7148C38.0804 22.5795 38.1779 22.3932 38.2021 22.1909C38.2705 21.616 38.3128 21.0313 38.3271 20.4523C38.3299 20.3429 38.3111 20.234 38.2718 20.1318C38.2324 20.0297 38.1734 19.9363 38.098 19.857C38.0225 19.7776 37.9322 19.714 37.8322 19.6696C37.7321 19.6252 37.6243 19.6009 37.5149 19.5982Z" fill="white"/>
+																		<path d="M34.957 29.1301C34.7742 29.0061 34.5496 28.9598 34.3325 29.0012C34.1155 29.0426 33.9238 29.1684 33.7994 29.351C33.5031 29.7868 33.1829 30.2137 32.8468 30.6193C32.7754 30.7034 32.7213 30.8008 32.6878 30.9059C32.6543 31.011 32.642 31.1217 32.6516 31.2316C32.6612 31.3415 32.6926 31.4484 32.7439 31.5461C32.7951 31.6438 32.8653 31.7303 32.9503 31.8007C33.0352 31.871 33.1333 31.9238 33.2389 31.9559C33.3444 31.9881 33.4553 31.9989 33.5651 31.9879C33.6748 31.9768 33.7813 31.9441 33.8783 31.8915C33.9753 31.839 34.0609 31.7677 34.1302 31.6818C34.4996 31.2359 34.8524 30.7667 35.1779 30.2874C35.2394 30.1969 35.2825 30.0952 35.3046 29.988C35.3268 29.8809 35.3277 29.7704 35.3072 29.663C35.2867 29.5555 35.2452 29.4531 35.1851 29.3617C35.125 29.2703 35.0475 29.1916 34.957 29.1301Z" fill="white"/>
+																		<path d="M36.106 15.7007C36.2411 16.2081 36.3535 16.7294 36.4401 17.2501C36.4724 17.4447 36.5726 17.6215 36.7229 17.7491C36.8733 17.8767 37.064 17.9469 37.2612 17.9472C37.3071 17.9471 37.353 17.9433 37.3983 17.9358C37.5063 17.9179 37.6097 17.8789 37.7026 17.821C37.7955 17.7631 37.8761 17.6875 37.9397 17.5985C38.0034 17.5094 38.0489 17.4087 38.0736 17.3021C38.0984 17.1955 38.1019 17.0851 38.0839 16.9771C37.9891 16.4042 37.8652 15.8302 37.7167 15.2718C37.6599 15.0582 37.5205 14.876 37.3292 14.7652C37.138 14.6544 36.9106 14.6241 36.697 14.681C36.4834 14.7378 36.3012 14.8772 36.1904 15.0685C36.0796 15.2597 36.0493 15.4871 36.1062 15.7007H36.106Z" fill="white"/>
+																		<path d="M30.6047 32.8585C30.1973 33.1955 29.7705 33.5156 29.3364 33.8098C29.2458 33.8712 29.1682 33.9499 29.108 34.0413C29.0479 34.1326 29.0063 34.235 28.9856 34.3425C28.965 34.4499 28.9658 34.5604 28.9878 34.6676C29.0099 34.7747 29.0528 34.8765 29.1142 34.9671C29.1756 35.0576 29.2543 35.1352 29.3457 35.1954C29.437 35.2556 29.5394 35.2972 29.6468 35.3178C29.7543 35.3384 29.8648 35.3377 29.9719 35.3156C30.0791 35.2936 30.1809 35.2506 30.2715 35.1892C30.7492 34.8657 31.2183 34.5138 31.6667 34.1435C31.8371 34.0027 31.9446 33.7999 31.9655 33.5799C31.9864 33.3598 31.919 33.1404 31.7782 32.97C31.6373 32.7996 31.4346 32.6921 31.2145 32.6712C30.9944 32.6503 30.7751 32.7177 30.6047 32.8585Z" fill="white"/>
+																		<path d="M36.9203 24.548C36.7098 24.4811 36.4813 24.5005 36.285 24.6019C36.0888 24.7033 35.9407 24.8784 35.8734 25.0888C35.7139 25.5888 35.5276 26.0881 35.3196 26.5735C35.2741 26.6744 35.2493 26.7834 35.2464 26.8941C35.2435 27.0047 35.2627 27.1148 35.3028 27.218C35.343 27.3211 35.4033 27.4152 35.4802 27.4948C35.5572 27.5744 35.6492 27.6378 35.7509 27.6815C35.8526 27.7251 35.962 27.748 36.0727 27.7489C36.1834 27.7498 36.2931 27.7286 36.3955 27.6866C36.4979 27.6446 36.5909 27.5826 36.6691 27.5042C36.7473 27.4259 36.8091 27.3327 36.8508 27.2302C37.0804 26.696 37.2855 26.1455 37.4608 25.5949C37.4941 25.4907 37.5065 25.3809 37.4974 25.2719C37.4882 25.1629 37.4577 25.0567 37.4075 24.9594C37.3573 24.8622 37.2885 24.7758 37.2049 24.7052C37.1213 24.6346 37.0246 24.5812 36.9203 24.548Z" fill="white"/>
+																		<path d="M26.5575 35.3267C26.0769 35.5326 25.5773 35.7186 25.0723 35.8797C24.9681 35.9129 24.8714 35.9663 24.7878 36.037C24.7042 36.1076 24.6353 36.1939 24.5851 36.2911C24.5349 36.3884 24.5043 36.4945 24.4951 36.6036C24.4859 36.7126 24.4983 36.8224 24.5316 36.9266C24.5648 37.0309 24.6182 37.1276 24.6888 37.2112C24.7594 37.2948 24.8458 37.3636 24.943 37.4138C25.0403 37.4641 25.1464 37.4946 25.2554 37.5038C25.3645 37.513 25.4743 37.5006 25.5785 37.4674C26.1339 37.2904 26.6841 37.0858 27.2134 36.8591C27.4166 36.7721 27.577 36.6079 27.6591 36.4027C27.7413 36.1975 27.7385 35.968 27.6515 35.7648C27.5645 35.5616 27.4003 35.4013 27.1951 35.3191C26.9899 35.2369 26.7604 35.2397 26.5572 35.3267H26.5575Z" fill="white"/>
+																		<path d="M12.9529 18.2975C12.9529 16.9317 12.0548 15.8374 10.6649 15.5092C9.90131 15.3284 9.09899 15.4117 8.38887 15.7456C7.67875 16.0795 7.10277 16.6442 6.75496 17.3476C6.65757 17.5451 6.64232 17.7732 6.71254 17.9819C6.78277 18.1907 6.93275 18.3631 7.12974 18.4616C7.32672 18.5601 7.55468 18.5766 7.7638 18.5076C7.97293 18.4385 8.14622 18.2895 8.24582 18.0931C8.42374 17.7238 8.72302 17.4269 9.09363 17.2518C9.46424 17.0768 9.88372 17.0342 10.2819 17.1314C10.5175 17.1869 11.2861 17.4355 11.2861 18.2975C11.2861 19.1667 10.2823 19.8371 9.21949 20.5469C8.02277 21.3457 6.66699 22.251 6.66699 23.75C6.66699 23.9711 6.75479 24.183 6.91108 24.3393C7.06736 24.4956 7.27933 24.5834 7.50035 24.5834H12.1195C12.2296 24.5845 12.3388 24.5637 12.4409 24.5223C12.5429 24.4809 12.6357 24.4197 12.714 24.3422C12.7922 24.2647 12.8543 24.1725 12.8967 24.0708C12.9391 23.9692 12.9609 23.8602 12.9609 23.7501C12.9609 23.64 12.9391 23.5309 12.8967 23.4293C12.8543 23.3277 12.7922 23.2354 12.714 23.1579C12.6357 23.0805 12.5429 23.0192 12.4409 22.9778C12.3388 22.9364 12.2296 22.9157 12.1195 22.9167H8.81793C9.16707 22.586 9.66059 22.2564 10.1448 21.9328C11.4613 21.0539 12.9529 20.0578 12.9529 18.2975Z" fill="white"/>
+																		<path d="M20.8331 21.0416C20.8331 20.8206 20.7453 20.6087 20.589 20.4524C20.4327 20.2961 20.2208 20.2083 19.9998 20.2083H19.3227V15.7812C19.3226 15.6086 19.269 15.4403 19.1692 15.2995C19.0695 15.1587 18.9284 15.0523 18.7656 14.9951C18.6028 14.9379 18.4262 14.9326 18.2602 14.98C18.0943 15.0274 17.9472 15.1252 17.8392 15.2598L13.6204 20.5204C13.5223 20.643 13.4607 20.7908 13.4429 20.9468C13.4251 21.1028 13.4516 21.2606 13.5196 21.4022C13.5875 21.5437 13.6941 21.6632 13.827 21.7468C13.9598 21.8305 14.1136 21.8749 14.2706 21.875H17.656V24.2187C17.655 24.3288 17.6757 24.4381 17.7171 24.5401C17.7585 24.6421 17.8197 24.735 17.8972 24.8132C17.9747 24.8915 18.0669 24.9536 18.1686 24.9959C18.2702 25.0383 18.3792 25.0602 18.4894 25.0602C18.5995 25.0602 18.7085 25.0383 18.8101 24.9959C18.9118 24.9536 19.004 24.8915 19.0815 24.8132C19.159 24.735 19.2202 24.6421 19.2616 24.5401C19.303 24.4381 19.3237 24.3288 19.3227 24.2187V21.875H19.9998C20.2208 21.875 20.4328 21.7872 20.5891 21.6309C20.7453 21.4746 20.8331 21.2626 20.8331 21.0416ZM17.656 20.2083H16.0076L17.656 18.1522V20.2083Z" fill="white"/>
+																		<path d="M25.0984 14.4955C24.9911 14.4738 24.8805 14.4735 24.7731 14.4946C24.6656 14.5158 24.5634 14.5579 24.4723 14.6187C24.3812 14.6794 24.303 14.7575 24.2422 14.8486C24.1813 14.9396 24.139 15.0417 24.1178 15.1492L22.2428 24.5242C22.1994 24.7409 22.2439 24.9659 22.3664 25.1498C22.489 25.3337 22.6796 25.4614 22.8963 25.5048C22.9503 25.5155 23.0053 25.521 23.0604 25.521C23.2528 25.5208 23.4393 25.454 23.5881 25.3319C23.7369 25.2098 23.8388 25.04 23.8766 24.8513L25.7516 15.4763C25.7731 15.369 25.7733 15.2585 25.7522 15.1511C25.731 15.0438 25.6889 14.9416 25.6282 14.8505C25.5676 14.7594 25.4895 14.6812 25.3986 14.6203C25.3077 14.5594 25.2057 14.517 25.0984 14.4955Z" fill="white"/>
+																		<path d="M29.3747 24.5837C29.5393 24.5836 29.7001 24.5349 29.837 24.4436C29.974 24.3523 30.0808 24.2225 30.1442 24.0706L33.2692 16.5706C33.322 16.444 33.3428 16.3063 33.3296 16.1697C33.3164 16.0331 33.2697 15.9019 33.1936 15.7877C33.1175 15.6735 33.0144 15.5799 32.8934 15.5152C32.7724 15.4505 32.6373 15.4166 32.5001 15.4166H28.2813C28.0617 15.4188 27.8518 15.5075 27.6973 15.6635C27.5428 15.8196 27.4561 16.0303 27.4561 16.2499C27.4561 16.4696 27.5428 16.6803 27.6973 16.8364C27.8518 16.9924 28.0617 17.0811 28.2813 17.0833H31.2501L28.606 23.4297C28.5534 23.5563 28.5329 23.6939 28.5461 23.8304C28.5594 23.9669 28.6061 24.098 28.6821 24.2121C28.7581 24.3263 28.8611 24.4199 28.9819 24.4848C29.1027 24.5496 29.2376 24.5837 29.3747 24.584V24.5837Z" fill="white"/>
+																	</svg>
+																</span>
+															</div>
+															<div class="icon-content">
+																<h5 class="text-[22px] mb-0">24 x 7 Support</h5>
+																<p class="lg:text-lg text-base font-light leading-[1.2] mb-0"><a href="#" class="text-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </a></p>
+															</div>
+														</div>
+													</div>
+													<div class="w-full mb-5">
+														<div class="flex items-center gap-5 text-left">
+															<div class="size-17.5 min-w-17.5 rounded-full flex items-center justify-center bg-primary">
+																<span class="icon-cell">
+																	<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+																		<path d="M25.4688 20C25.0375 20 24.6875 20.35 24.6875 20.7812C24.6875 21.2125 25.0375 21.5625 25.4688 21.5625C25.9 21.5625 26.25 21.2125 26.25 20.7812C26.25 20.35 25.9 20 25.4688 20Z" fill="white"/>
+																		<path d="M32.5 32.5H31.5667L29.0234 18.2405C28.5499 15.6386 26.2869 13.75 23.6422 13.75H16.3578C13.7127 13.75 11.4498 15.6387 10.977 18.2432L8.43328 32.5H7.5C6.20766 32.5 5.15625 33.5514 5.15625 34.8438V37.9688C5.15625 38.4002 5.50602 38.75 5.9375 38.75H34.0625C34.4939 38.75 34.8438 38.4002 34.8438 37.9688V34.8438C34.8438 33.5514 33.7923 32.5 32.5 32.5ZM12.5148 18.52C12.8522 16.6615 14.4684 15.3125 16.3578 15.3125H23.6422C25.5313 15.3125 27.1479 16.6616 27.4855 18.5176L29.9795 32.5H10.0205L12.5148 18.52ZM33.2812 37.1875H6.71875V34.8438C6.71875 34.413 7.06922 34.0625 7.5 34.0625C9.2557 34.0625 31.4362 34.0625 32.5 34.0625C32.9308 34.0625 33.2812 34.413 33.2812 34.8438V37.1875Z" fill="white"/>
+																		<path d="M27.9872 30.0166L26.8411 23.708C26.764 23.2834 26.3565 23.0015 25.9328 23.079C25.5082 23.1561 25.2266 23.5627 25.3037 23.9873L26.4498 30.2959C26.5275 30.7237 26.9375 31.0018 27.3581 30.9249C27.7827 30.8478 28.0644 30.4411 27.9872 30.0166Z" fill="white"/>
+																		<path d="M39.2188 20H32.5C32.0686 20 31.7188 20.3498 31.7188 20.7812C31.7188 21.2127 32.0686 21.5625 32.5 21.5625H39.2188C39.6502 21.5625 40 21.2127 40 20.7812C40 20.3498 39.6502 20 39.2188 20Z" fill="white"/>
+																		<path d="M7.5 20H0.78125C0.349766 20 0 20.3498 0 20.7812C0 21.2127 0.349766 21.5625 0.78125 21.5625H7.5C7.93148 21.5625 8.28125 21.2127 8.28125 20.7812C8.28125 20.3498 7.93148 20 7.5 20Z" fill="white"/>
+																		<path d="M33.8109 6.97021C33.5057 6.66521 33.0112 6.66521 32.706 6.97021L28.2864 11.3897C27.9813 11.6948 27.9813 12.1895 28.2864 12.4947C28.5917 12.7997 29.0861 12.7997 29.3913 12.4947L33.8109 8.07513C34.116 7.76997 34.116 7.27528 33.8109 6.97021Z" fill="white"/>
+																		<path d="M11.7132 11.3898L7.29369 6.97023C6.98853 6.66523 6.49393 6.66516 6.18877 6.97023C5.88369 7.27531 5.88369 7.77 6.18877 8.07516L10.6083 12.4947C10.9135 12.7998 11.4081 12.7998 11.7132 12.4947C12.0183 12.1896 12.0183 11.6949 11.7132 11.3898Z" fill="white"/>
+																		<path d="M20 1.25C19.5686 1.25 19.2188 1.59984 19.2188 2.03125V8.28125C19.2188 8.71266 19.5686 9.0625 20 9.0625C20.4314 9.0625 20.7812 8.71266 20.7812 8.28125V2.03125C20.7812 1.59984 20.4314 1.25 20 1.25Z" fill="white"/>
+																	</svg>
+																</span>
+															</div>
+															<div class="icon-content">
+																<h5 class="text-[22px] mb-0">emergency services available</h5>
+																<p class="lg:text-lg text-base font-light leading-[1.2] mb-0"><a href="#" class="text-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </a></p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</section>
+
+				<section class="2xxl:pb-17.5 pb-10 bg-light">
+					<div class="container">
+						<figure class="grid grid-cols-12 gap-5">
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/1.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/2.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/3.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/4.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/5.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+							<figure class="md:col-span-4 col-span-6"><img src="images/services/6.webp" alt="/" class="size-full object-cover flex-1 sm:rounded-xxl rounded-lg"></figure>
+						</figure>
+					</div>
+				</section>
+
+				<section class="2xxl:pt-25 2xxl:pb-17.5 md:pt-17.5 sm:pt-12.5 pt-10 pb-10 bg-white">
+			<div class="container">
+				<div class="row content-wrapper style-5 items-center">
+					<div class="2xl:w-5/12 lg:w-1/2 w-full mb-7.5">
+						<div class="relative wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+							<div class="rounded-2xl relative overflow-hidden">
+								<img src="images/about/image.webp" alt="" class="w-full">
+							</div>
+						</div>
+					</div>
+					<div class="2xl:w-7/12 lg:w-1/2 w-full mb-7.5 self-center">
+						<div class="xl:pl-7.5">
+							<div class="sm:mb-7.5 mb-5 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize mb-3.75">Frequently Asked Questions</h2>
+								<p class="xl:text-lg sm:text-base text-sm font-light">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+							</div>
+							<div class="myAccordion style-3 mb-8.75 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" id="accordionExample">
+								<div class="accordion-item">
+									<h2 class="accordion-header open">
+										<button class="accordion-button" type="button">
+											How much do you charge for pedicure ?
+										</button>
+										<span class="arrow active">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+											<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content show">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											What types of treatments do you offer?
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+											<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											How do i book my appointment ?
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+											<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+								<div class="accordion-item">
+									<h2 class="accordion-header">
+										<button class="accordion-button" type="button">
+											Can i cancel my appointment
+										</button>
+										<span class="arrow">
+											<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+											<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+										</span>
+									</h2>
+									<div class="accordion-content">
+										<div class="content-inner">
+											<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+				<section class="bg-light bg-no-repeat 2xxl:bg-size-[45%] bg-contain bg-top-right max-sm:!bg-none 2xxl:mt-0 xl:mt-7.5" style="background-image: url(images/about/1.png);">
+					<div class="container">
+						<div class="row 2xxl:min-h-100 lg:min-h-75 min-h-64.5 2xxl:!-mx-25 !mx-0 2xl:rounded-6xl lg:rounded-3xl rounded-2xl 2xxl:py-30 2xxl:px-25 lg:py-20 lg:px-12.5 py-10.75 sm:px-3.75 sm:bg-size-[60%] bg-size-[75%] bg-no-repeat bg-top-right relative overflow-hidden">
+							<div class="xl:w-1/2 md:w-7/12 sm:w-3/4">
+								<div class="relative mb-0 z-2">
+									<h2 class="2xxl:text-6xxl xl:text-5xxl sm:text-4xxl text-[32px] font-bold capitalize sm:mb-7.5 mb-3.75">Want to schedule an appointment?</h2>
+									<a href="about-us.html" class="btn btn-lg btn-icon btn-primary btn-shadow">
+										Appointment
+										<i class="feather icon-arrow-right"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</main>
+
+			<!-- Footer -->
+						<footer class="bg-secondary bg-blend-luminosity" style="background-image: url(images/background/bg1.webp)">
+				<div class="pt-7.5 mx-2.5">
+					<div class="container pt-15 z-2 !px-3.75 pb-7.5 relative before:absolute before:top-0 2xxl:before:-left-12.5 xl:before:-left-5 before:left-0 before:bg-white before:rounded-xxl 2xxl:before:w-[calc(100%_+_110px)] xl:before:w-[calc(100%_+_40px)] before:w-full before:h-full before:-z-1">
+						<div class="row">
+							<div class="xl:w-5/12 lg:w-1/4 w-full">
+								<div class="row h-full">
+									<div class="xl:w-1/3 w-full">
+										<div class="flex flex-col h-full justify-between pb-5">
+											<div class="mb-6">
+												<a href="index.html"><img src="images/logo.svg" alt="" class="max-w-45"></a> 
+											</div>
+											<ul class="flex gap-1.25">
+												<li>
+													<a href="https://www.facebook.com" target="_blank" class="size-12.5 leading-12.5 text-center text-sm block rounded-full bg-black/10 text-black hover:text-white hover:bg-primary">
+														<i class="fa-brands fa-facebook-f"></i>
+													</a>
+												</li>
+												<li>
+													<a href="https://twitter.com" target="_blank" class="size-12.5 leading-12.5 text-center text-sm block rounded-full bg-black/10 text-black hover:text-white hover:bg-primary">
+														<i class="fa-brands fa-x-twitter"></i>
+													</a>
+												</li>
+												<li>
+													<a href="https://www.instagram.com" target="_blank" class="size-12.5 leading-12.5 text-center text-sm block rounded-full bg-black/10 text-black hover:text-white hover:bg-primary">
+														<i class="fa-brands fa-instagram"></i>
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="w-2/3 self-end hidden xl:block">
+										<div class="relative mix-blend-darken -my-7.5 -mr-3.75 ml-5 after:absolute after:top-px after:left-px after:bottom-px after:right-px after:bg-primary after:opacity-40 after:mix-blend-color">
+											<img src="images/footer.png" alt="" class="w-full">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="xl:w-7/12 lg:w-3/4 flex flex-col w-full">
+								<div class="row lg:!ms-12">
+									<div class="md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+										<div class="mb-7.5">
+											<h2 class="relative mb-5 text-sm text-primary uppercase">Useful Links</h2>
+											<ul>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Privacy Policy</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Terms & Conditions</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="contact-us.html"><span class="relative link-hover">Contact Us</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Latest News</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Our Sitemap</span></a>
+												</li>
+											</ul>   
+										</div>
+									</div>
+									<div class="md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+										<div class="mb-7.5">
+											<h2 class="relative mb-5 text-sm text-primary uppercase">Our Stores</h2>
+											<ul>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">New York</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">London SF</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Edinburgh</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Los Angeles</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="javascript:void(0);"><span class="relative link-hover">Las Vegas</span></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="md:w-1/3 w-1/2 wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+										<div class="mb-7.5">
+											<h2 class="relative mb-5 text-sm text-primary uppercase">Quick Links</h2>
+											<ul>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="about-us.html"><span class="relative link-hover">About Us</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="services.html"><span class="relative link-hover">Our Services</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="team.html"><span class="relative link-hover">Our Team</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="appointment.html"><span class="relative link-hover">Appointments</span></a>
+												</li>
+												<li class="relative py-2 text-2sm leading-5 font-medium">
+													<a class="block text-secondary" href="contact-us.html"><span class="relative link-hover">Contact Us</span></a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="text-center lg:text-end fb-bottom mt-auto pt-7.5 border-t border-black/10">
+									<p class="copyright-text text-secondary mb-0">© Copyright By <span class="current-year">2025</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-primary">DexignZone</a> All Rights Reserved.</p>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<!-- Footer Top -->
+				<div class="footer-middle">
+					<div class="container">
+						<div class="py-10">
+							<div class="row items-center g-lg-5 g-4">
+								<div class="lg:w-7/12 w-full wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<h2 class="2xxl:text-4xl xl:text-3xxl lg:text-2xl text-[22px] xl:font-extrabold xl:leading-12 !text-white">Latest news and updates for <br>your child’s health and care</h2>
+									<p class="xl:text-lg text-base text-white/70 mb-0">Get our latest and best contents right into your inbox</p>
+								</div>
+								<div class="lg:w-5/12 w-full wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<form class="dzSubscribe style-4" action="../assets/script/mailchimp.php" method="post">
+										<div class="dzSubscribeMsg"></div>
+										<h4 class="text-sm !text-white">Subscribe Now</h4>
+										<div class="relative flex flex-wrap items-stretch w-full">
+											<input name="dzEmail" required="required" type="email" class="py-3.75 ps-5 pe-12 text-2sm text-left text-white border-2 border-white/20 rounded-xxl min-h-15 relative w-[1%] flex-1" placeholder="Enter your email address">
+											<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+												<button name="submit" value="Submit" type="submit" class="relative z-2 p-2 text-white">
+													<i class="feather icon-arrow-right text-2xl"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Footer Top End -->
+			</footer>
+			<!-- Footer End -->
+
+		</div>
+	</div>
+	
+	<button id="scrollProgress" title="Scroll to top" class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-3">
+<head>
+
+		<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta name="keywords" content="ClinicMaster, Skincare Template, Dermatology Website, Tailwind CSS, Skin Clinic Template, Cosmetic Care, Aesthetic Clinic, Beauty & Wellness Template, Responsive Skincare Template, Dermatologist Portfolio, Skin Treatment Website, Healthcare UI Kit">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/skincare/service-detail.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../skincare/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone">
+	<meta property="og:description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/skincare">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Skincare & Dermatology Tailwind CSS Template | DexignZone">
+	<meta name="twitter:description" content="ClinicMaster is a modern Skincare & Dermatology Tailwind CSS template designed for skin clinics, dermatologists, cosmetic care, and wellness websites. Fully responsive, customizable, and user-friendly.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-light" id="dzPreloader">
+	<div class="block w-32.5 h-1 rounded-3xl bg-white relative before:absolute before:bg-primary before:top-0 before:left-0 before:w-0 before:h-full before:rounded-3xl before:animate-dzMoving"></div>
+</div>
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper !absolute top-0 left-0 w-full z-999 border-b border-white/10">
+
+	<div class="main-bar relative xl:pl-20 lg:text-heading text-secondary w-full">
+		<div class="container-fluid flex pl-[calc(80px_/_2)]">
+
+			<div class="border-r border-white/10 h-full w-20 min-w-20 flex justify-center items-center absolute left-0 top-0 max-xl:hidden">
+				<button type="button" class="py-2.4 px-4 rounded-lg toggle-nav-btn" data-drawer="#offcanvas-right" data-drawer-placement="right">
+					<span class="w-5 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+					<span class="w-4 my-1.25 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+					<span class="w-5 h-0.5 [.sticky-header-wrapper.is-fixed_&]:bg-secondary bg-white block duration-500"></span>
+				</button>
+			</div>
+
+			<!-- Website Logo -->
+			<div class="flex items-center align-middle xl:w-41.25 w-33.75 sm:h-20 h-15.25 xl:me-7.5 me-2 logo-dark">
+				<a href="index.html" class="table-cell align-middle">
+					<img src="../skincare/images/logo-white.svg" alt="logo" class="object-contain duration-500 block [.sticky-header-wrapper.is-fixed_&]:hidden">
+					<img src="../skincare/images/logo.svg" alt="" class="object-contain duration-500 [.sticky-header-wrapper.is-fixed_&]:block hidden">
+				</a>
+			</div>
+
+			<button class="xmenu-toggler lg:hidden float-right sm:mt-4.5 sm:mb-4 sm:ml-7 my-2.5 ml-5 size-11 bg-white rounded-md relative cursor-pointer max-lg:order-1 max-md:ms-auto" type="button">
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-3.25 w-5.5"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-0 top-5.5 w-6.25"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-secondary duration-300 top-8 w-4"></span>
+			</button>
+			<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+			<div class="flex lg:basis-auto lg:grow max-lg:flex-col justify-start font-title max-lg:fixed max-lg:h-screen max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 [.sticky-header-wrapper.is-fixed_&]:text-secondary lg:text-white header-nav custom-scroll">
+				<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+					<a href="index.html" class="table-cell align-middle">
+						<img src="../skincare/images/logo.svg" alt="" class="object-contain duration-500">
+					</a>
+				</div>
+				<ul class="lg:flex flex-wrap navbar-nav">
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Home</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynocology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../physiotherapy/index.html" class="max-lg:py-2.5 block">
+										<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Pages</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us-2.html"><span>About Us 2</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="testimonial.html"><span>Testimonial</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Team</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team-detail.html"><span>Team Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Services</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail-2.html"><span>Services Detail 2</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="faqs.html"><span>Faqs</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Shop</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="shop.html"><span>Shop</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="shop-details.html"><span>Shop Details</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Blogs</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Post Layout </span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="header-image.html"><span>Header Image</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Elements</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">			
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+												<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+													<i class="fa-solid fa-fire-flame-curved"></i>
+												</span>
+											</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg-white [.sticky-header-wrapper.is-fixed_&]:after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Contact Us</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="contact-us.html"><span>Contact Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="contact-us-2.html"><span>Contact Us 2</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<div class="lg:hidden block max-lg:p-5 text-center mt-auto">
+					<ul>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="extra-nav flex items-center h-20 3xl:pl-7.5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 [.extra-nav.bottom-end]:-bottom-20">
+				<div class="flex items-center w-full">						
+					<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+						<li class="inline-block">
+							<a href="javascript:void(0);" class="min-w-10 flex align-center justify-center align-middle relative" data-drawer="#offcanvas-right-2" data-drawer-placement="right">
+								<i class="feather icon-shopping-cart text-[32px] [.sticky-header-wrapper.is-fixed_&]:text-secondary sm:text-white"></i>
+								<span class="absolute -top-1 right-0.5 text-xs flex items-center justify-center min-h-4.5 min-w-4.5 font-semibold bg-white text-secondary rounded-full">5</span>
+							</a>
+						</li>
+						<li class="2xxl:inline-flex items-center gap-3.75 hidden">
+							<div class="widget-media">
+								<i class="feather icon-phone-call dz-ring-effect text-3xxl inline-flex animate-dzRing [.sticky-header-wrapper.is-fixed_&]:text-secondary text-white"></i>
+							</div>
+							<div class="widget-content">
+								<h6 class="text-primary text-sm font-normal mb-0">Contact us?</h6>
+								<a href="tel:+11234567890" class="sm:text-lg text-base font-semibold [.sticky-header-wrapper.is-fixed_&]:text-secondary text-white">+1 123 456 7890</a>
+							</div>
+						</li>
+						<li class="inline-block max-xl:hidden max-sm:!block">
+							<a href="appointment.html" class="btn btn-primary btn-hover1 max-md:!text-sm max-md:!py-2.5 max-md:!px-4.5 max-md:!rounded-2lg">
+								Appointment
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed -top-full left-0 size-full bg-white/80 z-999 flex items-center justify-center p-8 duration-500 xmenu-search" id="searchOverlay4">
+				<form class="w-full" action="#">
+					<div class="relative max-w-3xl w-3xl mx-auto">
+						<input name="search" value="" type="text" class="h-14 py-4 px-5 border border-white/20 text-white w-full outline-none duration-300 focus:border-primary" placeholder="Type to search">
+						<button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 h-full w-10 flex items-center"><i class="fa fa-search text-base text-white"></i></button>
+					</div>
+					<button type="button" class="absolute right-8 top-8 text-white text-xl opacity-80 size-8 cursor-pointer search-remove"><i class="fa fa-close"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</header>
+
+
+<div id="offcanvas-right" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-white w-88 custom-scroll">
+	<div class="flex items-center justify-between p-4">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="mb-8.75">
+			<div class="w-40 mb-5">
+				<a href="index.html"><img src="../skincare/images/logo.svg" alt="/"></a>
+			</div>
+			<p>ClinicMaster is a modern and responsive Tailwind HTML template designed for health and medical websites. Ideal for clinics, hospitals, and healthcare professionals seeking a professional online presence with an elegant and user-friendly design.</p>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Contact Us</h4>
+			</div>
+			<ul class="list-check">
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2">785 15h Street, Office 478 Berlin, De 81566</li>
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2"><a href="mailto:email@domain.com" class="text-body">email@domain.com</a></li>
+				<li class="relative p-1.25 ps-7.5 text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:top-2"><a href="tel:+11234567890" class="text-body">+1 123 456 7890</a></li>
+			</ul>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Newsletter</h4>
+			</div>
+			<form class="dzSubscribe style-2" action="../assets/script/mailchimp.php" method="post">
+				<div class="dzSubscribeMsg"></div>
+				<div class="form-group">
+					<div class="relative flex flex-wrap items-stretch w-full">
+						<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] h-15 text-bodycolor border-b-2 border-[#DAE2F2] text-base pr-15 py-3.75 z-0 placeholder:text-bodycolor" placeholder="Your Email Address">
+						<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+							<button name="submit" value="Submit" type="submit" class="text-primary p-2 cursor-pointer">
+								<i class="fa-solid fa-paper-plane"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="mb-8.75">
+			<div class="mb-3.75">
+				<h4 class="text-xl mb-0">Follow Us</h4>
+			</div>
+			<div class="flex">
+				<ul class="flex">
+					<li class="inline-block mr-1.25">
+						<a href="https://www.linkedin.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-linkedin"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.instagram.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-instagram"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.facebook.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-facebook-f"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://twitter.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-x-twitter"></i>
+						</a>
+					</li>
+					<li class="inline-block mr-1.25">
+						<a href="https://www.youtube.com" target="_blank" class=" size-11 leading-[44px] text-center text-sm block rounded-full bg-light text-primary hover:text-white hover:bg-primary">
+							<i class="fa-brands fa-youtube"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="offcanvas-right-2" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-bodybg sm:w-100 w-90 custom-scroll">
+	<div class="flex items-center justify-between px-4 pt-2">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right-2">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="sidebar-cart-wrapper">
+			<h2 class="flex items-center gap-2.5 text-base border-b border-black/10 pb-2.5 mb-3.75">
+				Shopping Cart
+				<span class="py-1 font-semibold bg-primary text-white rounded-full text-[11px] size-5.75 min-w-5.75 min-h-5.75 uppercase text-center">3</span>
+			</h2>
+			<div class="flex flex-col min-h-[calc(100vh-147.5px)]">
+				<ul class="sidebar-cart-list">
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img1.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Herbal beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img2.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Green beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img4.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Sun beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+				<div class="flex items-center justify-between py-4.5 mb-2.5">
+					<h5 class="font-semibold text-lg mb-0">Subtotal:</h5>
+					<h5 class="font-semibold text-lg mb-0">300.00$</h5>
+				</div>
+				<div class="mt-auto text-center">
+					<a href="shop-checkout.html" class="btn btn-primary btn-hover1 mx-0.25">Checkout</a>
+					<a href="shop-cart.html" class="btn btn-secondary btn-hover1 mx-0.25">View Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- Header End -->
+	
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+
+			<main class="page-content">
+			
+				<div class="2xxl:min-h-125 lg:min-h-112.5 md:min-h-100 sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden pb-7.5 before:absolute before:left-0 before:top-0 before:size-full before:bg-[#07121E] before:opacity-70 after:w-full after:h-[calc(100%_-_80px)] after:absolute after:bottom-0 after:right-0 after:z-0 after:bg-[url(../../skincare/images/banner/bg.webp)] after:bg-no-repeat after:bg-position-[right_-13px_top] max-lg:after:hidden" style="background-image:url(images/banner/bnr1.webp);">
+						<div class="container relative z-1 h-full table">
+							<div class="table-cell 2xxl:h-125 lg:h-112.5 md:h-100 sm:h-87.5 h-75 align-middle pt-22.5 pb-5 text-center">
+								<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-[32px] font-semibold mb-3.75 break-word text-white wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Service Detail</h1>
+								<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-white shadow-breadcrumb">
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading"><a href="index.html" class="text-primary">Home</a></li>
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading pl-2 relative before:content-['\f101'] before:float-left before:text-heading before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">Service Detail</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+						<div class="h-[calc(100%_-_80px)] w-20 min-w-20 absolute bottom-0 flex justify-between items-center flex-col py-18.75 px-3.75 left-0 border-r border-white/10 z-1 max-xl:hidden">
+							<ul class="flex gap-7.5 [writing-mode:tb-rl]">
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.instagram.com/">Instagram</a></li>
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://www.facebook.com/">Facebook</a></li>
+								<li><a class="text-sm uppercase text-white tracking-[1px]" href="https://x.com/">twitter</a></li>
+							</ul>
+						</div>
+						<div class="absolute bottom-0 right-0 bg-primary size-71.25 rounded-full blur-[120px] opacity-50 max-xl:hidden"></div>
+						<div class="absolute top-[25%] left-0 bg-yellow-400 size-71.25 rounded-full blur-[120px] opacity-40 max-xl:hidden"></div>
+						<div class="absolute top-1/4 left-25 rounded-full size-16.25 object-cover z-2 border border-white overflow-hidden max-xl:hidden">
+							<img src="images/hero-banner/img2.jpg" alt="">
+						</div>
+						<div class="absolute z-0 top-[35%] right-[32%] max-md:hidden">
+							<svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M30.5 0L34.4251 26.5749L61 30.5L34.4251 34.4251L30.5 61L26.5749 34.4251L0 30.5L26.5749 26.5749L30.5 0Z" fill="#F46700"/>
+							</svg>
+						</div>
+						<div class="absolute z-0 bottom-0 right-[38%] max-md:hidden">
+							<svg width="102" height="102" viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<g filter="url(#filter0_d_102_123)">
+									<path d="M51 40L52.4156 49.5844L62 51L52.4156 52.4156L51 62L49.5844 52.4156L40 51L49.5844 49.5844L51 40Z" fill="#F46700"/>
+								</g>
+								<defs>
+									<filter id="filter0_d_102_123" x="0" y="0" width="102" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+										<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+										<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+										<feOffset/>
+										<feGaussianBlur stdDeviation="20"/>
+										<feComposite in2="hardAlpha" operator="out"/>
+										<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+										<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_102_123"/>
+										<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_102_123" result="shape"/>
+									</filter>
+								</defs>
+							</svg>					
+						</div>
+						<div class="absolute z-0 bottom-[20%] right-[10%] max-md:hidden">
+							<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M15 0L16.9304 13.0696L30 15L16.9304 16.9304L15 30L13.0696 16.9304L0 15L13.0696 13.0696L15 0Z" fill="#F46700"/>
+							</svg>					
+						</div>
+					</div>
+		
+				<section class="2xl:pt-25 2xl:pb-17.5 md:pt-17.5 md:pb-10 sm:pt-12.5 sm:pb-5 pt-10 pb-5 service-single bg-light">
+					<div class="container">
+						<div class="row">
+							<div class="lg:w-2/3 single-inner lg:order-1">
+								<div class="relative overflow-hidden xl:h-125 sm:h-100 h-62.5 rounded-2xl md:mb-11.25 sm:mb-6.25 mb-3.75" data-wow-delay="0.2s" data-wow-duration="0.8s">
+									<img src="images/services/large/img1.webp" alt="" class="size-full object-cover">
+								</div>
+								<div class="sm:mb-8.75 mb-5 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<h2 class="md:text-3xxl sm:text-3xl text-2xxl mb-2.5 capitalize">Cosmetic Dermatology</h2>
+									<p class="md:text-lg text-base font-light capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+									<p class="md:text-lg text-base font-light capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including.</p>
+								</div>
+								<div class="sm:mb-8.75 mb-5 row g-4 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+									<div class="xl:w-1/2 w-full">
+										<div class="dz-media relative overflow-hidden xl:h-125 sm:h-100 h-62.5 rounded-2xl xl:me-6">
+											<img src="images/services/img1.webp" alt="" class="size-full object-cover">
+										</div>
+									</div>
+									<div class="xl:w-1/2 w-full">
+										<h4 class="text-xl sm:mb-5 mb-3 capitalize">Benefits of Cosmetic Dermatology:</h4>
+										<p class="fs-6 font-normal">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.</p>
+										<ul class="list-style-1">
+											<li class="w-full py-3.5 pe-1.25 ps-18.75 relative text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:size-15 before:leading-15 before:text-center before:bg-white before:rounded-full before:shadow-1 before:top-2">
+												<h6 class="text-lg mb-1.25">Enhanced Appearance</h6>
+												<p class="sm:text-2sm text-sm font-normal leading-normal mb-0">Helps improve the overall aesthetic appeal of the skin, making it look more youthful and refreshed.</p>
+											</li>
+											<li class="w-full py-3.5 pe-1.25 ps-18.75 relative text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:size-15 before:leading-15 before:text-center before:bg-white before:rounded-full before:shadow-1 before:top-2">
+												<h6 class="text-lg mb-1.25">Boost in Confidence</h6>
+												<p class="sm:text-2sm text-sm font-normal leading-normal mb-0">Many individuals experience an increase in self-esteem and confidence after cosmetic treatments.</p>
+											</li>
+											<li class="w-full py-3.5 pe-1.25 ps-18.75 relative text-base before:absolute before:left-0 before:font-black before:content-['\f109'] before:font-['flaticon'] before:text-primary before:size-15 before:leading-15 before:text-center before:bg-white before:rounded-full before:shadow-1 before:top-2">
+												<h6 class="text-lg mb-1.25">Addressing Skin Imperfections</h6>
+												<p class="sm:text-2sm text-sm font-normal leading-normal mb-0">Effective in treating acne scars, pigmentation issues, and other skin imperfections.</p>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="sm:mb-8.75 mb-5 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+									<h3 class="md:text-2xxl sm:text-2xl text-xl sm:mb-5 mb-3 capitalize">Long term care services</h3>
+									<p class="md:text-lg text-base font-light capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+									<p class="md:text-lg text-base font-light capitalize">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including.</p>
+								</div>
+								<div class="sm:mb-8.75 mb-5 wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+									<h3 class="md:text-2xxl sm:text-2xl text-xl sm:mb-5 mb-3 capitalize">Frequently Asked Questions</h3>
+									<p class="md:text-lg text-base font-light capitalize">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+									<div class="myAccordion style-3 mb-8.75 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header open">
+												<button class="accordion-button" type="button">
+													How much do you charge for pedicure ?
+												</button>
+												<span class="arrow active">
+													<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content show">
+												<div class="content-inner">
+													<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button" type="button">
+													What types of treatments do you offer?
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content">
+												<div class="content-inner">
+													<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button" type="button">
+													How do i book my appointment ?
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content">
+												<div class="content-inner">
+													<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header">
+												<button class="accordion-button" type="button">
+													Can i cancel my appointment
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content">
+												<div class="content-inner">
+													<p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="lg:w-1/3 mb-7.5">
+								<aside class="xl:pr-11.25 pb-px my-sticky z-1 top-30">
+									<div class="py-7.5 px-5 rounded-2xl bg-white md:mb-11.25 sm:mb-6.25 mb-3.75 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+										<div class="px-5 mb-5 relative font-medium">
+											<h4 class="text-xl mb-0">All Services</h4>
+										</div>
+										<ul>
+											<li class="active"><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Cosmetic Dermatology</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Dermatologic Surgery</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Earlobe Repair</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Laser Resurfacing</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Anti Aging</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Earlobe Repair</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Laser Resurfacing</a></li>
+											<li><a class="bg-white block rounded-2lg py-3 px-5 font-medium mb-1.25 text-secondary duration-500 relative z-1 overflow-hidden before:content-['\e829'] before:font-['feather'] before:absolute before:right-2.5 before:left-auto before:top-1/2 before:text-lg before:text-primary hover:before:text-white before:duration-500  before:-translate-1/2 hover:bg-primary hover:text-white [li.active_&]:bg-primary [li.active_&]:text-white [li.active_&]:before:text-white" href="service-detail.html">Anti Aging</a></li>
+										</ul>
+									</div>
+									<div class="py-11.25 px-10 rounded-2xl text-center relative z-1 overflow-hidden bg-white bg-cover bg-bottom-right" style="background-image:url(images/background/bg04.webp);">
+										<div class="widget-content">
+											<svg class="mb-7.5 mx-auto" width="80" height="70" viewBox="0 0 80 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M77.9837 64.7933L76.0456 58.0361C75.9556 57.4945 76.0583 56.9388 76.3361 56.4652C78.7334 52.3795 80.0006 47.703 80.0006 42.9412C80.0006 29.2347 69.6448 17.9033 56.3469 16.3555C57.5608 19.6988 58.2241 23.3041 58.2241 27.0616C58.2241 27.7203 58.2012 28.3739 58.1611 29.0228H66.9298C68.1919 29.0228 69.2778 29.9927 69.3372 31.2533C69.4006 32.5992 68.3281 33.7103 66.9961 33.7103H57.5147C56.9942 36.1195 56.1983 38.4272 55.1592 40.5977H66.9298C68.1919 40.5977 69.2778 41.5675 69.3372 42.8281C69.4006 44.1741 68.3281 45.2852 66.9961 45.2852H52.3938C50.523 47.9081 48.2595 50.232 45.6909 52.1725H66.93C68.192 52.1725 69.278 53.1423 69.3373 54.403C69.4008 55.7489 68.3283 56.86 66.9963 56.86H39.4833C38.9648 56.86 38.4875 56.6897 38.0994 56.4047C35.9222 57.2483 33.6288 57.8556 31.25 58.1964C36.0897 65.1491 44.138 69.7092 53.2325 69.7092C57.9944 69.7092 62.6708 68.4422 66.7566 66.0448C67.23 65.7672 67.7864 65.6639 68.3275 65.7545L75.0845 67.6925C76.8542 68.2 78.4913 66.563 77.9837 64.7933Z" fill="var(--color-primary)"/>
+												<path d="M26.768 53.8289C41.5278 53.8289 53.5359 41.8209 53.5359 27.0609C53.5359 12.2416 41.5878 0.293281 26.7686 0.292969C12.0084 0.292656 0 12.3008 0 27.0609C0 31.8227 1.26719 36.4991 3.66453 40.585C3.94234 41.0584 4.04516 41.6144 3.955 42.1559L2.01688 48.9131C1.50937 50.6827 3.14641 52.3197 4.91594 51.8122L11.6731 49.8741C11.8009 49.8528 11.9297 49.8423 12.058 49.8423C12.4727 49.8423 12.8823 49.9523 13.2441 50.1647C17.3298 52.5619 22.0064 53.8289 26.768 53.8289ZM26.768 44.3108C25.4541 44.3108 24.4811 43.2369 24.4242 41.967C24.3675 40.7013 25.542 39.6233 26.768 39.6233C28.0819 39.6233 29.0548 40.6972 29.1117 41.967C29.1684 43.2328 27.9939 44.3108 26.768 44.3108ZM17.7937 18.7853C17.7937 13.8369 21.8195 9.81094 26.768 9.81094C31.7164 9.81094 35.7422 13.8369 35.7422 18.7853C35.7422 22.923 32.927 26.4158 29.1117 27.4491V33.1816C29.1117 34.4759 28.0623 35.5253 26.768 35.5253C25.4736 35.5253 24.4242 34.4759 24.4242 33.1816V25.4156C24.4242 24.1213 25.4736 23.0719 26.768 23.0719C29.1317 23.0719 31.0547 21.1489 31.0547 18.7852C31.0547 16.4214 29.1317 14.4983 26.768 14.4983C24.4044 14.4983 22.4813 16.4214 22.4813 18.7852C22.4813 20.0795 21.4319 21.1289 20.1375 21.1289C18.8431 21.1289 17.7937 20.0797 17.7937 18.7853Z" fill="var(--color-primary)"/>
+											</svg>
+											<h4 class="text-xl font-medium pb-5 mb-5 border-b border-black/10">Do you need any help?</h4>
+											<div class="text-secondary relative text-xl font-medium mb-3">
+												<a href="tel:+11234567890">+1 123 456 7890</a>
+											</div>
+											<div class="text-secondary relative text-xl font-medium mb-8.75">
+												<a href="mailto:info@support.com">info@support.com</a>
+											</div>
+											<div class="link-btn">
+												<a href="contact-us.html" class="btn btn-lg btn-icon btn-primary group">
+													Contact Us <span class="size-11 min-w-11 rounded-2lg inline-flex items-center justify-center -my-2.75 -mr-4.5 ml-3 duration-500 bg-white text-secondary"><i class="feather icon-arrow-right"></i></span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</aside>
+							</div>
+						</div>
+					</div>
+				</section>
+				
+			</main>
+
+			<!-- Footer -->
+			<footer style="--color-bodycolor: #BED2E7;" class="text-bodycolor bg-[#07121E] bg-blend-luminosity bg-cover bg-no-repeat bg-center bg-[url(../../skincare/images/background/bg1.webp)]">
+		
+		<!-- Footer Head -->
+		<div class="footer-head">
+			<div class="container">
+				<div class="pt-10 pb-2.5 border-b border-white/15">
+					<div class="row items-center">
+						<div class="lg:w-1/3 md:w-5/12 text-center md:text-start wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+							<div class="mb-6">
+								<a href="index.html"><img src="images/logo-white.svg" alt="" class="max-w-45"></a> 
+							</div>
+						</div>
+						<div class="lg:w-2/3 md:w-7/12 text-center md:text-end wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+							<div class="mb-6.25">
+								<a href="contact-us.html" class="btn btn-lg btn-outline-white text-white btn-hover1">
+									Contact Us
+								</a>
+								<a href="appointment.html" class="btn btn-lg btn-white text-primary btn-hover1 ml-5">
+									Appointment
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer Top -->
+		<div class="md:pt-17.5 md:pb-7.5 sm:pt-12.5 sm:pb-5 pt-11.25">
+			<div class="container">
+				<div class="row">
+					<div class="xl:w-1/4 lg:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<h2 class="relative text-xl sm:mb-5 mb-3.75 font-medium text-white">Important Updates <br>Waiting for you</h2>
+							<p class="text-2sm leading-[1.7] mb-5">Get our latest and best contents right into your inbox</p>
+							<form class="dzSubscribe style-1" action="../assets/script/mailchimp.php" method="post">
+								<div class="dzSubscribeMsg"></div>
+								<div class="relative flex flex-wrap items-stretch w-full">
+									<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] py-3.75 pl-6.25 pr-15 text-base text-left text-bodycolor border border-[#07121E] bg-[#07121E] placeholder:text-bodycolor rounded-[18px]" placeholder="Your Email Address">
+									<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+										<button name="submit" value="Submit" type="submit" class="size-12 min-w-12 text-lg leading-12 text-center">
+											<i class="flaticon-message"></i>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="xl:w-9/12 w-full wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+						<div class="row">
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Our Services </h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Emergency Care</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Operation Theater</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Medical Checkup</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Diagnostic Center</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="service-detail.html"><span class="link-hover">Outdoor Checkup</span></a></li>
+									</ul>   
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Useful Links</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Privacy Policy</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Terms & Conditions</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="contact-us.html"><span class="link-hover">Contact Us</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="blog-grid.html"><span class="link-hover">Latest News</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Our Sitemap</span></a></li>
+									</ul>   
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Our Stores</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">New York</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">London SF</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Edinburgh</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Los Angeles</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="javascript:void(0);"><span class="link-hover">Las Vegas</span></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="md:w-1/4 w-1/2">
+								<div class="mb-7.5 2xxl:pl-7.5">
+									<h2 class="relative text-xl mb-5 font-medium text-white">Quick Links</h2>
+									<ul class="list-hover1">
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="about-us.html"><span class="link-hover">About Us</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="services.html"><span class="link-hover">Our Services</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="team.html"><span class="link-hover">Our Team</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="appointment.html"><span class="link-hover">Appointments</span></a></li>
+										<li class="relative py-2 text-2sm leading-5 font-medium"><a class="block hover:text-primary" href="contact-us.html"><span class="link-hover">Contact Us</span></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Top End -->
+		
+		<!-- Footer Top -->
+		<div class="footer-middle">
+			<div class="container">
+				<div class="bg-[#07121E] rounded-3xl md:py-6.25 md:px-10 p-6.25">
+					<div class="row g-3 items-center">
+						<div class="xl:w-1/4 md:w-full sm:w-1/2 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+							<h3 class="md:text-2xl text-[19px] mb-0.75 text-white">Get in Touch with us</h3>
+							<p class="mb-0">Lorem Ipsum is simply dummy</p>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-phone flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Call Us</h5>
+									<p class="text-2sm font-light mb-0"><a href="tel:+11234567890" class="text-body">+1 123 456 7890</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-mail flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Send us a Mail</h5>
+									<p class="text-2sm font-light mb-0"><a href="mailto:info@example.com" class="text-body">info@example.com</a></p>
+								</div>
+							</div>
+						</div>
+						<div class="xl:w-1/4 md:w-1/3 sm:w-1/2 wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+							<div class="flex gap-3.75">
+								<div class="lg:min-w-15 lg:size-15 min-w-12.5 size-12.5 flex items-center lg:text-2xl text-lg justify-center rounded-full bg-primary text-white">
+									<span class="icon-cell">
+										<i class="feather icon-clock flex"></i>
+									</span>
+								</div>
+								<div class="overflow-hidden">
+									<h5 class="lg:text-lg text-base font-medium text-white mb-1.25">Opening Time</h5>
+									<p class="text-2sm font-light mb-0">Mon -Sat: 7:00 - 17:00</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="py-5 text-base">
+					<div class="row">
+						<div class="lg:w-1/2 w-full lg:text-start text-center"> 
+							<p class="copyright-text">© <span class="current-year">2024</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-primary">DexignZone</a> Theme. All Rights Reserved.</p>
+						</div>
+						<div class="lg:w-1/2 w-full lg:text-end text-center"> 
+							<img src="images/card.webp" alt="" class="inline-block">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom End -->
+		
+	</footer>
+			<!-- Footer End -->
+
+		</div>
+	</div>
+	
+	<button id="scrollProgress" title="Scroll to top"
+    class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+
+</div>
+
+<!-- JAVASCRIPT FILES ========================================= -->
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

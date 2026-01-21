@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-color="skin-8">
+<head>
+
+	<!-- Character Encoding -->
+	<meta charset="UTF-8">
+
+	<!-- Responsive Design -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Title -->
+	<title>ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone</title>
+
+	<!-- SEO Meta Tags -->
+	<meta name="description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta name="keywords" content="ClinicMaster, ophthalmology Tailwind CSS template, eye care website, vision clinic template, eye specialist website, retina care center, optometrist template, medical website template, healthcare Tailwind CSS, responsive medical template, eye doctor website design, DexignZone">
+	<meta name="author" content="DexignZone">
+	<meta name="robots" content="index, follow">
+
+	<!-- CANONICAL URL -->
+	<link rel="canonical" href="https://clinicmaster.dexignzone.com/tailwind/demo/ophthalmology/services.html">
+
+	<!-- FAVICONS ICON -->
+	<link rel="icon" type="image/png" href="../ophthalmology/images/favicon.png">
+
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone">
+	<meta property="og:description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta property="og:url" content="https://clinicmaster.dexignzone.com/tailwind/demo/ophthalmology">
+	<meta property="og:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+	<meta property="og:site_name" content="ClinicMaster">
+
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="ClinicMaster - Ophthalmology & Eye Care Tailwind CSS Template | DexignZone">
+	<meta name="twitter:description" content="ClinicMaster is a modern Ophthalmology & Eye Care Tailwind CSS Template designed for eye clinics, vision centers, and ophthalmologists. Featuring a clean layout, responsive design, and customizable UI, it helps medical professionals create a professional online presence.">
+	<meta name="twitter:image" content="https://clinicmaster.dexignzone.com/tailwind/demo/social-image.png">
+
+	<!-- IE Compatibility -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="format-detection" content="telephone=no">
+	
+	<link rel="stylesheet" type="text/css" href="../assets/vendor/swiper/swiper-bundle.min.css">
+
+	<link rel="stylesheet" type="text/css" href="../assets/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/flaticon/flaticon.css">
+	<link rel="stylesheet" type="text/css" href="../assets/icons/feather/css/iconfont.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+</head>	
+<body id="bg">
+<div class="page-wraper">
+
+	<div class="fixed size-full left-0 top-0 z-9999999 flex items-center justify-center bg-light" id="dzPreloader">
+	<div class="block w-32.5 h-1 rounded-3xl bg-white relative before:absolute before:bg-primary before:top-0 before:left-0 before:w-0 before:h-full before:rounded-3xl before:animate-dzMoving"></div>
+</div>
+	
+	<div id="offcanvas-right-2" class="fixed top-0 right-0 z-9999999 h-screen overflow-y-auto transition-transform translate-x-full bg-bodybg sm:w-100 w-90 custom-scroll">
+	<div class="flex items-center justify-between px-4 pt-2">
+		<button type="button" class="text-xl" data-drawer-hide="offcanvas-right-2">
+			<i class="fa-solid fa-xmark"></i>
+		</button>
+	</div>
+	<div class="p-7.5 grow overflow-y-auto">
+		<div class="sidebar-cart-wrapper">
+			<h2 class="flex items-center gap-2.5 text-base border-b border-black/10 pb-2.5 mb-3.75">
+				Shopping Cart
+				<span class="py-1 font-semibold bg-primary text-white rounded-full text-[11px] size-5.75 min-w-5.75 min-h-5.75 uppercase text-center">3</span>
+			</h2>
+			<div class="flex flex-col min-h-[calc(100vh-147.5px)]">
+				<ul class="sidebar-cart-list">
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img1.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Herbal beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img2.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Green beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+					<li class="py-5 border-b border-black/10">
+						<div class="flex items-center justify-center">
+							<div class="relative overflow-hidden size-20 min-w-20 rounded-2xl mr-4">
+								<img src="images/shop/img4.webp" alt="">
+							</div>
+							<div class="mr-2.5 flex-1">
+								<h3 class="font-semibold text-sm"><a href="shop-details.html">Sun beauty</a></h3>
+								<div class="flex items-center input-group">
+									<div class="w-26.25 min-w-26.25 h-10.5 p-0.75 bg-white rounded-2lg flex items-stretch mr-2.5">
+										<span class="flex gap-1 rounded-lg text-secondary bg-white p-1.5">
+											<button type="button" value="-" data-field="quantity" class="button-minus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-minus"></i></button>
+											<input type="number" step="1" value="1" name="quantity" class="touchspin h-7.5 w-5.5 leading-6.75 text-center outline-none">
+											<button type="button" value="+" data-field="quantity" class="button-plus cursor-pointer size-7.5 leading-6.75 text-center rounded-lg text-xs bg-light text-primary"><i class="fa-solid fa-plus"></i></button>
+										</span>
+									</div>
+									<h6 class="font-semibold text-sm mb-0">$50.00</h6>
+								</div>
+							</div>
+							<a href="javascript:void(0);" class="size-7 flex items-center justify-center">
+								<i class="feather icon-x text-primary"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+				<div class="flex items-center justify-between py-4.5 mb-2.5">
+					<h5 class="font-semibold text-lg mb-0">Subtotal:</h5>
+					<h5 class="font-semibold text-lg mb-0">300.00$</h5>
+				</div>
+				<div class="mt-auto text-center">
+					<a href="shop-checkout.html" class="btn btn-primary btn-hover1 mx-0.25">Checkout</a>
+					<a href="shop-cart.html" class="btn btn-secondary btn-hover1 mx-0.25">View Cart</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- Header Star -->
+	<header class="site-header sticky-header-wrapper relative w-full z-999 border-b border-black/10">
+	<div class="main-bar relative lg:text-heading text-secondary bg-white w-full">
+		<div class="container-fluid flex 3xl:px-20! xl:px-12.5! md:px-7.5! px-3.75!">
+
+			<!-- Website Logo -->
+			<div class="flex items-center align-middle xl:w-41.25 w-33.75 sm:h-20 h-15.25 xl:me-7.5 me-2 logo-dark">
+				<a href="index.html" class="table-cell align-middle"><img src="../ophthalmology/images/logo.svg" alt="logo" class="object-contain"></a>
+			</div>
+
+			<button class="xmenu-toggler lg:hidden float-right sm:mt-4.5 sm:mb-4 sm:ml-7 my-2.5 ml-5 size-11 bg-secondary rounded-md relative cursor-pointer max-lg:order-1 max-md:ms-auto" type="button">
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-3.25 w-5.5"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-0 top-5.5 w-6.25"></span>
+				<span class="block absolute left-2.5 h-0.5 rounded-px bg-white duration-300 top-8 w-4"></span>
+			</button>
+			<div class="lg:hidden fixed top-0 left-0 bg-black size-full duration-300 z-999 opacity-0 visible pointer-events-none menu-close fade-overlay"></div>
+			<div class="flex lg:basis-auto lg:grow max-lg:flex-col justify-start max-lg:fixed max-lg:h-screen max-lg:px-5 max-lg:top-0 max-lg:-left-75 max-lg:z-9999 max-lg:bg-white max-lg:w-72 max-lg:overflow-auto max-lg:duration-700 header-nav custom-scroll">
+				<div class="flex items-center relative z-9 py-6.25 lg:hidden w-33.75 h-15.25">
+					<a href="index.html" class="table-cell align-middle">
+						<img src="../ophthalmology/images/logo.svg" alt="" class="object-contain duration-500">
+					</a>
+				</div>
+				<ul class="lg:flex flex-wrap navbar-nav">
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Home</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-0 lg:right-0 xl:p-12 lg:p-7.5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-fit lg:max-w-fit lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="flex flex-wrap -mx-3.75 min-h-auto max-h-[calc(100vh_-_120px)]">
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../skincare/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home3.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">01 Skin Care</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dentist/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home2.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">02 Dentist</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../medical/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home1.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">03 Medical</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../pediatrics/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home4.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">04 Pediatrics</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../gynecology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home5.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">05 Gynocology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../dieting/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home6.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">06 Dieting</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../fatloss/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home7.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">07 Fatloss</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../ophthalmology/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home8.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">08 Ophthalmology</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../plasticsurgery/index.html" class="max-lg:py-2.5 max-lg:border-b border-gray-200 block">
+										<img src="../assets/images/demo/home9.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">09 Plasticsurgery</span>
+									</a>
+								</li>
+								<li class="lg:flex-[0_0_25%] flex-[0_0_100%] px-3.75">
+									<a href="../physiotherapy/index.html" class="max-lg:py-2.5 block">
+										<img src="../assets/images/demo/home10.jpg" alt="/" class="w-full shadow-[0_5px_15px_rgba(0,0,0,.14)] max-lg:hidden">
+										<span class="block lg:text-center lg:font-semibold lg:py-3.75 lg:text-secondary max-lg:text-sm">10 Physiotherapy</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Pages</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="about-us.html"><span>About Us</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="appointment.html"><span>Appointment</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="pricing-table.html"><span>Pricing Table</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Team</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team.html"><span>Team</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="team-detail.html"><span>Team Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Services</span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="services.html"><span>Services</span></a>
+									</li>
+									<li class="relative">
+										<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="service-detail.html"><span>Services Detail</span></a>
+									</li>
+								</ul>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="error-404.html"><span>Error 404</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="coming-soon.html"><span>Coming Soon</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="under-construction.html"><span>Under Construction</span></a>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Blogs</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 text-center text-xs bg-secondary rounded text-white float-end"></i>
+						</a>
+						<ul class="lg:absolute bg-white block lg:left-0 lg:py-5 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 w-full lg:w-55 lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden sub-menu">
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-grid.html"><span>Blog Grid</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-list-sidebar.html"><span>Blog List Sidebar</span></a>
+							</li>
+							<li class="relative">
+								<a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="blog-details.html"><span>Blog Details</span></a>
+							</li>
+							<li class="group/second relative sub-menu-down"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary after:content-['\f054'] after:inline-block after:font-black after:font-['Font_Awesome_5_Free'] after:text-tiny after:float-right after:duration-500 max-lg:after:size-7 max-lg:after:leading-7 max-lg:after:text-center max-lg:after:text-xs max-lg:after:rounded max-lg:after:bg-secondary max-lg:after:text-white" href="javascript:void(0);"><span>Post Layout </span></a>
+								<ul class="bg-white lg:py-5 lg:w-55 2xl:left-55 lg:-left-55 lg:top-0 lg:absolute lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left duration-500 lg:group-hover/second:opacity-100 lg:group-hover/second:visible lg:group-hover/second:translate-y-0 max-lg:hidden max-lg:pl-5 sub-menu">						
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="standard-post.html"><span>Standard Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="gutenberg-post.html"><span>Gutenberg Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="corner-post.html"><span>Corner Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="header-image.html"><span>Header Image</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-gallery.html"><span> Post Gallery </span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="link-post.html"><span>Link Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="video-post.html"><span>Video Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="audio-post.html"><span>Audio Post</span> </a></li>
+									<li class="relative"><a class="block relative text-sm text-gray-600 font-normal py-1.25 lg:px-7.5 duration-500 hover:text-primary" href="post-slider.html"><span>Post Slider </span> </a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="javascript:void(0);">
+							<span class="inline-block leading-7.5">Elements</span>
+							<i class="fas fa-chevron-right lg:!hidden !block size-7 !leading-7 rounded text-center text-xs bg-secondary text-white float-end"></i>
+						</a>
+						<div class="lg:absolute bg-white block lg:left-1/2 lg:-translate-x-1/2 lg:right-0 lg:py-12 2xxl:px-[calc((100vw_-_1320px)_/_2_+_15px)] xl:px-7.5 lg:-mx-2 max-lg:py-2.5 max-lg:border-t max-lg:border-gray-200 lg:w-screen lg:max-w-screen w-auto max-w-full lg:opacity-0 lg:invisible lg:translate-y-10 z-10 mt-0 text-left lg:overflow-y-auto lg:h-auto lg:max-h-[calc(100vh-80px)] duration-500 lg:group-hover:opacity-100 lg:group-hover:visible lg:group-hover:translate-y-0 max-lg:hidden mega-menu">
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-buttons.html">Buttons</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-icon-box.html">Icon Box Styles <span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-table.html">Pricing Table</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-tabs.html">Tabs</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-teams.html">Teams</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">			
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-counters.html">Counters</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-accordions.html">Accordions</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-image-effect.html">Image Effects<span class="text-tiny py-0.5 px-1 font-medium rounded bg-red-600/10 text-red-600 ms-1"><i class="fa-solid fa-circle text-[7px] -translate-y-0.5 mr-0.5"></i> HOT</span></a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pagination.html">Pagination</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-shop-widgets.html">Shop Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-form.html">Form Wizards</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-alert.html">Alert Box</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-list.html">List Group</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Element</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-swiper.html">Swiper Sliders</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-gallery.html">Gallery Filters
+												<span class="ms-2 text-red-600 animate-badgeZoom inline-block">
+													<i class="fa-solid fa-fire-flame-curved"></i>
+												</span>
+											</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-widgets.html">Widgets</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blogs.html">Blogs</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<span class="text-black flex items-center gap-2 text-xl font-semibold font-title max-lg:hidden text-center my-6 relative after:flex-1 after:h-px after:bg-black after:opacity-15 before:flex-1 before:h-px before:bg-black before:opacity-15"> Tailwind Special Elements </span>
+							<ul class="lg:flex flex-wrap -mx-3.75">
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-heroes.html">Hero Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-feature.html">Feature Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-cta.html">CTA Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-lists.html">Product Lists</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-pricing-section.html">Pricing Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-sign-in-and-registration.html">Sign-in and Registration</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-header-section.html">Header Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-newsletter.html">Newsletter Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stats.html">Stats</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-testimonials.html">Testimonials</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-blog-section.html">Blog Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-stacked-layouts.html">Stacked Layouts</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-contact-section.html">Contact Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-content-section.html">Content Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-logo-clouds.html">Logo Clouds</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-promo.html">Promo Sections</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-category-previews.html">Category Previews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-bento-grids.html">Bento Grids</a>
+										</li>
+									</ul>
+								</li>
+								<li class="lg:min-w-80 px-4 flex-1 relative">
+									<span class="text-black block text-base font-semibold pb-2.5 font-title max-lg:hidden">Elements
+										<span class="ms-2 animate-badgeZoom inline-block">
+											<img src="../assets/images/tailwind.svg" alt="">
+										</span>
+									</span>
+									<ul class="lg:mb-4">
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-features.html">Product Features</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-product-overviews.html">Product Overviews</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-avatars.html">Avatars</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-badges.html">Badges</a>
+										</li>
+										<li class="relative group/second">
+											<a class="block relative text-sm text-gray-600 font-normal py-1.25 duration-500 hover:text-primary" href="../elements/shortcode-404-pages.html">404 Pages</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="lg:inline-block block max-lg:border-b max-lg:border-gray-200 relative group">
+						<a class="lg:py-7 py-2 xl:px-4 lg:px-2 relative lg:inline-block block xl:text-lg text-2sm font-medium hover:text-primary after:ml-1 after:-mt-1 after:inline-block after:size-3 after:bg-starsvg max-lg:after:hidden" href="contact-us.html">
+							<span class="inline-block leading-7.5">Contact Us</span>
+						</a>
+					</li>
+				</ul>
+				<div class="lg:hidden block max-lg:p-5 text-center mt-auto">
+					<ul>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-facebook-f" target="_blank" href="https://www.facebook.com/dexignzone"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-twitter" target="_blank" href="https://twitter.com/dexignzones"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-linkedin-in" target="_blank" href="https://www.linkedin.com/showcase/3686700/admin/"></a>
+						</li>
+						<li class="inline-block mx-0.5">
+							<a class="size-10 !leading-10 border border-black/10 text-center text-primary fab fa-instagram" target="_blank" href="https://www.instagram.com/dexignzone/"></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="extra-nav flex items-center h-20 3xl:pl-7.5 ml-auto max-sm:w-full max-sm:bg-white max-sm:fixed max-sm:-bottom-20 max-sm:left-0 max-sm:px-5 max-sm:shadow-3 max-sm:h-15 max-sm:duration-500 [.extra-nav.active]:bottom-0 [.extra-nav.bottom-end]:-bottom-20">
+				<div class="flex items-center w-full">						
+					<ul class="lg:ml-5 sm:ml-3.75 flex items-center gap-11.25 w-full justify-between">
+						<li class="2xxl:inline-flex items-center gap-3.75 hidden">
+							<div class="widget-media">
+								<i class="feather icon-phone-call dz-ring-effect text-3xxl inline-flex animate-dzRing text-primary"></i>
+							</div>
+							<div class="widget-content">
+								<h6 class="text-primary text-sm font-normal mb-0 font-base!">Contact us</h6>
+								<a href="tel:+11234567890" class="sm:text-lg text-base font-semibold text-secondary font-title!">+1 123 456 7890</a>
+							</div>
+						</li>
+						<li class="inline-block">
+							<a href="javascript:void(0);" class="min-w-10 flex align-center justify-center align-middle relative" data-drawer="#offcanvas-right-2" data-drawer-placement="right">
+								<i class="feather icon-shopping-cart text-[32px]"></i>
+								<span class="absolute -top-1 right-0.5 text-xs flex items-center justify-center min-h-4.5 min-w-4.5 font-semibold bg-primary text-white rounded-full">5</span>
+							</a>
+						</li>
+						<li class="inline-block max-xl:hidden max-sm:!block">
+							<a href="appointment.html" class="btn btn-primary btn-hover1 max-md:!text-sm max-md:!py-2.5 max-md:!px-4.5 max-md:!rounded-2lg">
+								Appointment
+								<i class="feather icon-arrow-right ms-1.25 text-xl text-white"></i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="fixed -top-full left-0 size-full bg-black/80 z-999 flex items-center justify-center p-8 duration-500 xmenu-search" id="searchOverlay4">
+				<form class="w-full" action="#">
+					<div class="relative max-w-3xl w-3xl mx-auto">
+						<input name="search" value="" type="text" class="h-14 py-4 px-5 border border-white/20 text-white w-full outline-none duration-300 focus:border-primary" placeholder="Type to search">
+						<button type="button" class="absolute right-0 top-1/2 -translate-y-1/2 h-full w-10 flex items-center"><i class="fa fa-search text-base text-white"></i></button>
+					</div>
+					<button type="button" class="absolute right-8 top-8 text-white text-xl opacity-80 size-8 cursor-pointer search-remove"><i class="fa fa-close"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</header>
+
+
+	<!-- Header End -->
+
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+			
+			<main class="page-content">
+
+				<div class="2xxl:min-h-125 lg:min-h-112.5 md:min-h-full sm:min-h-87.5 min-h-75 bg-cover bg-center bg-light relative z-1 w-full overflow-hidden pb-7.5 before:absolute before:left-0 before:top-0 before:size-full before:bg-primary before:opacity-70" style="background-image:url(images/banner/bnr1.webp);">
+						<div class="container relative z-1 h-full table">
+							<div class="table-cell 2xxl:h-125 lg:h-112.5 md:h-95 sm:h-87.5 h-75 align-middle pt-22.5 pb-5 text-center">
+								<h1 class="2xxl:text-8xl xl:text-6xxl md:text-[48px] text-[32px] font-semibold mb-3.75 break-word text-white wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Services</h1>
+								<nav class="wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<ul class="inline-block rounded-5xl lg:py-2.5 py-1.5 lg:px-7.5 px-5 bg-white shadow-breadcrumb">
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading"><a href="index.html" class="text-primary">Home</a></li>
+										<li class="inline-block lg:text-base text-sm font-normal capitalize text-heading pl-2 relative before:content-['\f101'] before:float-left before:text-heading before:font-bold before:font-['Font_Awesome_5_Free'] before:text-sm before:pr-3 before:top-0.5 before:relative">Services</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+					</div>
+
+				<section class="2xxl:py-25 xl:py-17.5 md:py-12.5 sm:py-10 py-7.5 bg-light">
+					<div class="container">
+						<div class="row custom-tab" active-index="2">
+							<div class="xl:w-5/12 lg:w-1/3 w-full lg:mb-0 mb-4">
+								<div class="sm:mb-7.5 mb-5">
+									<h2 class="2xxl:text-5xl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] ">Services We Provide</h2>
+									<p class="text-lg font-light">Eye care center treatments are specialized services aimed at improving and maintaining eye health.</p>
+								</div>
+								<nav>
+									<div class="lg:pe-12 lg:mb-6 mb-4" id="nav-tab" role="tablist">
+										<button class="tab-title text-heading xl:text-xl text-base bg-white w-full text-left mb-2 font-normal rounded-2lg xl:py-5 xl:px-7.5 py-3 px-5 leading-none flex justify-between items-center duration-500 [.tab-title.active]:bg-primary [.tab-title.active]:text-white" type="button">Eye Specialist						
+											<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1839_4494)"><path class="[.tab-title.active_&]:fill-white" d="M21.748 10.3917C21.7477 10.3914 21.7475 10.3911 21.7472 10.3909L17.2568 5.92212C16.9204 5.58735 16.3763 5.5886 16.0414 5.92504C15.7066 6.26145 15.7079 6.80556 16.0443 7.14037L19.0591 10.1406H0.859375C0.384742 10.1406 0 10.5254 0 11C0 11.4746 0.384742 11.8594 0.859375 11.8594H19.0591L16.0443 14.8596C15.7079 15.1944 15.7066 15.7385 16.0414 16.0749C16.3763 16.4114 16.9205 16.4126 17.2568 16.0779L21.7472 11.6091C21.7475 11.6089 21.7477 11.6086 21.748 11.6083C22.0846 11.2724 22.0835 10.7265 21.748 10.3917Z" fill="#676767"/></g><defs><clipPath id="clip0_1839_4494"><rect width="22" height="22" fill="white"/></clipPath></defs>
+											</svg>
+										</button>
+										<button class="tab-title text-heading xl:text-xl text-base bg-white w-full text-left mb-2 font-normal rounded-2lg xl:py-5 xl:px-7.5 py-3 px-5 leading-none flex justify-between items-center duration-500 [.tab-title.active]:bg-primary [.tab-title.active]:text-white" type="button">Pediatric Eye Care						
+											<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1839_4494)"><path class="[.tab-title.active_&]:fill-white" d="M21.748 10.3917C21.7477 10.3914 21.7475 10.3911 21.7472 10.3909L17.2568 5.92212C16.9204 5.58735 16.3763 5.5886 16.0414 5.92504C15.7066 6.26145 15.7079 6.80556 16.0443 7.14037L19.0591 10.1406H0.859375C0.384742 10.1406 0 10.5254 0 11C0 11.4746 0.384742 11.8594 0.859375 11.8594H19.0591L16.0443 14.8596C15.7079 15.1944 15.7066 15.7385 16.0414 16.0749C16.3763 16.4114 16.9205 16.4126 17.2568 16.0779L21.7472 11.6091C21.7475 11.6089 21.7477 11.6086 21.748 11.6083C22.0846 11.2724 22.0835 10.7265 21.748 10.3917Z" fill="#676767"/></g><defs><clipPath id="clip0_1839_4494"><rect width="22" height="22" fill="white"/></clipPath></defs>
+											</svg>
+										</button>
+										<button class="tab-title text-heading xl:text-xl text-base bg-white w-full text-left mb-2 font-normal rounded-2lg xl:py-5 xl:px-7.5 py-3 px-5 leading-none flex justify-between items-center duration-500 [.tab-title.active]:bg-primary [.tab-title.active]:text-white" type="button">Low Vision Services							
+											<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1839_4494)"><path class="[.tab-title.active_&]:fill-white" d="M21.748 10.3917C21.7477 10.3914 21.7475 10.3911 21.7472 10.3909L17.2568 5.92212C16.9204 5.58735 16.3763 5.5886 16.0414 5.92504C15.7066 6.26145 15.7079 6.80556 16.0443 7.14037L19.0591 10.1406H0.859375C0.384742 10.1406 0 10.5254 0 11C0 11.4746 0.384742 11.8594 0.859375 11.8594H19.0591L16.0443 14.8596C15.7079 15.1944 15.7066 15.7385 16.0414 16.0749C16.3763 16.4114 16.9205 16.4126 17.2568 16.0779L21.7472 11.6091C21.7475 11.6089 21.7477 11.6086 21.748 11.6083C22.0846 11.2724 22.0835 10.7265 21.748 10.3917Z" fill="#676767"/></g><defs><clipPath id="clip0_1839_4494"><rect width="22" height="22" fill="white"/></clipPath></defs>
+											</svg>
+										</button>
+										<button class="tab-title text-heading xl:text-xl text-base bg-white w-full text-left mb-2 font-normal rounded-2lg xl:py-5 xl:px-7.5 py-3 px-5 leading-none flex justify-between items-center duration-500 [.tab-title.active]:bg-primary [.tab-title.active]:text-white" type="button">High Vision Services						
+											<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_1839_4494)"><path class="[.tab-title.active_&]:fill-white" d="M21.748 10.3917C21.7477 10.3914 21.7475 10.3911 21.7472 10.3909L17.2568 5.92212C16.9204 5.58735 16.3763 5.5886 16.0414 5.92504C15.7066 6.26145 15.7079 6.80556 16.0443 7.14037L19.0591 10.1406H0.859375C0.384742 10.1406 0 10.5254 0 11C0 11.4746 0.384742 11.8594 0.859375 11.8594H19.0591L16.0443 14.8596C15.7079 15.1944 15.7066 15.7385 16.0414 16.0749C16.3763 16.4114 16.9205 16.4126 17.2568 16.0779L21.7472 11.6091C21.7475 11.6089 21.7477 11.6086 21.748 11.6083C22.0846 11.2724 22.0835 10.7265 21.748 10.3917Z" fill="#676767"/></g><defs><clipPath id="clip0_1839_4494"><rect width="22" height="22" fill="white"/></clipPath></defs>
+											</svg>
+										</button>
+									</div>
+								</nav>
+							</div>
+							<div class="xl:w-7/12 lg:w-2/3 w-full">
+								<div class="tab-content-area" id="nav-tabContent">
+									<div class="tab-content">
+										<div class="bg-white rounded-2xl p-7.5">
+											<div class="relative overflow-hidden">
+												<img src="images/services/bnr1.webp" alt="/" class="w-full rounded-2xl">
+											</div>
+										</div>
+									</div>						
+								
+									<div class="tab-content">
+										<div class="bg-white rounded-2xl p-7.5">
+											<div class="relative overflow-hidden">
+												<img src="images/services/bnr2.webp" alt="/" class="w-full rounded-2xl">
+											</div>
+										</div>
+									</div>						
+								
+									<div class="tab-content">
+										<div class="bg-white rounded-2xl p-7.5">
+											<div class="relative overflow-hidden">
+											<img src="images/services/bnr3.webp" alt="/" class="w-full rounded-2xl">
+											</div>
+										</div>
+									</div>						
+								
+									<div class="tab-content">
+										<div class="bg-white rounded-2xl p-7.5">
+											<div class="relative overflow-hidden">
+												<img src="images/services/bnr4.webp" alt="/" class="w-full rounded-2xl">
+											</div>
+										</div>
+									</div>		
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="2xxl:py-25 xl:py-17.5 md:py-12.5 sm:py-10 py-7.5 bg-light p-t0 overflow-hidden content-wrapper style-39 ">
+					<div class="container">
+						<div class="row ">
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img1.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Eye Specialist</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img2.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Pediatric Eye Care</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img3.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Low Vision Services</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img4.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Cataract Surgery</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img5.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Pediatric Eye Care</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+							<div class="lg:w-1/3 w-full mb-7.5">
+								<div class="relative z-1 p-5 h-full duration-200 bg-white rounded-3xl">
+									<div class="relative overflow-hidden rounded-xxl mb-2.5 h-60">
+										<img src="images/blog/middle/img6.webp" alt="" class="size-full object-cover">
+									</div>
+									<div class="relative">
+										<h3 class="text-2xxl mb-2.5"><a href="blog-details.html">Diabetic Eye Exam</a></h3>
+										<p class="text-lg">Affordable Glasses and Lenses Deals We understand.</p>
+										<a href="blog-details.html" class="text-primary text-2sm font-medium capitalize">
+											Read more <i class="feather icon-arrow-right"></i>
+										</a>
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</section>
+
+				<section class="relative z-1 bg-primary">
+			<div class="container">
+				<div class="row justify-between">
+					<div class="lg:w-7/12 w-full">
+						<div class="2xl:pt-20 2xl:pb-17.5 pt-12.5 pb-10">
+							<div class="md:mb-10 mb-5">
+								<h2 class="2xxl:text-5xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize leading-[1.3] !text-white mb-0 wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">Better Vision Begins Here Book a Consultation</h2>
+							</div>
+							<div class="form-wrapper">
+								<div class="form-body">
+									<form action="../assets/script/contact_smtp.php" class="dzForm" method="POST">
+										<input type="hidden" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" name="dzToDo" value="Appointment">
+										<input type="hidden" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" name="reCaptchaEnable" value="0">
+										<div class="dzFormMsg"></div>
+										<div class="row g-5 items-end">
+											<div class="xl:w-1/3 sm:w-1/2 w-full wow fadeInUp" data-wow-delay="0.3s" data-wow-duration="0.8s">
+												<div class="relative">
+													<input name="dzName" type="text" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" id="inputYourName" placeholder="Your Name">
+													<span class="absolute text-2xl top-4 left-0">
+														<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M13.9827 17.9043C9.47052 17.9043 5.61719 18.5865 5.61719 21.3187C5.61719 24.051 9.44608 24.7576 13.9827 24.7576C18.495 24.7576 22.3472 24.0743 22.3472 21.3432C22.3472 18.6121 18.5194 17.9043 13.9827 17.9043Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M13.9794 14.0065C16.9406 14.0065 19.3406 11.6054 19.3406 8.64431C19.3406 5.6832 16.9406 3.2832 13.9794 3.2832C11.0183 3.2832 8.61722 5.6832 8.61722 8.64431C8.60722 11.5954 10.9917 13.9965 13.9417 14.0065H13.9794Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+												</div>
+											</div>
+											<div class="xl:w-1/3 sm:w-1/2 w-full wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+												<div class="relative">
+													<input name="dzEmail" type="email" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" id="inputYourEmail" placeholder="Your Email">
+													<span class="absolute text-2xl top-4 left-0">
+														<svg width="26" height="24" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M19.8888 8.32617L14.705 12.5414C13.7256 13.3184 12.3476 13.3184 11.3682 12.5414L6.14062 8.32617" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M18.7296 22.5C22.2779 22.5098 24.6693 19.5945 24.6693 16.0114V7.99835C24.6693 4.4153 22.2779 1.5 18.7296 1.5H7.2756C3.72736 1.5 1.33594 4.4153 1.33594 7.99835V16.0114C1.33594 19.5945 3.72736 22.5098 7.2756 22.5H18.7296Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+												</div>
+											</div>
+											<div class="xl:w-1/3 sm:w-1/2 w-full wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+												<div class="relative">
+													<input name="dzNumber" type="number" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" id="inputYournumber" placeholder="Phone Number">
+													<span class="absolute text-2xl top-4 left-0">
+														<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M15.7422 0.916992C20.06 1.39649 23.4714 4.80316 23.9555 9.12099" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M15.7422 5.0498C17.8084 5.45114 19.423 7.06697 19.8255 9.13314" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M11.8727 12.5514C16.5265 17.2041 17.5823 11.8215 20.5454 14.7826C23.4021 17.6385 25.0452 18.2107 21.4246 21.8292C20.9712 22.1935 18.0907 26.577 7.96781 16.4566C-2.15637 6.33499 2.22443 3.45151 2.58887 2.99827C6.217 -0.630188 6.78056 1.02127 9.63723 3.87721C12.5991 6.83957 7.21889 7.89881 11.8727 12.5514Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+												</div>
+											</div>
+
+											<div class="xl:w-1/3 sm:w-1/2 w-full  wow fadeInUp" data-wow-delay="0.5s" data-wow-duration="0.8s">
+												<div class="relative">
+													<input name="dzOther[DateTime]" type="text" class="py-3.75 pl-10 text-2sm text-left text-white border-b-2 border-white min-h-15 w-full placeholder:text-white" id="dateTimePickerOnly" placeholder="Date">
+													<span class="absolute text-2xl top-4 left-0">
+														<svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M3.60938 11.9608H24.404" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M19.1834 16.5174H19.1942" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M14.0037 16.5174H14.0146" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M8.81625 16.5174H8.82705" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M19.1834 21.0516H19.1942" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M14.0037 21.0516H14.0146" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M8.81625 21.0516H8.82705" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M18.7201 3.32227V7.16151" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path d="M9.2904 3.32227V7.16151" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														<path fill-rule="evenodd" clip-rule="evenodd" d="M18.9446 5.16504H9.06612C5.63999 5.16504 3.5 7.07363 3.5 10.5819V21.1398C3.5 24.7033 5.63999 26.656 9.06612 26.656H18.9338C22.3708 26.656 24.5 24.7364 24.5 21.2281V10.5819C24.5108 7.07363 22.3816 5.16504 18.9446 5.16504Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+													</span>
+												</div>
+											</div>
+											
+											<div class="xl:w-1/3 sm:w-1/2 w-full  wow fadeInUp" data-wow-delay="0.7s" data-wow-duration="0.8s">
+												<div class="relative custom-select icon-select">
+													<select name="dzOther[DoctorName]" class="dynamic-select">
+														<option selected>Doctor Name</option>
+														<option>Nashid Martines</option>
+														<option>Kenneth Fong</option>
+													</select>
+													<span class="absolute text-2xl top-4 left-0">
+														<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+															<path d="M20.8672 12.713C22.4947 12.4843 23.7477 11.089 23.7512 9.39851C23.7512 7.73251 22.5367 6.35118 20.9442 6.08984" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M23.0156 16.625C24.5918 16.8607 25.692 17.4125 25.692 18.55C25.692 19.3328 25.174 19.8415 24.3363 20.1612" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M13.8662 17.1074C10.1166 17.1074 6.91406 17.6756 6.91406 19.9448C6.91406 22.2128 10.0967 22.7973 13.8662 22.7973C17.6159 22.7973 20.8172 22.2349 20.8172 19.9646C20.8172 17.6943 17.6357 17.1074 13.8662 17.1074Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path fill-rule="evenodd" clip-rule="evenodd" d="M13.8696 13.869C16.3301 13.869 18.3251 11.8752 18.3251 9.41351C18.3251 6.95301 16.3301 4.95801 13.8696 4.95801C11.4091 4.95801 9.4141 6.95301 9.4141 9.41351C9.40476 11.8658 11.3846 13.8608 13.8369 13.869H13.8696Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M6.86838 12.713C5.23971 12.4843 3.98788 11.089 3.98438 9.39851C3.98438 7.73251 5.19887 6.35118 6.79138 6.08984" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+															<path d="M4.7154 16.625C3.13923 16.8607 2.03906 17.4125 2.03906 18.55C2.03906 19.3328 2.55706 19.8415 3.39473 20.1612" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+														</svg>
+
+													</span>
+												</div>
+											</div>
+											<div class="xl:w-1/3 sm:w-1/2 w-full  wow fadeInUp" data-wow-delay="0.8s" data-wow-duration="0.8s">
+												<button type="submit" name="submit" value="submit" class="btn w-full justify-center btn-white text-primary">
+													Book Appointment <i class="feather icon-arrow-right ms-1"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="lg:w-1/3 w-full self-end">
+						<div class="lg:-mt-37.5 xl:-mr-32.5 lg:-mr-6.25 lg:-ml-7.5 max-lg:text-center relative after:absolute after:top-2/5 after:left-0 after:size-full after:bg-no-repeat after:bg-pointed-arrow wow fadeInUp" data-wow-delay="1.0s" data-wow-duration="0.8s">
+							<img src="images/about/img1.webp" alt="">	
+						</div>
+					</div>
+				</div>
+			</div>
+			<img src="images/background/bg4.webp" alt="" class="absolute right-0 top-0 -z-1">
+		</section>
+
+				<section class="2xxl:py-25 xl:py-17.5 md:py-12.5 sm:py-10 py-7.5 bg-light">
+						<div class="container">
+							<div class="sm:mb-7.5 mb-5 text-center wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+								<h2 class="2xxl:text-4xxl lg:text-[38px] sm:text-[32px] text-2xxl font-bold capitalize">Have any questions?</h2>
+								<p class="sm:text-lg text-base font-light max-w-162.5 mx-auto">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+							</div>
+							<div class="row justify-center">
+								<div class="xl:w-1/2 lg:w-2/3 w-full mb-10 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+									<form class="dzSearch">
+										<div class="relative flex flex-wrap items-stretch w-full mb-0">
+											<input name="dzSearch" type="search" class="relative w-[1%] flex-1 text-base text-bodycolor h-15 border-b border-secondary/20 pr-10" placeholder="Type your question here">
+											<div class="absolute bottom-0 right-0 w-auto h-full">
+												<button name="dzSearch" value="search" class="text-xl text-primary h-full relative z-2">
+													<i class="icon feather icon-search"></i>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="xl:w-5/6 w-full custom-tab">
+									<div class="myAccordion style-2 wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s" id="accordionExample">
+										<div class="accordion-item">
+											<h2 class="accordion-header font-base md:!text-[22px] !py-3.5 [.accordion-header.open]:!text-heading [.accordion-header.open]:!bg-white [.accordion-header.open]:!mb-3.75 mb-1.25 open">
+												<button class="accordion-button" type="button">
+													How much do you charge for pedicure ?
+												</button>
+												<span class="arrow active">
+													<i class="icon feather icon-chevron-right size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content mb-3.75 show">
+												<div class="content-inner">
+													<p class="md:text-lg mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header font-base md:!text-[22px] !py-3.5 [.accordion-header.open]:!text-heading [.accordion-header.open]:!bg-white [.accordion-header.open]:!mb-3.75 mb-1.25">
+												<button class="accordion-button" type="button">
+													What types of treatments do you offer?
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content mb-3.75">
+												<div class="content-inner">
+													<p class="md:text-lg mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header font-base md:!text-[22px] !py-3.5 [.accordion-header.open]:!text-heading [.accordion-header.open]:!bg-white [.accordion-header.open]:!mb-3.75 mb-1.25">
+												<button class="accordion-button" type="button">
+													How do i book my appointment ?
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content mb-3.75">
+												<div class="content-inner">
+													<p class="md:text-lg mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header font-base md:!text-[22px] !py-3.5 [.accordion-header.open]:!text-heading [.accordion-header.open]:!bg-white [.accordion-header.open]:!mb-3.75 mb-1.25">
+												<button class="accordion-button" type="button">
+													Can i cancel my appointment
+												</button>
+												<span class="arrow">
+													<i class="icon feather icon-chevron-right size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:hidden block"></i>
+													<i class="icon feather icon-chevron-down size-7.5 leading-7.5! text-center rounded-lg bg-primary/10 text-primary [.arrow.active_&]:bg-primary [.arrow.active_&]:text-white [.arrow.active_&]:block hidden"></i>
+												</span>
+											</h2>
+											<div class="accordion-content mb-3.75">
+												<div class="content-inner">
+													<p class="md:text-lg mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its. The point of using Lorem Ipsum is that it has a more-or-less normal distribution</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+						<div>
+			<div class="container-fluid !p-0">
+				<div class="swiper portfolio-slider">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img1.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img2.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img3.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img4.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img5.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img6.webp" alt="" class="size-full">
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="relative overflow-hidden">
+								<img src="images/portfolio/img7.webp" alt="" class="size-full">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+			</main>
+
+			<!-- Footer -->
+			<footer class="text-bodycolor bg-[#006562] bg-blend-luminosity bg-cover bg-no-repeat bg-center" style="background-image: url(images/background/bg3.webp)">
+		
+		<!-- Footer Top -->
+		<div class="md:pt-17.5 md:pb-7.5 sm:pt-12.5 sm:pb-5 pt-11.25">
+			<div class="container">
+				<div class="row">
+					<div class="xl:w-1/3 w-full wow fadeInUp" data-wow-delay="0.2s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<div class="mb-6">
+								<a href="index.html"><img src="images/logo-white.svg" alt="" class="max-w-45"></a> 
+							</div>
+							<p class="text-lg font-light leading-[1.2] text-white/80 mb-5">ClinicMaster Ipsum Dolor Sit Amet, Consectetuer Adipiscing Elit, Sed Diam </p>
+							
+							<div class="inline-flex items-center gap-3.75 bg-white py-3 px-5 rounded-xxl text-secondary text-sm font-medium">
+								<img src="images/google.svg" alt="">
+								<div class="clearfix">
+									<div class="flex">
+										<ul class="flex gap-1">
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+											<li class="text-yellow-400 text-base leading-[1.2]"><i class="fa fa-star"></i></li>
+										</ul>
+										<span class="font-bold ms-1">(4.8)</span>
+									</div>									
+									<span class="text">12k+ ratings on google</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="xl:w-1/6 lg:w-1/4 md:w-1/2 w-full wow fadeInUp" data-wow-delay="0.4s" data-wow-duration="0.8s">
+						<div class="mb-7.5">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Quick Links </h2>
+							<ul class="list-hover1">
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="about-us.html"><span class="link-hover">About Us</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="services.html"><span class="link-hover">Our Services</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="team.html"><span class="link-hover">Our Team</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="appointment.html"><span class="link-hover">Appointments</span></a>
+								</li>
+								<li class="relative py-2 text-2sm leading-5 font-light text-white/80">
+									<a class="block" href="contact-us.html"><span class="link-hover">Contact Us</span></a>
+								</li>
+							</ul>   
+						</div>
+					</div>
+					<div class="xl:w-1/4 lg:w-1/4 md:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Contacts us</h2>
+							<ul>	
+								<li class="py-3.75 font-light text-white/80 border-b border-white/20"><a href="mailto:info@example.com"><i class="feather icon-mail text-[#57EEE9] mr-1.25"></i> contact@company.com</a></li>
+								<li class="py-3.75 font-light text-white/80 border-b border-white/20"><a href="tel:+11234567890"><i class="feather icon-phone-call text-[#57EEE9] mr-1.25"></i> (414) 687 - 5892</a></li>
+								<li class="py-3.75 font-light text-white/80"><a href="javascript:void(0);"><i class="feather icon-map-pin text-[#57EEE9] mr-1.25"></i> 794 Mcallister St San Francisco, 94102</a></li>
+							</ul>
+						</div>	
+					</div>
+					<div class="xl:w-1/4 lg:w-1/2 w-full wow fadeInUp" data-wow-delay="0.6s" data-wow-duration="0.8s">
+						<div class="mb-7.5 me-2">
+							<h2 class="text-xl relative mb-5 text-white font-medium">Newsletter</h2>
+							<p class="text-sm font-light text-white/80">Subscribe our newsletter to get the latest news and updates</p>
+							<form class="dzSubscribe style-1 mb-3.75" action="../assets/script/mailchimp.php" method="post">
+								<div class="dzSubscribeMsg"></div>
+								<div class="form-group">
+									<div class="relative flex flex-wrap items-stretch w-full">
+									<input name="dzEmail" required="required" type="email" class="relative flex-1 w-[1%] py-3.75 pl-6.25 pr-15 text-base text-left text-bodycolor border border-white bg-white placeholder:text-bodycolor rounded-[18px]" placeholder="Your Email Address">
+										<div class="absolute right-1.25 top-1/2 -translate-y-1/2 z-1">
+											<button name="submit" value="Submit" type="submit" class="size-12 min-w-12 text-lg leading-12 text-center text-primary">
+												<i class="flaticon-message"></i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</form>
+							<div class="dz-social-icon">
+								<ul class="flex gap-2.5">
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.linkedin.com" target="_blank">
+											<i class="fa-brands fa-linkedin"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.instagram.com" target="_blank">
+											<i class="fa-brands fa-instagram"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://www.facebook.com" target="_blank">
+											<i class="fa-brands fa-facebook-f"></i>
+										</a>
+									</li>
+									<li class="inline-block">
+										<a class="size-10 leading-10 text-center rounded-2lg bg-white text-primary block" href="https://twitter.com" target="_blank">
+											<i class="fa-brands fa-x-twitter"></i>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- Footer Top End -->
+		 	
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="py-7.5 border-t border-white/30 text-base">
+					<div class="row">
+						<div class="lg:w-1/2 w-full lg:text-start text-center">
+							<p class="text-sm font-light text-white/80 mb-0">© <span class="current-year">2025</span> <a href="https://themeforest.net/user/dexignzone" target="_blank" class="text-white">DexignZone</a> Theme. All Rights Reserved.</p>
+						</div>
+						<div class="lg:w-1/2 w-full lg:text-end text-center max-lg:!mt-3.75">
+							<ul class="footer-link style-1">
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white">All Rights Reserved</li>
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white before:h-3.25 before:w-px before:bg-white before:absolute before:top-1/2 before:-left-0.5 before:rounded-lg before:-translate-1/2"><a href="javascript:void(0);">Terms and Conditions</a></li>
+								<li class="inline-block font-poppins relative px-1.25 text-sm font-light text-white before:h-3.25 before:w-px before:bg-white before:absolute before:top-1/2 before:-left-0.5 before:rounded-lg before:-translate-1/2"><a href="javascript:void(0);">Privacy Policy</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Footer Bottom End -->
+		
+	</footer>
+			<!-- Footer End -->
+
+		</div>
+	</div>
+
+	<button id="scrollProgress" title="Scroll to top"
+    class="scroll-top fixed z-9999 right-5 bottom-5 size-12.5 rounded-full bg-secondary text-white cursor-pointer opacity-0 pointer-events-none duration-500 flex items-center justify-center [.scroll-top.active]:opacity-100 [.scroll-top.active]:pointer-events-auto">
+    <span class="icon text-xs relative z-1">
+        <i class="fas fa-arrow-up"></i>
+    </span>
+    <svg class="absolute top-0 left-0 -rotate-90" width="50" height="50">
+        <circle class="stroke-white" cx="25" cy="25" r="20" stroke="#000" stroke-width="1.5" fill="none"
+            stroke-linecap="round" stroke-dasharray="100.53" stroke-dashoffset="100.53"></circle>
+    </svg>
+</button>
+	
+</div>
+<!-- JAVASCRIPT FILES ========================================= -->
+<script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script defer src="../assets/vendor/gsap/gsap.min.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollSmoother.js"></script>
+<script defer src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../assets/vendor/xmenu/xmenu.js"></script>
+<script src="../assets/js/dz.carousel.js"></script>
+<script src="../assets/js/dz.ajax.js"></script>
+<script src="../assets/js/animation.js"></script>
+<script src="../assets/js/custom.js"></script>
+</body>
+</html>

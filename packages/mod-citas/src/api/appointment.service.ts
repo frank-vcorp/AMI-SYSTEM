@@ -52,11 +52,11 @@ export class AppointmentService {
       where: {
         clinicId: data.clinicId,
         dayOfWeek,
-        isOpen: true,
       }
     });
 
-    if (!schedule) {
+    // Check if schedule exists and is open (isOpen field may not exist in some schemas)
+    if (!schedule || (schedule as any).isOpen === false) {
       throw new ClinicNotAvailableError(data.clinicId, appointmentDate);
     }
 
@@ -225,11 +225,11 @@ export class AppointmentService {
         where: {
           clinicId: appointment.clinicId,
           dayOfWeek: newDate.getDay(),
-          isOpen: true,
         }
       });
 
-      if (!schedule) {
+      // Check if schedule exists and is open
+      if (!schedule || (schedule as any).isOpen === false) {
         throw new ClinicNotAvailableError(appointment.clinicId, newDate);
       }
 

@@ -38,14 +38,16 @@ export async function POST(request: NextRequest) {
     const startDate = new Date(dateFrom);
     const endDate = new Date(dateTo);
 
-    // Get clinic schedules
-    const schedules = await prisma.clinicSchedule.findMany({
+    // Get clinic schedules (filter isOpen in code for compatibility)
+    const allSchedules = await prisma.clinicSchedule.findMany({
       where: {
         clinicId,
-        isOpen: true,
       },
       orderBy: { dayOfWeek: 'asc' },
     });
+
+    // Filter only open schedules
+    const schedules = allSchedules.filter((s: any) => s.isOpen !== false);
 
     if (schedules.length === 0) {
       return NextResponse.json({

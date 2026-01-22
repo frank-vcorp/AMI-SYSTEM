@@ -1,0 +1,27 @@
+{
+  "name": "@ami/core-validation",
+  "version": "1.0.0",
+  "description": "Core validation services for medical exam workflow with electronic signatures and PDF generation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@ami/core-types": "workspace:*",
+    "@prisma/client": "^6.19.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "keywords": [
+    "medical",
+    "validation",
+    "signature",
+    "pdf",
+    "extraction",
+    "occupational-health"
+  ]
+}

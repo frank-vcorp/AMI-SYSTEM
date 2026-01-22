@@ -121,12 +121,26 @@ model Appointment {
   clinicId          String
   companyId         String?
   employeeId        String?
+  
+  // SPEC-MOD-CITAS: Appointment identifier (ID Papeleta)
+  appointmentFolio  String?           @db.VarChar(50) @unique // Format: EXP-YYYYNNN
+  
+  // SPEC-MOD-CITAS: QR code for check-in
+  qrCode            String?           @db.Text // Encoded QR data
+  
   appointmentDate   DateTime
   time              String            @db.VarChar(5) // HH:MM format
   status            AppointmentStatus @default(PENDING)
+  
+  // SPEC-MOD-CITAS: Occupancy tracking
+  occupancySlot     Int?              // Slot number for appointment batching
+  maxOccupancy      Int?              // Max patients per slot
+  
   notes             String?           @db.Text
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
 
   // Relations
   clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
@@ -137,6 +151,7 @@ model Appointment {
   @@index([status])
   @@index([appointmentDate])
   @@index([employeeId])
+  @@index([appointmentFolio])
   @@map("appointments")
 }
 
@@ -367,6 +382,13 @@ model Patient {
   birthDate         DateTime
   gender            Gender
   documentId        String            @db.VarChar(50)
+  
+  // SPEC-MOD-TRABAJADORES: Extended patient data
+  uniqueId          String            @db.VarChar(50) // Generated unique identifier per tenant
+  medicalHistory    Json?             // {allergies, medications, surgeries, chronicDiseases, conditions}
+  antecedentes      Json?             // {hereditario, habitos, ocupacional, quirurgico, farmacologico}
+  contactEmergency  Json?             // {name, phone, relationship}
+  
   status            PatientStatus     @default(ACTIVE)
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
@@ -379,6 +401,7 @@ model Patient {
   // Indices
   @@unique([tenantId, documentId])
   @@unique([tenantId, email])
+  @@unique([tenantId, uniqueId])
   @@index([tenantId])
   @@index([status])
   @@map("patients")
@@ -403,6 +426,7 @@ model Expedient {
   clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
   medicalExams      MedicalExam[]
   studies           StudyUpload[]
+  validationTasks   ValidationTask[]
 
   // Indices
   @@unique([patientId, clinicId])
@@ -426,6 +450,16 @@ model MedicalExam {
   weight            Float?            // kg
   height            Float?            // cm
   physicalExam      String?           @db.Text
+  
+  // SPEC-MOD-EXPEDIENTES: Expanded vital signs
+  vitalSigns        Json?             // {systolic, diastolic, heartRate, respiratoryRate, temperature, oxygenSaturation, weight, height}
+  
+  // SPEC-MOD-EXPEDIENTES: Visual examination
+  visualAcuity      Json?             // {farVisionOD, farVisionOI, nearVision, ishihara, campimetry}
+  
+  // SPEC-MOD-EXPEDIENTES: Physical examination details
+  physicalExamination Json?           // {cardiovascular, respiratory, gastrointestinal, neurological, musculoskeletal, dermatological}
+  
   explorationNotes  Json?             // Exploration fields with defaults from catalog
   demographics      Json?             // Demographic data: gender, maritalStatus, education, rhType
   vision            Json?             // Visual data: farVisionOD/OI, nearVision, ishihara, campimetry
@@ -441,6 +475,8 @@ model MedicalExam {
   // Relations
   expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
   examinedByDoctor  Doctor?           @relation("examinedBy", fields: [examinedByDoctorId], references: [id], onDelete: SetNull)
+  extractedData     ExtractedData[]   @relation("medicalExamData")
+  validationTasks   ValidationTask[]
 
   // Indices
   @@index([expedientId])
@@ -465,6 +501,7 @@ model StudyUpload {
 
   // Relations
   expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  extractedData     ExtractedData[]
 
   // Indices
   @@index([expedientId])
@@ -523,3 +560,212 @@ enum UploadStatus {
 // ============================================================================
 // Note: The Appointment model above covers basic appointment data.
 // This section is reserved for appointment-specific extensions.
+
+// ============================================================================
+// MOD-VALIDACIONES: Validation & Electronic Signature Models
+// ============================================================================
+
+/**
+ * IMPL-20260122-01: ValidationTask Model
+ * Manages medical exam validation workflow with electronic signatures
+ * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+ */
+model ValidationTask {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  expedientId       String
+  medicalExamId     String
+  assignedToUserId  String            @db.Uuid
+  
+  // Status tracking
+  status            ValidationStatus  @default(PENDING)
+  verdict           VerdictType?      @default(APTO) // Can be changed during validation
+  prediagnosis      String?           @db.Text // Initial assessment before validation
+  diagnosis         String?           @db.Text // Final diagnosis after validation
+  
+  // Electronic signature
+  signatureData     Json?             // {signatureImage, timestamp, ip, userAgent, coordinates}
+  signedAt          DateTime?
+  signedBy          String?           @db.Uuid
+  
+  // Validation metadata
+  startedAt         DateTime?
+  completedAt       DateTime?
+  validationNotes   String?           @db.Text
+  
+  // Extracted data from uploaded studies
+  extractedDataSummary Json?          // Quick lookup of extracted findings
+  
+  // Audit trail
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+  updatedBy         String?           @db.Uuid
+
+  // Relations
+  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  medicalExam       MedicalExam       @relation(fields: [medicalExamId], references: [id], onDelete: Cascade)
+  extractedData     ExtractedData[]   @relation("validationExtractedData")
+  pdfGeneration     PdfGeneration[]   @relation("validationPdfGeneration")
+
+  // Indices
+  @@unique([expedientId])
+  @@index([tenantId])
+  @@index([expedientId])
+  @@index([medicalExamId])
+  @@index([assignedToUserId])
+  @@index([status])
+  @@index([verdict])
+  @@index([completedAt])
+  @@map("validation_tasks")
+}
+
+/**
+ * IMPL-20260122-01: ExtractedData Model
+ * Stores extracted findings from uploaded medical studies (images, labs, etc)
+ * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+ */
+model ExtractedData {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  studyUploadId     String
+  medicalExamId     String?
+  validationTaskId  String?
+  
+  // Extraction metadata
+  extractionMethod  ExtractionMethod  @default(MANUAL) // MANUAL, OCR, AI_MODEL
+  extractedFields   Json              // Dynamic map of extracted key-value pairs
+  confidence        Float?            // AI confidence score (0-1) if extracted by ML
+  
+  // Classification
+  dataType          DataFieldType     // e.g., BLOOD_PRESSURE, GLUCOSE, HEMOGLOBIN
+  rawValue          String?           @db.Text
+  normalizedValue   String?           @db.Text
+  unit              String?           @db.VarChar(50)
+  
+  // Reference ranges
+  referenceMin      Float?
+  referenceMax      Float?
+  isOutOfRange      Boolean?
+  severity          SeverityLevel?    // CRITICAL, HIGH, MEDIUM, LOW, NORMAL
+  
+  // Audit trail
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  createdBy         String?           @db.Uuid
+
+  // Relations
+  studyUpload       StudyUpload       @relation(fields: [studyUploadId], references: [id], onDelete: Cascade)
+  medicalExam       MedicalExam?      @relation("medicalExamData", fields: [medicalExamId], references: [id], onDelete: SetNull)
+  validationTask    ValidationTask?   @relation("validationExtractedData", fields: [validationTaskId], references: [id], onDelete: SetNull)
+
+  // Indices
+  @@index([tenantId])
+  @@index([studyUploadId])
+  @@index([medicalExamId])
+  @@index([validationTaskId])
+  @@index([dataType])
+  @@index([severity])
+  @@index([createdAt])
+  @@map("extracted_data")
+}
+
+/**
+ * IMPL-20260122-01: PdfGeneration Model
+ * Tracks PDF generation for medical records and validation reports
+ * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+ */
+model PdfGeneration {
+  id                String            @id @default(cuid())
+  tenantId          String            @db.Uuid
+  validationTaskId  String
+  
+  // PDF metadata
+  fileName          String            @db.VarChar(255)
+  fileUrl           String            @db.Text // URL en GCP Storage
+  fileSizeBytes     Int
+  
+  // Generation details
+  generatedAt       DateTime          @default(now())
+  generatedBy       String?           @db.Uuid
+  templateVersion   String            @db.VarChar(20) @default("1.0")
+  
+  // Status
+  status            PdfGenerationStatus @default(PENDING)
+  errorMessage      String?           @db.Text
+  
+  // Audit trail
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  // Relations
+  validationTask    ValidationTask    @relation("validationPdfGeneration", fields: [validationTaskId], references: [id], onDelete: Cascade)
+
+  // Indices
+  @@index([tenantId])
+  @@index([validationTaskId])
+  @@index([status])
+  @@index([generatedAt])
+  @@map("pdf_generations")
+}
+
+// ============================================================================
+// ENUMS: Validación & Extracción de Datos
+// ============================================================================
+
+enum ValidationStatus {
+  PENDING       // Waiting for validator assignment
+  ASSIGNED      // Assigned to validator, awaiting action
+  IN_REVIEW     // Validator is actively reviewing
+  COMPLETED     // Validator completed review
+  APPROVED      // Final approval received
+  REJECTED      // Sent back for corrections
+  ARCHIVED      // Historical record, no longer active
+}
+
+enum VerdictType {
+  APTO          // Fit for work
+  APTO_CON_RESTRICCIONES // Fit with restrictions
+  NO_APTO       // Not fit for work
+  PENDIENTE     // Pending additional studies
+  REFERENCIA    // Requires specialist consultation
+}
+
+enum ExtractionMethod {
+  MANUAL        // Human data entry
+  OCR           // Optical character recognition
+  AI_MODEL      // Machine learning extraction
+  AUTOMATED     // Automated system extraction
+}
+
+enum DataFieldType {
+  BLOOD_PRESSURE
+  HEART_RATE
+  RESPIRATORY_RATE
+  TEMPERATURE
+  GLUCOSE
+  HEMOGLOBIN
+  CHOLESTEROL
+  WEIGHT
+  HEIGHT
+  BMI
+  VISION_OD
+  VISION_OI
+  HEARING
+  OTHER
+}
+
+enum SeverityLevel {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  NORMAL
+}
+
+enum PdfGenerationStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}

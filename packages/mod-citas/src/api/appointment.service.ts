@@ -104,6 +104,7 @@ export class AppointmentService {
         appointmentDate,
         // Current schema stores this as `time`
         time: appointmentTime,
+        status: 'SCHEDULED',  // Recepcionista agenda = ya programada
         notes: data.notes,
       } as any,
       include: {

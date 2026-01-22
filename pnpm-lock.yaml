@@ -335,40 +335,40 @@ importers:
   packages/web-app:
     dependencies:
       '@ami/core-auth':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core-auth
       '@ami/core-storage':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core-storage
       '@ami/core-types':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core-types
       '@ami/core-ui':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core-ui
       '@ami/core-validation':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core-validation
       '@ami/mod-citas':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-citas
       '@ami/mod-clinicas':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-clinicas
       '@ami/mod-empresas':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-empresas
       '@ami/mod-expedientes':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-expedientes
       '@ami/mod-reportes':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-reportes
       '@ami/mod-servicios':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-servicios
       '@ami/mod-validacion':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mod-validacion
       firebase:
         specifier: ^10.7.0

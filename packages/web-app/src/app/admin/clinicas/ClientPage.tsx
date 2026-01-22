@@ -71,11 +71,29 @@ export function ClinicsClientPage({
   const [showDoctorForm, setShowDoctorForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '', address: '', city: '', state: '', zipCode: '',
-    phoneNumber: '', email: '', totalBeds: '10', isHeadquarters: false,
+    phoneNumber: '', email: '', maxAppointmentsDay: '50', isHeadquarters: false,
   });
   const [doctorForm, setDoctorForm] = useState({
     name: '', cedula: '', specialty: '',
   });
+
+  // Load clinics from API if initial is empty (SSR fallback)
+  useEffect(() => {
+    if (initialClinics.length === 0) {
+      const loadClinics = async () => {
+        try {
+          const res = await fetch(`/api/clinicas?tenantId=${TENANT_ID}&pageSize=100`);
+          if (res.ok) {
+            const data = await res.json();
+            setClinics(data.data || []);
+          }
+        } catch (err) {
+          console.error('Error loading clinics:', err);
+        }
+      };
+      loadClinics();
+    }
+  }, [initialClinics.length]);
 
   // Load clinic details (doctors & schedules)
   const loadClinicDetails = useCallback(async (clinic: Clinic) => {
@@ -127,15 +145,15 @@ export function ClinicsClientPage({
         body: JSON.stringify({
           tenantId: TENANT_ID,
           ...formData,
-          totalBeds: parseInt(formData.totalBeds),
-          availableBeds: parseInt(formData.totalBeds),
+          totalBeds: 1,  // Not used, kept for schema compatibility
+          availableBeds: 1,
         }),
       });
       if (res.ok) {
         const newClinic = await res.json();
         setClinics([newClinic, ...clinics]);
         setShowClinicForm(false);
-        setFormData({ name: '', address: '', city: '', state: '', zipCode: '', phoneNumber: '', email: '', totalBeds: '10', isHeadquarters: false });
+        setFormData({ name: '', address: '', city: '', state: '', zipCode: '', phoneNumber: '', email: '', maxAppointmentsDay: '50', isHeadquarters: false });
       }
     } catch (error) {
       console.error('Error creating clinic:', error);
@@ -231,7 +249,7 @@ export function ClinicsClientPage({
                     )}
                   </div>
                   <div className="mt-2 flex gap-4 text-xs text-slate-500">
-                    <span>🏥 {clinic.totalBeds} camas</span>
+                    <span>📅 {clinic.schedules?.[0]?.maxAppointmentsDay || 50} citas/día</span>
                     <span>📞 {clinic.phoneNumber || 'Sin tel.'}</span>
                   </div>
                 </div>
@@ -292,8 +310,8 @@ export function ClinicsClientPage({
                           <p className="font-medium">{selectedClinic.email || '-'}</p>
                         </div>
                         <div>
-                          <label className="text-sm text-gray-500">Capacidad (Camas)</label>
-                          <p className="font-medium">{selectedClinic.totalBeds} total / {selectedClinic.availableBeds} disponibles</p>
+                          <label className="text-sm text-gray-500">Citas por Día (máx)</label>
+                          <p className="font-medium">{schedules.find(s => s.isOpen)?.maxAppointmentsDay || 50} citas</p>
                         </div>
                         <div>
                           <label className="text-sm text-gray-500">Estado</label>
@@ -476,13 +494,14 @@ export function ClinicsClientPage({
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Camas</label>
+                    <label className="block text-sm font-medium mb-1">Citas por Día</label>
                     <input
                       type="number"
-                      value={formData.totalBeds}
-                      onChange={(e) => setFormData({ ...formData, totalBeds: e.target.value })}
+                      value={formData.maxAppointmentsDay}
+                      onChange={(e) => setFormData({ ...formData, maxAppointmentsDay: e.target.value })}
                       className="w-full border rounded px-3 py-2"
                       min="1"
+                      placeholder="50"
                     />
                   </div>
                 </div>

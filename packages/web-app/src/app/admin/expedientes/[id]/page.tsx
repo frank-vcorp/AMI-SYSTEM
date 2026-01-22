@@ -27,6 +27,12 @@ async function getExpedient(id: string) {
         patient: true,
         clinic: true,
         appointment: true,
+        medicalExams: {
+          orderBy: { createdAt: 'desc' }
+        },
+        studies: {
+          orderBy: { createdAt: 'desc' }
+        },
       },
     });
 
@@ -55,6 +61,26 @@ async function getExpedient(id: string) {
         id: expedient.clinic.id,
         name: expedient.clinic.name,
       },
+      medicalExams: expedient.medicalExams.map(exam => ({
+        id: exam.id,
+        bloodPressure: exam.bloodPressure || undefined,
+        heartRate: exam.heartRate || undefined,
+        respiratoryRate: exam.respiratoryRate || undefined,
+        temperature: exam.temperature ? Number(exam.temperature) : undefined,
+        weight: exam.weight ? Number(exam.weight) : undefined,
+        height: exam.height ? Number(exam.height) : undefined,
+        physicalExamNotes: exam.physicalExam || undefined,
+        notes: exam.notes || undefined,
+        createdAt: exam.createdAt.toISOString(),
+      })),
+      studies: expedient.studies.map(study => ({
+        id: study.id,
+        studyType: study.studyType,
+        fileName: study.fileName,
+        fileSize: study.fileSize || 0,
+        fileKey: study.fileKey,
+        createdAt: study.createdAt.toISOString(),
+      })),
     };
   } catch (error) {
     console.error("[getExpedient] Error fetching expedient:", error);

@@ -90,7 +90,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   try {
     const validationTaskId = params.id;
     const body = await request.json();
-    const { verdict, diagnosis, restrictions, _referralSpecialty, signatureData, ipAddress, userAgent } = body;
+    const { verdict, diagnosis, restrictions, signatureData, ipAddress, userAgent } = body;
 
     // Validate verdict if provided
     const validVerdicts = ['APTO', 'APTO_CON_RESTRICCIONES', 'NO_APTO', 'PENDIENTE', 'REFERENCIA'];
@@ -112,7 +112,12 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 
     // Handle signature (mark as completed if signature provided)
     if (signatureData) {
-      updateData.signatureData = signatureData;
+      updateData.signatureData = {
+        ...signatureData,
+        ipAddress,
+        userAgent,
+        timestamp: new Date().toISOString(),
+      };
       updateData.signedAt = new Date();
       updateData.signedBy = body.validatorId;
       updateData.status = 'COMPLETED';

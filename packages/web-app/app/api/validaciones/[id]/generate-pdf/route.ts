@@ -64,6 +64,7 @@ export async function POST(_request: NextRequest, { params }: { params: { id: st
       validationTaskId,
       expedientId: validationTask.expedientId,
       patientName: validationTask.expedient.patient.name,
+      patientId: validationTask.expedient.patientId,
       clinicName: validationTask.expedient.clinic.name,
       medicalExamData: {
         vitalSigns: validationTask.medicalExam.vitalSigns || {},

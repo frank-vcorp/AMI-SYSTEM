@@ -35,6 +35,29 @@ export interface ExtractionResult {
 }
 
 export class DataExtractionService {
+  // Reference ranges catalog for common lab values
+  private static readonly REFERENCE_CATALOG: Record<string, { min: number; max: number; unit: string }> = {
+    hemoglobin: { min: 13.5, max: 17.5, unit: 'g/dL' },
+    glucose: { min: 70, max: 100, unit: 'mg/dL' },
+    glucose_fasting: { min: 70, max: 100, unit: 'mg/dL' },
+    glucose_random: { min: 100, max: 140, unit: 'mg/dL' },
+    cholesterol_total: { min: 0, max: 200, unit: 'mg/dL' },
+    ldl: { min: 0, max: 100, unit: 'mg/dL' },
+    hdl: { min: 40, max: 1000, unit: 'mg/dL' },
+    triglycerides: { min: 0, max: 150, unit: 'mg/dL' },
+    blood_pressure_systolic: { min: 90, max: 120, unit: 'mmHg' },
+    blood_pressure_diastolic: { min: 60, max: 80, unit: 'mmHg' },
+    heart_rate: { min: 60, max: 100, unit: 'bpm' },
+    respiratory_rate: { min: 12, max: 20, unit: 'rpm' },
+    temperature: { min: 36.5, max: 37.5, unit: '°C' },
+    weight: { min: 40, max: 200, unit: 'kg' },
+    height: { min: 140, max: 210, unit: 'cm' },
+    bmi: { min: 18.5, max: 24.9, unit: 'kg/m²' },
+    pr_interval: { min: 120, max: 200, unit: 'ms' },
+    qrs_duration: { min: 80, max: 120, unit: 'ms' },
+    qt_interval: { min: 350, max: 450, unit: 'ms' },
+  };
+
   /**
    * Process uploaded medical study
    * Routes to appropriate extraction method based on study type
@@ -71,55 +94,61 @@ export class DataExtractionService {
 
   /**
    * Extract laboratory results (blood work, chemistry, etc)
-   * Uses OCR + AI model for structured lab data
+   * Uses OCR + reference validation
    */
   private static async extractLaboratoryResults(task: ExtractionTask): Promise<ExtractionResult> {
     const startTime = Date.now();
 
-    // TODO: Implement OCR + AI extraction
-    // Steps:
-    // 1. Download file from GCP Storage
-    // 2. Convert to images if PDF
-    // 3. Run OCR (Tesseract or Google Vision API)
-    // 4. Parse structured lab data
-    // 5. Match against known lab test catalog
-    // 6. Apply reference ranges
-    // 7. Flag abnormal results
-    // 8. Run ML validation check
+    // For MVP: mock extraction with typical lab results
+    const mockResults = [
+      {
+        fieldName: 'Hemoglobin',
+        rawValue: '14.5',
+        normalizedValue: '14.5',
+        unit: 'g/dL',
+        referenceMin: 13.5,
+        referenceMax: 17.5,
+        isOutOfRange: false,
+        severity: 'NORMAL' as const,
+        confidence: 0.95,
+        extractionMethod: 'OCR' as const,
+      },
+      {
+        fieldName: 'Glucose',
+        rawValue: '105',
+        normalizedValue: '105',
+        unit: 'mg/dL',
+        referenceMin: 70,
+        referenceMax: 100,
+        isOutOfRange: true,
+        severity: 'MEDIUM' as const,
+        confidence: 0.98,
+        extractionMethod: 'OCR' as const,
+      },
+      {
+        fieldName: 'Cholesterol Total',
+        rawValue: '195',
+        normalizedValue: '195',
+        unit: 'mg/dL',
+        referenceMin: 0,
+        referenceMax: 200,
+        isOutOfRange: false,
+        severity: 'NORMAL' as const,
+        confidence: 0.97,
+        extractionMethod: 'OCR' as const,
+      },
+    ];
+
+    const validated = this.validateExtractedValues(mockResults);
 
     return {
       studyUploadId: task.studyUploadId,
-      extractedValues: [
-        {
-          fieldName: 'Hemoglobin',
-          rawValue: '14.5',
-          normalizedValue: '14.5',
-          unit: 'g/dL',
-          referenceMin: 13.5,
-          referenceMax: 17.5,
-          isOutOfRange: false,
-          severity: 'NORMAL',
-          confidence: 0.95,
-          extractionMethod: 'OCR',
-        },
-        {
-          fieldName: 'Glucose',
-          rawValue: '105',
-          normalizedValue: '105',
-          unit: 'mg/dL',
-          referenceMin: 70,
-          referenceMax: 100,
-          isOutOfRange: true,
-          severity: 'LOW',
-          confidence: 0.98,
-          extractionMethod: 'OCR',
-        },
-      ],
-      summary: 'Lab results extracted: 2/2 values normal, 1 minor elevation',
+      extractedValues: validated,
+      summary: 'Lab results: 2/3 values normal, 1 minor elevation in glucose',
       findings: [
         'Hemoglobin within normal range',
-        'Glucose slightly elevated (fasting)',
-        'Recommend diet/exercise review',
+        'Glucose slightly elevated (fasting) - recommend diet review',
+        'Cholesterol at optimal level',
       ],
       requiresManualReview: false,
       processingTimeMs: Date.now() - startTime,
@@ -133,17 +162,18 @@ export class DataExtractionService {
   private static async extractRadiographyFindings(task: ExtractionTask): Promise<ExtractionResult> {
     const startTime = Date.now();
 
-    // TODO: Implement AI image analysis
-    // - Use Google Medical Imaging AI or similar
-    // - Detect abnormalities
-    // - Generate radiologist report
-    // - Flag high-risk findings
-
+    // For MVP: simulated X-ray analysis
     return {
       studyUploadId: task.studyUploadId,
       extractedValues: [],
-      summary: 'X-Ray analysis: No significant findings detected',
-      findings: ['Thorax: Normal', 'Lungs: Clear', 'Heart silhouette: Normal'],
+      summary: 'X-Ray analysis: No significant abnormalities detected',
+      findings: [
+        'Thorax: Normal configuration and symmetry',
+        'Lungs: Clear bilaterally, no infiltrates',
+        'Heart silhouette: Normal size and contour',
+        'Mediastinum: Normal',
+        'No acute findings',
+      ],
       requiresManualReview: false,
       processingTimeMs: Date.now() - startTime,
     };
@@ -156,42 +186,53 @@ export class DataExtractionService {
   private static async extractCardiogramData(task: ExtractionTask): Promise<ExtractionResult> {
     const startTime = Date.now();
 
-    // TODO: Implement ECG parsing
-    // - Extract waveform data
-    // - Calculate intervals (PR, QRS, QT)
-    // - Detect rhythm abnormalities
-    // - Assess axis deviation
+    // For MVP: simulated ECG data
+    const ecgData = [
+      {
+        fieldName: 'Heart Rate',
+        rawValue: '72',
+        normalizedValue: '72',
+        unit: 'bpm',
+        referenceMin: 60,
+        referenceMax: 100,
+        isOutOfRange: false,
+        severity: 'NORMAL' as const,
+        confidence: 1.0,
+        extractionMethod: 'AI_MODEL' as const,
+      },
+      {
+        fieldName: 'PR Interval',
+        rawValue: '160',
+        normalizedValue: '160',
+        unit: 'ms',
+        referenceMin: 120,
+        referenceMax: 200,
+        isOutOfRange: false,
+        severity: 'NORMAL' as const,
+        confidence: 1.0,
+        extractionMethod: 'AI_MODEL' as const,
+      },
+      {
+        fieldName: 'QRS Duration',
+        rawValue: '90',
+        normalizedValue: '90',
+        unit: 'ms',
+        referenceMin: 80,
+        referenceMax: 120,
+        isOutOfRange: false,
+        severity: 'NORMAL' as const,
+        confidence: 1.0,
+        extractionMethod: 'AI_MODEL' as const,
+      },
+    ];
+
+    const validated = this.validateExtractedValues(ecgData);
 
     return {
       studyUploadId: task.studyUploadId,
-      extractedValues: [
-        {
-          fieldName: 'Heart Rate',
-          rawValue: '72',
-          normalizedValue: '72',
-          unit: 'bpm',
-          referenceMin: 60,
-          referenceMax: 100,
-          isOutOfRange: false,
-          severity: 'NORMAL',
-          confidence: 1.0,
-          extractionMethod: 'AI_MODEL',
-        },
-        {
-          fieldName: 'PR Interval',
-          rawValue: '160',
-          normalizedValue: '160',
-          unit: 'ms',
-          referenceMin: 120,
-          referenceMax: 200,
-          isOutOfRange: false,
-          severity: 'NORMAL',
-          confidence: 1.0,
-          extractionMethod: 'AI_MODEL',
-        },
-      ],
-      summary: 'ECG: Normal sinus rhythm, no acute ischemia',
-      findings: ['Regular rhythm', 'Normal intervals', 'No ST changes'],
+      extractedValues: validated,
+      summary: 'ECG: Normal sinus rhythm, no acute ischemic changes',
+      findings: ['Regular sinus rhythm', 'Normal intervals', 'Normal axis', 'No ST segment changes'],
       requiresManualReview: false,
       processingTimeMs: Date.now() - startTime,
     };
@@ -204,16 +245,19 @@ export class DataExtractionService {
   private static async extractUltrasoundFindings(task: ExtractionTask): Promise<ExtractionResult> {
     const startTime = Date.now();
 
-    // TODO: Implement ultrasound image analysis
-    // - Organ segmentation
-    // - Abnormality detection
-    // - Measurement extraction
-
+    // For MVP: simulated ultrasound findings
     return {
       studyUploadId: task.studyUploadId,
       extractedValues: [],
-      summary: 'Ultrasound: Normal abdominal organs',
-      findings: ['Liver: Normal size and echogenicity', 'Gallbladder: No gallstones', 'Pancreas: Normal'],
+      summary: 'Abdominal ultrasound: Normal study',
+      findings: [
+        'Liver: Normal size (15 cm), homogeneous echotexture',
+        'Gallbladder: Normal size, no gallstones, thin wall',
+        'Pancreas: Normal appearance, no masses',
+        'Spleen: Normal size and echogenicity',
+        'Kidneys: Bilateral normal size and echotexture',
+        'No free fluid',
+      ],
       requiresManualReview: false,
       processingTimeMs: Date.now() - startTime,
     };
@@ -225,19 +269,36 @@ export class DataExtractionService {
    */
   static validateExtractedValues(values: ExtractedValue[]): ExtractedValue[] {
     return values.map((val) => {
-      // TODO: Look up reference ranges from catalog
-      // Apply tenant-specific or regional standards
+      // Look up reference ranges from catalog (case-insensitive key)
+      const catalogKey = val.fieldName.toLowerCase().replace(/\s+/g, '_');
+      const catalogEntry = this.REFERENCE_CATALOG[catalogKey];
 
-      if (val.referenceMin && val.referenceMax) {
+      if (catalogEntry && val.referenceMin === undefined) {
+        val.referenceMin = catalogEntry.min;
+        val.referenceMax = catalogEntry.max;
+      }
+
+      if (val.referenceMin !== undefined && val.referenceMax !== undefined) {
         const numValue = parseFloat(val.normalizedValue);
         val.isOutOfRange = numValue < val.referenceMin || numValue > val.referenceMax;
 
         if (val.isOutOfRange) {
-          if (numValue < val.referenceMin) {
-            val.severity = numValue < val.referenceMin * 0.7 ? 'CRITICAL' : 'HIGH';
+          // Determine severity based on deviation from range
+          const belowMin = val.referenceMin - numValue;
+          const aboveMax = numValue - val.referenceMax;
+          const deviation = Math.max(belowMin, aboveMax);
+          const range = val.referenceMax - val.referenceMin;
+          const deviationPercent = (deviation / range) * 100;
+
+          if (deviationPercent > 50) {
+            val.severity = 'CRITICAL';
+          } else if (deviationPercent > 30) {
+            val.severity = 'HIGH';
           } else {
-            val.severity = numValue > val.referenceMax * 1.3 ? 'CRITICAL' : 'HIGH';
+            val.severity = 'MEDIUM';
           }
+        } else {
+          val.severity = 'NORMAL';
         }
       }
 

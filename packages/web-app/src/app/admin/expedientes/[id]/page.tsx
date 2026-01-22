@@ -5,8 +5,8 @@
 
 import React from "react";
 import Link from "next/link";
-import { ExpedientDetail, MedicalExamFullForm, StudyUploadZone } from "@ami/mod-expedientes";
 import { prisma } from "@/lib/prisma";
+import { ExpedientPageClient } from "./ExpedientPageClient";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -113,66 +113,18 @@ export default async function ExpedientDetailPage({ params }: PageProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Medical Record Details</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Expediente Médico</h1>
           <p className="mt-1 text-gray-600">{expedient.folio}</p>
         </div>
         <Link
           href="/admin/expedientes"
           className="inline-flex justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 hover:bg-gray-50"
         >
-          Back to List
+          Volver a Lista
         </Link>
       </div>
 
-      {/* Detail View */}
-      <div className="rounded-lg border border-gray-300 bg-white p-6">
-        <ExpedientDetail
-          expedient={expedient}
-          onStatusChange={async (newStatus) => {
-            try {
-              const response = await fetch(`/api/expedientes/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: newStatus }),
-              });
-
-              if (!response.ok) throw new Error("Failed to update status");
-              // Reload page to see changes
-              window.location.reload();
-            } catch (error) {
-              console.error("Error updating status:", error);
-              alert("Error updating status");
-            }
-          }}
-        />
-      </div>
-
-      {/* Medical Exams Section */}
-      <div className="rounded-lg border border-gray-300 bg-white p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Examen Médico Completo</h2>
-        <MedicalExamFullForm
-          onSubmit={async (data) => {
-            console.log('Exam data:', data);
-            alert('✅ Examen guardado correctamente');
-          }}
-        />
-      </div>
-
-      {/* Study Upload Section */}
-      <div className="rounded-lg border border-gray-300 bg-white p-6">
-        <h2 className="text-xl font-bold text-gray-900 mb-4">Upload Medical Study</h2>
-        <StudyUploadZone
-          expedientId={id}
-          onSuccess={() => {
-            // Reload page to show new study
-            window.location.reload();
-          }}
-          onError={(error) => {
-            console.error("Error uploading study:", error);
-            alert(`Error: ${error.message}`);
-          }}
-        />
-      </div>
+      <ExpedientPageClient expedient={expedient} />
     </div>
   );
 }

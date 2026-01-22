@@ -13,8 +13,12 @@ interface PageProps {
 
 async function getExpedient(id: string) {
   try {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-    const response = await fetch(`${apiUrl}/api/expedientes/${id}`, {
+    // Use VERCEL_URL for server-side fetch in production, fallback to localhost for dev
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+    
+    const response = await fetch(`${baseUrl}/api/expedientes/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -22,12 +26,13 @@ async function getExpedient(id: string) {
     });
 
     if (!response.ok) {
+      console.error(`[getExpedient] API error: ${response.status} for ID: ${id}`);
       throw new Error(`API error: ${response.status}`);
     }
 
     return response.json();
   } catch (error) {
-    console.error("Error fetching expedient:", error);
+    console.error("[getExpedient] Error fetching expedient:", error);
     return null;
   }
 }

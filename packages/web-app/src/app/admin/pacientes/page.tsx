@@ -17,10 +17,13 @@ interface Patient {
   id: string;
   name: string;
   email?: string;
-  phone?: string;
-  birthDate?: string;
+  phone?: string;          // Alias para compatibilidad
+  phoneNumber?: string;    // Campo real del schema
+  birthDate?: string;      // Alias para compatibilidad
+  dateOfBirth?: string;    // Campo real del schema
   gender?: string;
-  documentId?: string;
+  documentId?: string;     // Alias para compatibilidad
+  documentNumber?: string; // Campo real del schema
   status: string;
   companyId?: string;
   company?: { id: string; name: string };
@@ -171,13 +174,14 @@ export default function PacientesPage() {
 
   const handleEdit = (patient: Patient) => {
     setEditingId(patient.id);
+    const birthDateValue = patient.dateOfBirth || patient.birthDate;
     setFormData({
       name: patient.name || '',
       email: patient.email || '',
-      phone: patient.phone || '',
-      birthDate: patient.birthDate ? patient.birthDate.split('T')[0] : '',
-      gender: patient.gender || 'MASCULINO',
-      documentId: patient.documentId || '',
+      phone: patient.phoneNumber || patient.phone || '',
+      birthDate: birthDateValue ? birthDateValue.split('T')[0] : '',
+      gender: patient.gender === 'M' ? 'MASCULINO' : patient.gender === 'F' ? 'FEMENINO' : patient.gender === 'O' ? 'OTRO' : (patient.gender || 'MASCULINO'),
+      documentId: patient.documentNumber || patient.documentId || '',
       companyId: patient.companyId || '',
       jobProfileId: patient.jobProfileId || '',
     });
@@ -437,11 +441,11 @@ export default function PacientesPage() {
                       <td className="px-4 py-3">
                         <div className="font-medium text-gray-900">{patient.name}</div>
                         <div className="text-sm text-gray-500">
-                          {formatDate(patient.birthDate)} • {patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
+                          {formatDate(patient.dateOfBirth || patient.birthDate)} • {patient.gender === 'M' ? 'M' : patient.gender === 'F' ? 'F' : patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm font-mono text-gray-600">
-                        {patient.documentId || '-'}
+                        {patient.documentNumber || patient.documentId || '-'}
                       </td>
                       <td className="px-4 py-3">
                         {patient.company ? (
@@ -455,10 +459,10 @@ export default function PacientesPage() {
                       </td>
                       <td className="px-4 py-3">
                         {patient.email && <div className="text-sm text-gray-900">{patient.email}</div>}
-                        {patient.phone && <div className="text-sm text-gray-500">{patient.phone}</div>}
+                        {(patient.phoneNumber || patient.phone) && <div className="text-sm text-gray-500">{patient.phoneNumber || patient.phone}</div>}
                       </td>
                       <td className="px-4 py-3 text-center text-sm text-gray-600">
-                        {calculateAge(patient.birthDate)}
+                        {calculateAge(patient.dateOfBirth || patient.birthDate)}
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className="text-sm font-medium text-gray-900">

@@ -46,12 +46,13 @@ interface AvailabilitySlot {
 
 interface Appointment {
   id: string;
+  displayId?: string;
   appointmentDate: string;
   time?: string;
   appointmentTime?: string;
   status: string;
   notes?: string;
-  patient?: { id: string; name: string };
+  patient?: { id: string; name: string; documentNumber?: string };
   clinic?: { id: string; name: string };
   doctor?: { id: string; name: string };
   expedients?: Array<{ id: string; folio: string; status: string }>;
@@ -677,7 +678,7 @@ export function AppointmentManager() {
               <div className="flex justify-between items-start mb-6">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900">Detalles de Cita</h2>
-                  <p className="text-sm text-gray-500">ID: {selectedAppointment.id.slice(0, 8)}...</p>
+                  <p className="text-sm text-cyan-600 font-mono">{selectedAppointment.displayId || `APT-${selectedAppointment.id.slice(-6).toUpperCase()}`}</p>
                 </div>
                 <button
                   onClick={() => { setShowModal(false); setSelectedAppointment(null); }}
@@ -716,6 +717,9 @@ export function AppointmentManager() {
                 <div className="bg-gray-50 p-3 rounded-lg">
                   <p className="text-xs text-gray-500 mb-1">Paciente</p>
                   <p className="font-medium">{selectedAppointment.patient?.name || 'No asignado'}</p>
+                  {selectedAppointment.patient?.documentNumber && (
+                    <p className="text-xs text-gray-500 mt-1">Doc: {selectedAppointment.patient.documentNumber}</p>
+                  )}
                 </div>
 
                 <div className="bg-gray-50 p-3 rounded-lg">

@@ -5,14 +5,28 @@ import { prisma } from '@/lib/prisma';
 // Initialize AppointmentService with real Prisma client
 const appointmentService = new AppointmentService(prisma as any);
 
+// Default tenant for MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
+/**
+ * Generate short display ID from CUID
+ * Format: APT-XXXXXX (6 chars from cuid)
+ */
+function generateDisplayId(cuid: string): string {
+  // Take last 6 chars of the CUID (more unique than first chars)
+  const shortId = cuid.slice(-6).toUpperCase();
+  return `APT-${shortId}`;
+}
+
 /**
  * GET /api/citas
  * List appointments with filters
+ * Enhanced: Includes patient and clinic info
  */
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
     const clinicId = searchParams.get('clinicId');
     const employeeId = searchParams.get('employeeId');
     const status = searchParams.get('status');
@@ -22,32 +36,76 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '10');
 
-    // Build filter params
-    const filterParams: any = {
-      tenantId,
-      clinicId: clinicId ?? undefined,
-      employeeId: employeeId ?? undefined,
-      status: status as any,
-      page,
-      pageSize,
-    };
+    const skip = (page - 1) * pageSize;
 
-    // Handle single date filter (for daily view)
+    // Build where clause
+    const where: any = { tenantId };
+    if (clinicId) where.clinicId = clinicId;
+    if (employeeId) where.employeeId = employeeId;
+    if (status) where.status = status;
+
+    // Handle date filters
     if (date) {
       const startOfDay = new Date(date);
       startOfDay.setHours(0, 0, 0, 0);
       const endOfDay = new Date(date);
       endOfDay.setHours(23, 59, 59, 999);
-      filterParams.dateFrom = startOfDay;
-      filterParams.dateTo = endOfDay;
+      where.appointmentDate = { gte: startOfDay, lte: endOfDay };
     } else {
-      if (dateFrom) filterParams.dateFrom = new Date(dateFrom);
-      if (dateTo) filterParams.dateTo = new Date(dateTo);
+      if (dateFrom || dateTo) {
+        where.appointmentDate = {};
+        if (dateFrom) where.appointmentDate.gte = new Date(dateFrom);
+        if (dateTo) where.appointmentDate.lte = new Date(dateTo);
+      }
     }
 
-    const result = await appointmentService.listAppointments(filterParams);
+    // Query appointments with clinic relation
+    const [appointments, total] = await Promise.all([
+      prisma.appointment.findMany({
+        where,
+        skip,
+        take: pageSize,
+        include: {
+          clinic: { select: { id: true, name: true, address: true } },
+          expedients: { select: { id: true, folio: true, status: true } },
+        },
+        orderBy: [
+          { appointmentDate: 'asc' },
+          { time: 'asc' }
+        ],
+      }),
+      prisma.appointment.count({ where }),
+    ]);
 
-    return NextResponse.json(result, { status: 200 });
+    // Get patient IDs from appointments
+    const patientIds = appointments.map(a => a.employeeId).filter(Boolean) as string[];
+    
+    // Fetch patients in one query
+    const patients = patientIds.length > 0 
+      ? await prisma.patient.findMany({
+          where: { id: { in: patientIds } },
+          select: { id: true, name: true, documentNumber: true },
+        })
+      : [];
+
+    // Create patient lookup map
+    const patientMap = new Map(patients.map(p => [p.id, p]));
+
+    // Enhance appointments with patient info and displayId
+    const enhancedAppointments = appointments.map(apt => ({
+      ...apt,
+      displayId: generateDisplayId(apt.id),
+      appointmentTime: apt.time, // Alias for frontend compatibility
+      patient: apt.employeeId ? patientMap.get(apt.employeeId) || null : null,
+    }));
+
+    return NextResponse.json({
+      data: enhancedAppointments,
+      total,
+      page,
+      pageSize,
+      totalPages: Math.ceil(total / pageSize),
+    }, { status: 200 });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     console.error('[GET /api/citas] Error:', errorMessage, error);

@@ -19,8 +19,17 @@ import { getTenantIdFromRequest } from '@/lib/auth';
 const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
 
 /**
+ * Generate short display ID from CUID
+ * Format: APT-XXXXXX (6 chars from cuid)
+ */
+function generateDisplayId(cuid: string): string {
+  const shortId = cuid.slice(-6).toUpperCase();
+  return `APT-${shortId}`;
+}
+
+/**
  * GET /api/citas/[id]
- * Get a single appointment by ID
+ * Get a single appointment by ID with patient info
  */
 export async function GET(
   request: NextRequest,
@@ -51,7 +60,21 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(appointment);
+    // Fetch patient info if employeeId exists
+    let patient = null;
+    if (appointment.employeeId) {
+      patient = await prisma.patient.findUnique({
+        where: { id: appointment.employeeId },
+        select: { id: true, name: true, documentNumber: true },
+      });
+    }
+
+    return NextResponse.json({
+      ...appointment,
+      displayId: generateDisplayId(appointment.id),
+      appointmentTime: appointment.time,
+      patient,
+    });
   } catch (error) {
     console.error('[GET /api/citas/[id]]', error);
     return NextResponse.json(

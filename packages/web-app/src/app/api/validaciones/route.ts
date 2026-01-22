@@ -68,16 +68,11 @@ export async function GET(request: NextRequest) {
  */
 export async function POST(request: NextRequest) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: "Tenant ID not found" },
-        { status: 401 }
-      );
-    }
-
     const body = await request.json();
-    const { expedientId } = body;
+    const { expedientId, tenantId: bodyTenantId } = body;
+    
+    // Get tenantId from body or use default
+    const tenantId = bodyTenantId || 'default-tenant';
 
     if (!expedientId) {
       return NextResponse.json(

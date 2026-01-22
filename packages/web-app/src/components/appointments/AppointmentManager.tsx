@@ -45,7 +45,8 @@ interface AvailabilitySlot {
 interface Appointment {
   id: string;
   appointmentDate: string;
-  time: string;
+  time?: string;
+  appointmentTime?: string;
   status: string;
   patient?: { id: string; name: string };
   clinic?: { id: string; name: string };
@@ -537,7 +538,7 @@ export function AppointmentManager() {
                     <div key={apt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div className="flex items-center gap-4">
                         <div className="text-lg font-mono font-bold text-gray-700">
-                          {apt.time}
+                          {apt.appointmentTime || apt.time}
                         </div>
                         <div>
                           <p className="font-medium">{apt.patient?.name || 'Paciente'}</p>

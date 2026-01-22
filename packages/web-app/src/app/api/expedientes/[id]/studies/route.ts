@@ -19,6 +19,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getTenantIdFromRequest } from "@/lib/auth";
 
+// MVP Demo tenant ID
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 const ALLOWED_MIME_TYPES = ["application/pdf", "image/jpeg", "image/png"];
 const MAX_FILE_SIZE_BYTES = 50 * 1024 * 1024; // 50MB
 const VALID_STUDY_TYPES = [
@@ -35,7 +38,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
     const { id } = await params;
     const formData = await request.formData();
     const file = formData.get("file") as File;
@@ -134,7 +137,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
     const { id } = await params;
     const searchParams = request.nextUrl.searchParams;
     const limit = Math.min(parseInt(searchParams.get("limit") || "50"), 100);

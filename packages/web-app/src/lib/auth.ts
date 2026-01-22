@@ -6,13 +6,15 @@ import { NextRequest } from 'next/server';
 
 /**
  * Extract tenant ID from request headers or Firebase token
+ * Returns null if no auth header (for MVP demo fallback to default tenant)
  * @note This runs only on the server (API routes)
  */
-export async function getTenantIdFromRequest(request: NextRequest): Promise<string> {
+export async function getTenantIdFromRequest(request: NextRequest): Promise<string | null> {
   try {
     const authHeader = request.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('Missing authorization header');
+      // Return null for MVP demo - caller should use default tenant
+      return null;
     }
 
     const token = authHeader.substring(7);
@@ -21,21 +23,23 @@ export async function getTenantIdFromRequest(request: NextRequest): Promise<stri
     
     // Temporary: Use first 16 chars of token as placeholder tenant ID
     // TODO: Replace with actual Firebase Admin verification when server-side verification is implemented
-    return token.substring(0, 16) || 'default-tenant';
+    return token.substring(0, 16) || null;
   } catch (error) {
-    throw new Error(`Failed to extract tenant ID: ${error}`);
+    console.error('[getTenantIdFromRequest]', error);
+    return null;
   }
 }
 
 /**
  * Extract user ID from request headers or Firebase token
+ * Returns null if no auth header (for MVP demo)
  * @note This runs only on the server (API routes)
  */
-export async function getUserIdFromRequest(request: NextRequest): Promise<string> {
+export async function getUserIdFromRequest(request: NextRequest): Promise<string | null> {
   try {
     const authHeader = request.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
-      throw new Error('Missing authorization header');
+      return null;
     }
 
     const token = authHeader.substring(7);
@@ -44,9 +48,10 @@ export async function getUserIdFromRequest(request: NextRequest): Promise<string
     
     // Temporary: Use last 16 chars of token as placeholder user ID
     // TODO: Replace with actual Firebase Admin verification when server-side verification is implemented
-    return token.substring(token.length - 16) || 'default-user';
+    return token.substring(token.length - 16) || null;
   } catch (error) {
-    throw new Error(`Failed to extract user ID: ${error}`);
+    console.error('[getUserIdFromRequest]', error);
+    return null;
   }
 }
 

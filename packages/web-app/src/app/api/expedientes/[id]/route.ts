@@ -134,7 +134,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
     const { id } = await params;
 
     // Verify expedient exists and belongs to tenant

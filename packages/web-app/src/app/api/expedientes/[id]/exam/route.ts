@@ -21,6 +21,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getTenantIdFromRequest } from "@/lib/auth";
 
+// MVP Demo tenant ID
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 function validateBloodPressure(bp: string): boolean {
   const match = bp.match(/^(\d{1,3})\/(\d{1,3})$/);
   if (!match) return false;
@@ -33,7 +36,7 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
     const { id } = await params;
     const body = await request.json();
     const {

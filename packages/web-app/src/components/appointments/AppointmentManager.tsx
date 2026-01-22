@@ -1,5 +1,5 @@
 /**
- * ⚙️ IMPL REFERENCE: IMPL-20260122-02
+ * ⚙️ IMPL REFERENCE: IMPL-20260123-02
  * 📄 SEE: context/SPEC-MVP-DEMO-APIS.md
  * 🤖 AUTHOR: SOFIA (Claude Opus 4.5)
  * 
@@ -9,6 +9,8 @@
  * - Real availability from clinic schedules
  * - Patient selection with company info
  * - Job profile for exam type determination
+ * - Modal de detalles de cita
+ * - Flujo de estados completo
  */
 
 'use client';
@@ -48,10 +50,32 @@ interface Appointment {
   time?: string;
   appointmentTime?: string;
   status: string;
+  notes?: string;
   patient?: { id: string; name: string };
   clinic?: { id: string; name: string };
   doctor?: { id: string; name: string };
+  expedients?: Array<{ id: string; folio: string; status: string }>;
 }
+
+// Flujo de estados: SCHEDULED → CONFIRMED → CHECK_IN → IN_PROGRESS → COMPLETED
+type AppointmentStatus = 'SCHEDULED' | 'CONFIRMED' | 'CHECK_IN' | 'IN_PROGRESS' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW';
+
+const STATUS_LABELS: Record<AppointmentStatus, string> = {
+  SCHEDULED: 'Programada',
+  CONFIRMED: 'Confirmada',
+  CHECK_IN: 'Registrado',
+  IN_PROGRESS: 'En Proceso',
+  COMPLETED: 'Completada',
+  CANCELLED: 'Cancelada',
+  NO_SHOW: 'No Presentó',
+};
+
+const NEXT_STATUS: Partial<Record<AppointmentStatus, { status: AppointmentStatus; label: string; color: string }>> = {
+  SCHEDULED: { status: 'CONFIRMED', label: 'Confirmar', color: 'bg-green-600 hover:bg-green-700' },
+  CONFIRMED: { status: 'CHECK_IN', label: 'Check-In', color: 'bg-blue-600 hover:bg-blue-700' },
+  CHECK_IN: { status: 'IN_PROGRESS', label: 'Iniciar Examen', color: 'bg-purple-600 hover:bg-purple-700' },
+  IN_PROGRESS: { status: 'COMPLETED', label: 'Completar', color: 'bg-emerald-600 hover:bg-emerald-700' },
+};
 
 const TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
 const MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -81,6 +105,11 @@ export function AppointmentManager() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  
+  // Modal states
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+  const [updatingStatus, setUpdatingStatus] = useState(false);
 
   // Load initial data
   useEffect(() => {
@@ -270,6 +299,8 @@ export function AppointmentManager() {
 
       if (res.ok) {
         setSuccess('Cita cancelada');
+        setShowModal(false);
+        setSelectedAppointment(null);
         loadAppointments();
         loadAvailability();
       }
@@ -278,10 +309,63 @@ export function AppointmentManager() {
     }
   };
 
+  // Change appointment status
+  const handleStatusChange = async (id: string, newStatus: AppointmentStatus) => {
+    setUpdatingStatus(true);
+    try {
+      const res = await fetch(`/api/citas/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (res.ok) {
+        const updated = await res.json();
+        setSuccess(`Estado cambiado a ${STATUS_LABELS[newStatus]}`);
+        setSelectedAppointment(updated);
+        loadAppointments();
+      } else {
+        const data = await res.json();
+        throw new Error(data.error || 'Error al cambiar estado');
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al cambiar estado');
+    } finally {
+      setUpdatingStatus(false);
+    }
+  };
+
+  // Mark as No Show
+  const handleNoShow = async (id: string) => {
+    if (!confirm('¿Marcar como "No se presentó"?')) return;
+    await handleStatusChange(id, 'NO_SHOW');
+    setShowModal(false);
+    setSelectedAppointment(null);
+  };
+
+  // Open appointment details
+  const openAppointmentDetails = async (apt: Appointment) => {
+    try {
+      // Fetch full appointment details including expedients
+      const res = await fetch(`/api/citas/${apt.id}`);
+      if (res.ok) {
+        const fullData = await res.json();
+        setSelectedAppointment(fullData);
+      } else {
+        setSelectedAppointment(apt);
+      }
+    } catch {
+      setSelectedAppointment(apt);
+    }
+    setShowModal(true);
+  };
+
   const getStatusColor = (status: string) => {
     const colors: Record<string, string> = {
       SCHEDULED: 'bg-blue-100 text-blue-800',
       CONFIRMED: 'bg-green-100 text-green-800',
+      CHECK_IN: 'bg-indigo-100 text-indigo-800',
+      IN_PROGRESS: 'bg-purple-100 text-purple-800',
       COMPLETED: 'bg-gray-100 text-gray-800',
       CANCELLED: 'bg-red-100 text-red-800',
       NO_SHOW: 'bg-yellow-100 text-yellow-800',
@@ -534,46 +618,198 @@ export function AppointmentManager() {
                 <p className="text-center text-gray-500 py-8">No hay citas programadas para esta fecha</p>
               ) : (
                 <div className="space-y-2">
-                  {appointments.map(apt => (
-                    <div key={apt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <div className="text-lg font-mono font-bold text-gray-700">
-                          {apt.appointmentTime || apt.time}
-                        </div>
-                        <div>
-                          <p className="font-medium">{apt.patient?.name || 'Paciente'}</p>
-                          <p className="text-xs text-gray-500">{apt.doctor?.name || 'Sin médico asignado'}</p>
+                  {appointments.map(apt => {
+                    const nextAction = NEXT_STATUS[apt.status as AppointmentStatus];
+                    return (
+                      <div key={apt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <button
+                          onClick={() => openAppointmentDetails(apt)}
+                          className="flex items-center gap-4 text-left flex-1"
+                        >
+                          <div className="text-lg font-mono font-bold text-gray-700">
+                            {apt.appointmentTime || apt.time}
+                          </div>
+                          <div>
+                            <p className="font-medium">{apt.patient?.name || 'Paciente'}</p>
+                            <p className="text-xs text-gray-500">{apt.clinic?.name || 'Sin clínica'}</p>
+                          </div>
+                        </button>
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-1 text-xs rounded ${getStatusColor(apt.status)}`}>
+                            {STATUS_LABELS[apt.status as AppointmentStatus] || apt.status}
+                          </span>
+                          {/* Botón de siguiente estado */}
+                          {nextAction && (
+                            <button
+                              onClick={() => handleStatusChange(apt.id, nextAction.status)}
+                              disabled={updatingStatus}
+                              className={`px-3 py-1 text-xs text-white rounded ${nextAction.color} disabled:opacity-50`}
+                            >
+                              {nextAction.label}
+                            </button>
+                          )}
+                          {/* Botón cancelar solo para SCHEDULED */}
+                          {apt.status === 'SCHEDULED' && (
+                            <button
+                              onClick={() => handleCancelAppointment(apt.id)}
+                              className="text-red-600 hover:text-red-800 text-xs"
+                            >
+                              Cancelar
+                            </button>
+                          )}
                         </div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className={`px-2 py-1 text-xs rounded ${getStatusColor(apt.status)}`}>
-                          {apt.status}
-                        </span>
-                        {apt.status === 'SCHEDULED' && (
-                          <button
-                            onClick={() => handleCancelAppointment(apt.id)}
-                            className="text-red-600 hover:text-red-800 text-sm"
-                          >
-                            Cancelar
-                          </button>
-                        )}
-                        {apt.status === 'CONFIRMED' && (
-                          <button
-                            onClick={() => router.push(`/admin/expedientes/new?appointmentId=${apt.id}&patientId=${apt.patient?.id}`)}
-                            className="text-cyan-600 hover:text-cyan-800 text-sm"
-                          >
-                            Crear Expediente
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal de Detalles de Cita */}
+      {showModal && selectedAppointment && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              {/* Header */}
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">Detalles de Cita</h2>
+                  <p className="text-sm text-gray-500">ID: {selectedAppointment.id.slice(0, 8)}...</p>
+                </div>
+                <button
+                  onClick={() => { setShowModal(false); setSelectedAppointment(null); }}
+                  className="text-gray-400 hover:text-gray-600 text-2xl"
+                >
+                  ×
+                </button>
+              </div>
+
+              {/* Status Badge */}
+              <div className="mb-6">
+                <span className={`px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(selectedAppointment.status)}`}>
+                  {STATUS_LABELS[selectedAppointment.status as AppointmentStatus] || selectedAppointment.status}
+                </span>
+              </div>
+
+              {/* Info Grid */}
+              <div className="space-y-4 mb-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <p className="text-xs text-gray-500 mb-1">Fecha</p>
+                    <p className="font-medium">
+                      {new Date(selectedAppointment.appointmentDate).toLocaleDateString('es-MX', {
+                        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <p className="text-xs text-gray-500 mb-1">Hora</p>
+                    <p className="font-medium text-lg">
+                      {selectedAppointment.appointmentTime || selectedAppointment.time || '—'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">Paciente</p>
+                  <p className="font-medium">{selectedAppointment.patient?.name || 'No asignado'}</p>
+                </div>
+
+                <div className="bg-gray-50 p-3 rounded-lg">
+                  <p className="text-xs text-gray-500 mb-1">Clínica</p>
+                  <p className="font-medium">{selectedAppointment.clinic?.name || 'No asignada'}</p>
+                </div>
+
+                {selectedAppointment.notes && (
+                  <div className="bg-gray-50 p-3 rounded-lg">
+                    <p className="text-xs text-gray-500 mb-1">Notas</p>
+                    <p className="text-sm">{selectedAppointment.notes}</p>
+                  </div>
+                )}
+
+                {/* Expedientes vinculados */}
+                {selectedAppointment.expedients && selectedAppointment.expedients.length > 0 && (
+                  <div className="bg-cyan-50 p-3 rounded-lg">
+                    <p className="text-xs text-cyan-600 mb-2">Expedientes Vinculados</p>
+                    <div className="space-y-1">
+                      {selectedAppointment.expedients.map(exp => (
+                        <button
+                          key={exp.id}
+                          onClick={() => router.push(`/admin/expedientes/${exp.id}`)}
+                          className="w-full text-left flex justify-between items-center p-2 bg-white rounded hover:bg-cyan-100 transition-colors"
+                        >
+                          <span className="font-mono text-sm">{exp.folio}</span>
+                          <span className={`text-xs px-2 py-1 rounded ${
+                            exp.status === 'COMPLETED' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {exp.status}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="border-t pt-4 space-y-3">
+                {/* Botón de siguiente estado */}
+                {NEXT_STATUS[selectedAppointment.status as AppointmentStatus] && (
+                  <button
+                    onClick={() => handleStatusChange(selectedAppointment.id, NEXT_STATUS[selectedAppointment.status as AppointmentStatus]!.status)}
+                    disabled={updatingStatus}
+                    className={`w-full py-3 text-white rounded-lg font-medium ${NEXT_STATUS[selectedAppointment.status as AppointmentStatus]!.color} disabled:opacity-50`}
+                  >
+                    {updatingStatus ? 'Actualizando...' : NEXT_STATUS[selectedAppointment.status as AppointmentStatus]!.label}
+                  </button>
+                )}
+
+                {/* Crear Expediente (CHECK_IN o IN_PROGRESS) */}
+                {(selectedAppointment.status === 'CHECK_IN' || selectedAppointment.status === 'IN_PROGRESS') && (
+                  <button
+                    onClick={() => router.push(`/admin/expedientes/new?appointmentId=${selectedAppointment.id}&patientId=${selectedAppointment.patient?.id}`)}
+                    className="w-full py-3 bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg font-medium"
+                  >
+                    Crear Expediente
+                  </button>
+                )}
+
+                {/* Botones secundarios */}
+                <div className="flex gap-2">
+                  {!['COMPLETED', 'CANCELLED', 'NO_SHOW'].includes(selectedAppointment.status) && (
+                    <>
+                      <button
+                        onClick={() => handleNoShow(selectedAppointment.id)}
+                        disabled={updatingStatus}
+                        className="flex-1 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-lg text-sm font-medium disabled:opacity-50"
+                      >
+                        No se Presentó
+                      </button>
+                      <button
+                        onClick={() => handleCancelAppointment(selectedAppointment.id)}
+                        disabled={updatingStatus}
+                        className="flex-1 py-2 bg-red-100 hover:bg-red-200 text-red-800 rounded-lg text-sm font-medium disabled:opacity-50"
+                      >
+                        Cancelar Cita
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => { setShowModal(false); setSelectedAppointment(null); }}
+                  className="w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

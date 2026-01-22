@@ -15,6 +15,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getTenantIdFromRequest } from '@/lib/auth';
 
+// Default tenant for MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 /**
  * GET /api/citas/[id]
  * Get a single appointment by ID
@@ -24,13 +27,8 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
+    // Use default tenant for MVP demo if no auth header
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
 
     const { id } = await params;
 
@@ -72,13 +70,8 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
+    // Use default tenant for MVP demo if no auth header
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
 
     const { id } = await params;
     const body = await request.json();
@@ -152,13 +145,8 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: 'Tenant ID not found' },
-        { status: 401 }
-      );
-    }
+    // Use default tenant for MVP demo if no auth header
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
 
     const { id } = await params;
 

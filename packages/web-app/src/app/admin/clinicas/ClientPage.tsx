@@ -16,6 +16,8 @@ interface Clinic {
   availableBeds: number;
   isHeadquarters: boolean;
   status: string;
+  schedules?: Schedule[];
+  maxAppointmentsDay?: number;
 }
 
 interface Doctor {

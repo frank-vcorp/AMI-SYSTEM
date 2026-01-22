@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
         appointmentId,
         folio,
         status: "PENDING",
-        notes: notes || "",
+        medicalNotes: notes || "",
       },
       include: {
         patient: true,

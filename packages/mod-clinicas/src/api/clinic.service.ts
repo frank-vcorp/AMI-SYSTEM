@@ -147,16 +147,17 @@ export class ClinicService {
       where.city = { equals: filters.city, mode: 'insensitive' };
     }
 
+    /**
+     * @fix IMPL-20260122-01
+     * Removed nested service include as FK relation doesn't exist in current DB schema.
+     * Services data will be fetched separately if needed.
+     */
     const [clinics, total] = await Promise.all([
       this.prisma.clinic.findMany({
         where,
         include: {
           schedules: true,
-          services: {
-            include: {
-              service: true
-            }
-          }
+          services: true
         },
         orderBy: { createdAt: 'desc' },
         skip,
@@ -171,8 +172,9 @@ export class ClinicService {
         services: clinic.services.map((cs: any) => ({
           id: cs.id,
           clinicId: cs.clinicId,
-          name: cs.service.name,
-          description: cs.service.description
+          serviceId: cs.serviceId,
+          isAvailable: cs.isAvailable,
+          price: cs.price
         }))
       })) as ClinicResponse[],
       total,

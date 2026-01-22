@@ -62,14 +62,12 @@ export async function POST(request: NextRequest) {
         clinicId: appointment.clinicId,
         appointmentId,
         folio,
-        status: "PENDING",
-        medicalNotes: notes || "",
+        status: "DRAFT",
+        notes: notes || "",
       },
       include: {
         patient: true,
         clinic: true,
-        medicalExams: true,
-        studies: true,
       },
     });
 
@@ -85,8 +83,16 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
     const searchParams = request.nextUrl.searchParams;
+    const tenantId = searchParams.get("tenantId");
+    
+    if (!tenantId) {
+      return NextResponse.json(
+        { error: "tenantId is required" },
+        { status: 400 }
+      );
+    }
+    
     const clinicId = searchParams.get("clinicId");
     const patientId = searchParams.get("patientId");
     const status = searchParams.get("status");
@@ -106,8 +112,6 @@ export async function GET(request: NextRequest) {
         include: {
           patient: true,
           clinic: true,
-          medicalExams: { take: 1, orderBy: { createdAt: "desc" } },
-          studies: { take: 1, orderBy: { createdAt: "desc" } },
         },
         orderBy: { createdAt: "desc" },
         skip: (page - 1) * pageSize,

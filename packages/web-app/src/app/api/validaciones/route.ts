@@ -5,28 +5,30 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getTenantIdFromRequest } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const { searchParams } = new URL(request.url);
+    const tenantId = searchParams.get("tenantId");
+    
     if (!tenantId) {
       return NextResponse.json(
-        { error: "Tenant ID not found" },
-        { status: 401 }
+        { error: "Tenant ID is required" },
+        { status: 400 }
       );
     }
 
-    const { searchParams } = new URL(request.url);
-    const status = (searchParams.get("status") || "PENDING") as any;
+    const status = searchParams.get("status") || undefined;
     const limit = parseInt(searchParams.get("limit") || "20");
     const offset = parseInt(searchParams.get("offset") || "0");
 
+    const where: any = { tenantId };
+    if (status) {
+      where.status = status;
+    }
+
     const validations = await prisma.validationTask.findMany({
-      where: {
-        tenantId,
-        status,
-      },
+      where,
       include: {
         expedient: {
           include: {
@@ -41,12 +43,7 @@ export async function GET(request: NextRequest) {
       skip: offset,
     });
 
-    const total = await prisma.validationTask.count({
-      where: {
-        tenantId,
-        status,
-      },
-    });
+    const total = await prisma.validationTask.count({ where });
 
     return NextResponse.json({
       data: validations,

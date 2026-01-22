@@ -196,9 +196,10 @@ export async function PUT(
       createdExpedient,
     });
   } catch (error) {
-    console.error('[PUT /api/citas/[id]]', error);
+    console.error('[PUT /api/citas/[id]] Error:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to update appointment' },
+      { error: 'Failed to update appointment', details: message },
       { status: 500 }
     );
   }

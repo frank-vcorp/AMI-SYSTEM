@@ -325,6 +325,14 @@ export function AppointmentManager() {
         setSuccess(`Estado cambiado a ${STATUS_LABELS[newStatus]}`);
         setSelectedAppointment(updated);
         loadAppointments();
+
+        // Si es CHECK_IN y se creó expediente, navegar automáticamente
+        if (newStatus === 'CHECK_IN' && updated.createdExpedient) {
+          setShowModal(false);
+          setTimeout(() => {
+            router.push(`/admin/expedientes/${updated.createdExpedient.id}`);
+          }, 1000);
+        }
       } else {
         const data = await res.json();
         throw new Error(data.error || 'Error al cambiar estado');

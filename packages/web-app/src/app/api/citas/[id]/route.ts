@@ -122,12 +122,42 @@ export async function PUT(
 
     // Validate status if provided
     if (status) {
-      const validStatuses = ['PENDING', 'CONFIRMED', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'NO_SHOW'];
+      const validStatuses = ['PENDING', 'SCHEDULED', 'CONFIRMED', 'CHECK_IN', 'IN_PROGRESS', 'COMPLETED', 'CANCELLED', 'NO_SHOW'];
       if (!validStatuses.includes(status)) {
         return NextResponse.json(
           { error: `status must be one of: ${validStatuses.join(', ')}` },
           { status: 400 }
         );
+      }
+    }
+
+    // If transitioning to CHECK_IN, create expedient automatically
+    let createdExpedient = null;
+    if (status === 'CHECK_IN' && existing.status !== 'CHECK_IN') {
+      // Check if expedient already exists for this appointment
+      const existingExpedient = await prisma.expedient.findFirst({
+        where: { appointmentId: id },
+      });
+
+      if (!existingExpedient && existing.employeeId && existing.clinicId) {
+        // Generate folio
+        const count = await prisma.expedient.count({
+          where: { tenantId, clinicId: existing.clinicId },
+        });
+        const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const folio = `EXP-${today}-${String(count + 1).padStart(4, '0')}`;
+
+        // Create expedient
+        createdExpedient = await prisma.expedient.create({
+          data: {
+            tenantId,
+            patientId: existing.employeeId,
+            clinicId: existing.clinicId,
+            appointmentId: id,
+            folio,
+            status: 'IN_PROGRESS',
+          },
+        });
       }
     }
 
@@ -149,7 +179,22 @@ export async function PUT(
       },
     });
 
-    return NextResponse.json(appointment);
+    // Fetch patient for response
+    let patient = null;
+    if (appointment.employeeId) {
+      patient = await prisma.patient.findUnique({
+        where: { id: appointment.employeeId },
+        select: { id: true, name: true, documentNumber: true },
+      });
+    }
+
+    return NextResponse.json({
+      ...appointment,
+      displayId: generateDisplayId(appointment.id),
+      appointmentTime: appointment.time,
+      patient,
+      createdExpedient,
+    });
   } catch (error) {
     console.error('[PUT /api/citas/[id]]', error);
     return NextResponse.json(

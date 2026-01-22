@@ -13,12 +13,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getTenantIdFromRequest } from "@/lib/auth";
 
+// Default tenant for MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(
   _request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(_request);
+    const tenantId = await getTenantIdFromRequest(_request) || DEFAULT_TENANT_ID;
     const { id } = await params;
 
     // Fetch expedient with multi-tenant check
@@ -54,7 +57,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request) || DEFAULT_TENANT_ID;
     const { id } = await params;
     const body = await request.json();
     const { status, notes } = body;

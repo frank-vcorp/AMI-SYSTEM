@@ -6,31 +6,56 @@
 import React from "react";
 import Link from "next/link";
 import { ExpedientDetail, MedicalExamFullForm, StudyUploadZone } from "@ami/mod-expedientes";
+import { prisma } from "@/lib/prisma";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+// MVP Demo tenant ID
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 async function getExpedient(id: string) {
   try {
-    // Use VERCEL_URL for server-side fetch in production, fallback to localhost for dev
-    const baseUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
-    
-    const response = await fetch(`${baseUrl}/api/expedientes/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
+    // Direct database query instead of fetch to avoid URL issues in Vercel SSR
+    const expedient = await prisma.expedient.findFirst({
+      where: { 
+        id,
+        tenantId: DEFAULT_TENANT_ID 
       },
-      cache: "no-store",
+      include: {
+        patient: true,
+        clinic: true,
+        appointment: true,
+      },
     });
 
-    if (!response.ok) {
-      console.error(`[getExpedient] API error: ${response.status} for ID: ${id}`);
-      throw new Error(`API error: ${response.status}`);
-    }
+    if (!expedient) return null;
 
-    return response.json();
+    // Map to the format expected by ExpedientDetail component
+    const nameParts = expedient.patient.name.split(' ');
+    const firstName = nameParts[0] || '';
+    const lastName = nameParts.slice(1).join(' ') || '';
+
+    return {
+      id: expedient.id,
+      folio: expedient.folio,
+      status: expedient.status,
+      notes: expedient.medicalNotes || '',
+      createdAt: expedient.createdAt.toISOString(),
+      updatedAt: expedient.updatedAt.toISOString(),
+      patient: {
+        id: expedient.patient.id,
+        firstName,
+        lastName,
+        dateOfBirth: expedient.patient.dateOfBirth?.toISOString(),
+        documentId: expedient.patient.documentNumber,
+      },
+      clinic: {
+        id: expedient.clinic.id,
+        name: expedient.clinic.name,
+      },
+    };
   } catch (error) {
     console.error("[getExpedient] Error fetching expedient:", error);
     return null;

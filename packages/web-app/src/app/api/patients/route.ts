@@ -52,6 +52,9 @@ export async function GET(request: NextRequest) {
       prisma.patient.findMany({
         where,
         include: {
+          company: {
+            select: { id: true, name: true },
+          },
           _count: {
             select: { expedients: true },
           },
@@ -97,7 +100,8 @@ export async function POST(request: NextRequest) {
     const city = body.city;
     const state = body.state;
     const zipCode = body.zipCode;
-    const companyId = body.companyId || null;
+    // Convertir string vacío a null para evitar errores de FK
+    const companyId = body.companyId && body.companyId.trim() !== '' ? body.companyId : null;
     // Note: jobProfileId from form is ignored - not in Patient schema
     
     // Mapear género del formulario al schema

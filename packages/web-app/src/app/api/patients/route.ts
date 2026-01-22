@@ -81,26 +81,46 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
-    const { 
-      name, 
-      email, 
-      phoneNumber, 
-      dateOfBirth, 
-      gender = 'M', 
-      documentType = 'DNI',
-      documentNumber,
-      address,
-      city,
-      state,
-      zipCode,
-      companyId,
-    } = body;
+    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
+    
+    // Aceptar nombres del formulario y del schema (compatibilidad)
+    const name = body.name;
+    const email = body.email;
+    const phoneNumber = body.phoneNumber || body.phone;
+    const dateOfBirth = body.dateOfBirth || body.birthDate;
+    const documentNumber = body.documentNumber || body.documentId;
+    const documentType = body.documentType || 'CURP';
+    const address = body.address;
+    const city = body.city;
+    const state = body.state;
+    const zipCode = body.zipCode;
+    const companyId = body.companyId || null;
+    const jobProfileId = body.jobProfileId || null;
+    
+    // Mapear género del formulario al schema
+    let gender = body.gender || 'M';
+    if (gender === 'MASCULINO' || gender === 'Masculino') gender = 'M';
+    if (gender === 'FEMENINO' || gender === 'Femenino') gender = 'F';
+    if (gender === 'OTRO' || gender === 'Otro') gender = 'O';
 
-    // Validations
-    if (!name || !dateOfBirth || !documentNumber) {
+    // Validations - ahora más flexibles
+    if (!name) {
       return NextResponse.json(
-        { error: 'name, dateOfBirth, and documentNumber are required' },
+        { error: 'El nombre es requerido' },
+        { status: 400 }
+      );
+    }
+    
+    if (!dateOfBirth) {
+      return NextResponse.json(
+        { error: 'La fecha de nacimiento es requerida' },
+        { status: 400 }
+      );
+    }
+    
+    if (!documentNumber) {
+      return NextResponse.json(
+        { error: 'El documento de identidad es requerido' },
         { status: 400 }
       );
     }
@@ -124,7 +144,7 @@ export async function POST(request: NextRequest) {
 
     if (existing) {
       return NextResponse.json(
-        { error: 'Patient with this document number already exists' },
+        { error: 'Ya existe un paciente con este documento' },
         { status: 409 }
       );
     }
@@ -134,17 +154,18 @@ export async function POST(request: NextRequest) {
       data: {
         tenantId,
         name,
-        email,
-        phoneNumber,
+        email: email || null,
+        phoneNumber: phoneNumber || null,
         dateOfBirth: new Date(dateOfBirth),
         gender,
         documentType,
         documentNumber,
-        address,
-        city,
-        state,
-        zipCode,
+        address: address || null,
+        city: city || null,
+        state: state || null,
+        zipCode: zipCode || null,
         companyId,
+        jobProfileId,
         status: 'ACTIVE',
       },
     });

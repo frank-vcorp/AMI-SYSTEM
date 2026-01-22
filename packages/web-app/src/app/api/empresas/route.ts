@@ -12,10 +12,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { buildTenantFilter } from '@/lib/utils';
 
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
     const pageSize = Math.min(50, parseInt(searchParams.get('pageSize') || '20'));
     const search = searchParams.get('search') || '';
@@ -82,7 +85,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || DEFAULT_TENANT_ID;
     const { 
       name, 
       rfc, 

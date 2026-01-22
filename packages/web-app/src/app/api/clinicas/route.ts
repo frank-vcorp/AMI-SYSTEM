@@ -12,7 +12,7 @@ const clinicService = new ClinicService(prisma as any);
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '10');
     const search = searchParams.get('search') || undefined;
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { tenantId = 'default-tenant', createdBy = 'system', ...data } = body;
+    const { tenantId = '550e8400-e29b-41d4-a716-446655440000', createdBy = 'system', ...data } = body;
 
     const clinic = await clinicService.createClinic(tenantId, data, createdBy);
 

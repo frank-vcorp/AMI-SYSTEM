@@ -12,7 +12,7 @@ const appointmentService = new AppointmentService(prisma as any);
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
     const clinicId = searchParams.get('clinicId');
     const employeeId = searchParams.get('employeeId');
     const status = searchParams.get('status');

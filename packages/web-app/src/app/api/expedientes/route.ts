@@ -7,60 +7,70 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getTenantIdFromRequest } from "@/lib/auth";
+
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
 
 export async function POST(request: NextRequest) {
   try {
-    const tenantId = await getTenantIdFromRequest(request);
     const body = await request.json();
-    const { appointmentId, patientId, notes } = body;
+    const { appointmentId, patientId, clinicId, notes, tenantId: bodyTenantId } = body;
+    
+    // Usar tenantId del body o el default
+    const tenantId = bodyTenantId || DEFAULT_TENANT_ID;
 
-    if (!appointmentId || !patientId) {
+    if (!patientId) {
       return NextResponse.json(
-        { error: "appointmentId and patientId are required" },
+        { error: "patientId es requerido" },
+        { status: 400 }
+      );
+    }
+    
+    if (!clinicId) {
+      return NextResponse.json(
+        { error: "clinicId es requerido" },
         { status: 400 }
       );
     }
 
-    // Validate that appointment exists and belongs to tenant
-    const appointment = await prisma.appointment.findFirst({
-      where: { id: appointmentId, tenantId },
-    });
-
-    if (!appointment) {
-      return NextResponse.json(
-        { error: "Appointment not found" },
-        { status: 404 }
-      );
-    }
-
-    // Validate that patient exists
+    // Validar que el paciente existe
     const patient = await prisma.patient.findFirst({
-      where: { id: patientId, tenantId },
+      where: { id: patientId },
     });
 
     if (!patient) {
       return NextResponse.json(
-        { error: "Patient not found" },
+        { error: "Paciente no encontrado" },
         { status: 404 }
       );
     }
 
-    // Generate folio
-    const count = await prisma.expedient.count({
-      where: { tenantId, clinicId: appointment.clinicId },
+    // Validar que la clínica existe
+    const clinic = await prisma.clinic.findFirst({
+      where: { id: clinicId },
     });
 
-    // Generate folio: EXP-{CLINIC_ID_SHORT}-{SEQ}
-    const folio = `EXP-${appointment.clinicId.substring(0, 4).toUpperCase()}-${String(count + 1).padStart(6, "0")}`;
+    if (!clinic) {
+      return NextResponse.json(
+        { error: "Clínica no encontrada" },
+        { status: 404 }
+      );
+    }
 
-    // Create expedient
+    // Generar folio único
+    const count = await prisma.expedient.count({
+      where: { tenantId, clinicId },
+    });
+
+    const folio = `EXP-${clinicId.substring(0, 4).toUpperCase()}-${String(count + 1).padStart(6, "0")}`;
+
+    // Crear expediente
     const expedient = await prisma.expedient.create({
       data: {
         tenantId,
         patientId,
-        clinicId: appointment.clinicId,
-        appointmentId,
+        clinicId,
+        appointmentId: appointmentId || null,
         folio,
         status: "PENDING",
         medicalNotes: notes || "",
@@ -72,10 +82,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(expedient, { status: 201 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error creating expedient:", error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: "Failed to create expedient" },
+      { error: "Failed to create expedient", details: message },
       { status: 500 }
     );
   }
@@ -84,14 +95,8 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
-    const tenantId = searchParams.get("tenantId");
-    
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: "tenantId is required" },
-        { status: 400 }
-      );
-    }
+    // Usar tenantId del query o el default para MVP demo
+    const tenantId = searchParams.get("tenantId") || DEFAULT_TENANT_ID;
     
     const clinicId = searchParams.get("clinicId");
     const patientId = searchParams.get("patientId");

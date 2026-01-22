@@ -14,10 +14,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { buildTenantFilter } from '@/lib/utils';
 
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
     const page = Math.max(1, parseInt(searchParams.get('page') || '1'));
     const pageSize = Math.min(50, parseInt(searchParams.get('pageSize') || '20'));
     const search = searchParams.get('search') || '';
@@ -81,7 +84,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
+    const tenantId = body.tenantId || DEFAULT_TENANT_ID;
     
     // Aceptar nombres del formulario y del schema (compatibilidad)
     const name = body.name;
@@ -95,7 +98,7 @@ export async function POST(request: NextRequest) {
     const state = body.state;
     const zipCode = body.zipCode;
     const companyId = body.companyId || null;
-    const jobProfileId = body.jobProfileId || null;
+    // Note: jobProfileId from form is ignored - not in Patient schema
     
     // Mapear género del formulario al schema
     let gender = body.gender || 'M';
@@ -165,7 +168,7 @@ export async function POST(request: NextRequest) {
         state: state || null,
         zipCode: zipCode || null,
         companyId,
-        jobProfileId,
+        // Note: jobProfileId is not in Patient model, ignore it
         status: 'ACTIVE',
       },
     });

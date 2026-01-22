@@ -22,7 +22,7 @@ export async function GET(
   try {
     const { id: clinicId } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
 
     // Verify clinic exists
     const clinic = await prisma.clinic.findFirst({
@@ -69,7 +69,7 @@ export async function POST(
   try {
     const { id: clinicId } = await params;
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
     const { schedules } = body;
 
     if (!schedules || !Array.isArray(schedules)) {

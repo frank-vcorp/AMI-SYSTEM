@@ -15,6 +15,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { buildTenantFilter } from '@/lib/utils';
 
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -22,7 +25,7 @@ export async function GET(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
 
     const patient = await prisma.patient.findFirst({
       where: { id, ...buildTenantFilter(tenantId) },
@@ -64,15 +67,23 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || DEFAULT_TENANT_ID;
+    
+    // Support both form field names and schema field names for compatibility
+    const phoneNumber = body.phoneNumber || body.phone;
+    const dateOfBirth = body.dateOfBirth || body.birthDate;
+    const documentNumber = body.documentNumber || body.documentId;
+    
+    // Map gender from form values to schema values
+    let gender = body.gender;
+    if (gender === 'MASCULINO') gender = 'M';
+    else if (gender === 'FEMENINO') gender = 'F';
+    else if (gender === 'OTRO') gender = 'O';
+    
     const { 
       name, 
       email, 
-      phoneNumber, 
-      dateOfBirth, 
-      gender, 
       documentType,
-      documentNumber, 
       address,
       city,
       state,
@@ -165,7 +176,7 @@ export async function DELETE(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
 
     // Verify patient exists and belongs to tenant
     const existing = await prisma.patient.findFirst({

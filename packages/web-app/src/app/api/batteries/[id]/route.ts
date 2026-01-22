@@ -24,7 +24,7 @@ export async function GET(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
 
     const battery = await prisma.battery.findFirst({
       where: { id, ...buildTenantFilter(tenantId) },
@@ -77,7 +77,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
     const {
       name,
       description,
@@ -182,7 +182,7 @@ export async function DELETE(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
 
     // Verify battery exists and belongs to tenant
     const existing = await prisma.battery.findFirst({

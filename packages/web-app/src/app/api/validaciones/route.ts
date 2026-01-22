@@ -6,17 +6,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get("tenantId");
-    
-    if (!tenantId) {
-      return NextResponse.json(
-        { error: "Tenant ID is required" },
-        { status: 400 }
-      );
-    }
+    // Usar tenantId del query o default para MVP demo
+    const tenantId = searchParams.get("tenantId") || DEFAULT_TENANT_ID;
 
     const status = searchParams.get("status") || undefined;
     const limit = parseInt(searchParams.get("limit") || "20");
@@ -71,8 +68,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { expedientId, tenantId: bodyTenantId } = body;
     
-    // Get tenantId from body or use default
-    const tenantId = bodyTenantId || 'default-tenant';
+    // Get tenantId from body or use default for MVP demo
+    const tenantId = bodyTenantId || DEFAULT_TENANT_ID;
 
     if (!expedientId) {
       return NextResponse.json(

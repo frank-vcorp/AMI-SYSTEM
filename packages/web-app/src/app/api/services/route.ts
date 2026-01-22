@@ -24,7 +24,7 @@ import { buildTenantFilter } from '@/lib/utils';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = request.nextUrl;
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || '550e8400-e29b-41d4-a716-446655440000';
     const page = parseInt(searchParams.get('page') || '1');
     const pageSize = parseInt(searchParams.get('pageSize') || '50');
     const search = searchParams.get('search') || '';
@@ -89,7 +89,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
     const {
       name,
       code,

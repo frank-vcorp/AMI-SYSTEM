@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const tenantId = (formData.get('tenantId') as string) || 'default-tenant';
+    const tenantId = (formData.get('tenantId') as string) || '550e8400-e29b-41d4-a716-446655440000';
 
     if (!file) {
       return NextResponse.json(

@@ -13,6 +13,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { buildTenantFilter } from '@/lib/utils';
 
+// Tenant por defecto para MVP demo
+const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -20,7 +23,7 @@ export async function GET(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
 
     const company = await prisma.company.findFirst({
       where: { id, ...buildTenantFilter(tenantId) },
@@ -63,7 +66,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const tenantId = body.tenantId || 'default-tenant';
+    const tenantId = body.tenantId || '550e8400-e29b-41d4-a716-446655440000';
     const { 
       name, 
       rfc, 
@@ -176,7 +179,7 @@ export async function DELETE(
   try {
     const { id } = await params;
     const { searchParams } = new URL(request.url);
-    const tenantId = searchParams.get('tenantId') || 'default-tenant';
+    const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
 
     // Verify company exists and belongs to tenant
     const existing = await prisma.company.findFirst({

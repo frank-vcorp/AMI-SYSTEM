@@ -26,7 +26,7 @@ interface TimeSlot {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { tenantId = 'default-tenant', clinicId, dateFrom, dateTo, durationMin = 30 } = body;
+    const { tenantId = '550e8400-e29b-41d4-a716-446655440000', clinicId, dateFrom, dateTo, durationMin = 30 } = body;
 
     if (!clinicId || !dateFrom || !dateTo) {
       return NextResponse.json(

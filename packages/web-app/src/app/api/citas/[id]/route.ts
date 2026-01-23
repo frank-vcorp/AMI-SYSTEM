@@ -60,11 +60,11 @@ export async function GET(
       );
     }
 
-    // Fetch patient info if employeeId exists
+    // Fetch patient info if patientId exists
     let patient = null;
-    if (appointment.employeeId) {
+    if (appointment.patientId) {
       patient = await prisma.patient.findUnique({
-        where: { id: appointment.employeeId },
+        where: { id: appointment.patientId },
         select: { id: true, name: true, documentNumber: true },
       });
     }
@@ -181,9 +181,9 @@ export async function PUT(
 
     // Fetch patient for response
     let patient = null;
-    if (appointment.employeeId) {
+    if (appointment.patientId) {
       patient = await prisma.patient.findUnique({
-        where: { id: appointment.employeeId },
+        where: { id: appointment.patientId },
         select: { id: true, name: true, documentNumber: true },
       });
     }

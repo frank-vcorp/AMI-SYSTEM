@@ -61,7 +61,11 @@ export class AppointmentService {
     }
 
     // Validate time is within clinic hours
-    const [hour, minute] = data.appointmentTime.split(':').map(Number);
+    const timeStr = data.time || data.appointmentTime;
+    if (!timeStr) {
+      throw new InvalidAppointmentError('time or appointmentTime is required');
+    }
+    const [hour, minute] = timeStr.split(':').map(Number);
     const appointmentTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
     
     if (appointmentTime < schedule.openingTime || appointmentTime > schedule.closingTime) {
@@ -99,7 +103,7 @@ export class AppointmentService {
       data: {
         tenantId,
         clinicId: data.clinicId,
-        employeeId: data.employeeId,
+        patientId: data.employeeId || data.patientId,  // Support both field names
         companyId: data.companyId,
         appointmentDate,
         // Current schema stores this as `time`
@@ -161,7 +165,7 @@ export class AppointmentService {
 
     if (clinicId) where.clinicId = clinicId;
     if (companyId) where.companyId = companyId;
-    if (employeeId) where.employeeId = employeeId;
+    if (employeeId) where.patientId = employeeId;  // Map employeeId to patientId
     if (status) where.status = status;
 
     if (dateFrom || dateTo) {
@@ -363,15 +367,23 @@ export class AppointmentService {
       id: appointment.id,
       tenantId: appointment.tenantId,
       clinicId: appointment.clinicId,
-      employeeId: appointment.employeeId,
+      patientId: appointment.patientId || appointment.employeeId,  // Support both field names
       companyId: appointment.companyId,
+      displayId: appointment.displayId,
       appointmentDate: appointmentDate.toISOString().split('T')[0],
-      appointmentTime: appointment.appointmentTime ?? appointment.time,
+      time: appointment.time,
+      appointmentTime: appointment.time,  // Alias for backwards compatibility
+      appointmentDuration: appointment.appointmentDuration,
       status: appointment.status,
       notes: appointment.notes ?? null,
-      serviceIds: appointment.serviceIds ?? [],  // IMPL-20260120-12
+      serviceIds: appointment.serviceIds ?? [],
       createdAt: createdAt.toISOString(),
       updatedAt: updatedAt.toISOString(),
+      clinic: appointment.clinic,
+      patient: appointment.patient,
+      company: appointment.company,
+      // Deprecated fields for backwards compatibility
+      employeeId: appointment.patientId,
       clinicName: appointment.clinic?.name,
       companyName: appointment.company?.name
     };

@@ -24,8 +24,8 @@ export function AppointmentForm({
 }: AppointmentFormProps) {
   const defaultFormData: CreateAppointmentRequest = {
     clinicId: '',
+    patientId: '',  // Changed from employeeId
     companyId: '',
-    employeeId: '',
     appointmentDate: '',
     appointmentTime: '',
     serviceIds: [],

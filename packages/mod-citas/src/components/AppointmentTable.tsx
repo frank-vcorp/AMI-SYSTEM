@@ -120,7 +120,7 @@ export function AppointmentTable({
                   {appointment.clinicId}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {appointment.employeeId}
+                  {appointment.patientId || '-'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(appointment.status)}`}>
@@ -138,7 +138,7 @@ export function AppointmentTable({
                     <>
                       {onCreateExpedient && appointment.status === AppointmentStatus.CHECK_IN && (
                         <button
-                          onClick={() => onCreateExpedient(appointment.id, appointment.employeeId)}
+                          onClick={() => onCreateExpedient(appointment.id, appointment.patientId)}
                           className="text-green-600 hover:text-green-800 font-medium px-2 py-1 bg-green-50 rounded hover:bg-green-100"
                           title="Create medical record from this appointment"
                         >

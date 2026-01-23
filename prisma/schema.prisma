@@ -95,9 +95,11 @@ model Appointment {
   tenantId          String            @db.Uuid
   clinicId          String
   companyId         String?
-  employeeId        String?
+  patientId         String
+  displayId         String?           // Generated: APT-XXXXXX for display
   appointmentDate   DateTime
   time              String            @db.VarChar(5) // HH:MM format
+  appointmentDuration Int?            // Minutes allocated for appointment
   status            AppointmentStatus @default(PENDING)
   notes             String?           @db.Text
   createdAt         DateTime          @default(now())
@@ -105,14 +107,16 @@ model Appointment {
 
   // Relations
   clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  patient           Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
   expedients        Expedient[]
 
   // Indices
   @@index([tenantId])
   @@index([clinicId])
+  @@index([patientId])
   @@index([status])
   @@index([appointmentDate])
-  @@index([employeeId])
+  @@unique([displayId])
   @@map("appointments")
 }
 
@@ -129,6 +133,7 @@ model Doctor {
 
   // Relations
   clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  validationTasks   ValidationTask[]   @relation("ValidationSignedBy")
 
   // Indices
   @@unique([tenantId, cedula])
@@ -412,6 +417,7 @@ model Patient {
 
   // Relations
   company           Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  appointments      Appointment[]
   expedients        Expedient[]
 
   // Indices
@@ -445,12 +451,29 @@ model Study {
 model MedicalExam {
   id                String            @id @default(cuid())
   expedientId       String
+  
+  // Vital signs
   bloodPressure     String?           // SYS/DIA format
   heartRate         Int?              // bpm
   respiratoryRate   Int?              // breaths/min
   temperature       Float?            // Celsius
   weight            Float?            // kg
   height            Int?              // cm
+  
+  // Calculated metrics
+  imc               Float?            // Index of Body Mass (calculated: weight / (height/100)^2)
+  
+  // Vision assessment
+  leftEyeAcuity     Float?            // OD (derecho) - 6/6, 6/9, etc
+  rightEyeAcuity    Float?            // OI (izquierdo) - 6/6, 6/9, etc
+  colorBlindnessTest Boolean?         // Daltonismo result
+  
+  // Medical history
+  surgeries         Json?             // Array of {date, description, notes}
+  medications       Json?             // Array of {name, dosage, frequency, indication}
+  allergies         Json?             // Array of {allergen, severity, notes}
+  
+  // Physical and clinical examination
   physicalExam      String?           @db.Text
   notes             String?           @db.Text
   
@@ -521,6 +544,7 @@ model ValidationTask {
 
   // Relations
   expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  signedByDoctor    Doctor?           @relation("ValidationSignedBy", fields: [signedBy], references: [id])
 
   // Indices
   @@unique([expedientId])

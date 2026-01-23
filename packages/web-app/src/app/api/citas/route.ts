@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const tenantId = searchParams.get('tenantId') || DEFAULT_TENANT_ID;
     const clinicId = searchParams.get('clinicId');
-    const employeeId = searchParams.get('employeeId');
+    const patientId = searchParams.get('patientId') || searchParams.get('employeeId'); // Support both names
     const status = searchParams.get('status');
     const date = searchParams.get('date'); // Single date filter (YYYY-MM-DD)
     const dateFrom = searchParams.get('dateFrom');
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
     // Build where clause
     const where: any = { tenantId };
     if (clinicId) where.clinicId = clinicId;
-    if (employeeId) where.employeeId = employeeId;
+    if (patientId) where.patientId = patientId;
     if (status) where.status = status;
 
     // Handle date filters
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest) {
     ]);
 
     // Get patient IDs from appointments
-    const patientIds = appointments.map(a => a.employeeId).filter(Boolean) as string[];
+    const patientIds = appointments.map(a => a.patientId).filter(Boolean) as string[];
     
     // Fetch patients in one query
     const patients = patientIds.length > 0 
@@ -96,7 +96,7 @@ export async function GET(request: NextRequest) {
       ...apt,
       displayId: generateDisplayId(apt.id),
       appointmentTime: apt.time, // Alias for frontend compatibility
-      patient: apt.employeeId ? patientMap.get(apt.employeeId) || null : null,
+      patient: apt.patientId ? patientMap.get(apt.patientId) || null : null,
     }));
 
     return NextResponse.json({
@@ -135,16 +135,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Map UI fields to service interface
+    // Map UI fields to Prisma
     // UI sends: patientId, clinicId, appointmentDate, time
-    // Service expects: employeeId, clinicId, companyId, appointmentDate, appointmentTime, serviceIds
     const appointmentData = {
+      tenantId,
       clinicId: rest.clinicId,
-      employeeId: rest.patientId || rest.employeeId,  // Support both field names
-      companyId: rest.companyId || '',  // Optional company
+      patientId: rest.patientId || rest.employeeId,  // Support both field names
+      companyId: rest.companyId || null,  // Optional company
       appointmentDate: rest.appointmentDate,
-      appointmentTime: rest.time || rest.appointmentTime,  // Support both field names
-      serviceIds: rest.serviceIds || [],  // Optional services
+      time: rest.time || rest.appointmentTime,  // Support both field names
       notes: rest.notes || '',
     };
 

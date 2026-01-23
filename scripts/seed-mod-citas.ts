@@ -123,7 +123,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440100',
         clinicId: clinic1.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440200',
+        patientId: '550e8400-e29b-41d4-a716-446655440200',
         companyId,
         appointmentDate: new Date('2026-01-25'), // Sábado próximo
         time: '09:00',
@@ -133,7 +133,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440101',
         clinicId: clinic1.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440201',
+        patientId: '550e8400-e29b-41d4-a716-446655440201',
         companyId,
         appointmentDate: new Date('2026-01-25'),
         time: '10:00',
@@ -143,7 +143,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440102',
         clinicId: clinic1.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440202',
+        patientId: '550e8400-e29b-41d4-a716-446655440202',
         companyId,
         appointmentDate: new Date('2026-01-25'),
         time: '11:00',
@@ -153,7 +153,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440103',
         clinicId: clinic2.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440203',
+        patientId: '550e8400-e29b-41d4-a716-446655440203',
         companyId,
         appointmentDate: new Date('2026-01-27'), // Lunes
         time: '09:00',
@@ -163,7 +163,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440104',
         clinicId: clinic2.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440204',
+        patientId: '550e8400-e29b-41d4-a716-446655440204',
         companyId,
         appointmentDate: new Date('2026-01-27'),
         time: '10:30',
@@ -173,7 +173,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440105',
         clinicId: clinic2.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440205',
+        patientId: '550e8400-e29b-41d4-a716-446655440205',
         companyId,
         appointmentDate: new Date('2026-01-27'),
         time: '15:30',
@@ -183,7 +183,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440106',
         clinicId: clinic3.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440206',
+        patientId: '550e8400-e29b-41d4-a716-446655440206',
         companyId,
         appointmentDate: new Date('2026-01-28'),
         time: '08:00',
@@ -193,7 +193,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440107',
         clinicId: clinic3.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440207',
+        patientId: '550e8400-e29b-41d4-a716-446655440207',
         companyId,
         appointmentDate: new Date('2026-01-28'),
         time: '11:00',
@@ -203,7 +203,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440108',
         clinicId: clinic1.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440208',
+        patientId: '550e8400-e29b-41d4-a716-446655440208',
         companyId,
         appointmentDate: new Date('2026-01-29'),
         time: '09:30',
@@ -213,7 +213,7 @@ async function main() {
       {
         id: '550e8400-e29b-41d4-a716-446655440109',
         clinicId: clinic2.id,
-        employeeId: '550e8400-e29b-41d4-a716-446655440209',
+        patientId: '550e8400-e29b-41d4-a716-446655440209',
         companyId,
         appointmentDate: new Date('2026-01-30'),
         time: '13:00',
@@ -230,7 +230,7 @@ async function main() {
           id: apt.id,
           tenantId,
           clinicId: apt.clinicId,
-          employeeId: apt.employeeId,
+          patientId: apt.employeeId,
           companyId: apt.companyId,
           appointmentDate: apt.appointmentDate,
           time: apt.time,

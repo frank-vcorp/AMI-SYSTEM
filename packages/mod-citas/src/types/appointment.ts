@@ -18,29 +18,34 @@ export type Appointment = {
   id: string;
   tenantId: string;
   clinicId: string;
+  patientId: string;         // Changed from employeeId for consistency
   appointmentDate: Date | string;
-  appointmentTime: string;
-  employeeId: string;
-  companyId: string;
+  time: string;              // Changed from appointmentTime (database field name)
+  companyId?: string;        // Optional company association
   status: AppointmentStatus;
   notes: string | null;
+  displayId?: string;        // Generated display ID (e.g., APT-XXXXXX)
+  appointmentDuration?: number; // Minutes allocated
   createdAt: Date;
   updatedAt: Date;
   appointmentServices?: any[];
   clinic?: any;
+  patient?: any;
   company?: any;
 };
 
 // Request/Response DTOs
 export interface CreateAppointmentRequest {
   clinicId: string;
-  employeeId: string;        // Empleado / Paciente
-  companyId: string;         // Empresa contratante
+  patientId: string;         // Changed from employeeId - references Patient
+  companyId?: string;        // Optional company association
   appointmentDate: string;   // ISO 8601 date string (YYYY-MM-DD)
-  appointmentTime: string;   // HH:MM format
-  serviceIds: string[];      // Servicios/Baterías a realizar
+  appointmentTime?: string;  // HH:MM format - support both field names
+  time?: string;             // Alternative field name
+  serviceIds?: string[];     // Optional services/batteries
   notes?: string;
   createdBy?: string;
+  employeeId?: string;       // Deprecated - for backwards compatibility
 }
 
 export interface UpdateAppointmentRequest {
@@ -60,20 +65,27 @@ export interface AppointmentResponse {
   id: string;
   tenantId: string;
   clinicId: string;
-  employeeId: string;
-  companyId: string;
+  patientId: string;         // Changed from employeeId
+  companyId?: string;
+  displayId?: string;        // Generated display ID
   appointmentDate: string;   // ISO 8601 date string (YYYY-MM-DD)
-  appointmentTime: string;
+  time: string;              // HH:MM format - stored as 'time' in DB
+  appointmentTime?: string;  // Alias for backwards compatibility
+  appointmentDuration?: number; // Minutes allocated
   status: AppointmentStatus;
   notes: string | null;
-  serviceIds: string[];      // Servicios/Baterías (IMPL-20260120-12)
+  serviceIds?: string[];     // Optional services/batteries
   createdAt: string;         // ISO 8601 timestamp
   updatedAt: string;         // ISO 8601 timestamp
   // Optional enriched fields
+  clinic?: { id: string; name: string; address?: string };
+  patient?: { id: string; name: string; documentNumber?: string };
+  company?: { id: string; name: string };
+  // Deprecated fields for backwards compatibility
+  employeeId?: string;
   clinicName?: string;
   employeeName?: string;
   companyName?: string;
-  serviceName?: string;
 }
 
 export interface AppointmentListResponse {

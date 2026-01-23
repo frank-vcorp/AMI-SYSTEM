@@ -289,7 +289,7 @@ async function main() {
             tenantId: TENANT_ID,
             clinicId: clinics[idx % clinics.length].id,
             companyId: companies[idx % companies.length].id,
-            employeeId: `EMP-${String(idx + 1).padStart(4, '0')}`, // EMP-0001, EMP-0002, etc.
+            patientId: `EMP-${String(idx + 1).padStart(4, '0')}`, // EMP-0001, EMP-0002, etc. (references Patient.id)
             employeeName: PATIENT_NAMES[idx % PATIENT_NAMES.length],
             appointmentDate: date,
             status: 'CHECK_IN', // Cita ya realizada (check-in)
@@ -311,7 +311,7 @@ async function main() {
             appointmentId: apt.id,
             companyId: apt.companyId,
             clinicId: apt.clinicId,
-            patientId: apt.employeeId,
+            patientId: apt.patientId,
             patientName: apt.employeeName,
             folio: `EXP-${clinics[idx].code}-${Date.now()}-${idx}`,
             status: 'IN_PROGRESS',

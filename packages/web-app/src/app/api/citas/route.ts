@@ -137,13 +137,12 @@ export async function POST(request: NextRequest) {
 
     // Map UI fields to Prisma
     // UI sends: patientId, clinicId, appointmentDate, time
-    const appointmentData = {
-      tenantId,
+    const appointmentData: any = {
       clinicId: rest.clinicId,
       patientId: rest.patientId || rest.employeeId,  // Support both field names
       companyId: rest.companyId || null,  // Optional company
       appointmentDate: rest.appointmentDate,
-      time: rest.time || rest.appointmentTime,  // Support both field names
+      appointmentTime: rest.time || rest.appointmentTime,  // Normalize to appointmentTime
       notes: rest.notes || '',
     };
 

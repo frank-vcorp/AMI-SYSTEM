@@ -40,12 +40,12 @@ export interface CreateAppointmentRequest {
   patientId: string;         // Changed from employeeId - references Patient
   companyId?: string;        // Optional company association
   appointmentDate: string;   // ISO 8601 date string (YYYY-MM-DD)
-  appointmentTime?: string;  // HH:MM format - support both field names
-  time?: string;             // Alternative field name
+  appointmentTime: string;   // HH:MM format - required field
   serviceIds?: string[];     // Optional services/batteries
   notes?: string;
   createdBy?: string;
   employeeId?: string;       // Deprecated - for backwards compatibility
+  time?: string;             // Alternative field name
 }
 
 export interface UpdateAppointmentRequest {

@@ -139,7 +139,7 @@ export async function PUT(
         where: { appointmentId: id },
       });
 
-      if (!existingExpedient && existing.employeeId && existing.clinicId) {
+      if (!existingExpedient && existing.patientId && existing.clinicId) {
         // Generate folio
         const count = await prisma.expedient.count({
           where: { tenantId, clinicId: existing.clinicId },
@@ -151,7 +151,7 @@ export async function PUT(
         createdExpedient = await prisma.expedient.create({
           data: {
             tenantId,
-            patientId: existing.employeeId,
+            patientId: existing.patientId,
             clinicId: existing.clinicId,
             appointmentId: id,
             folio,

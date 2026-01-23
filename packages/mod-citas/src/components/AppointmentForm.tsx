@@ -107,8 +107,8 @@ export function AppointmentForm({
       // Reset form
       setFormData({
         clinicId: '',
+        patientId: '',
         companyId: '',
-        employeeId: '',
         appointmentDate: '',
         appointmentTime: '',
         serviceIds: [],
@@ -187,21 +187,21 @@ export function AppointmentForm({
         </select>
       </div>
 
-      {/* Employee Selection */}
+      {/* Patient Selection */}
       <div>
-        <label htmlFor="employeeId" className="block text-sm font-medium text-gray-700 mb-2">
-          Empleado / Paciente *
+        <label htmlFor="patientId" className="block text-sm font-medium text-gray-700 mb-2">
+          Paciente *
         </label>
         <select
-          id="employeeId"
-          name="employeeId"
-          value={formData.employeeId}
+          id="patientId"
+          name="patientId"
+          value={formData.patientId}
           onChange={handleInputChange}
           required
           disabled={submitting || isLoading}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent disabled:bg-gray-100"
         >
-          <option value="">Selecciona un empleado</option>
+          <option value="">Selecciona un paciente</option>
         </select>
       </div>
 

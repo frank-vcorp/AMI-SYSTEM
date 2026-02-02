@@ -9,47 +9,50 @@
 
 ## 🎯 Objetivos del Sprint
 
-1. **Certificación Médica Digital (PDF Real):** Pasar de placeholders a archivos PDF reales y descargables para la Papeleta de Aptitud y el Certificado Médico.
-2. **Dashboard Operativo Conectado:** Reemplazar los datos mock del administrador por métricas reales obtenidas mediante consultas a Prisma.
-3. **Digital Signature Integration:** Asegurar que la firma capturada en el panel de validación se incruste correctamente en los reportes generados.
+1. **VMS Unificado (Centro de Mandos):** Crear la interfaz de "una sola parada" basada en el diseño `index.html`, unificando Recepción, Examen, Estudios, Validación y Reportes.
+2. **Ciclo de Vida E2E:** Implementar el flujo completo desde la Cita/Papeleta hasta la Entrega del Certificado.
+3. **Identidad Médica Persistente (Unique ID):** Generación de un ID único de trabajador (ej. AMI-ID) que trascienda la empresa actual.
+4. **Gestión de Entidades Express:** Implementar los flujos de "Alta de Empresa" y "Alta de Trabajador" integrados en el registro inicial.
+5. **Certificación Médica Digital (PDF Real):** Generación de PDFs reales y descargables con firma digital incrustada.
+6. **Dashboard Operativo Conectado:** Métricas reales obtenidas mediante consultas a Prisma.
 
 ---
 
 ## 🛠️ Arquitectura y Componentes Relacionados
 
-### 1. MOD-REPORTES (Generación de Documentos)
+### 1. MOD-VMS (Centro de Operaciones Unificado)
+- **Componente Maestro:** `VMSOrchestrator` en `packages/web-app/src/app/admin/vms`.
+- **Tabs Dinámicos:** Integración de Recepción, Examen, Estudios, Validación y Reportes.
+- **Contexto de Sesión:** Persistencia del "Paciente/Folio Actual" durante todo el flujo.
+
+### 2. MOD-PACIENTES (Identidad Médica)
+- **Unique Worker ID:** Generación automática de ID único (AMI-ID) al primer registro.
+- **Alta Integrada:** Formularios rápidos de Empresa y Trabajador dentro del Tab de Recepción.
+
+### 3. MOD-REPORTES (Generación de Documentos)
 - **Componente:** `RealTimePDFGenerator` (basado en `react-pdf`).
 - **Plantilla A:** Papeleta de Aptitud (Resumen rápido para el paciente).
 - **Plantilla B:** Certificado de Aptitud Médica Laboral (Detallado con firma).
-- **Integración:** API `/api/reportes/generar/[expedientId]`.
-
-### 2. MOD-DASHBOARD (Métricas en Tiempo Real)
-- **API Endpoints:**
-  - `GET /api/dashboard/stats`: Retorna KPIs (Pacientes hoy, Pendientes, TAT).
-  - `GET /api/dashboard/funnel`: Retorna distribución por estados.
-- **Frontend:** Conexión de `packages/web-app/src/app/admin/page.tsx` con SWR/useEffect para cargar datos reales.
-
-### 3. MOD-VALIDACION (Cierre del Círculo)
-- **Refuerzo:** Al firmar un expediente, disparar la generación automática del reporte PDF.
 
 ---
 
 ## 📋 Tareas de Implementación (Backlog)
 
-### Bloque A: Reportes Digitales (@SOFIA)
-- [ ] Implementar `PDFCertificate` en `@ami/mod-reportes` usando `react-pdf`.
-- [ ] Crear la lógica de mapeo de `ExtractedDataSet` + `MedicalExam` al formato de impresión oficial.
-- [ ] Implementar la pre-visualización en el `CertificateViewer`.
+### Bloque A: El Centro de Mandos (UX/UI de Impacto - @SOFIA)
+- [ ] Construir el `VMSOrchestrator` con navegación por pestañas basada en `RD/index.html`.
+- [ ] Implementar el "Header de Paciente" persistente.
+- [ ] Integrar formularios de "Alta Express" para Empresas y Trabajadores.
+- [ ] Configurar las 3 sucursales oficiales de AMI en la base de datos (Seeded ✅).
 
-### Bloque B: Dashboard Operativo (@SOFIA)
-- [ ] Crear `dashboardService.ts` en `@ami/core` para realizar agregaciones de Prisma.
-- [ ] Exponer rutas API en `packages/web-app/src/app/api/dashboard`.
-- [ ] Refactorizar el dashboard para mostrar estados de carga y datos persistidos.
+### Bloque B: Motor IA y Datos (@SOFIA)
+- [ ] Migrar el Lector de Estudios (`context/RD/LECTOR`) al backend real usando la OpenAI API Key.
+- [ ] Implementar la generación del ID Único de Trabajador.
+- [ ] Asegurar flujo de datos: Recepción -> Examen -> Estudios.
 
 ### Bloque C: Validación y Despliegue (@DEBY)
-- [ ] Validar la legibilidad de los PDFs generados en diferentes dispositivos.
-- [ ] Verificar que los KPIs del dashboard coincidan con los datos de auditoría de la DB.
-- [ ] Verificación de seguridad multi-tenant en todas las nuevas rutas API.
+- [ ] Auditoría de "Impacto Visual": Comparar con `index.html`.
+- [ ] Prueba de estrés con archivos en `context/RD/expedientes/RD-2025-001`.
+- [ ] Verificación de seguridad multi-tenant y IDs persistentes.
 
 ---
 

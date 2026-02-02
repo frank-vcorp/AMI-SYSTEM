@@ -13,6 +13,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { buildTenantFilter } from '@/lib/utils';
+import { generateWorkerId } from '@ami/core-database';
+import { Gender } from '@prisma/client';
 
 // Tenant por defecto para MVP demo
 const DEFAULT_TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
@@ -29,16 +31,19 @@ export async function GET(request: NextRequest) {
 
     // Build where clause - omit tenantId filter if not a valid UUID
     const where: any = { ...buildTenantFilter(tenantId) };
-    
+
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
+        { firstName: { contains: search, mode: 'insensitive' } },
+        { paternalLastName: { contains: search, mode: 'insensitive' } },
         { email: { contains: search, mode: 'insensitive' } },
-        { documentNumber: { contains: search, mode: 'insensitive' } },
-        { phoneNumber: { contains: search, mode: 'insensitive' } },
+        { documentId: { contains: search, mode: 'insensitive' } },
+        { uniqueId: { contains: search, mode: 'insensitive' } },
+        { phone: { contains: search, mode: 'insensitive' } },
       ];
     }
-    
+
     if (status) {
       where.status = status;
     }
@@ -88,70 +93,82 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const tenantId = body.tenantId || DEFAULT_TENANT_ID;
-    
-    // Aceptar nombres del formulario y del schema (compatibilidad)
-    const name = body.name;
-    const email = body.email;
-    const phoneNumber = body.phoneNumber || body.phone;
-    const dateOfBirth = body.dateOfBirth || body.birthDate;
-    const documentNumber = body.documentNumber || body.documentId;
-    const documentType = body.documentType || 'CURP';
-    const address = body.address;
-    const city = body.city;
-    const state = body.state;
-    const zipCode = body.zipCode;
-    // Convertir string vacío a null para evitar errores de FK
-    const companyId = body.companyId && body.companyId.trim() !== '' ? body.companyId : null;
-    // Note: jobProfileId from form is ignored - not in Patient schema
-    
-    // Mapear género del formulario al schema
-    let gender = body.gender || 'M';
-    if (gender === 'MASCULINO' || gender === 'Masculino') gender = 'M';
-    if (gender === 'FEMENINO' || gender === 'Femenino') gender = 'F';
-    if (gender === 'OTRO' || gender === 'Otro') gender = 'O';
 
-    // Validations - ahora más flexibles
-    if (!name) {
+    // Extract name parts or whole name
+    let firstName = body.firstName;
+    let paternalLastName = body.paternalLastName;
+    let maternalLastName = body.maternalLastName;
+    const fullName = body.name || body.fullName;
+
+    // Logic to split name if only full name is provided
+    if (!firstName && fullName) {
+      const parts = fullName.trim().split(/\s+/);
+      if (parts.length >= 3) {
+        firstName = parts[0];
+        paternalLastName = parts[1];
+        maternalLastName = parts.slice(2).join(' ');
+      } else if (parts.length === 2) {
+        firstName = parts[0];
+        paternalLastName = parts[1];
+      } else {
+        firstName = parts[0];
+        paternalLastName = 'X';
+      }
+    }
+
+    const email = body.email || `${firstName?.toLowerCase()}.${paternalLastName?.toLowerCase()}@example.com`;
+    const phone = body.phone || body.phoneNumber || '0000000000';
+    const birthDateStr = body.birthDate || body.dateOfBirth;
+    const documentId = body.documentId || body.documentNumber || `DOC-${Date.now()}`;
+    const alias = body.alias || null;
+    const companyId = body.companyId && body.companyId.trim() !== '' ? body.companyId : null;
+
+    // Mapear género
+    let gender: Gender = Gender.MASCULINO;
+    const gInput = (body.gender || 'M').toUpperCase();
+    if (gInput.startsWith('F')) gender = Gender.FEMENINO;
+    if (gInput === 'OTRO' || gInput === 'O') gender = Gender.OTRO;
+
+    // Validations
+    if (!firstName || !paternalLastName) {
       return NextResponse.json(
-        { error: 'El nombre es requerido' },
+        { error: 'El nombre y apellido paterno son requeridos' },
         { status: 400 }
       );
     }
-    
-    if (!dateOfBirth) {
+
+    if (!birthDateStr) {
       return NextResponse.json(
         { error: 'La fecha de nacimiento es requerida' },
         { status: 400 }
       );
     }
-    
-    if (!documentNumber) {
-      return NextResponse.json(
-        { error: 'El documento de identidad es requerido' },
-        { status: 400 }
-      );
-    }
 
-    // Validate gender enum
-    const validGenders = ['M', 'F', 'O'];
-    if (!validGenders.includes(gender)) {
-      return NextResponse.json(
-        { error: `gender must be one of: ${validGenders.join(', ')}` },
-        { status: 400 }
-      );
-    }
+    // Generate the UNIQUE AMI-ID
+    const birthDate = new Date(birthDateStr);
+    const uniqueId = await generateWorkerId({
+      tenantId,
+      firstName,
+      paternalLastName,
+      maternalLastName,
+      birthDate,
+      gender: gender === Gender.FEMENINO ? 'FEMALE' : 'MALE'
+    });
 
-    // Check if patient with same documentNumber exists
+    // Check if patient with same documentId exists
     const existing = await prisma.patient.findFirst({
       where: {
         tenantId,
-        documentNumber,
+        OR: [
+          { documentId },
+          { uniqueId }
+        ]
       },
     });
 
     if (existing) {
       return NextResponse.json(
-        { error: 'Ya existe un paciente con este documento' },
+        { error: `Ya existe un paciente con este documento (${documentId}) o ID (${uniqueId})` },
         { status: 409 }
       );
     }
@@ -160,19 +177,18 @@ export async function POST(request: NextRequest) {
     const patient = await prisma.patient.create({
       data: {
         tenantId,
-        name,
-        email: email || null,
-        phoneNumber: phoneNumber || null,
-        dateOfBirth: new Date(dateOfBirth),
+        name: body.name || `${firstName} ${paternalLastName} ${maternalLastName || ''}`.trim(),
+        firstName,
+        paternalLastName,
+        maternalLastName,
+        alias,
+        email,
+        phone,
+        birthDate,
         gender,
-        documentType,
-        documentNumber,
-        address: address || null,
-        city: city || null,
-        state: state || null,
-        zipCode: zipCode || null,
+        documentId,
+        uniqueId,
         companyId,
-        // Note: jobProfileId is not in Patient model, ignore it
         status: 'ACTIVE',
       },
     });
@@ -181,7 +197,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('[POST /api/patients]', error);
     return NextResponse.json(
-      { error: 'Failed to create patient' },
+      { error: 'Failed to create patient: ' + (error instanceof Error ? error.message : String(error)) },
       { status: 500 }
     );
   }

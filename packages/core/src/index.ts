@@ -5,3 +5,6 @@ export * from './tenant/context';
 
 // AI Extraction Service
 export * from './ai';
+
+// Utils
+export * from './utils/medical-logic';

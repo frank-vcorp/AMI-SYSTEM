@@ -14,6 +14,7 @@ import { PrismaClient } from '@prisma/client';
 export * from './services/doctorService';
 export * from './services/folioService';
 export * from './services/dashboardService';
+export * from './services/workerIdService';
 
 // Declare global para TypeScript
 declare global {

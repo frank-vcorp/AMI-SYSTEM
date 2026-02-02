@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,36 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ============================================================================
-// MOD-CLINICAS: Clinic Management Models
-// ============================================================================
-
 model Clinic {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  name              String            @db.VarChar(255)
-  description       String?           @db.Text
-  address           String            @db.VarChar(255)
-  city              String            @db.VarChar(100)
-  state             String            @db.VarChar(100)
-  zipCode           String            @db.VarChar(10)
-  phoneNumber       String?           @db.VarChar(20)
-  email             String?           @db.VarChar(255)
-  totalBeds         Int               @default(1)
-  availableBeds     Int               @default(1)
-  isHeadquarters    Boolean           @default(false)
-  status            ClinicStatus      @default(ACTIVE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  
-  // Relations
-  schedules         ClinicSchedule[]
-  services          ClinicService[]
-  appointments      Appointment[]
-  expedients        Expedient[]
-  doctors           Doctor[]
+  id             String           @id @default(cuid())
+  tenantId       String           @db.Uuid
+  name           String           @db.VarChar(255)
+  description    String?
+  address        String           @db.VarChar(255)
+  city           String           @db.VarChar(100)
+  state          String           @db.VarChar(100)
+  zipCode        String           @db.VarChar(10)
+  phoneNumber    String?          @db.VarChar(20)
+  email          String?          @db.VarChar(255)
+  totalBeds      Int              @default(1)
+  availableBeds  Int              @default(1)
+  isHeadquarters Boolean          @default(false)
+  status         ClinicStatus     @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  appointments   Appointment[]
+  schedules      ClinicSchedule[]
+  services       ClinicService[]
+  doctors        Doctor[]
+  expedients     Expedient[]
 
-  // Indices
   @@unique([tenantId, name])
   @@index([tenantId])
   @@index([status])
@@ -48,98 +38,451 @@ model Clinic {
 }
 
 model ClinicSchedule {
-  id                String            @id @default(cuid())
-  clinicId          String
-  dayOfWeek         Int               @db.SmallInt // 0-6: Monday-Sunday
-  openingTime       String            @db.VarChar(5) // HH:MM format
-  closingTime       String            @db.VarChar(5) // HH:MM format
-  lunchStart        String?           @db.VarChar(5)
-  lunchEnd          String?           @db.VarChar(5)
-  isOpen            Boolean           @default(true)
-  maxAppointmentsDay Int              @default(50)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  id                 String   @id @default(cuid())
+  clinicId           String
+  dayOfWeek          Int      @db.SmallInt
+  openingTime        String   @db.VarChar(5)
+  closingTime        String   @db.VarChar(5)
+  lunchStart         String?  @db.VarChar(5)
+  lunchEnd           String?  @db.VarChar(5)
+  isOpen             Boolean  @default(true)
+  maxAppointmentsDay Int      @default(50)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  clinic             Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
 
-  // Relations
-  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
-
-  // Indices
   @@unique([clinicId, dayOfWeek])
   @@index([clinicId])
   @@map("clinic_schedules")
 }
 
 model ClinicService {
-  id                String            @id @default(cuid())
-  clinicId          String
-  serviceId         String
-  isAvailable       Boolean           @default(true)
-  estimatedDays     Int?
-  price             Float?
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  id            String   @id @default(cuid())
+  clinicId      String
+  serviceId     String
+  isAvailable   Boolean  @default(true)
+  estimatedDays Int?
+  price         Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  clinic        Clinic   @relation(fields: [clinicId], references: [id], onDelete: Cascade)
 
-  // Relations
-  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
-  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-
-  // Indices
   @@unique([clinicId, serviceId])
   @@index([clinicId])
   @@index([serviceId])
   @@map("clinic_services")
 }
 
-model Appointment {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  clinicId          String
-  companyId         String?
-  patientId         String
-  displayId         String?           // Generated: APT-XXXXXX for display
-  appointmentDate   DateTime
-  time              String            @db.VarChar(5) // HH:MM format
-  appointmentDuration Int?            // Minutes allocated for appointment
-  status            AppointmentStatus @default(PENDING)
-  notes             String?           @db.Text
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
-  patient           Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  expedients        Expedient[]
-
-  // Indices
-  @@index([tenantId])
-  @@index([clinicId])
-  @@index([patientId])
-  @@index([status])
-  @@index([appointmentDate])
-  @@unique([displayId])
-  @@map("appointments")
-}
-
 model Doctor {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  clinicId          String
-  name              String            @db.VarChar(255)
-  cedula            String            @db.VarChar(20)
-  specialty         String            @db.VarChar(100)
-  signature         Json?
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+  id           String        @id @default(cuid())
+  tenantId     String        @db.Uuid
+  name         String        @db.VarChar(255)
+  cedula       String        @db.VarChar(50)
+  specialty    String        @db.VarChar(100)
+  clinicId     String
+  signature    Json?
+  status       DoctorStatus  @default(ACTIVE)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  createdBy    String?       @db.Uuid
+  updatedBy    String?       @db.Uuid
+  clinic       Clinic        @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  medicalExams MedicalExam[] @relation("examinedBy")
 
-  // Relations
-  clinic            Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
-  validationTasks   ValidationTask[]   @relation("ValidationSignedBy")
-
-  // Indices
   @@unique([tenantId, cedula])
   @@index([tenantId])
   @@index([clinicId])
+  @@index([status])
   @@map("doctors")
+}
+
+model Appointment {
+  id               String            @id @default(cuid())
+  tenantId         String            @db.Uuid
+  clinicId         String
+  companyId        String?
+  employeeId       String?
+  appointmentFolio String?           @unique @db.VarChar(50)
+  qrCode           String?
+  appointmentDate  DateTime
+  time             String            @db.VarChar(5)
+  status           AppointmentStatus @default(PENDING)
+  occupancySlot    Int?
+  maxOccupancy     Int?
+  notes            String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  createdBy        String?           @db.Uuid
+  updatedBy        String?           @db.Uuid
+  clinic           Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([clinicId])
+  @@index([status])
+  @@index([appointmentDate])
+  @@index([employeeId])
+  @@index([appointmentFolio])
+  @@map("appointments")
+}
+
+model Service {
+  id                String           @id @default(cuid())
+  tenantId          String           @db.Uuid
+  code              String           @db.VarChar(50)
+  name              String           @db.VarChar(255)
+  description       String?
+  category          ServiceCategory  @default(OTROS)
+  estimatedMinutes  Int              @default(30)
+  requiresEquipment Boolean          @default(false)
+  equipmentName     String?          @db.VarChar(255)
+  costAmount        Float            @default(0)
+  sellingPrice      Float?
+  status            ServiceStatus    @default(ACTIVE)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  createdBy         String?          @db.Uuid
+  updatedBy         String?          @db.Uuid
+  batteries         BatteryService[]
+
+  @@unique([tenantId, code])
+  @@index([tenantId])
+  @@index([status])
+  @@index([category])
+  @@map("services")
+}
+
+model Battery {
+  id                  String           @id @default(cuid())
+  tenantId            String           @db.Uuid
+  name                String           @db.VarChar(255)
+  description         String?
+  costTotal           Float            @default(0)
+  sellingPriceTotal   Float?
+  estimatedMinutes    Int              @default(0)
+  status              BatteryStatus    @default(ACTIVE)
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+  createdBy           String?          @db.Uuid
+  updatedBy           String?          @db.Uuid
+  services            BatteryService[]
+  contractedBatteries CompanyBattery[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+  @@map("batteries")
+}
+
+model BatteryService {
+  id                       String   @id @default(cuid())
+  batteryId                String
+  serviceId                String
+  order                    Int      @default(0)
+  costOverride             Float?
+  estimatedMinutesOverride Int?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  battery                  Battery  @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+  service                  Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@unique([batteryId, serviceId])
+  @@index([batteryId])
+  @@index([serviceId])
+  @@map("battery_services")
+}
+
+model Company {
+  id             String           @id @default(cuid())
+  tenantId       String           @db.Uuid
+  name           String           @db.VarChar(255)
+  rfc            String           @unique @db.VarChar(13)
+  description    String?
+  address        String?          @db.VarChar(255)
+  city           String?          @db.VarChar(100)
+  state          String?          @db.VarChar(100)
+  zipCode        String?          @db.VarChar(10)
+  phoneNumber    String?          @db.VarChar(20)
+  email          String?          @db.VarChar(255)
+  contactPerson  String?          @db.VarChar(255)
+  contactPhone   String?          @db.VarChar(20)
+  isHeadquarters Boolean          @default(true)
+  maxEmployees   Int              @default(100)
+  status         CompanyStatus    @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  createdBy      String?          @db.Uuid
+  updatedBy      String?          @db.Uuid
+  batteries      CompanyBattery[]
+  jobProfiles    JobProfile[]
+
+  @@unique([tenantId, name])
+  @@index([tenantId])
+  @@index([status])
+  @@map("companies")
+}
+
+model CompanyBattery {
+  id           String    @id @default(cuid())
+  companyId    String
+  batteryId    String
+  contractDate DateTime  @default(now())
+  validFrom    DateTime  @default(now())
+  validUntil   DateTime?
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  battery      Battery   @relation(fields: [batteryId], references: [id], onDelete: Cascade)
+  company      Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, batteryId])
+  @@index([companyId])
+  @@index([batteryId])
+  @@map("company_batteries")
+}
+
+model JobProfile {
+  id                 String    @id @default(cuid())
+  tenantId           String    @db.Uuid
+  companyId          String
+  name               String    @db.VarChar(255)
+  description        String?
+  riskLevel          RiskLevel @default(BAJO)
+  requiredBatteryIds String[]
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  createdBy          String?   @db.Uuid
+  updatedBy          String?   @db.Uuid
+  company            Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@unique([companyId, name])
+  @@index([tenantId])
+  @@index([companyId])
+  @@map("job_profiles")
+}
+
+model Patient {
+  id               String        @id @default(cuid())
+  tenantId         String        @db.Uuid
+  name             String        @db.VarChar(255)
+  firstName        String        @db.VarChar(100)
+  paternalLastName String        @db.VarChar(100)
+  maternalLastName String?       @db.VarChar(100)
+  alias            String?       @db.VarChar(100)
+  email            String        @db.VarChar(255)
+  phone            String        @db.VarChar(20)
+  birthDate        DateTime
+  gender           Gender
+  documentId       String        @db.VarChar(50)
+  uniqueId         String        @db.VarChar(50) @unique
+  medicalHistory   Json?
+  antecedentes     Json?
+  contactEmergency Json?
+  status           PatientStatus @default(ACTIVE)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  createdBy        String?       @db.Uuid
+  updatedBy        String?       @db.Uuid
+  expedients       Expedient[]
+
+  @@unique([tenantId, documentId])
+  @@unique([tenantId, email])
+  @@unique([tenantId, uniqueId])
+  @@index([tenantId])
+  @@index([status])
+  @@map("patients")
+}
+
+model Expedient {
+  id              String          @id @default(cuid())
+  tenantId        String          @db.Uuid
+  patientId       String
+  clinicId        String
+  companyId       String?
+  folio           String?         @unique @db.VarChar(50)
+  status          ExpedientStatus @default(DRAFT)
+  notes           String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  createdBy       String?         @db.Uuid
+  updatedBy       String?         @db.Uuid
+  clinic          Clinic          @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  patient         Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  medicalExams    MedicalExam[]
+  studies         StudyUpload[]
+  validationTasks ValidationTask?
+
+  @@unique([patientId, clinicId])
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([clinicId])
+  @@index([companyId])
+  @@index([status])
+  @@index([folio])
+  @@map("expedients")
+}
+
+model MedicalExam {
+  id                      String           @id @default(cuid())
+  expedientId             String
+  examinedByDoctorId      String?
+  bloodPressure           String?          @db.VarChar(20)
+  heartRate               Int?
+  respiratoryRate         Int?
+  temperature             Float?
+  weight                  Float?
+  height                  Float?
+  physicalExam            String?
+  vitalSigns              Json?
+  visualAcuity            Json?
+  physicalExamination     Json?
+  explorationNotes        Json?
+  demographics            Json?
+  vision                  Json?
+  gynecology              Json?
+  background              Json?
+  aptitudeRecommendations String?
+  notes                   String?
+  examinedAt              DateTime         @default(now())
+  createdAt               DateTime         @default(now())
+  updatedAt               DateTime         @updatedAt
+  createdBy               String?          @db.Uuid
+  extractedData           ExtractedData[]  @relation("medicalExamData")
+  examinedByDoctor        Doctor?          @relation("examinedBy", fields: [examinedByDoctorId], references: [id])
+  expedient               Expedient        @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  validationTasks         ValidationTask[]
+
+  @@index([expedientId])
+  @@index([examinedByDoctorId])
+  @@index([examinedAt])
+  @@map("medical_exams")
+}
+
+model StudyUpload {
+  id            String          @id @default(cuid())
+  expedientId   String
+  type          StudyType
+  fileName      String          @db.VarChar(255)
+  fileUrl       String
+  mimeType      String          @db.VarChar(50)
+  fileSizeBytes Int
+  uploadedAt    DateTime        @default(now())
+  status        UploadStatus    @default(PENDING)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  createdBy     String?         @db.Uuid
+  extractedData ExtractedData[]
+  expedient     Expedient       @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+
+  @@index([expedientId])
+  @@index([type])
+  @@index([status])
+  @@index([uploadedAt])
+  @@map("study_uploads")
+}
+
+/// *
+///  * IMPL-20260122-01: ValidationTask Model
+///  * Manages medical exam validation workflow with electronic signatures
+///  * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+model ValidationTask {
+  id                   String           @id @default(cuid())
+  tenantId             String           @db.Uuid
+  expedientId          String           @unique
+  medicalExamId        String
+  assignedToUserId     String           @db.Uuid
+  status               ValidationStatus @default(PENDING)
+  verdict              VerdictType?     @default(APTO)
+  prediagnosis         String?
+  diagnosis            String?
+  signatureData        Json?
+  signedAt             DateTime?
+  signedBy             String?          @db.Uuid
+  startedAt            DateTime?
+  completedAt          DateTime?
+  validationNotes      String?
+  extractedDataSummary Json?
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  createdBy            String?          @db.Uuid
+  updatedBy            String?          @db.Uuid
+  extractedData        ExtractedData[]  @relation("validationExtractedData")
+  pdfGeneration        PdfGeneration[]  @relation("validationPdfGeneration")
+  expedient            Expedient        @relation(fields: [expedientId], references: [id], onDelete: Cascade)
+  medicalExam          MedicalExam      @relation(fields: [medicalExamId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([expedientId])
+  @@index([medicalExamId])
+  @@index([assignedToUserId])
+  @@index([status])
+  @@index([verdict])
+  @@index([completedAt])
+  @@map("validation_tasks")
+}
+
+/// *
+///  * IMPL-20260122-01: ExtractedData Model
+///  * Stores extracted findings from uploaded medical studies (images, labs, etc)
+///  * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+model ExtractedData {
+  id               String           @id @default(cuid())
+  tenantId         String           @db.Uuid
+  studyUploadId    String
+  medicalExamId    String?
+  validationTaskId String?
+  extractionMethod ExtractionMethod @default(MANUAL)
+  extractedFields  Json
+  confidence       Float?
+  dataType         DataFieldType
+  rawValue         String?
+  normalizedValue  String?
+  unit             String?          @db.VarChar(50)
+  referenceMin     Float?
+  referenceMax     Float?
+  isOutOfRange     Boolean?
+  severity         SeverityLevel?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  createdBy        String?          @db.Uuid
+  medicalExam      MedicalExam?     @relation("medicalExamData", fields: [medicalExamId], references: [id])
+  studyUpload      StudyUpload      @relation(fields: [studyUploadId], references: [id], onDelete: Cascade)
+  validationTask   ValidationTask?  @relation("validationExtractedData", fields: [validationTaskId], references: [id])
+
+  @@index([tenantId])
+  @@index([studyUploadId])
+  @@index([medicalExamId])
+  @@index([validationTaskId])
+  @@index([dataType])
+  @@index([severity])
+  @@index([createdAt])
+  @@map("extracted_data")
+}
+
+/// *
+///  * IMPL-20260122-01: PdfGeneration Model
+///  * Tracks PDF generation for medical records and validation reports
+///  * @ref context/infraestructura/Detalle-Specs/SPEC-MOD-VALIDACIONES.md
+model PdfGeneration {
+  id               String              @id @default(cuid())
+  tenantId         String              @db.Uuid
+  validationTaskId String
+  fileName         String              @db.VarChar(255)
+  fileUrl          String
+  fileSizeBytes    Int
+  generatedAt      DateTime            @default(now())
+  generatedBy      String?             @db.Uuid
+  templateVersion  String              @default("1.0") @db.VarChar(20)
+  status           PdfGenerationStatus @default(PENDING)
+  errorMessage     String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  validationTask   ValidationTask      @relation("validationPdfGeneration", fields: [validationTaskId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([validationTaskId])
+  @@index([status])
+  @@index([generatedAt])
+  @@map("pdf_generations")
 }
 
 enum ClinicStatus {
@@ -157,86 +500,6 @@ enum AppointmentStatus {
   COMPLETED
   CANCELLED
   NO_SHOW
-}
-
-// ============================================================================
-// MOD-SERVICIOS: Service & Battery Management Models
-// ============================================================================
-
-model Service {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  code              String            @db.VarChar(50)
-  name              String            @db.VarChar(255)
-  description       String?           @db.Text
-  category          ServiceCategory   @default(OTROS)
-  estimatedMinutes  Int               @default(30)
-  requiresEquipment Boolean           @default(false)
-  equipmentName     String?           @db.VarChar(255)
-  costAmount        Float             @default(0)
-  sellingPrice      Float?
-  status            ServiceStatus     @default(ACTIVE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  createdBy         String?           @db.Uuid
-  updatedBy         String?           @db.Uuid
-
-  // Relations
-  batteries         BatteryService[]
-  clinics           ClinicService[]
-
-  // Indices
-  @@unique([tenantId, code])
-  @@index([tenantId])
-  @@index([status])
-  @@index([category])
-  @@map("services")
-}
-
-model Battery {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  name              String            @db.VarChar(255)
-  description       String?           @db.Text
-  costTotal         Float             @default(0)
-  sellingPriceTotal Float?
-  estimatedMinutes  Int               @default(0)
-  status            BatteryStatus     @default(ACTIVE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  createdBy         String?           @db.Uuid
-  updatedBy         String?           @db.Uuid
-
-  // Relations
-  services          BatteryService[]
-  contractedBatteries CompanyBattery[]
-
-  // Indices
-  @@unique([tenantId, name])
-  @@index([tenantId])
-  @@index([status])
-  @@map("batteries")
-}
-
-model BatteryService {
-  id                String            @id @default(cuid())
-  batteryId         String
-  serviceId         String
-  order             Int               @default(0)
-  costOverride      Float?
-  estimatedMinutesOverride Int?
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  battery           Battery           @relation(fields: [batteryId], references: [id], onDelete: Cascade)
-  service           Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-
-  // Indices
-  @@unique([batteryId, serviceId])
-  @@index([batteryId])
-  @@index([serviceId])
-  @@map("battery_services")
 }
 
 enum ServiceCategory {
@@ -262,89 +525,6 @@ enum BatteryStatus {
   ARCHIVED
 }
 
-// ============================================================================
-// MOD-EMPRESAS: Company & JobProfile Management Models
-// ============================================================================
-
-model Company {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  name              String            @db.VarChar(255)
-  rfc               String            @db.VarChar(13) @unique // Globally unique
-  description       String?           @db.Text
-  address           String?           @db.VarChar(255)
-  city              String?           @db.VarChar(100)
-  state             String?           @db.VarChar(100)
-  zipCode           String?           @db.VarChar(10)
-  phoneNumber       String?           @db.VarChar(20)
-  email             String?           @db.VarChar(255)
-  contactPerson     String?           @db.VarChar(255)
-  contactPhone      String?           @db.VarChar(20)
-  isHeadquarters    Boolean           @default(true)
-  maxEmployees      Int               @default(100)
-  status            CompanyStatus     @default(ACTIVE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  createdBy         String?           @db.Uuid
-  updatedBy         String?           @db.Uuid
-
-  // Relations
-  batteries         CompanyBattery[]
-  jobProfiles       JobProfile[]
-  patients          Patient[]
-
-  // Indices
-  @@unique([tenantId, name])
-  @@index([tenantId])
-  @@index([status])
-  @@map("companies")
-}
-
-model CompanyBattery {
-  id                String            @id @default(cuid())
-  companyId         String
-  batteryId         String
-  contractDate      DateTime          @default(now())
-  validFrom         DateTime          @default(now())
-  validUntil        DateTime?
-  isActive          Boolean           @default(true)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  battery           Battery           @relation(fields: [batteryId], references: [id], onDelete: Cascade)
-
-  // Indices
-  @@unique([companyId, batteryId])
-  @@index([companyId])
-  @@index([batteryId])
-  @@map("company_batteries")
-}
-
-model JobProfile {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  companyId         String
-  name              String            @db.VarChar(255)
-  description       String?           @db.Text
-  riskLevel         RiskLevel         @default(BAJO)
-  requiredBatteryIds String[]          // JSON array of battery IDs
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  createdBy         String?           @db.Uuid
-  updatedBy         String?           @db.Uuid
-
-  // Relations
-  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
-
-  // Indices
-  @@unique([companyId, name])
-  @@index([tenantId])
-  @@index([companyId])
-  @@map("job_profiles")
-}
-
 enum RiskLevel {
   BAJO
   MEDIO
@@ -358,151 +538,15 @@ enum CompanyStatus {
   ARCHIVED
 }
 
-// ============================================================================
-// MOD-EXPEDIENTES: Patient Expedient Models
-// ============================================================================
-
-model Expedient {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  appointmentId     String?
-  patientId         String
-  clinicId          String
-  folio             String            @unique // Generated format: EXP-CLINIC-DATE-SEQ
-  status            ExpedientStatus   @default(PENDING)
-  
-  // Vital signs capture
-  vitals            Json?             // {sistolica, diastolica, fc, temp, o2, imc}
-  medicalNotes      String?           @db.Text
-  
-  // Study uploads
-  studies           Study[]
-  medicalExams      MedicalExam[]
-  
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  appointment       Appointment?      @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
-  patient           Patient           @relation(fields: [patientId], references: [id], onDelete: Cascade)
-  clinic            Clinic            @relation(fields: [clinicId], references: [id])
-  validationTask    ValidationTask?
-
-  // Indices
-  @@index([tenantId])
-  @@index([patientId])
-  @@index([clinicId])
-  @@index([status])
-  @@map("expedients")
+enum Gender {
+  MASCULINO
+  FEMENINO
+  OTRO
 }
 
-model Patient {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  name              String            @db.VarChar(255)
-  documentType      String            @default("DNI") // DNI, Pasaporte, etc
-  documentNumber    String
-  dateOfBirth       DateTime
-  gender            String            @default("M") // M, F, O
-  phoneNumber       String?           @db.VarChar(20)
-  email             String?           @db.VarChar(255)
-  address           String?           @db.Text
-  city              String?           @db.VarChar(100)
-  state             String?           @db.VarChar(100)
-  zipCode           String?           @db.VarChar(10)
-  companyId         String?           // Current employer
-  status            PatientStatus     @default(ACTIVE)
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  company           Company?          @relation(fields: [companyId], references: [id], onDelete: SetNull)
-  appointments      Appointment[]
-  expedients        Expedient[]
-
-  // Indices
-  @@unique([tenantId, documentNumber])
-  @@index([tenantId])
-  @@index([companyId])
-  @@map("patients")
-}
-
-model Study {
-  id                String            @id @default(cuid())
-  expedientId       String
-  fileKey           String            // GCS storage key
-  fileName          String
-  studyType         StudyType
-  uploadedAt        DateTime          @default(now())
-  fileSize          Int?              // Bytes
-  mimeType          String?
-  
-  createdAt         DateTime          @default(now())
-
-  // Relations
-  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
-
-  // Indices
-  @@index([expedientId])
-  @@index([studyType])
-  @@map("studies")
-}
-
-model MedicalExam {
-  id                String            @id @default(cuid())
-  expedientId       String
-  
-  // Vital signs
-  bloodPressure     String?           // SYS/DIA format
-  heartRate         Int?              // bpm
-  respiratoryRate   Int?              // breaths/min
-  temperature       Float?            // Celsius
-  weight            Float?            // kg
-  height            Int?              // cm
-  
-  // Calculated metrics
-  imc               Float?            // Index of Body Mass (calculated: weight / (height/100)^2)
-  
-  // Vision assessment
-  leftEyeAcuity     Float?            // OD (derecho) - 6/6, 6/9, etc
-  rightEyeAcuity    Float?            // OI (izquierdo) - 6/6, 6/9, etc
-  colorBlindnessTest Boolean?         // Daltonismo result
-  
-  // Medical history
-  surgeries         Json?             // Array of {date, description, notes}
-  medications       Json?             // Array of {name, dosage, frequency, indication}
-  allergies         Json?             // Array of {allergen, severity, notes}
-  
-  // Physical and clinical examination
-  physicalExam      String?           @db.Text
-  notes             String?           @db.Text
-  
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-
-  // Relations
-  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
-
-  // Indices
-  @@index([expedientId])
-  @@map("medical_exams")
-}
-
-enum StudyType {
-  RADIOGRAFIA
-  LABORATORIO
-  ECG
-  ESPIROMETRIA
-  AUDIOMETRIA
-  OTROS
-}
-
-enum ExpedientStatus {
-  PENDING           // Citado, no ha llegado
-  IN_PROGRESS       // Chegó, examen en curso
-  STUDIES_PENDING   // Esperando estudios
-  VALIDATED         // Listo para reporte
-  COMPLETED         // Reporte generado
+enum DoctorStatus {
+  ACTIVE
+  INACTIVE
   ARCHIVED
 }
 
@@ -512,65 +556,85 @@ enum PatientStatus {
   ARCHIVED
 }
 
-// ============================================================================
-// MOD-VALIDACION: Validation & Dictamen Models
-// ============================================================================
+enum ExpedientStatus {
+  DRAFT
+  IN_PROGRESS
+  COMPLETED
+  SIGNED
+  DELIVERED
+}
 
-model ValidationTask {
-  id                String            @id @default(cuid())
-  tenantId          String            @db.Uuid
-  expedientId       String
-  patientId         String
-  clinicId          String
-  status            ValidationStatus  @default(PENDING)
-  
-  // Studies and extracted data
-  studies           Json              // Array of {id, fileKey, fileName, studyType, uploadedAt, extractionStatus}
-  extractedData     Json              @default("{}")  // {laboratorio?, radiografia?, ecg?, ...}
-  
-  // Medical assessment
-  medicalOpinion    String            @db.Text @default("")
-  verdict           Verdict           @default(APTO)
-  restrictions      String[]          @default([])
-  recommendations   String[]          @default([])
-  
-  // Signature and timeline
-  signedAt          DateTime?
-  signedBy          String?           @db.Uuid // UID of signing physician
-  validatedBy       String?           @db.Uuid // UID of validator
-  
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
+enum StudyType {
+  RADIOGRAPHY
+  LABORATORY
+  CARDIOGRAM
+  ULTRASOUND
+  TOMOGRAPHY
+  RESONANCE
+  ENDOSCOPY
+  OTHER
+}
 
-  // Relations
-  expedient         Expedient         @relation(fields: [expedientId], references: [id], onDelete: Cascade)
-  signedByDoctor    Doctor?           @relation("ValidationSignedBy", fields: [signedBy], references: [id])
-
-  // Indices
-  @@unique([expedientId])
-  @@index([tenantId])
-  @@index([patientId])
-  @@index([status])
-  @@index([verdict])
-  @@map("validation_tasks")
+enum UploadStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
 }
 
 enum ValidationStatus {
   PENDING
+  ASSIGNED
   IN_REVIEW
   COMPLETED
-  SIGNED
+  APPROVED
   REJECTED
+  ARCHIVED
 }
 
-enum Verdict {
+enum VerdictType {
   APTO
   APTO_CON_RESTRICCIONES
   NO_APTO
+  PENDIENTE
+  REFERENCIA
 }
 
-// ============================================================================
-// MOD-CITAS: Extended Appointment Models (from mod-citas context)
-// ============================================================================
-// Note: The Appointment model above covers basic appointment data.
-// This section is reserved for appointment-specific extensions.
+enum ExtractionMethod {
+  MANUAL
+  OCR
+  AI_MODEL
+  AUTOMATED
+}
+
+enum DataFieldType {
+  BLOOD_PRESSURE
+  HEART_RATE
+  RESPIRATORY_RATE
+  TEMPERATURE
+  GLUCOSE
+  HEMOGLOBIN
+  CHOLESTEROL
+  WEIGHT
+  HEIGHT
+  BMI
+  VISION_OD
+  VISION_OI
+  HEARING
+  OTHER
+}
+
+enum SeverityLevel {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  NORMAL
+}
+
+enum PdfGenerationStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}

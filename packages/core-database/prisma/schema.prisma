@@ -264,12 +264,16 @@ model Patient {
   id               String        @id @default(cuid())
   tenantId         String        @db.Uuid
   name             String        @db.VarChar(255)
+  firstName        String        @db.VarChar(100)
+  paternalLastName String        @db.VarChar(100)
+  maternalLastName String?       @db.VarChar(100)
+  alias            String?       @db.VarChar(100)
   email            String        @db.VarChar(255)
   phone            String        @db.VarChar(20)
   birthDate        DateTime
   gender           Gender
   documentId       String        @db.VarChar(50)
-  uniqueId         String        @db.VarChar(50)
+  uniqueId         String        @db.VarChar(50) @unique
   medicalHistory   Json?
   antecedentes     Json?
   contactEmergency Json?

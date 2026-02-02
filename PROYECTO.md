@@ -14,8 +14,16 @@ Sistema modular de gestión de salud ocupacional con extracción IA de datos cl�
 4.  **Multi-Tenant**: Un sistema, múltiples organizaciones aisladas
 
 ## 3. Estado Global
-- **Fase Actual**: SPRINT 2 - Certificación y Dashboard [🚀 EN CURSO]
-- **Semáforo**: 🟢 Verde (Despliegue Vercel OK | Premium UI Live)
+- **Fase Actual**: SPRINT 2 - Unificación VMS e Identidad Médica [🚀 EN CURSO]
+- **Semáforo**: 🟢 Verde (Sucursales AMI Seeded ✅ | Motor PDF Beta Live)
+- **Hitos Recientes:**
+  - [✓] Seeding de 3 sucursales oficiales (Queretaro, El Marqués, Koonol).
+  - [✓] Definición de ID Único de Trabajador (AMI-ID) con filtro de censura y homónimos.
+  - [✓] Rediseño de Sprint 2 hacia Consola unificada (VMS Orchestrator).
+  - [✓] **Sprint 2.1:** Identidad Médica Persistente e ID AMI-ID 🧬
+  - [✓] **Sprint 2.2:** Consultorio Digital y Semaforización Médica Automática (IMC/TA) 🩺⚡
+  - [✓] **Sprint 2.3:** IA & Validación (Split-Screen) y Hallazgos Inteligentes 🤖🖥️
+  - [✓] **Fase 3 (Alpha):** Portal Clientes (RH) - Dashboard, Expedientes y Agenda Corporativa 🏢💼
 - **Status FASE 1**: 
   - MOD-CITAS: ✅ 90% (Completo + integrado)
   - MOD-EXPEDIENTES: ✅ 95% (CRUD + API routes + UI componentes completos)

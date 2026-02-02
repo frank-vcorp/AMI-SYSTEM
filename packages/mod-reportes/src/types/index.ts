@@ -13,14 +13,17 @@ export interface ReportTemplate {
 
 export interface CertificateData {
   expedientId: string;
+  folio?: string;
   patientName: string;
   patientDOB: string;
   clinicName: string;
+  companyName?: string;
   validatorName: string;
   validationDate: string;
   status: 'APPROVED' | 'REJECTED' | 'CONDITIONAL';
   medicalFindings?: string;
   signature?: string;
+  signatureImageUrl?: string;
   stampDate: string;
 }
 

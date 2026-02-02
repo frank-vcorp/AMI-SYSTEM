@@ -12,6 +12,7 @@
   "dependencies": {
     "@ami/core": "workspace:*",
     "@ami/core-auth": "workspace:*",
+    "@ami/core-database": "workspace:*",
     "@ami/core-storage": "workspace:*",
     "@ami/core-types": "workspace:*",
     "@ami/core-ui": "workspace:*",

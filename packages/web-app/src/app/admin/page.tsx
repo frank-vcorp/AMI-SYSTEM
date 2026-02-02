@@ -34,74 +34,62 @@ interface DashboardMetrics {
 }
 
 export default function AdminDashboard() {
-  const [metrics] = useState<DashboardMetrics>({
-    patientsInProcess: 47,
-    dictamesHoy: 12,
-    averageTAT: '5.8 hrs',
-    iaAccuracy: 94.2,
+  const [metrics, setMetrics] = useState<DashboardMetrics>({
+    patientsInProcess: 0,
+    dictamesHoy: 0,
+    averageTAT: '0.0 hrs',
+    iaAccuracy: 0,
     expedientsByStatus: {
-      PENDING: 8,
-      IN_PROGRESS: 12,
-      STUDIES: 15,
-      VALIDATED: 9,
-      COMPLETED: 3,
+      PENDING: 0,
+      IN_PROGRESS: 0,
+      STUDIES: 0,
+      VALIDATED: 0,
+      COMPLETED: 0,
     },
-    productivityByClinic: [
-      { clinicName: 'Centro', count: 24 },
-      { clinicName: 'Norte', count: 18 },
-      { clinicName: 'Móvil', count: 12 },
-    ],
-    recentActivity: [
-      {
-        id: '1',
-        action: 'Dictamen emitido',
-        user: 'DR. FRANCO VERALDI',
-        patient: 'CONTADOR FRANCO, YERALDIN',
-        clinic: 'ABBOTT MEDICAL MEXICO',
-        folio: '#RD-2025-001',
-        timestamp: 'Hace 4 min',
-        status: 'success'
-      },
-      {
-        id: '1.5',
-        action: 'IA detectó anemia',
-        user: 'SISTEMA RD-AMI',
-        patient: 'JUAREZ GARCIA, MARIA',
-        clinic: 'CENTRO MEDICO NORTE',
-        folio: '#RD-2025-042',
-        timestamp: 'Hace 8 min',
-        status: 'error'
-      },
-      {
-        id: '2',
-        action: 'Estudios cargados',
-        user: 'ENF. LUCIA ROSALES',
-        patient: 'MARTINEZ LOPEZ, CARLOS',
-        clinic: 'CLINICA MOVIL 1',
-        folio: '#RD-2025-002',
-        timestamp: 'Hace 12 min',
-        status: 'info'
-      },
-      {
-        id: '3',
-        action: 'Paciente en Check-in',
-        user: 'RECEPCIÓN',
-        patient: 'ORTEGA RUIZ, PEDRO',
-        clinic: 'SEDE CENTRAL',
-        folio: '#RD-2025-089',
-        timestamp: 'Hace 18 min',
-        status: 'info'
-      },
-    ],
+    productivityByClinic: [],
+    recentActivity: [],
   });
 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 800);
-    return () => clearTimeout(timer);
+    async function fetchStats() {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/dashboard/stats');
+        if (!response.ok) throw new Error('Failed to fetch stats');
+        const data = await response.json();
+
+        // Map API response to Component state
+        setMetrics(prev => ({
+          ...prev,
+          patientsInProcess: data.patientsInProcess,
+          dictamesHoy: data.dictamesHoy,
+          averageTAT: data.averageTAT,
+          iaAccuracy: data.iaAccuracy,
+          expedientsByStatus: {
+            PENDING: data.expedientsByStatus.PENDING || 0,
+            IN_PROGRESS: data.expedientsByStatus.IN_PROGRESS || 0,
+            STUDIES: data.expedientsByStatus.STUDIES_PENDING || 0,
+            VALIDATED: data.expedientsByStatus.VALIDATED || 0,
+            COMPLETED: data.expedientsByStatus.COMPLETED || 0,
+          },
+          productivityByClinic: data.productivityByClinic || [],
+        }));
+      } catch (err) {
+        console.error('Error loading dashboard:', err);
+        setError('Error al cargar métricas reales. Mostrando datos locales.');
+      } finally {
+        setTimeout(() => setLoading(false), 500); // Smooth transition
+      }
+    }
+
+    fetchStats();
+
+    // Refresh every minute
+    const interval = setInterval(fetchStats, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {

@@ -27,6 +27,7 @@
     "@ami/core-types": "workspace:*",
     "@ami/core-ui": "workspace:*",
     "@prisma/client": "^6.19.1",
+    "@react-pdf/renderer": "^4.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-pdf": "^9.2.0"

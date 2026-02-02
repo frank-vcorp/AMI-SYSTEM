@@ -1,6 +1,9 @@
 "use client";
 
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { AptitudePDF } from "./AptitudePDF";
 import { CertificateData, PDFExportOptions } from "../types";
+import { Button } from "@ami/core-ui";
 
 interface CertificateViewerProps {
   data: CertificateData;
@@ -10,9 +13,6 @@ interface CertificateViewerProps {
 
 /**
  * CertificateViewer Component
- * 
- * Displays a validation certificate that can be printed or exported to PDF.
- * This is a simple HTML/CSS based viewer suitable for rapid MVP deployment.
  */
 export function CertificateViewer({
   data,
@@ -25,26 +25,32 @@ export function CertificateViewer({
     window.print();
   };
 
-  const handleDownload = () => {
-    onDownload?.();
-  };
-
   return (
     <div className="certificate-container p-8 bg-white">
       {/* Print Controls */}
       <div className="no-print flex gap-4 mb-8">
-        <button
+        <Button
           onClick={handlePrint}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+          variant="outline"
+          className="border-slate-200"
         >
-          Imprimir
-        </button>
-        <button
-          onClick={handleDownload}
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          🖨️ Imprimir
+        </Button>
+
+        <PDFDownloadLink
+          document={<AptitudePDF data={data} />}
+          fileName={`Certificado_${data.folio || data.expedientId}.pdf`}
         >
-          Descargar PDF
-        </button>
+          {({ loading }) => (
+            <Button
+              className="btn-primary"
+              isLoading={loading}
+              onClick={onDownload}
+            >
+              📥 Descargar PDF Real
+            </Button>
+          )}
+        </PDFDownloadLink>
       </div>
 
       {/* Certificate Content */}
@@ -108,13 +114,12 @@ export function CertificateViewer({
           <div className="flex items-center gap-4">
             <p className="text-sm font-semibold text-gray-700">Estado:</p>
             <span
-              className={`px-4 py-2 rounded font-semibold ${
-                data.status === "APPROVED"
-                  ? "bg-green-100 text-green-800"
-                  : data.status === "REJECTED"
-                    ? "bg-red-100 text-red-800"
-                    : "bg-yellow-100 text-yellow-800"
-              }`}
+              className={`px-4 py-2 rounded font-semibold ${data.status === "APPROVED"
+                ? "bg-green-100 text-green-800"
+                : data.status === "REJECTED"
+                  ? "bg-red-100 text-red-800"
+                  : "bg-yellow-100 text-yellow-800"
+                }`}
             >
               {data.status === "APPROVED"
                 ? "✓ APROBADO"

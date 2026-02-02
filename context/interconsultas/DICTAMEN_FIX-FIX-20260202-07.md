@@ -8,17 +8,12 @@
 
 ## 🔍 Análisis del Error
 
-### Síntoma
-El despliegue en Vercel falló durante la etapa de compilación de Next.js (`Checking validity of types`).
-
-### Registro del Error (Build Log)
-```
-../mod-reportes/src/components/AptitudePDF.tsx:2:57
-Type error: 'Font' is declared but its value is never read.
-```
+### Síntomas
+1.  **Fallo 1 (Resuelto):** `Type error: 'Font' is declared but its value is never read` en `AptitudePDF.tsx`.
+2.  **Fallo 2 (Detectado):** `Type error: 'error' is declared but its value is never read` en `packages/web-app/src/app/admin/page.tsx`.
 
 ### Origen
-El componente `AptitudePDF.tsx` en `@ami/mod-reportes` importa el objeto `Font` de `@react-pdf/renderer` pero no lo utiliza. Dado que el proyecto tiene reglas estrictas de TypeScript (`noUnusedLocals` o similar activado por Next.js/Vercel), esto rompe el proceso de build.
+Persistencia de "código muerto" (dead code) en las implementaciones de SOFIA. El dashboard introdujo un estado `error` que se captura pero no se renderiza, violando las reglas de compilación de producción.
 
 ---
 

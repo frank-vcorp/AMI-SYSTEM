@@ -51,7 +51,6 @@ export default function AdminDashboard() {
   });
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchStats() {
@@ -79,7 +78,6 @@ export default function AdminDashboard() {
         }));
       } catch (err) {
         console.error('Error loading dashboard:', err);
-        setError('Error al cargar métricas reales. Mostrando datos locales.');
       } finally {
         setTimeout(() => setLoading(false), 500); // Smooth transition
       }

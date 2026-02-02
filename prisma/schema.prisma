@@ -146,7 +146,7 @@ model Service {
   createdBy         String?          @db.Uuid
   updatedBy         String?          @db.Uuid
   batteries         BatteryService[]
-  clinicServices    ClinicService[]
+  clinics           ClinicService[]
 
   @@unique([tenantId, code])
   @@index([tenantId])

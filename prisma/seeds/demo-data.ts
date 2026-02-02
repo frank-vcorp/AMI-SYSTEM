@@ -13,7 +13,7 @@ import * as path from 'path';
 
 const prisma = new PrismaClient();
 
-const TENANT_ID = '11111111-1111-1111-1111-111111111111';
+const TENANT_ID = '550e8400-e29b-41d4-a716-446655440000';
 const STUDIES_SOURCE = path.join(__dirname, '../../context/LEGACY_IMPORT/ami-rd/context/02_Contexto_Tecnico/Demos funcionales/RD/expedientes/RD-2025-001');
 
 // Demo patients data

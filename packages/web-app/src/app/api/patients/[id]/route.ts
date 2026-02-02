@@ -8,7 +8,7 @@
  * PUT    /api/patients/[id] - Actualizar paciente
  * DELETE /api/patients/[id] - Eliminar paciente (soft delete)
  * 
- * Schema-aligned: Uses Patient model with documentNumber, dateOfBirth, gender (M/F/O), etc.
+ * Schema-aligned: Uses Patient model with documentId, dateOfBirth, gender (M/F/O), etc.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -72,7 +72,7 @@ export async function PUT(
     // Support both form field names and schema field names for compatibility
     const phoneNumber = body.phoneNumber || body.phone;
     const dateOfBirth = body.dateOfBirth || body.birthDate;
-    const documentNumber = body.documentNumber || body.documentId;
+    const documentId = body.documentId || body.documentId;
     
     // Map gender from form values to schema values
     let gender = body.gender;
@@ -104,10 +104,10 @@ export async function PUT(
       );
     }
 
-    // If updating documentNumber, check for duplicates
-    if (documentNumber && documentNumber !== existing.documentNumber) {
+    // If updating documentId, check for duplicates
+    if (documentId && documentId !== existing.documentId) {
       const docExists = await prisma.patient.findFirst({
-        where: { tenantId, documentNumber, id: { not: id } },
+        where: { tenantId, documentId, id: { not: id } },
       });
       if (docExists) {
         return NextResponse.json(
@@ -146,10 +146,10 @@ export async function PUT(
         ...(name && { name }),
         ...(email !== undefined && { email }),
         ...(phoneNumber !== undefined && { phoneNumber }),
-        ...(dateOfBirth && { dateOfBirth: new Date(dateOfBirth) }),
+        ...(dateOfBirth && { birthDate: new Date(dateOfBirth) }),
         ...(gender && { gender }),
         ...(documentType && { documentType }),
-        ...(documentNumber && { documentNumber }),
+        ...(documentId && { documentId }),
         ...(address !== undefined && { address }),
         ...(city !== undefined && { city }),
         ...(state !== undefined && { state }),

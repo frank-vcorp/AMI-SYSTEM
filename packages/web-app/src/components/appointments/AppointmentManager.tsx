@@ -29,7 +29,7 @@ interface Clinic {
 interface Patient {
   id: string;
   name: string;
-  documentNumber: string;
+  documentId: string;
   company?: { id: string; name: string };
 }
 
@@ -52,7 +52,7 @@ interface Appointment {
   appointmentTime?: string;
   status: string;
   notes?: string;
-  patient?: { id: string; name: string; documentNumber?: string };
+  patient?: { id: string; name: string; documentId?: string };
   clinic?: { id: string; name: string };
   doctor?: { id: string; name: string };
   expedients?: Array<{ id: string; folio: string; status: string }>;
@@ -201,7 +201,7 @@ export function AppointmentManager() {
   const filteredPatients = patientSearch
     ? patients.filter(p => 
         p.name.toLowerCase().includes(patientSearch.toLowerCase()) ||
-        p.documentNumber?.includes(patientSearch)
+        p.documentId?.includes(patientSearch)
       )
     : patients;
 
@@ -570,7 +570,7 @@ export function AppointmentManager() {
                           >
                             <div className="font-medium">{patient.name}</div>
                             <div className="text-xs text-gray-500">
-                              {patient.documentNumber} • {patient.company?.name || 'Sin empresa'}
+                              {patient.documentId} • {patient.company?.name || 'Sin empresa'}
                             </div>
                           </button>
                         ))}
@@ -725,8 +725,8 @@ export function AppointmentManager() {
                 <div className="bg-gray-50 p-3 rounded-lg">
                   <p className="text-xs text-gray-500 mb-1">Paciente</p>
                   <p className="font-medium">{selectedAppointment.patient?.name || 'No asignado'}</p>
-                  {selectedAppointment.patient?.documentNumber && (
-                    <p className="text-xs text-gray-500 mt-1">Doc: {selectedAppointment.patient.documentNumber}</p>
+                  {selectedAppointment.patient?.documentId && (
+                    <p className="text-xs text-gray-500 mt-1">Doc: {selectedAppointment.patient.documentId}</p>
                   )}
                 </div>
 

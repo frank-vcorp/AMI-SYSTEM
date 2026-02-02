@@ -84,7 +84,7 @@ export async function GET(request: NextRequest) {
     const patients = patientIds.length > 0 
       ? await prisma.patient.findMany({
           where: { id: { in: patientIds } },
-          select: { id: true, name: true, documentNumber: true },
+          select: { id: true, name: true, documentId: true },
         })
       : [];
 

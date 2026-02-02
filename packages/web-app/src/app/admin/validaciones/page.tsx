@@ -12,7 +12,7 @@ interface ValidationTaskRow {
   id: string;
   expedientId: string;
   patientName: string;
-  documentNumber: string;
+  documentId: string;
   companyName?: string;
   status: string;
   studies: number;
@@ -43,7 +43,7 @@ export default function ValidacionesPage() {
           id: task.id,
           expedientId: task.expedientId,
           patientName: task.expedient?.patient?.name || "N/A",
-          documentNumber: task.expedient?.patient?.documentNumber || "N/A",
+          documentId: task.expedient?.patient?.documentId || "N/A",
           companyName: task.expedient?.patient?.company?.name || "—",
           status: task.status,
           studies: task.studies?.length || 0,
@@ -170,7 +170,7 @@ export default function ValidacionesPage() {
                         {task.patientName}
                       </p>
                       <p className="text-sm text-gray-500">
-                        {task.documentNumber}
+                        {task.documentId}
                       </p>
                     </div>
                   </td>

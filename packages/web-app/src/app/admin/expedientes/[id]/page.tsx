@@ -54,8 +54,8 @@ async function getExpedient(id: string) {
         id: expedient.patient.id,
         firstName,
         lastName,
-        dateOfBirth: expedient.patient.dateOfBirth?.toISOString(),
-        documentId: expedient.patient.documentNumber,
+        birthDate: expedient.patient.dateOfBirth?.toISOString(),
+        documentId: expedient.patient.documentId,
       },
       clinic: {
         id: expedient.clinic.id,

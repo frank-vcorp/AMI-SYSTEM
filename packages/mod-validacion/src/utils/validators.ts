@@ -182,7 +182,7 @@ export function validatePatientSummary(
 
   if (!patient.id) errors.push("Patient ID is missing");
   if (!patient.name) errors.push("Patient name is missing");
-  if (!patient.documentNumber) errors.push("Patient document number is missing");
+  if (!patient.documentId) errors.push("Patient document number is missing");
   if (!patient.age || patient.age < 16 || patient.age > 120) {
     warnings.push("Patient age seems unusual - verify data");
   }

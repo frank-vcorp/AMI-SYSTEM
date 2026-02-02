@@ -23,7 +23,7 @@ interface Patient {
   dateOfBirth?: string;    // Campo real del schema
   gender?: string;
   documentId?: string;     // Alias para compatibilidad
-  documentNumber?: string; // Campo real del schema
+  documentId?: string; // Campo real del schema
   status: string;
   companyId?: string;
   company?: { id: string; name: string };
@@ -181,7 +181,7 @@ export default function PacientesPage() {
       phone: patient.phoneNumber || patient.phone || '',
       birthDate: birthDateValue ? birthDateValue.split('T')[0] : '',
       gender: patient.gender === 'M' ? 'MASCULINO' : patient.gender === 'F' ? 'FEMENINO' : patient.gender === 'O' ? 'OTRO' : (patient.gender || 'MASCULINO'),
-      documentId: patient.documentNumber || patient.documentId || '',
+      documentId: patient.documentId || patient.documentId || '',
       companyId: patient.companyId || '',
       jobProfileId: patient.jobProfileId || '',
     });
@@ -445,7 +445,7 @@ export default function PacientesPage() {
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm font-mono text-gray-600">
-                        {patient.documentNumber || patient.documentId || '-'}
+                        {patient.documentId || patient.documentId || '-'}
                       </td>
                       <td className="px-4 py-3">
                         {patient.company ? (

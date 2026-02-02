@@ -146,7 +146,7 @@ export interface PatientSummary {
   id: string;
   name: string;
   documentType: string;
-  documentNumber: string;
+  documentId: string;
   age: number;
   gender: "M" | "F" | "O";
   company?: {

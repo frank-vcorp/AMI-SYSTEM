@@ -79,7 +79,7 @@ export interface AppointmentResponse {
   updatedAt: string;         // ISO 8601 timestamp
   // Optional enriched fields
   clinic?: { id: string; name: string; address?: string };
-  patient?: { id: string; name: string; documentNumber?: string };
+  patient?: { id: string; name: string; documentId?: string };
   company?: { id: string; name: string };
   // Deprecated fields for backwards compatibility
   employeeId?: string;

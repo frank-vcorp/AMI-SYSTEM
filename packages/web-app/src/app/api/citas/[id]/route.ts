@@ -65,7 +65,7 @@ export async function GET(
     if (appointment.patientId) {
       patient = await prisma.patient.findUnique({
         where: { id: appointment.patientId },
-        select: { id: true, name: true, documentNumber: true },
+        select: { id: true, name: true, documentId: true },
       });
     }
 
@@ -184,7 +184,7 @@ export async function PUT(
     if (appointment.patientId) {
       patient = await prisma.patient.findUnique({
         where: { id: appointment.patientId },
-        select: { id: true, name: true, documentNumber: true },
+        select: { id: true, name: true, documentId: true },
       });
     }
 

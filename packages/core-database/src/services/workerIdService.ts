@@ -47,7 +47,7 @@ export async function generateWorkerId(input: GenerateWorkerIdInput): Promise<st
     const count = await prisma.patient.count({
         where: {
             tenantId: input.tenantId,
-            documentNumber: {
+            uniqueId: {
                 startsWith: baseId
             }
         }

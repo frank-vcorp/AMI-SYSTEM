@@ -60,7 +60,7 @@ export default function ValidacionDetailPage() {
           id: p.id,
           name: p.name,
           documentType: p.documentType,
-          documentNumber: p.documentNumber,
+          documentId: p.documentId,
           age: new Date().getFullYear() - new Date(p.dateOfBirth).getFullYear(),
           gender: p.gender,
           company: data.expedient.patient.company

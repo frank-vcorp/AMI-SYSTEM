@@ -1,188 +1,144 @@
 /**
- * ⚙️ IMPL REFERENCE: IMPL-20260121-01
- * 📄 SEE: context/SPEC-MVP-DEMO-APIS.md
- * 🤖 AUTHOR: SOFIA (Claude Opus 4.5)
+ * ⚙️ IMPL REFERENCE: IMPL-20260202-LAYOUT-FIX
+ * 📄 SEE: context/RD/index.html (The Truth)
+ * 🤖 AUTHOR: SOFIA (Builder)
  * 
- * Admin Layout - Navigation sidebar with all modules
+ * Admin Layout - RESKIN COMPLETO
+ * Reemplazando Sidebar vertical con Header Horizontal + Tabs
+ * para coincidir 100% con el diseño Mock.
  */
 
+"use client";
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
+
+  // Función helper para clases de tabs activas
+  // En mock: border-b-2 border-ami-blue text-ami-blue
+  // Inactiva: border-b-2 border-transparent text-gray-500 hover:text-gray-700
+  const getTabClass = (path: string) => {
+    const isActive = pathname === path || pathname.startsWith(`${path}/`);
+    return isActive
+      ? "flex items-center space-x-2 py-4 px-1 border-b-2 border-ami-blue text-ami-blue font-medium text-sm whitespace-nowrap"
+      : "flex items-center space-x-2 py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium text-sm whitespace-nowrap";
+  };
+
   return (
-    <div className="flex h-screen bg-gray-100">
-      {/* Sidebar Navigation */}
-      <aside className="w-64 bg-gradient-to-b from-slate-800 to-slate-900 text-white shadow-lg">
-        <div className="p-6 border-b border-slate-700">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-            AMI
-          </h1>
-          <p className="text-sm text-slate-400 mt-1">Sistema Médico Integral</p>
+    <div className="min-h-screen bg-gray-50 font-inter">
+      {/* 
+        ========================================
+        HEADER (Idéntico visualmente al Mock)
+        ========================================
+      */}
+      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              {/* Logo AMI (Simulado con Texto/Icono si no hay imagen) */}
+              <div className="flex items-center space-x-3">
+                {/* <img src="logo-ami.png" alt="AMI" class="h-12 w-auto"> (Reemplazo con placeholder SVG estilizado) */}
+                <div className="w-10 h-10 bg-gradient-to-br from-ami-turquoise to-ami-blue rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-sm">
+                  A
+                </div>
+                <div className="border-l border-gray-300 pl-3">
+                  <h1 className="text-xl font-bold text-ami-purple">RD-AMI</h1>
+                  <p className="text-xs text-ami-turquoise font-medium">Residente Digital con IA</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4 text-sm text-gray-600">
+              <span className="font-medium">Usuario: <span className="text-ami-blue">Dra. Ana López</span></span>
+              <span className="text-gray-300">|</span>
+              <span id="fechaActual">{new Date().toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            </div>
+          </div>
         </div>
+      </header>
 
-        <nav className="p-4 space-y-2">
-          {/* Dashboard */}
-          <Link
-            href="/admin"
-            className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-          >
-            <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            Dashboard
-          </Link>
-
-          {/* Gestión Operativa */}
-          <div>
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">
-              Gestión Operativa
-            </h3>
-
-            {/* VMS - Centro de Operaciones (PROTOTIPO - OCULTO PARA ENTREGA)
-            <Link
-              href="/admin/vms"
-              className="flex items-center px-4 py-2 rounded-lg bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 mb-2 hover:bg-cyan-600/30 transition-all font-medium"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
-              </svg>
-              Centro de Op. (VMS)
-            </Link>
-            */}
-
-            {/* Citas */}
-            <Link
-              href="/admin/citas"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              Citas
+      {/* 
+        ========================================
+        NAVIGATION TABS (Horizontal Scroll)
+        ========================================
+      */}
+      <nav className="bg-white border-b border-gray-200 sticky top-16 z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex space-x-8 overflow-x-auto no-scrollbar">
+            {/* 1. Dashboard */}
+            <Link href="/admin" className={getTabClass('/admin')}>
+              <i className="fas fa-chart-dashboard"></i>
+              <span>Dashboard</span>
             </Link>
 
-            {/* Check-in - NEW (PROTOTIPO - OCULTO PARA ENTREGA)
-            <Link
-              href="/admin/check-in"
-              className="flex items-center px-4 py-2 rounded-lg bg-green-600/20 text-green-400 border border-green-500/30 hover:bg-green-600/30 transition-all font-medium"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Check-in (QR)
-            </Link>
-            */}
-
-            {/* Expedientes */}
-            <Link
-              href="/admin/expedientes"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Expedientes
+            {/* 2. Recepción (Link a Expedientes por ahora para demo flujo) */}
+            <Link href="/admin/expedientes" className={getTabClass('/admin/recepcion')}>
+              <i className="fas fa-clipboard-list"></i>
+              <span>Recepción</span>
             </Link>
 
-            {/* Pacientes */}
-            <Link
-              href="/admin/pacientes"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
-              Pacientes
+            {/* 3. Examen Médico */}
+            <Link href="/admin/expedientes" className={getTabClass('/admin/examen')}>
+              <i className="fas fa-stethoscope"></i>
+              <span>Examen Médico</span>
             </Link>
+
+            {/* 4. Estudios (Link directo a expedientes) */}
+            <Link href="/admin/expedientes" className={getTabClass('/admin/expedientes')}>
+              <i className="fas fa-upload"></i>
+              <span>Estudios</span>
+            </Link>
+
+            {/* 5. Validación */}
+            <Link href="/admin/validaciones" className={getTabClass('/admin/validaciones')}>
+              <i className="fas fa-user-md"></i>
+              <span>Validación</span>
+            </Link>
+
+            {/* 6. Reportes */}
+            <Link href="/admin/reportes" className={getTabClass('/admin/reportes')}>
+              <i className="fas fa-file-pdf"></i>
+              <span>Reportes</span>
+            </Link>
+
+            {/* 7. Papeletas (Mock) */}
+            <button className="flex items-center space-x-2 py-4 px-1 border-b-2 border-transparent text-gray-400 cursor-not-allowed font-medium text-sm whitespace-nowrap">
+              <i className="fas fa-list"></i>
+              <span>Papeletas</span>
+            </button>
+
+            {/* 8. Empresas */}
+            <Link href="/admin/empresas" className={getTabClass('/admin/empresas')}>
+              <i className="fas fa-building"></i>
+              <span>Empresas</span>
+            </Link>
+
+            {/* 9. Expedientes (Principal) */}
+            <Link href="/admin/expedientes" className={getTabClass('/admin/expedientes-master')}>
+              <i className="fas fa-folder-open"></i>
+              <span>Expedientes</span>
+            </Link>
+
+            {/* 10. Admin */}
+            <button className="flex items-center space-x-2 py-4 px-1 border-b-2 border-transparent text-gray-400 cursor-not-allowed font-medium text-sm whitespace-nowrap">
+              <i className="fas fa-cog"></i>
+              <span>Config</span>
+            </button>
           </div>
-
-          {/* Catálogos */}
-          <div className="pt-4 border-t border-slate-700">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">
-              Catálogos
-            </h3>
-
-            {/* Clínicas */}
-            <Link
-              href="/admin/clinicas"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-              Clínicas
-            </Link>
-
-            {/* Empresas */}
-            <Link
-              href="/admin/empresas"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z" />
-              </svg>
-              Empresas
-            </Link>
-
-            {/* Servicios */}
-            <Link
-              href="/admin/servicios"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Servicios y Baterías
-            </Link>
-          </div>
-
-          {/* Herramientas */}
-          <div className="pt-4 border-t border-slate-700">
-            <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider px-3 py-2 mb-2">
-              Herramientas
-            </h3>
-
-            {/* Upload */}
-            <Link
-              href="/admin/upload"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-              </svg>
-              Carga de Archivos
-            </Link>
-
-            {/* Reportes */}
-            <Link
-              href="/admin/reportes"
-              className="flex items-center px-4 py-2 rounded-lg text-slate-100 hover:bg-slate-700 transition-colors"
-            >
-              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              Reportes
-            </Link>
-          </div>
-        </nav>
-
-        {/* Footer */}
-        <div className="absolute bottom-0 w-64 p-4 border-t border-slate-700">
-          <p className="text-xs text-slate-400">
-            AMI-SYSTEM v2.0
-          </p>
-          <p className="text-xs text-slate-500 mt-1">
-            MVP Demo • INTEGRA Methodology
-          </p>
         </div>
-      </aside>
+      </nav>
 
-      {/* Main Content */}
-      <main className="flex-1 overflow-auto">
+      {/* 
+        ========================================
+        MAIN CONTENT
+        ========================================
+      */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {children}
       </main>
     </div>

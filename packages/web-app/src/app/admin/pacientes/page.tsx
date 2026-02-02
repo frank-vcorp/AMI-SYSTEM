@@ -17,13 +17,10 @@ interface Patient {
   id: string;
   name: string;
   email?: string;
-  phone?: string;          // Alias para compatibilidad
-  phoneNumber?: string;    // Campo real del schema
-  birthDate?: string;      // Alias para compatibilidad
-  birthDate?: string;    // Campo real del schema
+  phone?: string;
+  birthDate?: string;
   gender?: string;
-  documentId?: string;     // Alias para compatibilidad
-  documentId?: string; // Campo real del schema
+  documentId?: string;
   status: string;
   companyId?: string;
   company?: { id: string; name: string };
@@ -120,7 +117,7 @@ export default function PacientesPage() {
       const params = new URLSearchParams({ pageSize: '100' });
       if (search) params.append('search', search);
       if (filterCompany) params.append('companyId', filterCompany);
-      
+
       const response = await fetch(`/api/patients?${params}`);
       if (response.ok) {
         const data = await response.json();

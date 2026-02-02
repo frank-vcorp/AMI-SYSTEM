@@ -8,6 +8,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import useSWR from "swr";
+import { ExpedientStatusBadge } from "./ExpedientStatusBadge";
 
 interface Expedient {
   id: string;
@@ -90,17 +91,7 @@ export function ExpedientTable({ status, clinicId, onRowClick }: ExpedientTableP
                     {exp.patient?.name || exp.patientId}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    <span
-                      className={`inline-block rounded px-2 py-1 text-xs font-semibold ${
-                        exp.status === "COMPLETED"
-                          ? "bg-green-100 text-green-800"
-                          : exp.status === "IN_PROGRESS"
-                          ? "bg-blue-100 text-blue-800"
-                          : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {exp.status}
-                    </span>
+                    <ExpedientStatusBadge status={exp.status} size="sm" />
                   </td>
                   <td className="border border-gray-300 px-4 py-2 text-sm">
                     {new Date(exp.createdAt).toLocaleDateString()}

@@ -171,14 +171,14 @@ export default function PacientesPage() {
 
   const handleEdit = (patient: Patient) => {
     setEditingId(patient.id);
-    const birthDateValue = patient.birthDate || patient.birthDate;
+    const birthDateValue = patient.birthDate;
     setFormData({
       name: patient.name || '',
       email: patient.email || '',
-      phone: patient.phoneNumber || patient.phone || '',
+      phone: patient.phone || '',
       birthDate: birthDateValue ? birthDateValue.split('T')[0] : '',
       gender: patient.gender === 'M' ? 'MASCULINO' : patient.gender === 'F' ? 'FEMENINO' : patient.gender === 'O' ? 'OTRO' : (patient.gender || 'MASCULINO'),
-      documentId: patient.documentId || patient.documentId || '',
+      documentId: patient.documentId || '',
       companyId: patient.companyId || '',
       jobProfileId: patient.jobProfileId || '',
     });
@@ -438,7 +438,7 @@ export default function PacientesPage() {
                       <td className="px-4 py-3">
                         <div className="font-medium text-gray-900">{patient.name}</div>
                         <div className="text-sm text-gray-500">
-                          {formatDate(patient.birthDate || patient.birthDate)} • {patient.gender === 'M' ? 'M' : patient.gender === 'F' ? 'F' : patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
+                          {formatDate(patient.birthDate)} • {patient.gender === 'M' ? 'M' : patient.gender === 'F' ? 'F' : patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm font-mono text-gray-600">
@@ -456,10 +456,10 @@ export default function PacientesPage() {
                       </td>
                       <td className="px-4 py-3">
                         {patient.email && <div className="text-sm text-gray-900">{patient.email}</div>}
-                        {(patient.phoneNumber || patient.phone) && <div className="text-sm text-gray-500">{patient.phoneNumber || patient.phone}</div>}
+                        {patient.phone && <div className="text-sm text-gray-500">{patient.phone}</div>}
                       </td>
                       <td className="px-4 py-3 text-center text-sm text-gray-600">
-                        {calculateAge(patient.birthDate || patient.birthDate)}
+                        {calculateAge(patient.birthDate)}
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className="text-sm font-medium text-gray-900">

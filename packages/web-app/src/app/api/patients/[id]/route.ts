@@ -68,21 +68,21 @@ export async function PUT(
     const { id } = await params;
     const body = await request.json();
     const tenantId = body.tenantId || DEFAULT_TENANT_ID;
-    
+
     // Support both form field names and schema field names for compatibility
     const phoneNumber = body.phoneNumber || body.phone;
     const birthDate = body.birthDate || body.birthDate;
     const documentId = body.documentId || body.documentId;
-    
+
     // Map gender from form values to schema values
     let gender = body.gender;
     if (gender === 'MASCULINO') gender = 'M';
     else if (gender === 'FEMENINO') gender = 'F';
     else if (gender === 'OTRO') gender = 'O';
-    
-    const { 
-      name, 
-      email, 
+
+    const {
+      name,
+      email,
       documentType,
       address,
       city,
@@ -145,7 +145,7 @@ export async function PUT(
       data: {
         ...(name && { name }),
         ...(email !== undefined && { email }),
-        ...(phoneNumber !== undefined && { phoneNumber }),
+        ...(phoneNumber !== undefined && { phone: phoneNumber }),
         ...(birthDate && { birthDate: new Date(birthDate) }),
         ...(gender && { gender }),
         ...(documentType && { documentType }),

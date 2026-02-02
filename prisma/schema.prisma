@@ -215,6 +215,7 @@ model Company {
   updatedBy      String?          @db.Uuid
   batteries      CompanyBattery[]
   jobProfiles    JobProfile[]
+  patients       Patient[]
 
   @@unique([tenantId, name])
   @@index([tenantId])
@@ -283,6 +284,8 @@ model Patient {
   updatedAt        DateTime      @updatedAt
   createdBy        String?       @db.Uuid
   updatedBy        String?       @db.Uuid
+  companyId        String?
+  company          Company?      @relation(fields: [companyId], references: [id])
   expedients       Expedient[]
 
   @@unique([tenantId, documentId])

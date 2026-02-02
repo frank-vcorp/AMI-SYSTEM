@@ -45,8 +45,8 @@ async function getExpedient(id: string) {
 
     return {
       id: expedient.id,
-      folio: expedient.folio,
-      status: expedient.status,
+      folio: expedient.folio || '',
+      status: String(expedient.status),
       notes: expedient.medicalNotes || '',
       createdAt: expedient.createdAt.toISOString(),
       updatedAt: expedient.updatedAt.toISOString(),

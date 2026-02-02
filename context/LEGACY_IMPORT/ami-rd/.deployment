@@ -1,2 +1,0 @@
-[tasks]
-rsync -a --delete --exclude=/.git/ --exclude=/.github/ progressdashboard/ "${PLESK_DEPLOY_PATH}/progress-ami/progressdashboard/"

@@ -1,23 +1,15 @@
-/**
- * @impl IMPL-20260121-B1
- * @ref context/Plan-Demo-RD-20260121.md
- * 
- * Dashboard Principal - Overview KPIs y estado del sistema
- * Muestra: Pacientes en Proceso, Dictámenes Hoy, TAT, Precisión IA
- *          Estado de Expedientes por etapa, Productividad, Actividad Reciente
- */
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@ami/core-ui';
 import { Badge } from '@ami/core-ui';
+import { Card, CardHeader, CardTitle, CardContent } from '@ami/core-ui';
 
 interface DashboardMetrics {
   patientsInProcess: number;
   dictamesHoy: number;
-  averageTAT: string; // "5.8 hrs"
-  iaAccuracy: number; // 94.2
+  averageTAT: string;
+  iaAccuracy: number;
   expedientsByStatus: {
     PENDING: number;
     IN_PROGRESS: number;
@@ -37,6 +29,7 @@ interface DashboardMetrics {
     clinic: string;
     folio: string;
     timestamp: string;
+    status: 'success' | 'warning' | 'info' | 'error';
   }>;
 }
 
@@ -63,28 +56,41 @@ export default function AdminDashboard() {
         id: '1',
         action: 'Dictamen emitido',
         user: 'DR. FRANCO VERALDI',
-        patient: 'CONTADOR FRANCO, VERALDI',
+        patient: 'CONTADOR FRANCO, YERALDIN',
         clinic: 'ABBOTT MEDICAL MEXICO',
         folio: '#RD-2025-001',
         timestamp: 'Hace 4 min',
+        status: 'success'
+      },
+      {
+        id: '1.5',
+        action: 'IA detectó anemia',
+        user: 'SISTEMA RD-AMI',
+        patient: 'JUAREZ GARCIA, MARIA',
+        clinic: 'CENTRO MEDICO NORTE',
+        folio: '#RD-2025-042',
+        timestamp: 'Hace 8 min',
+        status: 'error'
       },
       {
         id: '2',
         action: 'Estudios cargados',
-        user: 'MARTINEZ LOPEZ, CARLOS',
+        user: 'ENF. LUCIA ROSALES',
         patient: 'MARTINEZ LOPEZ, CARLOS',
-        clinic: 'ABBOTT MEDICAL MEXICO',
-        folio: '#RD-2023-002',
+        clinic: 'CLINICA MOVIL 1',
+        folio: '#RD-2025-002',
         timestamp: 'Hace 12 min',
+        status: 'info'
       },
       {
         id: '3',
-        action: 'IA detectó anemia',
-        user: 'SISTEMA',
-        patient: 'Paciente',
-        clinic: 'ABBOTT MEDICAL MEXICO',
-        folio: '#RD-2023-003',
+        action: 'Paciente en Check-in',
+        user: 'RECEPCIÓN',
+        patient: 'ORTEGA RUIZ, PEDRO',
+        clinic: 'SEDE CENTRAL',
+        folio: '#RD-2025-089',
         timestamp: 'Hace 18 min',
+        status: 'info'
       },
     ],
   });
@@ -92,272 +98,260 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // En producción, llamaría a una API para obtener métricas reales
-    // Por ahora, simular datos
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ami-turquoise mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando Dashboard...</p>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center font-inter">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-medical-500 mx-auto"></div>
+          <p className="text-slate-600 font-medium">Sincronizando Residente Digital...</p>
         </div>
       </div>
     );
   }
 
-  const totalExpedients = Object.values(metrics.expedientsByStatus).reduce(
-    (a, b) => a + b,
-    0
-  );
+  const totalExpedients = Object.values(metrics.expedientsByStatus).reduce((a, b) => a + b, 0);
 
   const expedientsByStatusArray = [
-    {
-      status: 'Recepción',
-      count: metrics.expedientsByStatus.PENDING,
-      color: 'bg-blue-500',
-    },
-    {
-      status: 'Examen Médico',
-      count: metrics.expedientsByStatus.IN_PROGRESS,
-      color: 'bg-yellow-500',
-    },
-    {
-      status: 'Estudios',
-      count: metrics.expedientsByStatus.STUDIES,
-      color: 'bg-purple-500',
-    },
-    {
-      status: 'Validación',
-      count: metrics.expedientsByStatus.VALIDATED,
-      color: 'bg-orange-500',
-    },
-    {
-      status: 'Completado',
-      count: metrics.expedientsByStatus.COMPLETED,
-      color: 'bg-green-500',
-    },
+    { status: 'Recepción', count: metrics.expedientsByStatus.PENDING, color: 'bg-clinical-info' },
+    { status: 'Examen Médico', count: metrics.expedientsByStatus.IN_PROGRESS, color: 'bg-clinical-warning' },
+    { status: 'Estudios (SIM/NOVA)', count: metrics.expedientsByStatus.STUDIES, color: 'bg-ami-purple' },
+    { status: 'Validación IA', count: metrics.expedientsByStatus.VALIDATED, color: 'bg-clinical-info' },
+    { status: 'Dictamen Final', count: metrics.expedientsByStatus.COMPLETED, color: 'bg-clinical-success' },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Dashboard</h1>
-          <p className="text-slate-600">
-            Residente Digital con IA - Sistema de Gestión Médica Ocupacional
-          </p>
-        </div>
+    <div className="min-h-screen bg-slate-50 p-6 lg:p-10 font-inter">
+      <div className="max-w-7xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
 
-        {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {/* Pacientes en Proceso */}
-          <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-ami-turquoise">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-gray-600 text-sm font-medium mb-1">
-                  Pacientes en Proceso
-                </p>
-                <p className="text-3xl font-bold text-slate-900">
-                  {metrics.patientsInProcess}
-                </p>
-              </div>
-              <div className="text-4xl text-ami-turquoise opacity-20">👥</div>
-            </div>
+        {/* Top Navigation / Stats Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-200 pb-8">
+          <div>
+            <Badge variant="info" className="mb-3">Sistema de Gestión Médica</Badge>
+            <h1 className="text-4xl font-outfit font-bold text-slate-900 tracking-tight">Dashboard General</h1>
+            <p className="text-slate-500 mt-1 max-w-xl text-balance">
+              Panel de control operativo para el Residente Digital con IA. Monitoreo de flujo de pacientes y precisión diagnóstica.
+            </p>
           </div>
-
-          {/* Dictámenes Emitidos Hoy */}
-          <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-500">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-gray-600 text-sm font-medium mb-1">
-                  Dictámenes Emitidos (Hoy)
-                </p>
-                <p className="text-3xl font-bold text-slate-900">
-                  {metrics.dictamesHoy}
-                </p>
-              </div>
-              <div className="text-4xl text-green-500 opacity-20">✓</div>
-            </div>
-          </div>
-
-          {/* TAT Promedio */}
-          <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-orange-500">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-gray-600 text-sm font-medium mb-1">
-                  TAT Promedio
-                </p>
-                <p className="text-3xl font-bold text-slate-900">
-                  {metrics.averageTAT}
-                </p>
-              </div>
-              <div className="text-4xl text-orange-500 opacity-20">⏱️</div>
-            </div>
-          </div>
-
-          {/* Precisión IA */}
-          <div className="bg-white rounded-lg shadow-md p-6 border-t-4 border-ami-purple">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-gray-600 text-sm font-medium mb-1">
-                  Precisión IA
-                </p>
-                <p className="text-3xl font-bold text-slate-900">
-                  {metrics.iaAccuracy}%
-                </p>
-              </div>
-              <div className="text-4xl text-ami-purple opacity-20">🤖</div>
-            </div>
+          <div className="flex gap-2">
+            <Button variant="outline" className="border-slate-200 text-slate-600">Reporte Diario</Button>
+            <Button className="btn-primary shadow-premium">Exportar Data</Button>
           </div>
         </div>
 
-        {/* Estado de Expedientes */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-          {/* Estado de Expedientes - Barras */}
-          <div className="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">
-              Estado de Expedientes
-            </h2>
-
-            <div className="space-y-4">
-              {expedientsByStatusArray.map((item) => {
-                const percentage =
-                  totalExpedients > 0
-                    ? Math.round((item.count / totalExpedients) * 100)
-                    : 0;
-                return (
-                  <div key={item.status}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700">
-                        {item.status}
-                      </span>
-                      <span className="text-sm font-semibold text-slate-900">
-                        {item.count} ({percentage}%)
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className={`${item.color} h-2 rounded-full transition-all`}
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Total */}
-            <div className="mt-6 pt-4 border-t">
-              <p className="text-sm font-medium text-gray-600">
-                Total Expedientes: <span className="font-bold">{totalExpedients}</span>
+        {/* KPI Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card variant="premium" className="overflow-hidden group">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Pacientes en Proceso</p>
+                  <p className="text-4xl font-outfit font-bold text-slate-900 leading-none">{metrics.patientsInProcess}</p>
+                </div>
+                <div className="p-3 bg-medical-50 text-medical-500 rounded-xl group-hover:bg-medical-500 group-hover:text-white transition-colors duration-300">
+                  <span className="text-xl">👥</span>
+                </div>
+              </div>
+              <p className="text-clinical-success text-xs font-semibold mt-4 flex items-center gap-1">
+                ↑ +12% <span className="text-slate-400 font-normal">vrs. ayer</span>
               </p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Productividad por Clínica */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-bold text-slate-900 mb-6">
-              Productividad por Clínica
-            </h2>
-
-            <div className="space-y-4">
-              {metrics.productivityByClinic.map((clinic, idx) => {
-                const maxCount = Math.max(
-                  ...metrics.productivityByClinic.map((c) => c.count)
-                );
-                const percentage = (clinic.count / maxCount) * 100;
-                const colors = [
-                  'bg-ami-turquoise',
-                  'bg-ami-purple',
-                  'bg-blue-500',
-                ];
-
-                return (
-                  <div key={idx}>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-medium text-gray-700">
-                        {clinic.clinicName}
-                      </span>
-                      <span className="text-sm font-semibold text-slate-900">
-                        {clinic.count}
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3">
-                      <div
-                        className={`${colors[idx % colors.length]} h-3 rounded-full transition-all`}
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* Actividad Reciente */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-xl font-bold text-slate-900 mb-6">
-            Actividad Reciente
-          </h2>
-
-          <div className="space-y-3">
-            {metrics.recentActivity.map((activity, idx) => (
-              <div
-                key={activity.id}
-                className="flex items-start space-x-4 pb-3 border-b last:border-b-0"
-              >
-                {/* Timeline dot */}
-                <div className="flex flex-col items-center">
-                  <div className="w-3 h-3 rounded-full bg-ami-turquoise mt-1.5"></div>
-                  {idx < metrics.recentActivity.length - 1 && (
-                    <div className="w-0.5 h-8 bg-gray-200 mt-1"></div>
-                  )}
+          <Card variant="premium" className="overflow-hidden group">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Dictámenes (Hoy)</p>
+                  <p className="text-4xl font-outfit font-bold text-slate-900 leading-none">{metrics.dictamesHoy}</p>
                 </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center space-x-2 mb-1">
-                    <Badge variant="default">{activity.action}</Badge>
-                    <span className="text-xs text-gray-500">
-                      {activity.timestamp}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-700">
-                    <span className="font-medium">{activity.user}</span>
-                    {' - '}
-                    <span className="text-gray-600">{activity.patient}</span>
-                  </p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {activity.clinic} • {activity.folio}
-                  </p>
+                <div className="p-3 bg-green-50 text-clinical-success rounded-xl group-hover:bg-clinical-success group-hover:text-white transition-colors duration-300">
+                  <span className="text-xl">📄</span>
                 </div>
               </div>
-            ))}
-          </div>
+              <p className="text-clinical-success text-xs font-semibold mt-4 flex items-center gap-1">
+                85% <span className="text-slate-400 font-normal">de la meta diaria</span>
+              </p>
+            </CardContent>
+          </Card>
 
-          {/* Ver más */}
-          <div className="mt-6 pt-4 border-t">
-            <Button variant="outline" className="w-full">
-              Ver Más Actividades
-            </Button>
-          </div>
+          <Card variant="premium" className="overflow-hidden group">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">TAT Promedio</p>
+                  <p className="text-4xl font-outfit font-bold text-slate-900 leading-none">{metrics.averageTAT}</p>
+                </div>
+                <div className="p-3 bg-amber-50 text-clinical-warning rounded-xl group-hover:bg-clinical-warning group-hover:text-white transition-colors duration-300">
+                  <span className="text-xl">⏱️</span>
+                </div>
+              </div>
+              <p className="text-clinical-error text-xs font-semibold mt-4 flex items-center gap-1">
+                +1.2h <span className="text-slate-400 font-normal">vrs. meta</span>
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card variant="premium" className="overflow-hidden group">
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Precisión IA</p>
+                  <p className="text-4xl font-outfit font-bold text-slate-900 leading-none">{metrics.iaAccuracy}%</p>
+                </div>
+                <div className="p-3 bg-purple-50 text-ami-purple rounded-xl group-hover:bg-ami-purple group-hover:text-white transition-colors duration-300">
+                  <span className="text-xl">🤖</span>
+                </div>
+              </div>
+              <p className="text-clinical-success text-xs font-semibold mt-4 flex items-center gap-1">
+                ↑ +0.4% <span className="text-slate-400 font-normal">vrs. semana pasada</span>
+              </p>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Footer */}
-        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800">
-          <p className="text-sm">
-            <strong>Nota:</strong> Este dashboard se actualiza en tiempo real.
-            Los datos provienen de la base de datos PostgreSQL de Railway.
-          </p>
+        {/* Visual Charts & State Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+          {/* Operations Funnel */}
+          <Card variant="premium" className="lg:col-span-2 overflow-hidden border-none glass-card">
+            <CardHeader className="bg-slate-50/50">
+              <CardTitle>Flujo Operacional del Paciente</CardTitle>
+              <p className="text-xs text-slate-500">Distribución de expedientes por etapa del proceso digital.</p>
+            </CardHeader>
+            <CardContent className="p-8">
+              <div className="space-y-6">
+                {expedientsByStatusArray.map((item) => {
+                  const percentage = totalExpedients > 0 ? Math.round((item.count / totalExpedients) * 100) : 0;
+                  return (
+                    <div key={item.status} className="relative group">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-semibold text-slate-700">{item.status}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-bold text-slate-900">{item.count}</span>
+                          <span className="text-xs text-slate-400 font-medium">({percentage}%)</span>
+                        </div>
+                      </div>
+                      <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                        <div
+                          className={`${item.color} h-full rounded-full transition-all duration-1000 ease-out shadow-sm`}
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-10 pt-6 border-t border-slate-100 flex justify-between items-center text-slate-500 text-sm">
+                <span className="font-medium">Total en flujo activo: <span className="text-slate-900 font-bold ml-1">{totalExpedients}</span></span>
+                <span className="text-xs">Ultima actualización: 2 min ago</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Productivity / Performance Card */}
+          <Card variant="premium" className="bg-slate-900 text-white border-none shadow-2xl">
+            <CardHeader className="border-slate-800">
+              <CardTitle className="text-white">Rendimiento por Sede</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="space-y-8 mt-4">
+                {metrics.productivityByClinic.map((clinic, idx) => {
+                  const maxCount = Math.max(...metrics.productivityByClinic.map((c) => c.count));
+                  const percentage = (clinic.count / maxCount) * 100;
+                  return (
+                    <div key={idx} className="space-y-3">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                          <div className={`w-2 h-2 rounded-full ${idx === 0 ? 'bg-medical-400' : 'bg-slate-500'}`}></div>
+                          <span className="text-sm font-medium text-slate-300">{clinic.clinicName}</span>
+                        </div>
+                        <span className="text-sm font-bold">{clinic.count} <span className="text-slate-500 font-normal">certs</span></span>
+                      </div>
+                      <div className="w-full bg-slate-800 rounded-full h-1.5">
+                        <div
+                          className={`bg-gradient-to-r from-medical-500 to-medical-400 h-full rounded-full transition-all duration-700`}
+                          style={{ width: `${percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-12 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+                <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                  💡 <span className="text-slate-200">Tip Operativo:</span> La sede "Centro" está operando al 95% de su capacidad. Considere derivar a "Norte".
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
+
+        {/* Dashboard Feed / Recent Activity */}
+        <div className="grid grid-cols-1 gap-8">
+          <Card variant="premium" className="glass-card overflow-hidden">
+            <CardHeader className="bg-slate-50/50 flex flex-row items-center justify-between py-4">
+              <div>
+                <CardTitle>Actividad del Sistema en Tiempo Real</CardTitle>
+                <p className="text-xs text-slate-500">Log detallado de acciones médicas, administrativas e IA.</p>
+              </div>
+              <Button variant="outline" size="sm" className="h-8 text-xs">Filtros Avanzados</Button>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="divide-y divide-slate-100">
+                {metrics.recentActivity.map((activity) => (
+                  <div key={activity.id} className="p-5 flex items-center gap-4 hover:bg-slate-50 transition-colors group">
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border 
+                      ${activity.status === 'success' ? 'bg-clinical-success/10 text-clinical-success border-clinical-success/10' :
+                        activity.status === 'error' ? 'bg-clinical-error/10 text-clinical-error border-clinical-error/10' :
+                          'bg-clinical-info/10 text-clinical-info border-clinical-info/10'}`}>
+                      {activity.status === 'error' ? '🚨' : activity.action.includes('Dictamen') ? '🖋️' : '📑'}
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <p className="text-sm font-bold text-slate-900 truncate group-hover:text-medical-600 transition-colors">
+                          {activity.action}
+                        </p>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter">{activity.timestamp}</span>
+                      </div>
+                      <p className="text-xs text-slate-600 flex items-center gap-1.5">
+                        <span className="font-bold text-slate-700">{activity.user}</span>
+                        <span className="text-slate-300">•</span>
+                        <span>Paciente: {activity.patient}</span>
+                      </p>
+                      <div className="mt-2 flex items-center gap-4">
+                        <span className="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+                          🏢 {activity.clinic}
+                        </span>
+                        <span className="text-[10px] font-bold text-medical-600 bg-medical-50 px-2 py-0.5 rounded-full">
+                          {activity.folio}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button className="opacity-0 group-hover:opacity-100 transition-opacity p-2 text-slate-400 hover:text-medical-500">
+                      <span className="text-xl">→</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+            <div className="p-4 bg-slate-50 text-center border-t border-slate-100">
+              <Button variant="link" className="text-medical-600 font-bold text-xs uppercase tracking-widest">
+                Ver historial de auditoría completo
+              </Button>
+            </div>
+          </Card>
+        </div>
+
       </div>
     </div>
   );

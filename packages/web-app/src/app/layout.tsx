@@ -1,7 +1,18 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { Inter, Outfit } from 'next/font/google';
 import RootLayoutClient from './layout-client';
 import './globals.css';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+});
 
 export const metadata: Metadata = {
   title: 'AMI-SYSTEM - Residente Digital con IA',
@@ -16,12 +27,12 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${inter.variable} ${outfit.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="bg-gray-50">
+      <body className="bg-slate-50 font-inter">
         <RootLayoutClient>{children}</RootLayoutClient>
       </body>
     </html>

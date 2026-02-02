@@ -69,63 +69,78 @@ export const ExtractionResults: React.FC<ExtractionResultsProps> = ({
     }
 
     return (
-      <div className="mb-6">
-        <h3 className="text-lg font-semibold mb-3 text-gray-800">{title}</h3>
-        <div className="overflow-x-auto border rounded-lg">
+      <div className="mb-8 last:mb-0">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="w-1 h-4 bg-medical-500 rounded-full"></div>
+          <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">{title}</h3>
+        </div>
+
+        <div className="overflow-hidden border border-slate-100 rounded-xl shadow-sm">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b">
+            <thead className="bg-slate-50/50 border-b border-slate-100">
               <tr>
-                <th className="px-4 py-2 text-left font-semibold">Campo</th>
-                <th className="px-4 py-2 text-left font-semibold">Valor</th>
+                <th className="px-5 py-3 text-left text-[10px] font-bold text-slate-400 uppercase tracking-widest">Parámetro</th>
+                <th className="px-5 py-3 text-left text-[10px] font-bold text-slate-400 uppercase tracking-widest">Valor Reportado</th>
                 {isEditable && (
-                  <th className="px-4 py-2 text-left font-semibold">Acción</th>
+                  <th className="px-5 py-3 text-right text-[10px] font-bold text-slate-400 uppercase tracking-widest">Acción</th>
                 )}
               </tr>
             </thead>
-            <tbody>
-              {Object.entries(data).map(([field, value], idx) => (
+            <tbody className="divide-y divide-slate-50">
+              {Object.entries(data).map(([field, value]) => (
                 <tr
                   key={field}
-                  className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                  className="hover:bg-slate-50/50 transition-colors group"
                 >
-                  <td className="px-4 py-2 font-medium text-gray-700">
+                  <td className="px-5 py-3.5 font-medium text-slate-700">
                     {humanizeFieldName(field)}
                   </td>
                   <td
-                    className="px-4 py-2 cursor-pointer hover:bg-blue-50 transition-colors"
+                    className={`px-5 py-3.5 transition-all ${isEditable ? 'cursor-pointer' : ''}`}
                     onClick={() => handleCellClick(field, value, dataType)}
                   >
                     {editingCell?.field === field &&
-                    editingCell?.dataType === dataType ? (
+                      editingCell?.dataType === dataType ? (
                       <input
                         type="text"
                         value={editValue}
                         onChange={(e) => setEditValue(e.target.value)}
-                        className="border border-blue-500 px-2 py-1 rounded w-full"
+                        className="border-2 border-medical-500 bg-white px-3 py-1.5 rounded-lg w-full shadow-inner focus:outline-none"
                         autoFocus
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleSaveEdit(field, dataType);
+                          if (e.key === 'Escape') setEditingCell(null);
+                        }}
                       />
                     ) : (
-                      <span>{formatValue(value)}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-slate-900">{formatValue(value)}</span>
+                        {isEditable && (
+                          <span className="opacity-0 group-hover:opacity-100 text-[10px] text-medical-500 font-bold uppercase tracking-tighter">Click para editar</span>
+                        )}
+                      </div>
                     )}
                   </td>
                   {isEditable && (
-                    <td className="px-4 py-2">
+                    <td className="px-5 py-3.5 text-right">
                       {editingCell?.field === field &&
-                      editingCell?.dataType === dataType ? (
-                        <div className="flex gap-2">
+                        editingCell?.dataType === dataType ? (
+                        <div className="flex justify-end gap-2">
                           <button
                             onClick={() =>
                               handleSaveEdit(field, dataType)
                             }
-                            className="px-2 py-1 bg-green-500 text-white text-xs rounded hover:bg-green-600"
+                            className="p-1.5 bg-clinical-success text-white rounded-lg hover:bg-clinical-success/90 transition-colors shadow-sm"
+                            title="Confirmar"
                           >
-                            Guardar
+                            <span className="text-xs font-bold px-1">✓</span>
                           </button>
                           <button
                             onClick={() => setEditingCell(null)}
-                            className="px-2 py-1 bg-gray-300 text-gray-700 text-xs rounded hover:bg-gray-400"
+                            className="p-1.5 bg-slate-200 text-slate-600 rounded-lg hover:bg-slate-300 transition-colors shadow-sm"
+                            title="Cancelar"
                           >
-                            Cancelar
+                            <span className="text-xs font-bold px-1">✕</span>
                           </button>
                         </div>
                       ) : (
@@ -133,9 +148,9 @@ export const ExtractionResults: React.FC<ExtractionResultsProps> = ({
                           onClick={() =>
                             handleCellClick(field, value, dataType)
                           }
-                          className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded hover:bg-blue-200"
+                          className="p-2 text-slate-300 hover:text-medical-500 hover:bg-medical-50 rounded-lg transition-all"
                         >
-                          Editar
+                          <span className="text-xs">✏️</span>
                         </button>
                       )}
                     </td>
@@ -150,44 +165,51 @@ export const ExtractionResults: React.FC<ExtractionResultsProps> = ({
   };
 
   return (
-    <div className="space-y-6">
-      <div className="bg-blue-50 border border-blue-200 rounded p-3 text-sm text-blue-900">
-        <p className="font-semibold mb-1">💡 Datos Extraídos</p>
-        <p className="text-xs">
-          {isEditable
-            ? "Puedes editar los valores si la extracción IA necesita correcciones"
-            : "Revisa los datos extraídos del PDF"}
-        </p>
+    <div className="space-y-10">
+      <div className="bg-gradient-to-br from-medical-500 to-medical-600 rounded-2xl p-5 text-white shadow-premium relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8 blur-xl"></div>
+        <div className="relative z-10 flex items-start gap-4">
+          <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-xl backdrop-blur-sm">💡</div>
+          <div>
+            <p className="font-bold text-sm uppercase tracking-widest mb-1">Verificación RD-AMI</p>
+            <p className="text-xs text-white/80 leading-relaxed font-medium">
+              {isEditable
+                ? "Los valores resaltados fueron extraídos automáticamente. Por favor, verifica la correspondencia con el PDF original antes de firmar."
+                : "Visualizando matriz de datos clínicos consolidada."}
+            </p>
+          </div>
+        </div>
       </div>
 
-      {renderTable(
-        "📋 Laboratorio",
-        extractedData.laboratorio,
-        "laboratorio"
-      )}
-      {renderTable(
-        "🫁 Radiografía",
-        extractedData.radiografia,
-        "radiografia"
-      )}
-      {renderTable("❤️ ECG", extractedData.ecg, "ecg")}
-      {renderTable(
-        "🫁 Espirometría",
-        extractedData.spirometry,
-        "spirometry"
-      )}
-      {renderTable(
-        "👂 Audiometría",
-        extractedData.audiometry,
-        "audiometry"
-      )}
+      <div className="space-y-4">
+        {renderTable(
+          "Laboratorio Clínico",
+          extractedData.laboratorio,
+          "laboratorio"
+        )}
+        {renderTable(
+          "Radiografía / Imagenología",
+          extractedData.radiografia,
+          "radiografia"
+        )}
+        {renderTable("Electrocardiograma (ECG)", extractedData.ecg, "ecg")}
+        {renderTable(
+          "Espirometría / Función Pulmonar",
+          extractedData.spirometry,
+          "spirometry"
+        )}
+        {renderTable(
+          "Audiometría / Salud Auditiva",
+          extractedData.audiometry,
+          "audiometry"
+        )}
+      </div>
 
       {Object.keys(extractedData).length === 0 && (
-        <div className="text-center py-12 text-gray-500">
-          <p className="text-lg">Sin datos extraídos</p>
-          <p className="text-sm mt-2">
-            Los datos aparecerán aquí una vez se procese el PDF
-          </p>
+        <div className="text-center py-20 bg-slate-50 rounded-3xl border-2 border-dashed border-slate-200">
+          <div className="text-4xl mb-4 opacity-20">📂</div>
+          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Sin datos extraídos para este estudio</p>
+          <p className="text-slate-300 text-[10px] mt-1 max-w-[200px] mx-auto">Sube un archivo compatible para iniciar la extracción RD-AMI.</p>
         </div>
       )}
     </div>

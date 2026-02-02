@@ -79,12 +79,13 @@ const NEXT_STATUSES: Record<string, string[]> = {
   ARCHIVED: [],
 };
 
+import { ExpedientReader } from "./ExpedientReader";
+
 export function ExpedientDetail({
   expedient,
   onStatusChange,
   isLoading = false,
 }: ExpedientDetailProps) {
-  const [expandedSection, setExpandedSection] = useState<string>("patient");
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
   const formatDate = (dateString: string) => {
@@ -92,14 +93,11 @@ export function ExpedientDetail({
       year: "numeric",
       month: "long",
       day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
     });
   };
 
   const handleStatusChange = async (newStatus: string) => {
     if (!onStatusChange || isUpdatingStatus) return;
-
     try {
       setIsUpdatingStatus(true);
       await onStatusChange(newStatus);
@@ -110,179 +108,64 @@ export function ExpedientDetail({
     }
   };
 
-  const ExpandableSection = ({
-    id,
-    title,
-    children,
-  }: {
-    id: string;
-    title: string;
-    children: React.ReactNode;
-  }) => {
-    const isExpanded = expandedSection === id;
-    return (
-      <div className="border rounded-lg overflow-hidden">
-        <button
-          onClick={() => setExpandedSection(isExpanded ? "" : id)}
-          className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 font-medium text-gray-900"
-        >
-          {title}
-          <span className={`transform transition-transform ${isExpanded ? "rotate-180" : ""}`}>
-            ▼
-          </span>
-        </button>
-        {isExpanded && <div className="px-4 py-4 bg-white space-y-3">{children}</div>}
-      </div>
-    );
-  };
+  // Si el expediente está en fase de recolección de estudios, mostramos el Reader Premium
+  const showReader = ["IN_PROGRESS", "STUDIES_PENDING"].includes(expedient.status);
 
   return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div className="rounded-lg border border-gray-300 bg-white p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{expedient.folio}</h1>
-            <p className="mt-1 text-sm text-gray-500">
-              Created {formatDate(expedient.createdAt)}
-            </p>
-          </div>
-          <span
-            className={`inline-flex rounded-full px-4 py-2 text-sm font-semibold ${
-              STATUS_COLORS[expedient.status] || "bg-gray-100 text-gray-800"
-            }`}
-          >
-            {expedient.status}
-          </span>
+    <div className="space-y-6 max-w-6xl mx-auto py-8 px-4 font-inter">
+      {/* Barra de Navegación de Estado / Acciones */}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-4">
+          <Badge variant="info" className="bg-medical-50 text-medical-600 border-none px-4 py-1.5 rounded-lg font-bold">
+            ESTADO: {expedient.status}
+          </Badge>
         </div>
 
-        {/* Status Transition */}
         {NEXT_STATUSES[expedient.status].length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="flex gap-2">
             {NEXT_STATUSES[expedient.status].map((nextStatus) => (
-              <button
+              <Button
                 key={nextStatus}
                 onClick={() => handleStatusChange(nextStatus)}
-                disabled={isUpdatingStatus || isLoading}
-                className="inline-flex justify-center rounded-md border border-transparent bg-purple-600 py-2 px-4 text-sm font-medium text-white hover:bg-purple-700 disabled:opacity-50"
+                isLoading={isUpdatingStatus || isLoading}
+                className="btn-primary shadow-premium"
               >
-                Move to {nextStatus}
-              </button>
+                Mover a {nextStatus}
+              </Button>
             ))}
           </div>
         )}
       </div>
 
-      {/* Sections */}
-      <ExpandableSection id="patient" title="Patient Information">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-xs font-semibold text-gray-600">Name</p>
-            <p className="mt-1 text-sm text-gray-900">
-              {expedient.patient.firstName} {expedient.patient.lastName}
-            </p>
-          </div>
-          {expedient.patient.documentId && (
-            <div>
-              <p className="text-xs font-semibold text-gray-600">Document ID</p>
-              <p className="mt-1 text-sm text-gray-900">{expedient.patient.documentId}</p>
-            </div>
-          )}
-          {expedient.patient.dateOfBirth && (
-            <div>
-              <p className="text-xs font-semibold text-gray-600">Date of Birth</p>
-              <p className="mt-1 text-sm text-gray-900">
-                {formatDate(expedient.patient.dateOfBirth)}
-              </p>
-            </div>
-          )}
-          <div>
-            <p className="text-xs font-semibold text-gray-600">Clinic</p>
-            <p className="mt-1 text-sm text-gray-900">{expedient.clinic.name}</p>
+      {showReader ? (
+        <ExpedientReader
+          patientName={`${expedient.patient.firstName} ${expedient.patient.lastName}`}
+          companyName={expedient.clinic.name}
+          folio={expedient.folio}
+          expedientId={expedient.id}
+        />
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-6">
+            <Card variant="premium">
+              <CardHeader>
+                <CardTitle>Datos del Paciente</CardTitle>
+              </CardHeader>
+              <CardContent className="grid grid-cols-2 gap-6">
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Nombre Completo</p>
+                  <p className="text-slate-800 font-semibold">{expedient.patient.firstName} {expedient.patient.lastName}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Folio del Sistema</p>
+                  <p className="text-slate-800 font-semibold font-mono">{expedient.folio}</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Aquí iría el historial de exámenes y estudios previos si no estamos en modo Reader */}
           </div>
         </div>
-      </ExpandableSection>
-
-      {/* Medical Exams */}
-      <ExpandableSection id="exams" title={`Medical Exams (${expedient.medicalExams?.length || 0})`}>
-        {expedient.medicalExams && expedient.medicalExams.length > 0 ? (
-          <div className="space-y-4">
-            {expedient.medicalExams.map((exam, idx) => (
-              <div key={exam.id} className="border-t pt-4 first:border-t-0 first:pt-0">
-                <p className="text-sm font-semibold text-gray-900">Exam #{idx + 1}</p>
-                <p className="text-xs text-gray-500 mt-1">{formatDate(exam.createdAt)}</p>
-                <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
-                  {exam.bloodPressure && (
-                    <div>
-                      <span className="text-xs font-semibold text-gray-600">Blood Pressure:</span>
-                      <span className="ml-1">{exam.bloodPressure} mmHg</span>
-                    </div>
-                  )}
-                  {exam.heartRate && (
-                    <div>
-                      <span className="text-xs font-semibold text-gray-600">Heart Rate:</span>
-                      <span className="ml-1">{exam.heartRate} bpm</span>
-                    </div>
-                  )}
-                  {exam.temperature && (
-                    <div>
-                      <span className="text-xs font-semibold text-gray-600">Temperature:</span>
-                      <span className="ml-1">{exam.temperature}°C</span>
-                    </div>
-                  )}
-                  {exam.weight && (
-                    <div>
-                      <span className="text-xs font-semibold text-gray-600">Weight:</span>
-                      <span className="ml-1">{exam.weight} kg</span>
-                    </div>
-                  )}
-                </div>
-                {exam.physicalExamNotes && (
-                  <div className="mt-3">
-                    <p className="text-xs font-semibold text-gray-600">Physical Exam Notes</p>
-                    <p className="mt-1 text-sm text-gray-700">{exam.physicalExamNotes}</p>
-                  </div>
-                )}
-                {exam.notes && (
-                  <div className="mt-3">
-                    <p className="text-xs font-semibold text-gray-600">Notes</p>
-                    <p className="mt-1 text-sm text-gray-700">{exam.notes}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-gray-500">No medical exams recorded yet.</p>
-        )}
-      </ExpandableSection>
-
-      {/* Studies */}
-      <ExpandableSection id="studies" title={`Medical Studies (${expedient.studies?.length || 0})`}>
-        {expedient.studies && expedient.studies.length > 0 ? (
-          <div className="space-y-2">
-            {expedient.studies.map((study) => (
-              <div key={study.id} className="flex items-center justify-between rounded bg-gray-50 p-3">
-                <div>
-                  <p className="text-sm font-semibold text-gray-900">{study.fileName}</p>
-                  <p className="text-xs text-gray-500">
-                    {study.studyType} • {(study.fileSize / 1024 / 1024).toFixed(2)} MB •{" "}
-                    {formatDate(study.createdAt)}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-gray-500">No studies attached yet.</p>
-        )}
-      </ExpandableSection>
-
-      {/* Notes */}
-      {expedient.notes && (
-        <ExpandableSection id="notes" title="Additional Notes">
-          <p className="text-sm text-gray-700">{expedient.notes}</p>
-        </ExpandableSection>
       )}
     </div>
   );

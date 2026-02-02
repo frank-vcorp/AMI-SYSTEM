@@ -1,5 +1,6 @@
 
-> @ami/core-database@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-database
+
+> @ami/core-database@0.1.0 build /root/antigravity-projects/Ami-app/AMI-SYSTEM/packages/core-database
 > echo 'No build needed for database stubs'
 
 No build needed for database stubs

@@ -1,5 +1,6 @@
 
-> @ami/core-ui@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-ui
+
+> @ami/core-ui@0.1.0 build /root/antigravity-projects/Ami-app/AMI-SYSTEM/packages/core-ui
 > echo 'No build needed for ui stubs'
 
 No build needed for ui stubs

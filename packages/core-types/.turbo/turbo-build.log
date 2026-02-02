@@ -1,5 +1,6 @@
 
-> @ami/core-types@0.1.0 build /workspaces/AMI-SYSTEM/packages/core-types
+
+> @ami/core-types@0.1.0 build /root/antigravity-projects/Ami-app/AMI-SYSTEM/packages/core-types
 > echo 'No build needed for types package'
 
 No build needed for types package

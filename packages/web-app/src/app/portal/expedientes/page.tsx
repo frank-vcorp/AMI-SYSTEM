@@ -9,7 +9,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from '@ami/core-ui';
+// Button removed as it was unused
 
 export default function PortalExpedientes() {
     const [search, setSearch] = useState('');
@@ -96,9 +96,9 @@ export default function PortalExpedientes() {
                                     </td>
                                     <td className="px-10 py-8">
                                         <span className={`px-4 py-2 rounded-xl text-xs font-black ${exp.result === 'APTO' ? 'bg-green-500 text-white shadow-lg shadow-green-100' :
-                                                exp.result === 'APTO C/R' ? 'bg-amber-500 text-white shadow-lg shadow-amber-100' :
-                                                    exp.result === 'NO APTO' ? 'bg-red-500 text-white shadow-lg shadow-red-100' :
-                                                        'bg-slate-100 text-slate-400'
+                                            exp.result === 'APTO C/R' ? 'bg-amber-500 text-white shadow-lg shadow-amber-100' :
+                                                exp.result === 'NO APTO' ? 'bg-red-500 text-white shadow-lg shadow-red-100' :
+                                                    'bg-slate-100 text-slate-400'
                                             }`}>
                                             {exp.result}
                                         </span>

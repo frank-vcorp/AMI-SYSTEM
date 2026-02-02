@@ -398,8 +398,10 @@ model ValidationTask {
   id                   String           @id @default(cuid())
   tenantId             String           @db.Uuid
   expedientId          String           @unique
-  medicalExamId        String
-  assignedToUserId     String           @db.Uuid
+  patientId            String
+  clinicId             String
+  medicalExamId        String?
+  assignedToUserId     String?          @db.Uuid
   status               ValidationStatus @default(PENDING)
   verdict              VerdictType?     @default(APTO)
   prediagnosis         String?
@@ -409,6 +411,9 @@ model ValidationTask {
   signedBy             String?          @db.Uuid
   startedAt            DateTime?
   completedAt          DateTime?
+  medicalOpinion       String?
+  restrictions         String[]
+  recommendations      String[]
   validationNotes      String?
   extractedDataSummary Json?
   createdAt            DateTime         @default(now())
@@ -418,7 +423,7 @@ model ValidationTask {
   extractedData        ExtractedData[]  @relation("validationExtractedData")
   pdfGeneration        PdfGeneration[]  @relation("validationPdfGeneration")
   expedient            Expedient        @relation(fields: [expedientId], references: [id], onDelete: Cascade)
-  medicalExam          MedicalExam      @relation(fields: [medicalExamId], references: [id], onDelete: Cascade)
+  medicalExam          MedicalExam?     @relation(fields: [medicalExamId], references: [id], onDelete: Cascade)
 
   @@index([tenantId])
   @@index([expedientId])

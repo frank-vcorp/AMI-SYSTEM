@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { expedientId, tenantId: bodyTenantId } = body;
-    
+
     // Get tenantId from body or use default for MVP demo
     const tenantId = bodyTenantId || DEFAULT_TENANT_ID;
 
@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
       include: {
         patient: true,
         studies: true,
+        medicalExams: { take: 1, orderBy: { createdAt: "desc" } },
       },
     });
 
@@ -101,16 +102,9 @@ export async function POST(request: NextRequest) {
         expedientId,
         patientId: expedient.patientId,
         clinicId: expedient.clinicId,
+        medicalExamId: expedient.medicalExams[0]?.id || null,
         status: "PENDING",
-        studies: expedient.studies.map((s) => ({
-          id: s.id,
-          fileKey: s.fileKey,
-          fileName: s.fileName,
-          studyType: s.studyType,
-          uploadedAt: s.uploadedAt.toISOString(),
-          extractionStatus: "PENDING",
-        })),
-        extractedData: {},
+        extractedDataSummary: {},
         medicalOpinion: "",
         verdict: "APTO",
       },

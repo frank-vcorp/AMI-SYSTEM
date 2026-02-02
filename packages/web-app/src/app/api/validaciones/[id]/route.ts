@@ -9,7 +9,7 @@ import { getTenantIdFromRequest } from "@/lib/auth";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const tenantId = await getTenantIdFromRequest(request);
@@ -20,9 +20,11 @@ export async function GET(
       );
     }
 
+    const { id } = await params;
+
     const validationTask = await prisma.validationTask.findFirst({
       where: {
-        id: params.id,
+        id,
         tenantId,
       },
       include: {
@@ -61,10 +63,10 @@ export async function GET(
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const tenantId = getTenantIdFromRequest(request);
+    const tenantId = await getTenantIdFromRequest(request);
     if (!tenantId) {
       return NextResponse.json(
         { error: "Tenant ID not found" },
@@ -72,13 +74,14 @@ export async function PATCH(
       );
     }
 
+    const { id } = await params;
     const body = await request.json();
     const { extractedData, medicalOpinion, verdict } = body;
 
     const validationTask = await prisma.validationTask.update({
-      where: { id: params.id },
+      where: { id },
       data: {
-        extractedData: extractedData || undefined,
+        extractedDataSummary: extractedData || undefined,
         medicalOpinion: medicalOpinion || undefined,
         verdict: verdict || undefined,
         updatedAt: new Date(),

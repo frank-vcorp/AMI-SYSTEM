@@ -10,9 +10,10 @@ import { getUserIdFromRequest } from "@/lib/auth";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const tenantId = await getTenantIdFromRequest(request);
     const userId = await getUserIdFromRequest(request);
 
@@ -43,7 +44,7 @@ export async function POST(
     // Get current validation task
     const currentTask = await prisma.validationTask.findFirst({
       where: {
-        id: params.id,
+        id,
         tenantId,
       },
     });
@@ -57,7 +58,7 @@ export async function POST(
 
     // Update validation task with verdict
     const updatedTask = await prisma.validationTask.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         medicalOpinion,
         verdict,

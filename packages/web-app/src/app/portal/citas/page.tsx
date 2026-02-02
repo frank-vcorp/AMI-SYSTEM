@@ -9,7 +9,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button, Card } from '@ami/core-ui';
+import { Button } from '@ami/core-ui';
 
 export default function PortalCitas() {
     const [activeView, setActiveView] = useState<'lista' | 'agenda'>('agenda');

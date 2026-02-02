@@ -83,13 +83,13 @@ export default function AdminLayout({
             </Link>
 
             {/* 3. Examen Médico */}
-            <Link href="/admin/expedientes" className={getTabClass('/admin/examen')}>
+            <Link href="/admin/expedientes?status=CHECKED_IN" className={getTabClass('/admin/examen')}>
               <i className="fas fa-stethoscope"></i>
               <span>Examen Médico</span>
             </Link>
 
             {/* 4. Estudios (Carga) */}
-            <Link href="/admin/expedientes" className={getTabClass('/admin/expedientes')}>
+            <Link href="/admin/expedientes?status=AWAITING_STUDIES" className={getTabClass('/admin/expedientes')}>
               <i className="fas fa-upload"></i>
               <span>Estudios</span>
             </Link>

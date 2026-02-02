@@ -5,13 +5,25 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ExpedientTable } from "@ami/mod-expedientes";
 
 export default function ExpedientesPage() {
-  const [statusFilter, setStatusFilter] = useState<string>("");
+  const searchParams = useSearchParams();
+  const initialStatus = searchParams.get('status') || "";
+
+  const [statusFilter, setStatusFilter] = useState<string>(initialStatus);
   const [clinicFilter, setClinicFilter] = useState<string>("");
+
+  // Sync state if URL param changes
+  useEffect(() => {
+    const status = searchParams.get('status');
+    if (status) {
+      setStatusFilter(status);
+    }
+  }, [searchParams]);
 
   return (
     <div className="space-y-6">

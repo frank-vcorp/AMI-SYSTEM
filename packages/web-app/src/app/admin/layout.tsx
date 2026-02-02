@@ -106,29 +106,17 @@ export default function AdminLayout({
               <span>Reportes</span>
             </Link>
 
-            {/* 7. Papeletas (Mock) */}
-            <button className="flex items-center space-x-2 py-4 px-1 border-b-2 border-transparent text-gray-400 cursor-not-allowed font-medium text-sm whitespace-nowrap">
-              <i className="fas fa-list"></i>
-              <span>Papeletas</span>
-            </button>
-
-            {/* 8. Empresas */}
+            {/* 7. Empresas */}
             <Link href="/admin/empresas" className={getTabClass('/admin/empresas')}>
               <i className="fas fa-building"></i>
               <span>Empresas</span>
             </Link>
 
-            {/* 9. Expedientes (Principal) */}
+            {/* 8. Expedientes (Principal) */}
             <Link href="/admin/expedientes" className={getTabClass('/admin/expedientes-master')}>
               <i className="fas fa-folder-open"></i>
               <span>Expedientes</span>
             </Link>
-
-            {/* 10. Admin */}
-            <button className="flex items-center space-x-2 py-4 px-1 border-b-2 border-transparent text-gray-400 cursor-not-allowed font-medium text-sm whitespace-nowrap">
-              <i className="fas fa-cog"></i>
-              <span>Config</span>
-            </button>
           </div>
         </div>
       </nav>

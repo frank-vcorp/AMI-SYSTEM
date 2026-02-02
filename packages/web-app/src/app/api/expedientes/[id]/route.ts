@@ -76,7 +76,12 @@ export async function PUT(
 
     // Validate status transition if provided
     if (status) {
-      const validStatuses = ["PENDING", "IN_PROGRESS", "STUDIES_PENDING", "VALIDATED", "COMPLETED", "ARCHIVED"];
+      const validStatuses = [
+        "SCHEDULED", "CHECKED_IN", "IN_PHYSICAL_EXAM", "EXAM_COMPLETED",
+        "AWAITING_STUDIES", "STUDIES_UPLOADED", "DATA_EXTRACTED",
+        "READY_FOR_REVIEW", "IN_VALIDATION", "VALIDATED", "DELIVERED",
+        "ARCHIVED", "DRAFT", "CANCELLED"
+      ];
       if (!validStatuses.includes(status)) {
         return NextResponse.json(
           { error: `status must be one of: ${validStatuses.join(", ")}` },

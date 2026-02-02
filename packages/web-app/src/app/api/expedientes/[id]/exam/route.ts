@@ -125,11 +125,11 @@ export async function POST(
         },
       });
 
-      // Update expedient status to IN_PROGRESS if it's PENDING
-      if (expedient.status === "PENDING") {
+      // Update expedient status to IN_PHYSICAL_EXAM if it's CHECKED_IN
+      if (expedient.status === "CHECKED_IN" || expedient.status === "DRAFT") {
         await tx.expedient.update({
           where: { id },
-          data: { status: "IN_PROGRESS" },
+          data: { status: "IN_PHYSICAL_EXAM" },
         });
       }
 

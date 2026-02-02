@@ -29,7 +29,11 @@ export async function getDashboardMetrics(tenantId: string): Promise<DashboardMe
         where: {
             tenantId,
             status: {
-                in: ['PENDING', 'IN_PROGRESS', 'STUDIES_PENDING', 'VALIDATED']
+                in: [
+                    'CHECKED_IN', 'IN_PHYSICAL_EXAM', 'EXAM_COMPLETED',
+                    'AWAITING_STUDIES', 'STUDIES_UPLOADED', 'DATA_EXTRACTED',
+                    'READY_FOR_REVIEW', 'IN_VALIDATION'
+                ]
             }
         }
     });
@@ -95,7 +99,9 @@ export async function getDashboardMetrics(tenantId: string): Promise<DashboardMe
             _count: {
                 select: {
                     expedients: {
-                        where: { status: 'COMPLETED' }
+                        where: {
+                            status: { in: ['VALIDATED', 'DELIVERED', 'ARCHIVED'] }
+                        }
                     }
                 }
             }

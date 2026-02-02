@@ -155,7 +155,7 @@ export async function PUT(
             clinicId: existing.clinicId,
             appointmentId: id,
             folio,
-            status: 'IN_PROGRESS',
+            status: 'CHECKED_IN', // Expediente creado al llegar el paciente
           },
         });
       }

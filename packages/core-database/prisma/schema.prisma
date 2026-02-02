@@ -376,7 +376,7 @@ model StudyUpload {
   mimeType      String          @db.VarChar(50)
   fileSizeBytes Int
   uploadedAt    DateTime        @default(now())
-  status        UploadStatus    @default(PENDING)
+  status        StudyStatus     @default(UPLOADED)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   createdBy     String?         @db.Uuid
@@ -572,15 +572,31 @@ enum PatientStatus {
 }
 
 enum ExpedientStatus {
-  PENDING
-  IN_PROGRESS
-  STUDIES_PENDING
-  VALIDATED
-  COMPLETED
-  ARCHIVED
-  DRAFT
-  SIGNED
-  DELIVERED
+  // Fase 1: Pre-atención
+  SCHEDULED           // Cita agendada, QR generado (opcional, puede no existir expediente aún)
+  
+  // Fase 2: Atención presencial
+  CHECKED_IN          // Paciente llegó, escaneó QR, expediente creado
+  IN_PHYSICAL_EXAM    // Médico realizando examen físico
+  EXAM_COMPLETED      // Examen físico terminado, paciente se fue
+  
+  // Fase 3: Espera asíncrona (puede durar días)
+  AWAITING_STUDIES    // Esperando resultados de laboratorio/estudios
+  STUDIES_UPLOADED    // PDFs subidos, pendiente de procesamiento IA
+  DATA_EXTRACTED      // IA procesó los datos, listo para revisión
+  
+  // Fase 4: Validación médica
+  READY_FOR_REVIEW    // Todo completo, esperando asignación a validador
+  IN_VALIDATION       // Validador revisando expediente
+  
+  // Fase 5: Cierre y entrega
+  VALIDATED           // Dictamen emitido y firmado
+  DELIVERED           // Enviado a empresa/cliente
+  ARCHIVED            // Cerrado definitivamente
+  
+  // Estados especiales
+  DRAFT               // Borrador (legacy, mantener por compatibilidad)
+  CANCELLED           // Cancelado antes de completar
 }
 
 enum StudyType {
@@ -594,11 +610,13 @@ enum StudyType {
   OTHER
 }
 
-enum UploadStatus {
-  PENDING
-  PROCESSING
-  COMPLETED
-  FAILED
+enum StudyStatus {
+  UPLOADED        // PDF subido, pendiente procesamiento
+  PROCESSING      // IA analizando documento
+  EXTRACTED       // Datos capturados exitosamente por IA
+  MANUAL_REVIEW   // IA no pudo extraer, requiere captura manual
+  VALIDATED       // Validador revisó y aprobó datos
+  FAILED          // Error en procesamiento
 }
 
 enum ValidationStatus {

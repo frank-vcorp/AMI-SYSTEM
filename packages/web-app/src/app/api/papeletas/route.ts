@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
         clinicId,
         patientId,
         folio,
-        status: 'PENDING',
+        status: 'DRAFT',
         medicalNotes: `Papeleta generada con ${studies?.length || 0} estudios`,
       },
     });

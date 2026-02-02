@@ -117,15 +117,15 @@ export async function POST(
           type: (STUDY_TYPE_MAP[studyType] || "OTHER") as any,
           fileSizeBytes: file.size,
           mimeType: file.type,
-          status: "COMPLETED", // Assuming immediate completion for demo
+          status: "UPLOADED", // Pendiente procesamiento por IA
         },
       });
 
-      // Update expedient status to IN_PROGRESS if it's PENDING
-      if (expedient.status === "PENDING") {
+      // Update expedient status to STUDIES_UPLOADED
+      if (expedient.status === "EXAM_COMPLETED" || expedient.status === "AWAITING_STUDIES") {
         await tx.expedient.update({
           where: { id },
-          data: { status: "IN_PROGRESS" },
+          data: { status: "STUDIES_UPLOADED" },
         });
       }
 

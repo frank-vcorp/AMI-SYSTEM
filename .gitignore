@@ -38,3 +38,5 @@ yarn-debug.log*
 dist/
 .turbo/
 context/RD/
+.vercel
+.env*.local

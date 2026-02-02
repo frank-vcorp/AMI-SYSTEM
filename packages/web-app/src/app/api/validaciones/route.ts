@@ -95,19 +95,67 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create validation task
-    const validationTask = await prisma.validationTask.create({
-      data: {
-        tenantId,
-        expedientId,
-        patientId: expedient.patientId,
-        clinicId: expedient.clinicId,
-        medicalExamId: expedient.medicalExams[0]?.id || null,
-        status: "PENDING",
-        extractedDataSummary: {},
-        medicalOpinion: "",
-        verdict: "APTO",
-      },
+    // === VALIDAR COMPLETITUD DEL EXPEDIENTE ===
+    // Solo crear tarea si el expediente está completo
+    const hasExam = expedient.medicalExams && expedient.medicalExams.length > 0;
+    const hasStudies = expedient.studies && expedient.studies.length > 0;
+    const allStudiesProcessed = expedient.studies?.every(
+      (s: any) => s.status === "EXTRACTED" || s.status === "VALIDATED"
+    );
+
+    if (!hasExam) {
+      return NextResponse.json(
+        { error: "Cannot create validation task: expedient has no medical exam" },
+        { status: 400 }
+      );
+    }
+
+    if (hasStudies && !allStudiesProcessed) {
+      return NextResponse.json(
+        {
+          error: "Cannot create validation task: some studies are still being processed",
+          pendingStudies: expedient.studies?.filter((s: any) =>
+            s.status !== "EXTRACTED" && s.status !== "VALIDATED"
+          )
+        },
+        { status: 400 }
+      );
+    }
+
+    // Verificar que no exista ya una tarea de validación
+    const existingTask = await prisma.validationTask.findFirst({
+      where: { expedientId, tenantId },
+    });
+
+    if (existingTask) {
+      return NextResponse.json(
+        { error: "Validation task already exists for this expedient", task: existingTask },
+        { status: 409 }
+      );
+    }
+
+    // Crear tarea de validación y actualizar estado del expediente
+    const validationTask = await prisma.$transaction(async (tx) => {
+      // Actualizar estado del expediente
+      await tx.expedient.update({
+        where: { id: expedientId },
+        data: { status: "READY_FOR_REVIEW" },
+      });
+
+      // Crear tarea
+      return tx.validationTask.create({
+        data: {
+          tenantId,
+          expedientId,
+          patientId: expedient.patientId,
+          clinicId: expedient.clinicId,
+          medicalExamId: expedient.medicalExams[0]?.id || null,
+          status: "PENDING",
+          extractedDataSummary: {},
+          medicalOpinion: "",
+          verdict: "APTO",
+        },
+      });
     });
 
     return NextResponse.json(validationTask, { status: 201 });

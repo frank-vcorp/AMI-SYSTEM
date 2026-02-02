@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { appointmentId, patientId, clinicId, notes, tenantId: bodyTenantId } = body;
-    
+
     // Usar tenantId del body o el default
     const tenantId = bodyTenantId || DEFAULT_TENANT_ID;
 
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-    
+
     if (!clinicId) {
       return NextResponse.json(
         { error: "clinicId es requerido" },
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
         clinicId,
         appointmentId: appointmentId || null,
         folio,
-        status: "PENDING",
+        status: "DRAFT", // Borrador hasta check-in
         medicalNotes: notes || "",
       },
       include: {
@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     // Usar tenantId del query o el default para MVP demo
     const tenantId = searchParams.get("tenantId") || DEFAULT_TENANT_ID;
-    
+
     const clinicId = searchParams.get("clinicId");
     const patientId = searchParams.get("patientId");
     const status = searchParams.get("status");

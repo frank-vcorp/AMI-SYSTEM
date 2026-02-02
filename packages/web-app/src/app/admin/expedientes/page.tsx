@@ -43,12 +43,32 @@ export default function ExpedientesPage() {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
             >
               <option value="">All Statuses</option>
-              <option value="PENDING">Pending</option>
-              <option value="IN_PROGRESS">In Progress</option>
-              <option value="STUDIES_PENDING">Studies Pending</option>
-              <option value="VALIDATED">Validated</option>
-              <option value="COMPLETED">Completed</option>
-              <option value="ARCHIVED">Archived</option>
+              <optgroup label="📋 Pre-atención">
+                <option value="SCHEDULED">Scheduled</option>
+                <option value="DRAFT">Draft</option>
+              </optgroup>
+              <optgroup label="🏥 Atención">
+                <option value="CHECKED_IN">Checked In</option>
+                <option value="IN_PHYSICAL_EXAM">In Physical Exam</option>
+                <option value="EXAM_COMPLETED">Exam Completed</option>
+              </optgroup>
+              <optgroup label="⏳ Procesamiento">
+                <option value="AWAITING_STUDIES">Awaiting Studies</option>
+                <option value="STUDIES_UPLOADED">Studies Uploaded</option>
+                <option value="DATA_EXTRACTED">Data Extracted</option>
+              </optgroup>
+              <optgroup label="✅ Validación">
+                <option value="READY_FOR_REVIEW">Ready for Review</option>
+                <option value="IN_VALIDATION">In Validation</option>
+              </optgroup>
+              <optgroup label="📦 Finalizado">
+                <option value="VALIDATED">Validated</option>
+                <option value="DELIVERED">Delivered</option>
+                <option value="ARCHIVED">Archived</option>
+              </optgroup>
+              <optgroup label="❌ Otros">
+                <option value="CANCELLED">Cancelled</option>
+              </optgroup>
             </select>
           </div>
           <div>

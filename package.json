@@ -16,6 +16,8 @@
     "build": "rm -rf node_modules/.prisma && npx prisma generate --schema=./prisma/schema.prisma && turbo run build --filter=@ami/web-app",
     "dev": "turbo run dev --filter=@ami/web-app",
     "prisma:generate": "npx prisma generate --schema=./prisma/schema.prisma",
+    "seed:demo": "tsx prisma/seeds/demo-data.ts",
+    "seed:clean": "npx prisma migrate reset --force --skip-seed",
     "dashboard:update": "node progressdashboard/parser.js",
     "dashboard:watch": "node progressdashboard/parser.js && echo 'Dashboard updated. Watch PROYECTO.md for changes.'"
   },
@@ -26,10 +28,16 @@
     "typescript": "^5.2.2"
   },
   "pnpm": {
-    "neverBuiltDependencies": ["canvas"],
+    "neverBuiltDependencies": [
+      "canvas"
+    ],
     "supportedArchitectures": {
-      "os": ["linux"],
-      "cpu": ["x64"]
+      "os": [
+        "linux"
+      ],
+      "cpu": [
+        "x64"
+      ]
     }
   }
 }

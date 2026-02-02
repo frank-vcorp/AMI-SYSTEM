@@ -61,15 +61,6 @@ interface ExpedientDetailProps {
   isLoading?: boolean;
 }
 
-const STATUS_COLORS: Record<string, string> = {
-  PENDING: "bg-gray-100 text-gray-800",
-  IN_PROGRESS: "bg-blue-100 text-blue-800",
-  STUDIES_PENDING: "bg-yellow-100 text-yellow-800",
-  VALIDATED: "bg-green-100 text-green-800",
-  COMPLETED: "bg-green-100 text-green-800",
-  ARCHIVED: "bg-gray-200 text-gray-700",
-};
-
 const NEXT_STATUSES: Record<string, string[]> = {
   PENDING: ["IN_PROGRESS"],
   IN_PROGRESS: ["STUDIES_PENDING"],
@@ -79,6 +70,7 @@ const NEXT_STATUSES: Record<string, string[]> = {
   ARCHIVED: [],
 };
 
+import { Badge, Button, Card, CardHeader, CardTitle, CardContent } from "@ami/core-ui";
 import { ExpedientReader } from "./ExpedientReader";
 
 export function ExpedientDetail({

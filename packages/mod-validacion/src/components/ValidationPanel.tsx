@@ -13,6 +13,7 @@ import { PDFViewer } from "./PDFViewer";
 import { ExtractionResults } from "./ExtractionResults";
 import { SemaphoreIndicators } from "./SemaphoreIndicators";
 import { ValidationForm } from "./ValidationForm";
+import { Badge, Button } from "@ami/core-ui";
 import {
   calculateSemaphoresFromLab,
   suggestVerdictBySemaphores,
@@ -91,7 +92,7 @@ export const ValidationPanel: React.FC<ValidationPanelProps> = ({
               <div className="px-3 py-1 bg-white/5 rounded-lg border border-white/10">
                 <p className="text-[10px] uppercase font-bold text-slate-500 leading-none mb-0.5 text-center">Riesgo</p>
                 <p className={`text-xs font-bold text-center ${patient.jobProfile?.riskLevel === 'ALTO' ? 'text-clinical-error' :
-                    patient.jobProfile?.riskLevel === 'MEDIO' ? 'text-clinical-warning' : 'text-clinical-success'
+                  patient.jobProfile?.riskLevel === 'MEDIO' ? 'text-clinical-warning' : 'text-clinical-success'
                   }`}>
                   {patient.jobProfile?.riskLevel || 'BAJO'}
                 </p>
@@ -120,8 +121,8 @@ export const ValidationPanel: React.FC<ValidationPanelProps> = ({
                     key={study.id}
                     onClick={() => setSelectedStudyId(study.id)}
                     className={`h-7 px-3 rounded-full text-[10px] font-bold uppercase tracking-tight transition-all border shrink-0 ${selectedStudyId === study.id
-                        ? "bg-medical-500 text-white border-medical-600 shadow-sm"
-                        : "bg-white text-slate-500 border-slate-200 hover:border-slate-300"
+                      ? "bg-medical-500 text-white border-medical-600 shadow-sm"
+                      : "bg-white text-slate-500 border-slate-200 hover:border-slate-300"
                       }`}
                   >
                     {study.studyType}

@@ -1,9 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '../../../core-ui/src/components/card';
-import { Badge } from '../../../core-ui/src/components/badge';
-import { Button } from '../../../core-ui/src/components/button';
+import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@ami/core-ui';
 import { StudyUploadZone } from './StudyUploadZone';
 
 interface ExpedientReaderProps {
@@ -128,8 +126,8 @@ export function ExpedientReader({ patientName, companyName, folio, expedientId }
                         <div key={study.id} className="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-premium hover:border-medical-100 transition-all group">
                             <div className="flex items-center gap-4">
                                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-xl transition-all ${study.type === studyTypes.SIM
-                                        ? 'bg-medical-50 text-medical-600 group-hover:bg-medical-500 group-hover:text-white'
-                                        : 'bg-purple-50 text-purple-600 group-hover:bg-ami-purple group-hover:text-white'
+                                    ? 'bg-medical-50 text-medical-600 group-hover:bg-medical-500 group-hover:text-white'
+                                    : 'bg-purple-50 text-purple-600 group-hover:bg-ami-purple group-hover:text-white'
                                     }`}>
                                     <i className={`fas fa-${study.icon}`}></i>
                                 </div>

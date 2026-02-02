@@ -42,7 +42,7 @@ export default function AdminLayout({
               Gestión Operativa
             </h3>
 
-            {/* VMS - Centro de Operaciones */}
+            {/* VMS - Centro de Operaciones (PROTOTIPO - OCULTO PARA ENTREGA)
             <Link
               href="/admin/vms"
               className="flex items-center px-4 py-2 rounded-lg bg-cyan-600/20 text-cyan-400 border border-cyan-500/30 mb-2 hover:bg-cyan-600/30 transition-all font-medium"
@@ -52,6 +52,7 @@ export default function AdminLayout({
               </svg>
               Centro de Op. (VMS)
             </Link>
+            */}
 
             {/* Citas */}
             <Link
@@ -64,7 +65,7 @@ export default function AdminLayout({
               Citas
             </Link>
 
-            {/* Check-in - NEW */}
+            {/* Check-in - NEW (PROTOTIPO - OCULTO PARA ENTREGA)
             <Link
               href="/admin/check-in"
               className="flex items-center px-4 py-2 rounded-lg bg-green-600/20 text-green-400 border border-green-500/30 hover:bg-green-600/30 transition-all font-medium"
@@ -74,6 +75,7 @@ export default function AdminLayout({
               </svg>
               Check-in (QR)
             </Link>
+            */}
 
             {/* Expedientes */}
             <Link

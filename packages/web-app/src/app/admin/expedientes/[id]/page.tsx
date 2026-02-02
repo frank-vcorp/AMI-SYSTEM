@@ -19,9 +19,9 @@ async function getExpedient(id: string) {
   try {
     // Direct database query instead of fetch to avoid URL issues in Vercel SSR
     const expedient = await prisma.expedient.findFirst({
-      where: { 
+      where: {
         id,
-        tenantId: DEFAULT_TENANT_ID 
+        tenantId: DEFAULT_TENANT_ID
       },
       include: {
         patient: true,
@@ -54,7 +54,7 @@ async function getExpedient(id: string) {
         id: expedient.patient.id,
         firstName,
         lastName,
-        birthDate: expedient.patient.dateOfBirth?.toISOString(),
+        birthDate: expedient.patient.birthDate?.toISOString(),
         documentId: expedient.patient.documentId,
       },
       clinic: {
@@ -75,10 +75,10 @@ async function getExpedient(id: string) {
       })),
       studies: expedient.studies.map(study => ({
         id: study.id,
-        studyType: study.studyType,
+        studyType: study.type,
         fileName: study.fileName,
-        fileSize: study.fileSize || 0,
-        fileKey: study.fileKey,
+        fileSize: study.fileSizeBytes || 0,
+        fileKey: study.fileUrl,
         createdAt: study.createdAt.toISOString(),
       })),
     };

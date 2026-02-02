@@ -20,7 +20,7 @@ interface Patient {
   phone?: string;          // Alias para compatibilidad
   phoneNumber?: string;    // Campo real del schema
   birthDate?: string;      // Alias para compatibilidad
-  dateOfBirth?: string;    // Campo real del schema
+  birthDate?: string;    // Campo real del schema
   gender?: string;
   documentId?: string;     // Alias para compatibilidad
   documentId?: string; // Campo real del schema
@@ -174,7 +174,7 @@ export default function PacientesPage() {
 
   const handleEdit = (patient: Patient) => {
     setEditingId(patient.id);
-    const birthDateValue = patient.dateOfBirth || patient.birthDate;
+    const birthDateValue = patient.birthDate || patient.birthDate;
     setFormData({
       name: patient.name || '',
       email: patient.email || '',
@@ -441,7 +441,7 @@ export default function PacientesPage() {
                       <td className="px-4 py-3">
                         <div className="font-medium text-gray-900">{patient.name}</div>
                         <div className="text-sm text-gray-500">
-                          {formatDate(patient.dateOfBirth || patient.birthDate)} • {patient.gender === 'M' ? 'M' : patient.gender === 'F' ? 'F' : patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
+                          {formatDate(patient.birthDate || patient.birthDate)} • {patient.gender === 'M' ? 'M' : patient.gender === 'F' ? 'F' : patient.gender === 'MASCULINO' ? 'M' : patient.gender === 'FEMENINO' ? 'F' : 'O'}
                         </div>
                       </td>
                       <td className="px-4 py-3 text-sm font-mono text-gray-600">
@@ -462,7 +462,7 @@ export default function PacientesPage() {
                         {(patient.phoneNumber || patient.phone) && <div className="text-sm text-gray-500">{patient.phoneNumber || patient.phone}</div>}
                       </td>
                       <td className="px-4 py-3 text-center text-sm text-gray-600">
-                        {calculateAge(patient.dateOfBirth || patient.birthDate)}
+                        {calculateAge(patient.birthDate || patient.birthDate)}
                       </td>
                       <td className="px-4 py-3 text-center">
                         <span className="text-sm font-medium text-gray-900">

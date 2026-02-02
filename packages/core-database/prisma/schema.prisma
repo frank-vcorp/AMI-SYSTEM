@@ -115,6 +115,7 @@ model Appointment {
   createdBy        String?           @db.Uuid
   updatedBy        String?           @db.Uuid
   clinic           Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  expedients       Expedient[]
 
   @@index([tenantId])
   @@index([clinicId])
@@ -299,8 +300,10 @@ model Expedient {
   clinicId        String
   companyId       String?
   folio           String?         @unique @db.VarChar(50)
+  appointmentId   String?
   status          ExpedientStatus @default(DRAFT)
-  notes           String?
+  medicalNotes    String?
+  appointment     Appointment?    @relation(fields: [appointmentId], references: [id])
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   createdBy       String?         @db.Uuid

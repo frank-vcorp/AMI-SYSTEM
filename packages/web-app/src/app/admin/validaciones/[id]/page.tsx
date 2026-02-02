@@ -61,13 +61,13 @@ export default function ValidacionDetailPage() {
           name: p.name,
           documentType: p.documentType,
           documentId: p.documentId,
-          age: new Date().getFullYear() - new Date(p.dateOfBirth).getFullYear(),
+          age: new Date().getFullYear() - new Date(p.birthDate).getFullYear(),
           gender: p.gender,
           company: data.expedient.patient.company
             ? {
-                id: data.expedient.patient.company.id,
-                name: data.expedient.patient.company.name,
-              }
+              id: data.expedient.patient.company.id,
+              name: data.expedient.patient.company.name,
+            }
             : undefined,
           jobProfile: undefined, // TODO: fetch from company profile
           vitals: data.expedient?.vitals,
@@ -79,7 +79,7 @@ export default function ValidacionDetailPage() {
       const urls: Record<string, string> = {};
       if (data.studies) {
         data.studies.forEach((study: any) => {
-          urls[study.id] = `/api/storage/download?key=${study.fileKey}`;
+          urls[study.id] = `/api/storage/download?key=${study.fileUrl}`;
         });
       }
       setPdfUrls(urls);

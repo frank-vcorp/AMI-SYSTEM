@@ -7,7 +7,7 @@
  * GET  /api/patients - Listar pacientes con filtros
  * POST /api/patients - Crear paciente
  * 
- * Schema-aligned: Uses Patient model with documentId, dateOfBirth, gender (M/F/O), etc.
+ * Schema-aligned: Uses Patient model with documentId, birthDate, gender (M/F/O), etc.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
 
     const email = body.email || `${firstName?.toLowerCase()}.${paternalLastName?.toLowerCase()}@example.com`;
     const phone = body.phone || body.phoneNumber || '0000000000';
-    const birthDateStr = body.birthDate || body.dateOfBirth;
+    const birthDateStr = body.birthDate || body.birthDate;
     const documentId = body.documentId || body.documentId || `DOC-${Date.now()}`;
     const alias = body.alias || null;
     const companyId = body.companyId && body.companyId.trim() !== '' ? body.companyId : null;

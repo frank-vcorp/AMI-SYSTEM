@@ -8,7 +8,7 @@
  * PUT    /api/patients/[id] - Actualizar paciente
  * DELETE /api/patients/[id] - Eliminar paciente (soft delete)
  * 
- * Schema-aligned: Uses Patient model with documentId, dateOfBirth, gender (M/F/O), etc.
+ * Schema-aligned: Uses Patient model with documentId, birthDate, gender (M/F/O), etc.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -71,7 +71,7 @@ export async function PUT(
     
     // Support both form field names and schema field names for compatibility
     const phoneNumber = body.phoneNumber || body.phone;
-    const dateOfBirth = body.dateOfBirth || body.birthDate;
+    const birthDate = body.birthDate || body.birthDate;
     const documentId = body.documentId || body.documentId;
     
     // Map gender from form values to schema values
@@ -146,7 +146,7 @@ export async function PUT(
         ...(name && { name }),
         ...(email !== undefined && { email }),
         ...(phoneNumber !== undefined && { phoneNumber }),
-        ...(dateOfBirth && { birthDate: new Date(dateOfBirth) }),
+        ...(birthDate && { birthDate: new Date(birthDate) }),
         ...(gender && { gender }),
         ...(documentType && { documentType }),
         ...(documentId && { documentId }),

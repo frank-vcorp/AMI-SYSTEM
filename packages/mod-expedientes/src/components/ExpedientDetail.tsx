@@ -127,6 +127,7 @@ export function ExpedientDetail({
           companyName={expedient.clinic.name}
           folio={expedient.folio}
           expedientId={expedient.id}
+          initialStudies={expedient.studies}
         />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

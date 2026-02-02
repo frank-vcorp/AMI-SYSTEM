@@ -4,19 +4,54 @@ import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent, Badge } from '@ami/core-ui';
 import { StudyUploadZone } from './StudyUploadZone';
 
+interface Study {
+    id: string;
+    studyType: string;
+    fileName: string;
+    createdAt: string;
+}
+
 interface ExpedientReaderProps {
     patientName: string;
     companyName: string;
     folio: string;
     expedientId: string;
+    initialStudies?: Study[];
 }
 
-export function ExpedientReader({ patientName, companyName, folio, expedientId }: ExpedientReaderProps) {
+const studyTypes = {
+    SIM: 'SIM (Clínico)',
+    NOVA: 'NOVA (Laboratorio)'
+};
+
+const getIconForStudy = (fileName: string): string => {
+    const lower = fileName.toLowerCase();
+    if (lower.includes('audio')) return 'ear-listen';
+    if (lower.includes('espiro')) return 'lungs';
+    if (lower.includes('electro') || lower.includes('ecg')) return 'heart-pulse';
+    if (lower.includes('rx') || lower.includes('rayos')) return 'x-ray';
+    if (lower.includes('lab') || lower.includes('sanguinea') || lower.includes('tox')) return 'vial';
+    return 'file-medical';
+};
+
+const getTypeForStudy = (fileName: string): string => {
+    const lower = fileName.toLowerCase();
+    if (lower.includes('lab') || lower.includes('tox')) return studyTypes.NOVA;
+    return studyTypes.SIM;
+};
+
+export function ExpedientReader({ patientName, companyName, folio, expedientId, initialStudies = [] }: ExpedientReaderProps) {
     const [isProcessing, setIsProcessing] = useState(false);
-    const [studies, setStudies] = useState([
-        { id: '1', name: 'Espirometría', type: studyTypes.SIM, status: 'PROCESO', icon: 'lungs' },
-        { id: '2', name: 'Audiometría', type: studyTypes.SIM, status: 'PENDIENTE', icon: 'ear' },
-    ]);
+
+    // Convert DB studies to View models
+    const [studies, setStudies] = useState(initialStudies.map(s => ({
+        id: s.id,
+        name: s.fileName.replace('.pdf', ''),
+        type: getTypeForStudy(s.fileName),
+        status: 'PROCESADO',
+        icon: getIconForStudy(s.fileName),
+        url: `/uploads/studies/${folio}/${s.fileName}` // Asumiendo estructura pública
+    })));
 
     const simulateAIProcessing = (file: File) => {
         setIsProcessing(true);
@@ -25,10 +60,11 @@ export function ExpedientReader({ patientName, companyName, folio, expedientId }
             setIsProcessing(false);
             const newStudy = {
                 id: Math.random().toString(36).substr(2, 9),
-                name: file.name,
-                type: file.name.toLowerCase().includes('lab') ? studyTypes.NOVA : studyTypes.SIM,
+                name: file.name.replace('.pdf', ''),
+                type: getTypeForStudy(file.name),
                 status: 'PROCESADO',
-                icon: 'file-medical'
+                icon: getIconForStudy(file.name),
+                url: '#'
             };
             setStudies(prev => [newStudy, ...prev]);
         }, 2500);

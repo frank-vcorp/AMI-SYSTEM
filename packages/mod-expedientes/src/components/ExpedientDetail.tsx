@@ -80,14 +80,6 @@ export function ExpedientDetail({
 }: ExpedientDetailProps) {
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("es-ES", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
-
   const handleStatusChange = async (newStatus: string) => {
     if (!onStatusChange || isUpdatingStatus) return;
     try {

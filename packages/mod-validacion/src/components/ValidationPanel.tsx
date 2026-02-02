@@ -11,7 +11,6 @@ import {
 } from "../types";
 import { PDFViewer } from "./PDFViewer";
 import { ExtractionResults } from "./ExtractionResults";
-import { SemaphoreIndicators } from "./SemaphoreIndicators";
 import { ValidationForm } from "./ValidationForm";
 import { Badge, Button } from "@ami/core-ui";
 import {
@@ -27,7 +26,6 @@ export interface ValidationPanelProps {
   isLoading?: boolean;
 }
 
-type TabType = "pdf" | "data" | "opinion";
 
 export const ValidationPanel: React.FC<ValidationPanelProps> = ({
   task,

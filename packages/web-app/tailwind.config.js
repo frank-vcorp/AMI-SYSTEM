@@ -11,6 +11,10 @@ module.exports = {
       colors: {
         'ami-turquoise': '#00B5A5', // Core Brand
         'ami-purple': '#7B2D8E',    // Core Secondary
+        'ami-light-turquoise': '#4FD1C7',
+        'ami-blue': '#00B5A5',
+        'ami-green': '#00B5A5',
+        'ami-yellow': '#f59e0b',
         medical: {
           50: '#F0FDFA',
           100: '#CCFBF1',

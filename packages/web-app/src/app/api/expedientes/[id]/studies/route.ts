@@ -33,6 +33,15 @@ const VALID_STUDY_TYPES = [
   "OTROS",
 ];
 
+const STUDY_TYPE_MAP: Record<string, string> = {
+  "RADIOGRAFIA": "RADIOGRAPHY",
+  "LABORATORIO": "LABORATORY",
+  "ECG": "CARDIOGRAM",
+  "ESPIROMETRIA": "OTHER", // Map to OTHER if no direct match or update enums
+  "AUDIOMETRIA": "OTHER",
+  "OTROS": "OTHER",
+};
+
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -96,18 +105,19 @@ export async function POST(
     // === UPLOAD FILE & CREATE STUDY RECORD ===
     // Generate fileKey for storage path (tenant-isolated)
     const fileKey = `${expedient.tenantId}/studies/${id}/${Date.now()}-${file.name}`;
-    
+
     // Create study record with Prisma transaction
     const study = await prisma.$transaction(async (tx: any) => {
       // Create study
-      const newStudy = await tx.study.create({
+      const newStudy = await tx.studyUpload.create({
         data: {
           expedientId: id,
-          fileKey,
+          fileUrl: fileKey,
           fileName: file.name,
-          studyType: studyType,
-          fileSize: file.size,
+          type: (STUDY_TYPE_MAP[studyType] || "OTHER") as any,
+          fileSizeBytes: file.size,
           mimeType: file.type,
+          status: "COMPLETED", // Assuming immediate completion for demo
         },
       });
 
@@ -158,24 +168,24 @@ export async function GET(
 
     // === FETCH STUDIES ===
     const [studies, total] = await Promise.all([
-      prisma.study.findMany({
+      prisma.studyUpload.findMany({
         where: { expedientId: id },
         orderBy: { createdAt: "desc" },
         take: limit,
         skip: offset,
       }),
-      prisma.study.count({ where: { expedientId: id } }),
+      prisma.studyUpload.count({ where: { expedientId: id } }),
     ]);
 
     return NextResponse.json({
-      data: studies.map((study) => ({
+      data: studies.map((study: any) => ({
         id: study.id,
         expedientId: study.expedientId,
-        studyType: study.studyType,
+        studyType: study.type,
         fileName: study.fileName,
-        fileKey: study.fileKey,
+        fileKey: study.fileUrl,
         mimeType: study.mimeType,
-        fileSize: study.fileSize,
+        fileSize: study.fileSizeBytes,
         createdAt: study.createdAt.toISOString(),
       })),
       pagination: {

@@ -557,9 +557,13 @@ enum PatientStatus {
 }
 
 enum ExpedientStatus {
-  DRAFT
+  PENDING
   IN_PROGRESS
+  STUDIES_PENDING
+  VALIDATED
   COMPLETED
+  ARCHIVED
+  DRAFT
   SIGNED
   DELIVERED
 }
@@ -590,6 +594,7 @@ enum ValidationStatus {
   APPROVED
   REJECTED
   ARCHIVED
+  SIGNED
 }
 
 enum VerdictType {

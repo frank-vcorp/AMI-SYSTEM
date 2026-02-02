@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, Badge, Button } from '@ami/core-ui';
+import { Card, CardHeader, CardTitle, CardContent, Badge } from '@ami/core-ui';
 import { StudyUploadZone } from './StudyUploadZone';
 
 interface ExpedientReaderProps {

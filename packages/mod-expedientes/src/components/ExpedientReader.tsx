@@ -193,7 +193,3 @@ export function ExpedientReader({ patientName, companyName, folio, expedientId, 
     );
 }
 
-const studyTypes = {
-    SIM: 'Clínico (SIM)',
-    NOVA: 'Laboratorio (NOVA)'
-};

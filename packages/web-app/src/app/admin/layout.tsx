@@ -76,8 +76,8 @@ export default function AdminLayout({
               <span>Dashboard</span>
             </Link>
 
-            {/* 2. Recepción (Link a Expedientes por ahora para demo flujo) */}
-            <Link href="/admin/expedientes" className={getTabClass('/admin/recepcion')}>
+            {/* 2. Recepción (Agenda y Check-in) */}
+            <Link href="/admin/citas" className={getTabClass('/admin/citas')}>
               <i className="fas fa-clipboard-list"></i>
               <span>Recepción</span>
             </Link>
@@ -88,7 +88,7 @@ export default function AdminLayout({
               <span>Examen Médico</span>
             </Link>
 
-            {/* 4. Estudios (Link directo a expedientes) */}
+            {/* 4. Estudios (Carga) */}
             <Link href="/admin/expedientes" className={getTabClass('/admin/expedientes')}>
               <i className="fas fa-upload"></i>
               <span>Estudios</span>

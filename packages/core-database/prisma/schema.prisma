@@ -101,7 +101,6 @@ model Appointment {
   tenantId         String            @db.Uuid
   clinicId         String
   companyId        String?
-  employeeId       String?
   appointmentFolio String?           @unique @db.VarChar(50)
   qrCode           String?
   appointmentDate  DateTime
@@ -114,14 +113,16 @@ model Appointment {
   updatedAt        DateTime          @updatedAt
   createdBy        String?           @db.Uuid
   updatedBy        String?           @db.Uuid
+  patientId        String?
   clinic           Clinic            @relation(fields: [clinicId], references: [id], onDelete: Cascade)
+  patient          Patient?          @relation(fields: [patientId], references: [id])
   expedients       Expedient[]
 
   @@index([tenantId])
   @@index([clinicId])
   @@index([status])
   @@index([appointmentDate])
-  @@index([employeeId])
+  @@index([patientId])
   @@index([appointmentFolio])
   @@map("appointments")
 }
@@ -287,6 +288,7 @@ model Patient {
   companyId        String?
   company          Company?      @relation(fields: [companyId], references: [id])
   expedients       Expedient[]
+  appointments     Appointment[]
 
   @@unique([tenantId, documentId])
   @@unique([tenantId, email])
